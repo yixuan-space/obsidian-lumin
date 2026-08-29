@@ -155,6 +155,11 @@ body.mod-macos:not(.is-mobile) {
   --titlebar-background-focused: var(--background-primary);
 }
 
+body:not(.mod-macos):not(.is-mobile).adaptive-mode-off {
+  --titlebar-background: var(--background-secondary);
+  --titlebar-background-focused: var(--background-secondary);
+}
+
 body.mod-macos:has(.modal.mod-settings) {
   --titlebar-background: var(--background-primary);
   --titlebar-background-focused: var(--background-primary);
