@@ -3559,7 +3559,7 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) .mod-sidedock.mod-left-s
 body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) .mod-sidedock.mod-right-split > .workspace-leaf-resize-handle {
   border-color: var(--divider-color);
 }
-body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) .modal-container:has(.modal.mod-settings) {
+body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile).mod-macos .modal-container:has(.modal.mod-settings) {
   background-color: var(--background-primary);
 }
 body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) .modal.mod-settings.mod-sidebar-layout {

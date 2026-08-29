@@ -95,7 +95,7 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
   }
 
   // Settings
-  .modal-container:has(.modal.mod-settings) {
+  &.mod-macos .modal-container:has(.modal.mod-settings) {
     background-color: var(--background-primary);
   }
 
