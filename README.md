@@ -6,7 +6,6 @@
 
 Lumin 为写作、阅读和日常知识管理而设计。它以清晰的层级、克制的留白和适配不同设备的界面为核心，让笔记内容保持在视觉中心。
 
-![Desktop preview](img/desktop.png)
 
 ## 特性
 
@@ -17,7 +16,6 @@ Lumin 为写作、阅读和日常知识管理而设计。它以清晰的层级�
 - Style Settings：可在 Obsidian 设置中调整常用界面选项。
 - 笔记增强：包含横幅、图片缩放与滤镜、卡片、表格、嵌入内容和替代复选框样式。
 
-![Mobile preview](img/mobile.png)
 
 ## 安装
 
