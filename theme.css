@@ -3057,10 +3057,10 @@ body:not(.is-android:not(.adaptive-mode-off)) .setting-item[data-id=material-col
 @media screen, print {
   body {
     --table-text-size: var(--font-small);
-    --table-border-color: color-mix(in srgb, var(--background-modifier-border), var(--text-normal) 8%);
-    --table-header-background: color-mix(in srgb, var(--background-secondary), var(--color-blue) 6%);
-    --table-row-alt-background: color-mix(in srgb, var(--background-primary), var(--color-blue) 3%);
-    --table-row-hover-background: color-mix(in srgb, var(--background-modifier-hover), var(--color-blue) 12%);
+    --table-border-color: color-mix(in srgb, var(--background-modifier-border), var(--background-primary) 45%);
+    --table-header-background: color-mix(in srgb, var(--background-primary), var(--text-normal) 4%);
+    --table-row-alt-background: color-mix(in srgb, var(--background-primary), var(--text-normal) 1.5%);
+    --table-row-hover-background: var(--background-modifier-hover);
     --table-add-button-border-width: 0;
     --table-header-border-color: transparent;
     --embed-block-shadow-hover: none;
@@ -3093,6 +3093,8 @@ body:not(.is-android:not(.adaptive-mode-off)) .setting-item[data-id=material-col
     border-inline-end: 1px solid var(--table-border-color);
     padding: 10px 12px;
     transition: background-color var(--anim-duration-fast);
+    vertical-align: top;
+    line-height: 1.5;
   }
   div:is(.markdown-preview-view, .is-live-preview) table > thead > tr > th {
     background-color: var(--table-header-background);
@@ -3114,12 +3116,8 @@ body:not(.is-android:not(.adaptive-mode-off)) .setting-item[data-id=material-col
   div:is(.markdown-preview-view, .is-live-preview) table > thead:only-child,
   div:is(.markdown-preview-view, .is-live-preview) table > tbody {
     --table-header-border-color: var(--table-border-color);
-    background-color: var(--background-primary-alt);
+    background-color: var(--background-primary);
     position: relative;
-  }
-  div:is(.markdown-preview-view, .is-live-preview) table > thead:not(:only-child) > tr > th,
-  div:is(.markdown-preview-view, .is-live-preview) table > thead:not(:only-child) > tr > th .table-cell-wrapper {
-    border-radius: var(--radius-s);
   }
   div:is(.markdown-preview-view, .is-live-preview) table > tbody > tr:not(:last-child) > th,
   div:is(.markdown-preview-view, .is-live-preview) table > tbody > tr:not(:last-child) > td {
