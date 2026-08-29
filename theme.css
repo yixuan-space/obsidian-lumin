@@ -150,6 +150,11 @@ body.is-frameless:not(.is-translucent, .is-hidden-frameless, .is-fullscreen) .ti
   background-color: var(--background-secondary);
 }
 
+body.mod-macos:not(.is-mobile) {
+  --titlebar-background: var(--background-primary);
+  --titlebar-background-focused: var(--background-primary);
+}
+
 body.mod-macos:has(.modal.mod-settings) {
   --titlebar-background: var(--background-primary);
   --titlebar-background-focused: var(--background-primary);
@@ -588,6 +593,11 @@ body.mod-macos.is-frameless:not(.is-popout-window) .workspace .workspace-tabs.mo
 body.mod-macos.is-frameless:not(.is-popout-window) .workspace .mod-root .sidebar-toggle-button.mod-right {
   position: relative;
   padding-right: 0;
+}
+
+body.mod-macos:not(.is-mobile) .workspace:not(.is-right-sidedock-open) .mod-root .workspace-tabs.mod-top-right-space .workspace-tab-header-container,
+body.mod-macos:not(.is-mobile) .workspace:not(.is-right-sidedock-open) .mod-root .sidebar-toggle-button.mod-right {
+  background-color: var(--background-secondary);
 }
 
 body {
@@ -1174,6 +1184,10 @@ body:not(.is-phone) .modal.mod-community-modal .community-modal-search-results {
 }
 body:not(.is-phone) .modal.mod-community-modal .community-item:not(.is-selected) {
   background-color: var(--setting-items-background);
+}
+
+body.mod-macos:not(.is-mobile) .modal.mod-community-modal .community-modal-controls {
+  padding-top: 16px;
 }
 
 body.is-phone .modal.mod-sidebar-layout {
@@ -4307,6 +4321,13 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
 body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) .modal.mod-sidebar-layout {
   background-color: var(--background-primary);
   border: none;
+}
+body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) .modal.mod-settings .vertical-tab-header {
+  margin: 0;
+  border-radius: 0;
+  border-inline-end: 1px solid var(--divider-color);
+  box-shadow: none;
+  background-color: var(--background-primary);
 }
 body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) .modal.mod-settings .vertical-tab-nav-item.is-active {
   --text-normal: var(--text-on-accent);

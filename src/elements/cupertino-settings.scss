@@ -45,6 +45,14 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
   }
 
   .modal.mod-settings {
+    .vertical-tab-header {
+      margin: 0;
+      border-radius: 0;
+      border-inline-end: 1px solid var(--divider-color);
+      box-shadow: none;
+      background-color: var(--background-primary);
+    }
+
     .vertical-tab-nav-item.is-active {
       --text-normal: var(--text-on-accent);
       color: var(--text-on-accent);

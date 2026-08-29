@@ -368,3 +368,10 @@ body.mod-macos.is-frameless:not(.is-popout-window) .workspace {
     padding-right: 0;
   }
 }
+
+body.mod-macos:not(.is-mobile) .workspace:not(.is-right-sidedock-open) .mod-root {
+  .workspace-tabs.mod-top-right-space .workspace-tab-header-container,
+  .sidebar-toggle-button.mod-right {
+    background-color: var(--background-secondary);
+  }
+}

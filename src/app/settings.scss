@@ -124,6 +124,10 @@ body:not(.is-phone) {
   }
 }
 
+body.mod-macos:not(.is-mobile) .modal.mod-community-modal .community-modal-controls {
+  padding-top: 16px;
+}
+
 body.is-phone {
   .modal.mod-sidebar-layout {
     box-shadow: none;
