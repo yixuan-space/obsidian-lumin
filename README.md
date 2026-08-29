@@ -6,6 +6,18 @@
 
 Lumin is designed for writing, reading, and everyday knowledge management. It keeps notes at the center with a clear visual hierarchy, restrained spacing, and responsive desktop and mobile layouts.
 
+<p align="center">
+  <a href="https://obsidian.md/">
+    <img src="img/open-in-obsidian.svg" alt="Open in Obsidian" width="360">
+  </a>
+  <br><br>
+  <a href="https://ifdian.net/a/yixuan-space">
+    <img src="img/support-on-afdian.svg" alt="Support Lumin on Afdian" width="360">
+  </a>
+  <br><br>
+  <img src="img/made-in-taiwan.svg" alt="Made in Taiwan" width="360">
+</p>
+
 [简体中文说明](README_CN.md)
 
 ## Highlights
