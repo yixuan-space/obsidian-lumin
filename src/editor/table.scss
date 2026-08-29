@@ -91,20 +91,20 @@
         border-inline-end: 1px solid var(--table-border-color);
       }
 
-      > :is(thead, tbody) > tr:first-child > :is(th, td):first-child,
-      > :is(thead, tbody) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
+      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child,
+      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
         border-top-left-radius: var(--radius-s);
       }
-      > :is(thead, tbody) > tr:first-child > :is(th, td):last-child,
-      > :is(thead, tbody) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
+      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child,
+      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
         border-top-right-radius: var(--radius-s);
       }
-      > :is(thead, tbody) > tr:last-child > :is(th, td):first-child,
-      > :is(thead, tbody) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
+      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child,
+      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
         border-bottom-left-radius: var(--radius-s);
       }
-      > :is(thead, tbody) > tr:last-child > :is(th, td):last-child,
-      > :is(thead, tbody) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
+      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child,
+      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
         border-bottom-right-radius: var(--radius-s);
       }
     }
@@ -117,20 +117,20 @@
         border-inline-end: 1px solid var(--table-border-color);
       }
 
-      > :is(thead, tbody) > tr:first-child > :is(th, td):first-child,
-      > :is(thead, tbody) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
+      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child,
+      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
         border-top-right-radius: var(--radius-s);
       }
-      > :is(thead, tbody) > tr:first-child > :is(th, td):last-child,
-      > :is(thead, tbody) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
+      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child,
+      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
         border-top-left-radius: var(--radius-s);
       }
-      > :is(thead, tbody) > tr:last-child > :is(th, td):first-child,
-      > :is(thead, tbody) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
+      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child,
+      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
         border-bottom-right-radius: var(--radius-s);
       }
-      > :is(thead, tbody) > tr:last-child > :is(th, td):last-child,
-      > :is(thead, tbody) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
+      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child,
+      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
         border-bottom-left-radius: var(--radius-s);
       }
     }

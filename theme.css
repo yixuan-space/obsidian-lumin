@@ -2364,6 +2364,13 @@ settings:
         description.en: Do not widen blocks beyond the default reading column.
         type: class-toggle
     -
+        id: reading-width-limit
+        title: 限制阅读页面宽度
+        title.en: Limit reading page width
+        description: 在阅读与实时预览视图中将正文限制为舒适的阅读宽度；关闭后随窗口宽度自适应。
+        description.en: Constrain reading and live preview text to a comfortable width. When disabled, the page adapts to the window width.
+        type: class-toggle
+    -
         id: font-variant-off
         title: 关闭字体变体
         title.en: Disable font variants
@@ -2388,13 +2395,16 @@ settings:
         default: image-align-center
         options:
             -
-                label: Left / 左
+                label: 左
+                label.en: Left
                 value: image-align-left
             -
-                label: Center / 居中
+                label: 居中
+                label.en: Center
                 value: image-align-center
             -
-                label: Right / 右
+                label: 右
+                label.en: Right
                 value: image-align-right
     -
         id: clean-link-off
@@ -2755,6 +2765,9 @@ body:not(.is-android:not(.adaptive-mode-off)) .setting-item[data-id=material-col
     margin-inline-start: var(--image-align-margin-start);
     margin-inline-end: var(--image-align-margin-end);
   }
+  .workspace-leaf-content[data-type=markdown] img:not(.link-favicon, .emoji, [alt=banner]) {
+    box-shadow: 0 10px 18px -14px rgba(var(--mono-rgb-100), 0.35);
+  }
   body:not(.full-width-media-off) .workspace-leaf-content[data-type=markdown] img:not([width], .cm-widgetBuffer, .link-favicon, .emoji, [alt=banner]),
   body:not(.full-width-media-off) .workspace-leaf-content[data-type=markdown] iframe,
   body:not(.full-width-media-off) .workspace-leaf-content[data-type=markdown] video {
@@ -2792,6 +2805,7 @@ body:not(.is-android:not(.adaptive-mode-off)) .setting-item[data-id=material-col
     height: -webkit-fill-available;
     overflow: auto;
     object-fit: cover;
+    box-shadow: none;
   }
   body.unstyled-tags {
     --tag-background: transparent;
@@ -3128,20 +3142,20 @@ body:not(.is-android:not(.adaptive-mode-off)) .setting-item[data-id=material-col
   div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > tbody > tr > td:not(:last-child) {
     border-inline-end: 1px solid var(--table-border-color);
   }
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead, tbody) > tr:first-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead, tbody) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
+  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child,
+  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
     border-top-left-radius: var(--radius-s);
   }
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead, tbody) > tr:first-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead, tbody) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
+  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child,
+  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
     border-top-right-radius: var(--radius-s);
   }
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead, tbody) > tr:last-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead, tbody) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
+  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child,
+  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
     border-bottom-left-radius: var(--radius-s);
   }
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead, tbody) > tr:last-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead, tbody) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
+  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child,
+  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
     border-bottom-right-radius: var(--radius-s);
   }
   div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > thead > tr > th:not(:last-child),
@@ -3152,28 +3166,28 @@ body:not(.is-android:not(.adaptive-mode-off)) .setting-item[data-id=material-col
   div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > tbody > tr > td:not(:last-child) {
     border-inline-end: 1px solid var(--table-border-color);
   }
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead, tbody) > tr:first-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead, tbody) > tr:first-child > :is(th, td):first-child .table-cell-wrapper,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead, tbody) > tr:first-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead, tbody) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
+  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child,
+  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child .table-cell-wrapper,
+  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child,
+  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
     border-top-right-radius: var(--radius-s);
   }
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead, tbody) > tr:first-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead, tbody) > tr:first-child > :is(th, td):last-child .table-cell-wrapper,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead, tbody) > tr:first-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead, tbody) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
+  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child,
+  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child .table-cell-wrapper,
+  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child,
+  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
     border-top-left-radius: var(--radius-s);
   }
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead, tbody) > tr:last-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead, tbody) > tr:last-child > :is(th, td):first-child .table-cell-wrapper,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead, tbody) > tr:last-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead, tbody) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
+  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child,
+  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child .table-cell-wrapper,
+  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child,
+  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
     border-bottom-right-radius: var(--radius-s);
   }
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead, tbody) > tr:last-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead, tbody) > tr:last-child > :is(th, td):last-child .table-cell-wrapper,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead, tbody) > tr:last-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead, tbody) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
+  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child,
+  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child .table-cell-wrapper,
+  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child,
+  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
     border-bottom-left-radius: var(--radius-s);
   }
   .cm-html-embed th,
@@ -6366,8 +6380,12 @@ body:not(.banner-off) .mod-root .view-content:not(.pixel-banner, .has-banner) di
 }
 
 body {
-  --file-line-width: var(--line-width);
+  --file-line-width: 100%;
   --line-width: 700px;
+}
+
+body.reading-width-limit :is(.markdown-reading-view, .is-live-preview) {
+  --file-line-width: min(var(--line-width), 100%);
 }
 
 body:not(.block-width-off) {

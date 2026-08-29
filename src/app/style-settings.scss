@@ -129,6 +129,13 @@ settings:
         description.en: Do not widen blocks beyond the default reading column.
         type: class-toggle
     -
+        id: reading-width-limit
+        title: 限制阅读页面宽度
+        title.en: Limit reading page width
+        description: 在阅读与实时预览视图中将正文限制为舒适的阅读宽度；关闭后随窗口宽度自适应。
+        description.en: Constrain reading and live preview text to a comfortable width. When disabled, the page adapts to the window width.
+        type: class-toggle
+    -
         id: font-variant-off
         title: 关闭字体变体
         title.en: Disable font variants
@@ -153,13 +160,16 @@ settings:
         default: image-align-center
         options:
             -
-                label: Left / 左
+                label: 左
+                label.en: Left
                 value: image-align-left
             -
-                label: Center / 居中
+                label: 居中
+                label.en: Center
                 value: image-align-center
             -
-                label: Right / 右
+                label: 右
+                label.en: Right
                 value: image-align-right
     -
         id: clean-link-off

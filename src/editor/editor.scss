@@ -281,6 +281,10 @@
       margin-inline-start: var(--image-align-margin-start);
       margin-inline-end: var(--image-align-margin-end);
     }
+
+    img:not(.link-favicon, .emoji, [alt="banner"]) {
+      box-shadow: 0 10px 18px -14px rgba(var(--mono-rgb-100), 0.35);
+    }
   }
 
   body:not(.full-width-media-off) .workspace-leaf-content[data-type="markdown"] {
@@ -328,6 +332,7 @@
         height: -webkit-fill-available;
         overflow: auto;
         object-fit: cover;
+        box-shadow: none;
       }
     }
   }
