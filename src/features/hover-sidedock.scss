@@ -1,0 +1,119 @@
+body:not(.is-mobile) {
+  --hover-sidedock-width: 320px;
+  --hover-sidedock-delay: 160ms;
+  --hover-sidedock-trigger-area: 4px;
+}
+
+// Window drag fix
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split:hover + .mod-root,
+body:not(.is-mobile).hover-sidedock .mod-root:has(+ .mod-sidedock.is-sidedock-collapsed.mod-right-split:hover),
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed,
+body:not(.is-mobile).hover-ribbon .workspace-ribbon.mod-left:hover ~ .mod-root {
+  div:is(.workspace-tab-header-container, .workspace-tab-header-container-inner) {
+    -webkit-app-region: no-drag;
+  }
+}
+
+body:not(.is-mobile).hover-sidedock {
+  .mod-sidedock.is-sidedock-collapsed[style*="display"] {
+    display: flex !important;
+    position: absolute;
+    opacity: 0;
+    z-index: 11;
+    background-color: transparent;
+    width: var(--hover-sidedock-width) !important;
+
+    .workspace-tabs {
+      visibility: visible;
+    }
+
+    // Position
+    &.mod-left-split {
+      transform: translateX(calc(-1 * (var(--hover-sidedock-width) - var(--hover-sidedock-trigger-area))));
+    }
+    &.mod-right-split {
+      transform: translateX(calc(var(--hover-sidedock-width) - var(--hover-sidedock-trigger-area)));
+    }
+    &.mod-left-split,
+    &.mod-left-split::before {
+      right: auto;
+      left: 0;
+    }
+    &.mod-right-split,
+    &.mod-right-split::before {
+      right: 0;
+      left: auto;
+    }
+
+    // Background
+    &::before {
+      position: absolute;
+      z-index: 0;
+      transition: var(--anim-duration-moderate);
+      inset-block: 0;
+      width: 150%;
+      content: "";
+      pointer-events: none;
+    }
+    &.mod-left-split::before {
+      background: linear-gradient(to right, var(--background-primary) 50%, transparent);
+    }
+    &.mod-right-split::before {
+      background: linear-gradient(to left, var(--background-primary) 50%, transparent);
+    }
+  }
+
+  // Hovered
+  .mod-sidedock.is-sidedock-collapsed[style*="display"]:hover,
+  &.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock,
+  &:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:has(> .workspace-tabs.mod-active) {
+    transition-delay: var(--hover-sidedock-delay);
+    transform: none;
+    opacity: 1;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+body:not(.is-mobile).hover-ribbon.show-ribbon {
+  .workspace-ribbon.mod-left {
+    position: absolute;
+    z-index: 12;
+    height: -webkit-fill-available;
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--ribbon-width) + var(--hover-sidedock-trigger-area)));
+    background-color: transparent;
+  }
+  .workspace-ribbon.mod-left:hover {
+    opacity: 1;
+    transform: none;
+  }
+
+  .workspace-ribbon.mod-left:hover + .mod-sidedock {
+    padding-left: calc(var(--ribbon-width) - 8px);
+  }
+  .workspace-ribbon.mod-left.is-collapsed:hover,
+  .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock {
+    transition-delay: var(--hover-sidedock-delay) !important;
+  }
+
+  &.hover-sidedock .workspace-ribbon.mod-left.is-collapsed {
+    z-index: 13;
+  }
+
+  // macOS fix
+  &.mod-macos:not(.is-fullscreen).is-hidden-frameless {
+    .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
+      transition-timing-function: ease;
+    }
+    .workspace-ribbon.mod-left:not(.is-collapsed):hover ~ .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
+      padding-left: 52px;
+    }
+    .workspace-ribbon.mod-left:not(.is-collapsed):not(:hover) ~ .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container,
+    .workspace-ribbon.mod-left.is-collapsed ~ .mod-root > div:first-of-type .workspace-tab-header-container {
+      padding-left: 88px;
+    }
+  }
+}

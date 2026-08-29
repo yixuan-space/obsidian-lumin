@@ -1,0 +1,192 @@
+@media screen, print {
+  body {
+    --table-text-size: var(--font-small);
+
+    --table-border-color: color-mix(in srgb, var(--background-modifier-border), var(--text-normal) 8%);
+    --table-header-background: color-mix(in srgb, var(--background-secondary), var(--color-blue) 6%);
+    --table-row-alt-background: color-mix(in srgb, var(--background-primary), var(--color-blue) 3%);
+    --table-row-hover-background: color-mix(in srgb, var(--background-modifier-hover), var(--color-blue) 12%);
+
+    --table-add-button-border-width: 0;
+    --table-header-border-color: transparent;
+
+    --embed-block-shadow-hover: none;
+  }
+  body:not(.full-width-media-off) table,
+  body:not(.full-width-media-off) .markdown-source-view.mod-cm6 .cm-table-widget .table-wrapper {
+    min-width: 100%;
+  }
+
+  :root table {
+    border-collapse: separate;
+    border-spacing: 0;
+    word-break: break-word;
+  }
+
+  div:is(.markdown-preview-view, .is-live-preview) {
+    table {
+      position: relative;
+      border: 1px solid var(--table-border-color);
+      border-radius: var(--radius-m);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+
+      .table-cell-wrapper:active,
+      .table-cell-wrapper:focus,
+      .table-cell-wrapper:focus-within {
+        background-color: var(--background-modifier-hover);
+      }
+
+      th,
+      td {
+        corner-shape: var(--corner-shape);
+        border-bottom: 1px solid var(--table-border-color);
+        border-inline-end: 1px solid var(--table-border-color);
+        padding: 10px 12px;
+        transition: background-color var(--anim-duration-fast);
+      }
+
+      > thead > tr > th {
+        background-color: var(--table-header-background);
+        color: var(--text-normal);
+        font-weight: var(--table-header-weight);
+      }
+
+      > tbody > tr:nth-child(even) {
+        background-color: var(--table-row-alt-background);
+      }
+
+      > tbody > tr:hover {
+        background-color: var(--table-row-hover-background);
+      }
+
+      > :is(thead, tbody) > tr > :last-child {
+        border-inline-end: none;
+      }
+
+      > tbody > tr:last-child > :is(th, td) {
+        border-bottom: none;
+      }
+
+      > thead:only-child,
+      > tbody {
+        --table-header-border-color: var(--table-border-color);
+
+        background-color: var(--background-primary-alt);
+        position: relative;
+      }
+
+      > thead:not(:only-child) > tr > th,
+      > thead:not(:only-child) > tr > th .table-cell-wrapper {
+        border-radius: var(--radius-s);
+      }
+
+      > tbody > tr:not(:last-child) > th,
+      > tbody > tr:not(:last-child) > td {
+        border-bottom: 1px solid var(--table-border-color);
+      }
+    }
+
+    div:not([dir="rtl"]) > table:not([dir="rtl"]) {
+      > thead > tr > th:not(:last-child),
+      > tbody > tr > th:not(:last-child),
+      > tbody > tr > td:not(:last-child) {
+        border-inline-end: 1px solid var(--table-border-color);
+      }
+
+      > :is(thead, tbody) > tr:first-child > :is(th, td):first-child,
+      > :is(thead, tbody) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
+        border-top-left-radius: var(--radius-s);
+      }
+      > :is(thead, tbody) > tr:first-child > :is(th, td):last-child,
+      > :is(thead, tbody) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
+        border-top-right-radius: var(--radius-s);
+      }
+      > :is(thead, tbody) > tr:last-child > :is(th, td):first-child,
+      > :is(thead, tbody) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
+        border-bottom-left-radius: var(--radius-s);
+      }
+      > :is(thead, tbody) > tr:last-child > :is(th, td):last-child,
+      > :is(thead, tbody) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
+        border-bottom-right-radius: var(--radius-s);
+      }
+    }
+
+    div[dir="rtl"] > table,
+    table[dir="rtl"] {
+      > thead > tr > th:not(:last-child),
+      > tbody > tr > th:not(:last-child),
+      > tbody > tr > td:not(:last-child) {
+        border-inline-end: 1px solid var(--table-border-color);
+      }
+
+      > :is(thead, tbody) > tr:first-child > :is(th, td):first-child,
+      > :is(thead, tbody) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
+        border-top-right-radius: var(--radius-s);
+      }
+      > :is(thead, tbody) > tr:first-child > :is(th, td):last-child,
+      > :is(thead, tbody) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
+        border-top-left-radius: var(--radius-s);
+      }
+      > :is(thead, tbody) > tr:last-child > :is(th, td):first-child,
+      > :is(thead, tbody) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
+        border-bottom-right-radius: var(--radius-s);
+      }
+      > :is(thead, tbody) > tr:last-child > :is(th, td):last-child,
+      > :is(thead, tbody) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
+        border-bottom-left-radius: var(--radius-s);
+      }
+    }
+  }
+
+  .cm-html-embed th,
+  .markdown-rendered th,
+  .cm-html-embed td,
+  .markdown-rendered td,
+  .markdown-source-view.mod-cm6 .cm-table-widget .table-cell-wrapper {
+    padding: 10px 12px;
+  }
+  .cm-html-embed th,
+  .markdown-rendered th {
+    text-align: var(--table-text-align-header);
+  }
+  .cm-html-embed td,
+  .markdown-rendered td {
+    text-align: var(--table-text-align-body);
+  }
+
+  .dataview,
+  .block-language-datacorejsx {
+    &.table-view-table {
+      &::before {
+        border: none;
+      }
+
+      tr:first-child > td {
+        border-top: none;
+      }
+    }
+
+    &.table-view-table > thead > tr > th,
+    .datacore-table-header-cell {
+      border-bottom: none;
+      font-weight: var(--table-header-weight);
+      font-size: var(--table-header-size);
+    }
+
+    &.table-view-table > tbody > tr:not(:only-child) > td {
+      max-width: 20em;
+    }
+
+    &.dataview-error-box {
+      border: none;
+      border-radius: var(--radius-s);
+      background-color: var(--background-secondary);
+      min-height: 80px;
+    }
+
+    .dc-paging-control-page {
+      padding: 0 !important;
+    }
+  }
+}

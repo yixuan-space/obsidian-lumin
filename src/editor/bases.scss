@@ -1,0 +1,114 @@
+body {
+  --bases-header-border-width: 0;
+  --bases-table-header-color: var(--text-faint);
+}
+
+.bases-view {
+  border-radius: var(--radius-s);
+}
+
+.mod-sidedock {
+  .bases-table-container,
+  .bases-tbody {
+    background-color: transparent;
+  }
+}
+
+// Bases: Table view
+.bases-table-container.mod-multiline .bases-table-cell {
+  align-items: var(--bases-table-align-items, start);
+}
+
+.bases-thead .bases-table-header {
+  overflow: hidden;
+}
+.bases-thead .bases-td {
+  box-shadow: none;
+  border-radius: var(--radius-s);
+  overflow: visible;
+}
+.bases-thead .bases-td:hover {
+  --bases-table-header-color: var(--text-normal);
+}
+.bases-table-header-resizer {
+  border-radius: var(--radius-s);
+}
+
+.bases-table-cell > * {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+body.bases-row-alt .bases-tbody .bases-tr:nth-child(odd) {
+  background-color: var(--background-secondary);
+}
+body.bases-col-alt .bases-tbody .bases-tr > .bases-td:nth-child(2n + 2) {
+  background-color: var(--background-secondary);
+}
+
+// Bases: Cards view
+.bases-cards-item {
+  gap: 2px;
+}
+.bases-cards-label {
+  color: var(--text-faint);
+}
+
+// Embedded Bases
+.workspace-leaf-content[data-type="markdown"] .bases-embed .bases-view {
+  border: none;
+  border-radius: 0;
+
+  .bases-thead,
+  .bases-tbody,
+  .bases-tbody > .bases-tr:first-child,
+  .bases-tbody > .bases-tr > .bases-td:first-child {
+    box-shadow: none;
+  }
+
+  .bases-tbody {
+    border: var(--bases-embed-border-width) solid var(--bases-embed-border-color);
+    border-radius: var(--bases-embed-border-radius);
+    overflow: hidden;
+  }
+}
+
+// Menu
+.query-toolbar-menu,
+.bases-toolbar-menu,
+.cm-tooltip {
+  animation: none !important;
+  min-width: unset;
+}
+
+.text-icon-button {
+  border-radius: var(--clickable-icon-radius);
+}
+
+body:not(.is-phone) .menu.bases-toolbar-menu {
+  align-items: unset;
+
+  .search-input-container {
+    margin: var(--menu-padding) var(--menu-padding) 0;
+    padding-bottom: 0;
+    background: var(--background-modifier-form-field);
+    border: var(--input-border-width) solid var(--background-modifier-border);
+    border-radius: var(--input-radius);
+  }
+}
+
+// Mobile
+body.is-phone {
+  --bases-embed-width: unset;
+  --bases-embed-transform: none;
+
+  .markdown-preview-sizer > .el-pre .bases-embed,
+  .markdown-preview-sizer > .el-p .bases-embed,
+  .cm-content > .bases-embed,
+  .cm-content > .cm-lang-base {
+    max-width: 100cqw !important;
+    width: 100cqw !important;
+    justify-self: center;
+    margin-inline: calc(-1 * var(--file-margins-x)) !important;
+  }
+}

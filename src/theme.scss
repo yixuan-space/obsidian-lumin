@@ -1,0 +1,52 @@
+@use "app/root.scss";
+@use "app/icons.scss";
+@use "app/tabs.scss";
+@use "app/sidedock.scss";
+@use "app/dialog.scss";
+@use "app/prompt.scss";
+@use "app/settings.scss";
+@use "app/status-bar.scss";
+@use "app/empty-state.scss";
+@use "app/mobile.scss";
+@use "app/core-plugins.scss";
+@use "app/community-plugins.scss";
+@use "app/style-settings.scss";
+
+@use "editor/editor.scss";
+@use "editor/frontmatter.scss";
+@use "editor/blockquote.scss";
+@use "editor/callout.scss";
+@use "editor/table.scss";
+@use "editor/bases.scss";
+
+@use "layouts/classic.scss";
+@use "layouts/cupertino.scss" as layout-cupertino;
+@use "layouts/macos.scss";
+@use "layouts/fusion.scss";
+
+@use "elements/baseline.scss";
+@use "elements/cupertino.scss" as element-cupertino;
+@use "elements/cupertino-dialog.scss";
+@use "elements/cupertino-settings.scss";
+@use "elements/cupertino-prompt.scss";
+@use "elements/cupertino-mobile.scss";
+@use "elements/fluent.scss";
+@use "elements/material.scss";
+@use "elements/adwaita.scss" as element-adwaita;
+
+@use "features/alternative-checkboxes.scss";
+@use "features/banners.scss";
+@use "features/block-width.scss";
+@use "features/callout-icon.scss";
+@use "features/image-zoom.scss";
+@use "features/dataview-cards.scss";
+@use "features/helpers-tables.scss";
+@use "features/image-filters.scss";
+@use "features/colorful-frame.scss";
+@use "features/focus-mode.scss";
+@use "features/hover-sidedock.scss";
+@use "features/file-explorer.scss";
+
+@use "color-schemes/adwaita.scss" as color-adwaita;
+@use "color-schemes/cupertino.scss" as color-cupertino;
+@use "color-schemes/material.scss" as color-material;

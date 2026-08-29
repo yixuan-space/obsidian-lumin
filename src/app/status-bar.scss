@@ -1,0 +1,95 @@
+body.status-bar-baseline .status-bar {
+  transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
+  border: none;
+  transform-origin: bottom right;
+  background-color: transparent;
+  min-height: 8px;
+  height: calc-size(auto, size);
+}
+body.status-bar-baseline .status-bar::before {
+  transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 150%;
+  height: 200%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(farthest-side at right bottom, var(--background-primary), rgba(var(--mono-rgb-0), 0));
+}
+body.status-bar-baseline .status-bar:not(:hover) {
+  transform: scale(0.8);
+  opacity: 0.5;
+}
+body.status-bar-baseline .status-bar:not(:hover)::before {
+  opacity: 0;
+}
+
+body:not(.status-bar-baseline) .status-bar {
+  --status-bar-border-width: var(--border-width);
+  right: unset;
+  justify-content: center;
+  transition:
+    var(--anim-duration-moderate) var(--anim-motion-baseline),
+    background-color var(--anim-duration-moderate) ease;
+  border: none;
+  border-radius: 100vh;
+  max-width: 100%;
+  min-height: unset;
+
+  > div {
+    transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
+  }
+  &:not(:hover) {
+    bottom: 2px;
+    border-width: 0;
+    background-color: rgba(var(--mono-rgb-100), 0.2);
+    padding-block: 0;
+    max-width: 160px;
+    height: 4px;
+
+    > div {
+      transform: scale(0.9);
+      opacity: 0;
+      filter: blur(16px);
+      white-space: nowrap;
+    }
+  }
+  &:hover {
+    bottom: 4px;
+    box-shadow: var(--shadow-s);
+    border-color: var(--background-modifier-border);
+    padding: 8px;
+    height: 40px;
+
+    &::before {
+      transform: scaleY(1);
+    }
+  }
+
+  &::before {
+    position: absolute;
+    transform: scaleY(10);
+    z-index: -1;
+    transition: var(--anim-duration-fast) var(--anim-duration-fast);
+    width: 100%;
+    height: 100%;
+    content: "";
+  }
+}
+
+body:not(.status-bar-baseline):not(.is-grabbing) .app-container.no-transition .status-bar {
+  bottom: 4px;
+  border-color: transparent;
+  background-color: var(--color-accent);
+  color: var(--text-on-accent);
+  max-width: 100% !important;
+  height: 40px !important;
+
+  > div {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+}

@@ -1,0 +1,56 @@
+body {
+  --prompt-input-height: 64px;
+  --prompt-border-color: var(--background-modifier-border);
+
+  .prompt {
+    background-color: var(--background-secondary);
+    animation: modalIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
+
+    .prompt-input,
+    .prompt-input:hover,
+    .prompt-input:focus,
+    .prompt-input:focus-visible {
+      background-color: transparent;
+      border-bottom-color: var(--divider-color);
+    }
+
+    .prompt-results {
+      flex: 1;
+    }
+    .suggestion-item {
+      padding: 12px;
+    }
+  }
+}
+
+body.is-phone {
+  .prompt {
+    animation: none;
+    border-radius: var(--radius-l) var(--radius-l) 0 0;
+
+    .prompt-results {
+      padding: var(--safe-area-inset-side);
+    }
+    .prompt-input-container {
+      width: auto;
+      margin: auto var(--keyboard-spacing) var(--keyboard-spacing);
+    }
+    .prompt-input {
+      background-color: var(--background-primary);
+    }
+    .suggestion-item {
+      padding: calc(16px * var(--density-modifier)) 16px;
+    }
+  }
+}
+
+body.is-tablet {
+  --prompt-input-height: 64px;
+
+  .prompt {
+    border-radius: var(--modal-radius);
+  }
+  .prompt-input {
+    background-color: transparent;
+  }
+}

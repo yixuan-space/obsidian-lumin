@@ -1,0 +1,19 @@
+name: 💡 Feature request
+description: Suggest an idea for Lumin
+body:
+  - type: checkboxes
+    attributes:
+      label: Prerequisite
+      options:
+        - label: I've confirmed that this feature is not currently achievable with the Style Settings plugin in Lumin.
+          required: true
+  - type: textarea
+    attributes:
+      label: Describe the feature
+      description: How would the feature work?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Example & references
+      placeholder: Is there another theme, website, or app that does this well?

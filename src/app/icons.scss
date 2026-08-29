@@ -1,0 +1,58 @@
+// Vector
+.lucide-folder-closed {
+  path[d="M2 10h20"] {
+    display: none;
+  }
+}
+.lucide-arrow-left {
+  path[d="M19 12H5"] {
+    display: none;
+  }
+  path[d="m12 19-7-7 7-7"] {
+    transform: translateX(2px);
+  }
+}
+.lucide-arrow-right {
+  path[d="M5 12h14"] {
+    display: none;
+  }
+  path[d="m12 5 7 7-7 7"] {
+    transform: translateX(-2px);
+  }
+}
+.lucide-edit-3 {
+  path[d="M13 21h8"] {
+    display: none;
+  }
+}
+
+// Animations
+body:not(.reduce-motion, .is-mobile) .workspace {
+  svg.svg-icon {
+    transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
+  }
+  .clickable-icon:not(.workspace-ribbon > .sidebar-toggle-button > .clickable-icon) svg.svg-icon {
+    @starting-style {
+      filter: blur(4px);
+      scale: 0.75;
+      opacity: 0;
+    }
+  }
+
+  .clickable-icon:not([aria-disabled="true"]):active svg.svg-icon,
+  .mod-sidedock .workspace-tab-header.tappable:active svg.svg-icon {
+    scale: 0.75;
+    opacity: 0.75;
+  }
+
+  .workspace-tab-header-tab-list .clickable-icon:is(:hover, .has-active-menu) svg.svg-icon {
+    transform: translateY(1px);
+  }
+
+  .view-header-nav-buttons .clickable-icon:not([aria-disabled="true"]):first-child:hover svg.svg-icon {
+    transform: translateX(-1px);
+  }
+  .view-header-nav-buttons .clickable-icon:not([aria-disabled="true"]):last-child:hover svg.svg-icon {
+    transform: translateX(1px);
+  }
+}

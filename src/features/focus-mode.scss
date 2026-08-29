@@ -1,0 +1,53 @@
+body.focus-view:not(.is-mobile):not(.is-popout-window) .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) .mod-root {
+  --view-top-spacing-markdown: var(--header-height);
+  --file-margins: calc(var(--file-margins-y) + var(--header-height)) var(--file-margins-y);
+
+  .workspace-tab-header-container {
+    height: 0;
+    border-width: 0px;
+
+    > div:not(.sidebar-toggle-button) {
+      opacity: 0;
+    }
+  }
+  .view-header {
+    -webkit-app-region: drag;
+
+    position: absolute;
+    left: calc(var(--frame-left-space) + var(--tab-action-width));
+    right: calc(var(--frame-right-space) + var(--tab-action-width));
+    background-color: transparent;
+    transition: var(--anim-duration-fast);
+
+    &:not(:hover) {
+      opacity: 0.5;
+    }
+  }
+  .workspace-leaf-content:not([data-type="markdown"]) > .view-content {
+    margin-top: var(--header-height);
+  }
+
+  .sidebar-toggle-button {
+    position: absolute;
+    height: var(--header-height);
+    z-index: 1;
+
+    &.mod-left {
+      left: calc(var(--frame-left-space) + 8px);
+    }
+    &.mod-right {
+      right: calc(var(--frame-right-space) + 8px);
+    }
+
+    &:not(:hover) {
+      opacity: 0.5;
+    }
+  }
+}
+
+body.focus-view.mod-macos:not(.is-mobile):not(.is-popout-window):not(.is-hidden-frameless) .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) .mod-root {
+  --frame-left-space: 0px;
+}
+body.focus-view:not(.mod-macos):not(.is-mobile):not(.is-popout-window):not(.is-hidden-frameless) .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) .mod-root {
+  --frame-right-space: 0px;
+}

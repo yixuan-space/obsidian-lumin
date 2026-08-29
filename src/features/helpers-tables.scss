@@ -1,0 +1,93 @@
+/* Table helper classes for alternate styles */
+/* MIT License | Copyright (c) Stephan Ango (@kepano) */
+
+.table-small {
+  --table-text-size: var(--font-smaller);
+}
+.table-tiny {
+  --table-text-size: var(--font-smallest);
+}
+
+.row-hover {
+  --table-row-background-hover: var(--background-modifier-hover);
+  --table-row-alt-background-hover: var(--background-modifier-hover);
+}
+
+.row-alt {
+  --table-row-alt-background: var(--background-primary);
+  --table-row-alt-background-hover: var(--background-primary);
+}
+.col-alt .markdown-rendered:not(.cards) {
+  --table-column-alt-background: var(--background-primary);
+}
+
+.table-tabular table:not(.calendar) {
+  font-variant-numeric: tabular-nums;
+}
+
+.table-center {
+  .markdown-preview-sizer table,
+  .table-wrapper {
+    margin: 0 auto;
+  }
+}
+
+.table-nowrap {
+  --table-white-space: nowrap;
+}
+.table-nowrap-first {
+  table {
+    thead > tr > th:first-child,
+    tbody > tr > td:first-child {
+      --table-white-space: nowrap;
+    }
+  }
+}
+
+.trim-cols,
+.table-nowrap .table-wrap {
+  --table-white-space: normal;
+}
+
+.table-numbers {
+  table {
+    counter-reset: section;
+    &:not(.table-editor) > :is(thead, tbody) > tr > :is(th, td):first-child,
+    &.table-editor > :is(thead, tbody) > tr > :is(th, td):first-child .table-cell-wrapper {
+      position: relative;
+      padding-left: 3em;
+    }
+
+    &:not(.table-editor) tbody > tr > td:first-child::before,
+    &.table-editor tbody > tr > td:first-child .table-cell-wrapper::before {
+      display: inline-block;
+      position: absolute;
+      top: 0.5em;
+      left: 0.5em;
+      counter-increment: section;
+      min-width: 2em;
+      content: counter(section);
+      color: var(--text-faint);
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+    }
+  }
+}
+
+.row-lines div:not(.el-table):not(.table-wrapper) > table {
+  > tbody > tr > td {
+    border-bottom: var(--table-border-width) solid var(--table-border-color);
+  }
+  > tbody > tr:last-child > td {
+    border-bottom: none;
+  }
+}
+
+.col-lines div:not(.el-table):not(.table-wrapper) > table {
+  > tbody > tr > td {
+    border-right: var(--table-border-width) solid var(--table-border-color);
+  }
+  > tbody > tr > td:last-child {
+    border-right: none;
+  }
+}

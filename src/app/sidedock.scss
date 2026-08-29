@@ -1,0 +1,240 @@
+body {
+  --nav-item-padding: calc(8px * var(--density-modifier)) 16px calc(8px * var(--density-modifier)) 32px;
+  --nav-indentation-guide-width: 0px;
+  --nav-item-children-margin-start: calc(20px - var(--nav-indentation-guide-width) / 2);
+
+  --ribbon-background: transparent;
+  --ribbon-background-collapsed: var(--ribbon-background);
+
+  --divider-vertical-height: 100% !important;
+}
+
+body.is-mobile {
+  --nav-item-padding: calc(10px * var(--density-modifier)) 24px;
+  --nav-item-color: var(--text-muted);
+  --nav-item-size: var(--font-ui-small);
+  --nav-item-weight-active: var(--font-medium);
+  --nav-item-children-margin-start: 12px;
+}
+
+@keyframes workspaceLeafIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.sidebar-toggle-icon-inner {
+  transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
+}
+.sidebar-toggle-button .clickable-icon:hover .sidebar-toggle-icon-inner {
+  width: 24%;
+}
+.workspace.is-left-sidedock-open .sidebar-toggle-button.mod-left .clickable-icon:hover .sidebar-toggle-icon-inner,
+.workspace.is-right-sidedock-open .sidebar-toggle-button.mod-right .clickable-icon:hover .sidebar-toggle-icon-inner {
+  width: revert-layer;
+}
+
+// File explorer
+body.full-item-name {
+  --nav-item-white-space: none;
+}
+body.bold-folders .nav-folder-title {
+  --nav-item-weight: calc(var(--font-weight) + var(--bold-modifier));
+  --nav-item-weight-hover: calc(var(--font-weight) + var(--bold-modifier));
+}
+
+.tree-item-self,
+.tree-item-inner {
+  align-items: center;
+}
+
+// Panel actions style
+.nav-header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px;
+}
+.nav-header .nav-buttons-container {
+  flex-wrap: nowrap;
+}
+.nav-header .search-input-container {
+  margin: 8px 0;
+  width: 100%;
+}
+.nav-action-button,
+.nav-action-button[aria-disabled="true"] {
+  position: relative;
+  height: 100%;
+}
+
+// Ribbon
+body.mod-macos.is-hidden-frameless .workspace-ribbon.mod-left {
+  padding-top: 0;
+}
+.workspace-ribbon.mod-left {
+  border-right: none;
+  z-index: 11;
+  transition: var(--anim-duration-moderate) !important;
+  position: relative;
+}
+.workspace-ribbon.mod-left:not(.is-collapsed) {
+  padding-left: 12px;
+}
+.workspace-ribbon.mod-left:before {
+  content: none;
+}
+.workspace-ribbon.mod-left .sidebar-toggle-button {
+  position: relative;
+  display: flex;
+  height: var(--header-height);
+  padding: 8px;
+  width: unset;
+  align-items: center;
+  justify-content: center;
+}
+.workspace-ribbon.mod-left .sidebar-toggle-button .clickable-icon {
+  pointer-events: auto;
+  z-index: 1;
+}
+.workspace-ribbon.mod-left .side-dock-actions {
+  gap: 4px;
+  transition: var(--anim-duration-moderate);
+  z-index: 1;
+  color: var(--icon-color);
+}
+.workspace-ribbon.mod-left .sidebar-toggle-button .clickable-icon,
+.workspace-ribbon.mod-left .side-dock-actions .side-dock-ribbon-action {
+  width: var(--tab-action-width);
+}
+
+body:not(.mod-macos):not(.is-mobile) .workspace-ribbon.mod-left,
+body.mod-macos:not(.is-hidden-frameless):not(.is-mobile) .workspace-ribbon.mod-left {
+  margin-top: 0;
+}
+body:not(.mod-macos):not(.is-mobile) .workspace-ribbon.mod-left .sidebar-toggle-button,
+body.mod-macos:not(.is-hidden-frameless):not(.is-mobile) .workspace-ribbon.mod-left .sidebar-toggle-button {
+  height: auto;
+  padding: 0;
+  margin: 0 auto;
+}
+body:not(.mod-macos):not(.is-mobile) .workspace-ribbon.mod-left .sidebar-toggle-button {
+  height: calc(var(--header-height) - 16px);
+}
+
+// Desktop sidedock
+body:not(.is-mobile) {
+  .mod-sidedock > .workspace-leaf-resize-handle:not(:hover) {
+    border-color: transparent;
+  }
+
+  .mod-sidedock .workspace-leaf {
+    background-color: transparent;
+  }
+  .mod-sidedock .workspace-leaf:not([style*="display: none"]) {
+    animation: workspaceLeafIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
+  }
+
+  // Sidedock padding
+  .mod-sidedock .workspace-leaf-content > .node-insert-event,
+  .mod-sidedock .workspace-leaf-content > .view-content {
+    padding: 2px 8px;
+
+    > .node-insert-event {
+      padding: 0;
+    }
+  }
+}
+
+// Panel actions
+.nav-header,
+.nav-buttons-container,
+.nav-action-button,
+.nav-action-button::after,
+.nav-header svg {
+  transition:
+    var(--anim-duration-moderate) var(--anim-motion-baseline),
+    background-color var(--anim-duration-fast);
+}
+
+body:not(.nav-action-center) .mod-sidedock .workspace-leaf-content .nav-header:first-child:not(:hover) .nav-buttons-container {
+  gap: 4px !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+
+  .nav-action-button {
+    padding: 2px !important;
+    width: 0 !important;
+    flex: 0;
+    background-color: var(--background-modifier-hover);
+    box-shadow: none !important;
+    min-width: 0;
+
+    &::after {
+      font-size: 0;
+      opacity: 0;
+    }
+  }
+  .nav-action-button.is-active {
+    background-color: var(--background-modifier-hover) !important;
+  }
+  .nav-action-button.clickable-icon[aria-disabled="true"] {
+    opacity: var(--icon-opacity);
+  }
+
+  svg {
+    width: 0px;
+    height: 0px;
+  }
+}
+
+// Vault switcher
+body:not(.is-mobile) .workspace-split.mod-left-split .workspace-drawer-vault-actions .clickable-icon:first-child {
+  display: none;
+}
+body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile {
+  background-color: transparent;
+}
+body:not(.is-mobile) .mod-sidedock.mod-left-split {
+  .workspace-sidedock-vault-profile {
+    border-top: none;
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 1;
+    align-items: unset;
+    width: auto;
+
+    &:hover ~ .workspace-tabs:last-child {
+      mask: linear-gradient(to top, transparent, black 64px);
+    }
+
+    .workspace-drawer-vault-switcher.has-active-menu {
+      background-color: var(--interactive-normal);
+    }
+
+    &:not(:hover) {
+      pointer-events: none;
+
+      .workspace-drawer-vault-switcher:not(.has-active-menu) {
+        opacity: 0;
+        filter: blur(4px);
+        pointer-events: none;
+        transform: scale(0.95);
+      }
+    }
+  }
+
+  .workspace-drawer-vault-switcher,
+  .workspace-drawer-vault-actions .clickable-icon {
+    transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
+    pointer-events: visible;
+  }
+
+  .workspace-leaf-content > .node-insert-event,
+  .workspace-leaf-content > .view-content {
+    padding-bottom: 64px;
+  }
+}

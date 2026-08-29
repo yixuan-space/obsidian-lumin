@@ -1,0 +1,209 @@
+@use "sass:math";
+
+body:not(.banner-off) {
+  --banner-image-object-fit: cover;
+  --banner-image-inset: 8px;
+  --banner-image-height: 320px;
+  --banner-image-height-s: 240px;
+  --banner-image-radius: var(--radius-s);
+  --banner-fade-height: 80px;
+  --banner-icon-size: 3rem;
+  --banner-mobile-offset: 0px;
+
+  // Mobile
+  &:where(.is-mobile) {
+    --banner-image-height: var(--banner-image-height-s);
+
+    .markdown-preview-view:not(.banner),
+    .is-live-preview:not(.banner) {
+      --banner-mobile-offset: 0px;
+    }
+  }
+
+  &:not(.is-phone) {
+    --view-top-spacing-markdown: 0px;
+  }
+
+  &.is-mobile .banner:not(.banner-icon) {
+    --banner-mobile-offset: 0.5rem;
+  }
+  &.is-mobile .banner.banner-icon {
+    --banner-mobile-offset: 1.5rem;
+  }
+
+  &:not(.is-phone) .banner-icon.banner-title .inline-title ~ .metadata-container {
+    padding-top: 0px;
+  }
+  &.is-mobile .banner-icon .inline-title {
+    padding-top: 0px;
+  }
+  &.is-phone .banner-icon.banner-title .inline-title ~ .metadata-container {
+    padding-top: 8px;
+  }
+
+  @for $n from 0 through 20 {
+    $i: $n * 5;
+    .banner.y#{$i} {
+      img[alt="banner"] {
+        object-position: center #{math.percentage(math.div($i, 100))};
+      }
+    }
+  }
+
+  .mod-root .view-content:not(.pixel-banner, .has-banner) div:is(.markdown-preview-view, .is-live-preview) {
+    // Spacing
+    .markdown-preview-sizer,
+    .cm-editor > .cm-scroller > .cm-sizer {
+      margin-top: calc(var(--banner-image-height) + var(--banner-icon-size) - var(--banner-fade-height) + var(--banner-mobile-offset));
+    }
+
+    &:not(.banner) {
+      --banner-image-height: 0px;
+    }
+    &:not(.banner.banner-fade) {
+      --banner-fade-height: 0px;
+    }
+    &:not(.banner-icon) {
+      --banner-icon-size: 0px;
+    }
+
+    &.banner-icon:not(.banner) {
+      --banner-image-height: var(--banner-icon-size);
+    }
+    &.banner-icon:not(.banner.banner-fade) {
+      --banner-fade-height: var(--banner-icon-size);
+    }
+    &.banner.banner-icon.banner-title:not(.banner-fade) {
+      --banner-fade-height: 0px;
+    }
+
+    // Banner image
+    &.banner-image-contain {
+      --banner-image-object-fit: contain;
+    }
+    &.banner-image-cover {
+      --banner-image-object-fit: cover;
+    }
+    &.banner-image-fill {
+      --banner-image-object-fit: fill;
+    }
+
+    &.banner {
+      img[alt="banner"]:not([contenteditable]) {
+        position: absolute;
+        inset: var(--view-top-spacing-markdown) var(--banner-image-inset) auto;
+        border-radius: var(--banner-image-radius);
+        width: stretch;
+        height: var(--banner-image-height);
+        overflow: hidden;
+        object-fit: var(--banner-image-object-fit);
+        line-height: 0;
+        max-width: calc(100% - var(--banner-image-inset) * 2);
+      }
+
+      .image-embed[alt="banner"],
+      .image-embed[alt="banner"] > .image-wrapper,
+      .image-embed[alt="banner"] > .image-resize-container {
+        display: contents !important;
+
+        &::before,
+        &::after,
+        .image-resize-corner,
+        .image-resize-handle {
+          display: none !important;
+        }
+      }
+      div:is(.mod-header, .inline-title, .metadata-container) {
+        z-index: 1;
+      }
+    }
+
+    // Banner image fade
+    &.banner.banner-fade img[alt="banner"] {
+      mask: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsla(0, 0%, 0%, 0.987) 14%, hsla(0, 0%, 0%, 0.951) 26.2%, hsla(0, 0%, 0%, 0.896) 36.8%, hsla(0, 0%, 0%, 0.825) 45.9%, hsla(0, 0%, 0%, 0.741) 53.7%, hsla(0, 0%, 0%, 0.648) 60.4%, hsla(0, 0%, 0%, 0.55) 66.2%, hsla(0, 0%, 0%, 0.45) 71.2%, hsla(0, 0%, 0%, 0.352) 75.6%, hsla(0, 0%, 0%, 0.259) 79.6%, hsla(0, 0%, 0%, 0.175) 83.4%, hsla(0, 0%, 0%, 0.104) 87.2%, hsla(0, 0%, 0%, 0.049) 91.1%, hsla(0, 0%, 0%, 0.013) 95.3%, hsla(0, 0%, 0%, 0) 100%);
+    }
+
+    // Banner icon
+    &.banner-icon {
+      .cm-callout:has(.callout[data-callout="banner-icon"]) {
+        display: contents !important;
+      }
+
+      .callout[data-callout="banner-icon"] {
+        z-index: 1;
+        position: absolute;
+        top: calc(var(--view-top-spacing-markdown) + var(--banner-image-height) - var(--banner-fade-height) + 1rem);
+        margin: 0 !important;
+        border: none !important;
+        background: none !important;
+        padding: 0 !important;
+        width: var(--banner-icon-size);
+        height: var(--banner-icon-size);
+        font-size: var(--banner-icon-size);
+        display: flex;
+        justify-content: center;
+        overflow: visible;
+        box-shadow: none;
+
+        .callout-title-inner {
+          line-height: 1;
+        }
+
+        .callout-icon,
+        .callout-content {
+          display: none;
+        }
+      }
+    }
+
+    // Banner title
+    @keyframes bannerTitleEditIn {
+      from {
+        transform: translateY(-0.5rem);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    @keyframes bannerTitleEditOut {
+      from {
+        transform: translateY(0.5rem);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    &.banner-icon.banner-title .inline-title {
+      transition:
+        var(--anim-duration-moderate) var(--anim-motion-baseline),
+        margin-left 0s;
+
+      &:focus-within {
+        animation: bannerTitleEditIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
+      }
+      &:not(:focus-within) {
+        position: absolute;
+        top: calc(var(--view-top-spacing-markdown) + var(--banner-image-height) - var(--banner-fade-height) + 1rem);
+        align-items: center;
+        animation: bannerTitleEditOut var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
+        margin-bottom: 0;
+        margin-left: calc(var(--banner-icon-size) + 1rem);
+        width: calc(var(--file-line-width) - var(--banner-icon-size) - 1rem);
+        max-width: calc(100% - var(--file-margins-x) * 2 - var(--banner-icon-size) - 1rem);
+        height: var(--banner-icon-size);
+        overflow: hidden;
+        line-height: var(--banner-icon-size);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      &:not(:focus-within)::before {
+        content: none;
+      }
+    }
+  }
+}
