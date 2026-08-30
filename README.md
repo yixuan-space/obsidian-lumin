@@ -1,23 +1,22 @@
 <h1 align="center">Lumin</h1>
 
-> A clean, calm, native-feeling Obsidian theme.
-
 <p align="center">
   <img src="https://img.shields.io/github/downloads/yixuan-space/obsidian-lumin/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=7c3aed" alt="Downloads">
   <img src="https://img.shields.io/github/stars/yixuan-space/obsidian-lumin?style=flat-square&logo=github&label=stars&color=3d79b7" alt="GitHub stars">
   <img src="https://img.shields.io/github/last-commit/yixuan-space/obsidian-lumin?style=flat-square&label=last%20commit&color=4f8a10" alt="Last commit">
 </p>
 
+
+<p align="center">
+  <a href="https://community.obsidian.md/themes/lumin"><img src="img/open-in-obsidian-button.svg" alt="Open in Obsidian" width="150"></a>
+  <a href="https://ko-fi.com/yixuanhq"><img src="img/support-on-kofi-button.svg" alt="Support Lumin on Ko-fi" width="150"></a>
+</p>
+
+> A clean, calm, native-feeling Obsidian theme.
+
 ![Lumin theme preview](img/hero.png)
 
 Lumin is designed for writing, reading, and everyday knowledge management. It keeps notes at the center with a clear visual hierarchy, restrained spacing, and responsive desktop and mobile layouts.
-
-
-
-<p align="center">
-  <a href="https://community.obsidian.md/themes/lumin"><img src="img/open-in-obsidian-button.svg" alt="Open in Obsidian" width="200"></a>
-  <a href="https://ko-fi.com/yixuanhq"><img src="img/support-on-kofi-button.svg" alt="Support Lumin on Ko-fi" width="200"></a>
-</p>
 
 [简体中文说明](README_CN.md)
 

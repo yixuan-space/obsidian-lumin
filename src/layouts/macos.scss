@@ -160,3 +160,16 @@ body:is(.mod-macos, .adaptive-mode-off).is-tablet {
     box-shadow: var(--shadow-surface);
   }
 }
+
+// Windows uses the Cupertino layout when adaptive mode is disabled. Its
+// settings container must remain transparent so the workspace is not covered.
+body.mod-windows.adaptive-mode-off:not(.is-mobile) {
+  .modal-container:has(.modal.mod-settings) {
+    background-color: transparent;
+  }
+
+  .modal-bg {
+    background-color: black;
+    opacity: 0.2 !important;
+  }
+}

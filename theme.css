@@ -3619,6 +3619,14 @@ body:is(.mod-macos, .adaptive-mode-off).is-tablet .modal.mod-settings .vertical-
   box-shadow: var(--shadow-surface);
 }
 
+body.mod-windows.adaptive-mode-off:not(.is-mobile) .modal-container:has(.modal.mod-settings) {
+  background-color: transparent;
+}
+body.mod-windows.adaptive-mode-off:not(.is-mobile) .modal-bg {
+  background-color: black;
+  opacity: 0.2 !important;
+}
+
 body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) .mod-root {
   z-index: 5;
 }
