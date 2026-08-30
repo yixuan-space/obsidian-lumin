@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="72" viewBox="0 0 300 72" role="img" aria-labelledby="title">
+  <title id="title">Open in Obsidian</title>
+  <rect width="300" height="72" rx="24" fill="#ede9fe"/>
+  <path d="m47 15 11 13-3 11 8 13-15 10-18-12 3-12-3-11 9-12 4 9 4-9Z" fill="#7c3aed"/>
+  <path d="m39 15 4 9-6 7 2-16Zm8 0-4 9 5 6 10-2-11-13Zm-10 16 6-7 5 6-4 9-7-8Zm11-1 10-2-3 11-7 1-1-10Zm-11 1 7 8-3 11-8-4 4-15Zm7 8 11-1 1 14-9 10-3-23Zm-3 11 3 23-14-11 11-12Zm15 2-1 14-9 10 10-24Z" fill="#a78bfa"/>
+  <text x="82" y="45" fill="#3b2a67" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="22" font-weight="700">Open in Obsidian</text>
+</svg>

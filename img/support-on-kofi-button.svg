@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="72" viewBox="0 0 300 72" role="img" aria-labelledby="title">
+  <title id="title">Support on Ko-fi</title>
+  <rect width="300" height="72" rx="24" fill="#f1e6d6"/>
+  <path d="M24 20h33v19c0 12-7 20-17 20S24 51 24 39V20Z" fill="#fff" stroke="#3d3d3d" stroke-linejoin="round" stroke-width="3.5"/>
+  <path d="M57 28h5c9 0 9 15 0 15h-5" fill="none" stroke="#3d3d3d" stroke-linecap="round" stroke-width="3.5"/>
+  <path d="m40 49-8-8c-5-5 3-12 8-6 5-6 13 1 8 6l-8 8Z" fill="#ff5f5f"/>
+  <text x="82" y="45" fill="#3d3d3d" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="22" font-weight="700">Support on Ko-fi</text>
+</svg>
