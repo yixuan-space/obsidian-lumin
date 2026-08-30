@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="72" viewBox="0 0 360 72" role="img" aria-labelledby="title">
+  <title id="title">Support Lumin on Ko-fi</title>
+  <rect width="360" height="72" rx="24" fill="#29abe0"/>
+  <path d="M35 24h31v18c0 10-7 17-16 17S35 52 35 42V24Zm31 5h5c7 0 7 12 0 12h-5M40 20h21" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  <text x="86" y="46" fill="#fff" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="25" font-weight="650">Support on Ko-fi</text>
+</svg>

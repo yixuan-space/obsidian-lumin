@@ -10,8 +10,8 @@ Lumin is designed for writing, reading, and everyday knowledge management. It ke
   <a href="https://community.obsidian.md/themes/lumin">
     <img src="img/open-in-obsidian.svg" alt="Open in Obsidian" width="200">
   </a>
-  <a href="https://ifdian.net/a/yixuan-space">
-    <img src="img/support-on-afdian.svg" alt="Support Lumin on Afdian" width="200">
+  <a href="https://ko-fi.com/yixuanhq">
+    <img src="img/support-on-kofi.svg" alt="Support Lumin on Ko-fi" width="200">
   </a>
   <img src="img/made-in-china.svg" alt="Made in China" width="200">
 </p>
