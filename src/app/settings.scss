@@ -124,7 +124,7 @@ body:not(.is-phone) {
   }
 }
 
-body.mod-macos:not(.is-mobile) .modal.mod-community-modal .community-modal-controls {
+body:not(.is-mobile) .modal.mod-community-modal .community-modal-controls {
   padding-top: 16px;
 }
 
@@ -183,7 +183,7 @@ body.is-tablet {
   }
 }
 
-body:is(.mod-macos, .adaptive-mode-off, .is-android:not(.adaptive-mode-off)) {
+body {
   .modal.mod-settings .vertical-tab-nav-item {
     &[data-setting-id="editor"] .vertical-tab-nav-item-icon {
       --setting-nav-icon-background: var(--color-blue);

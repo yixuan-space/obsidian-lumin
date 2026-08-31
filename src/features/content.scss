@@ -1,0 +1,117 @@
+// Shared content treatment inspired by Minimal.
+@media screen, print {
+  body {
+    --metadata-gap: 0;
+    --metadata-padding: 0;
+    --metadata-property-radius: 0;
+    --metadata-property-radius-hover: 0;
+    --metadata-property-radius-focus: 0;
+    --embed-background: transparent;
+    --embed-border-start: 2px solid var(--background-modifier-border);
+    --table-row-alt-background: transparent;
+    --table-row-hover-background: var(--background-modifier-hover);
+
+    .inline-title {
+      letter-spacing: 0;
+      line-height: 1.25;
+    }
+
+    .workspace-split .metadata-container {
+      padding: 0 !important;
+
+      // Keep the rounded corner on the Properties surface, not on every row.
+      --metadata-property-radius: 0;
+      --metadata-property-radius-hover: 0;
+      --metadata-property-radius-focus: 0;
+
+      .metadata-properties {
+        border: var(--border-width) solid var(--background-modifier-border);
+        border-radius: var(--radius-s);
+        background-color: transparent;
+        overflow: hidden;
+      }
+
+      .metadata-property {
+        min-height: 36px;
+        border-radius: 0 !important;
+        border-bottom: var(--border-width) solid var(--background-modifier-border);
+      }
+
+      .metadata-property:last-child {
+        border-bottom: 0;
+      }
+
+      .metadata-property-key,
+      .text-icon-button {
+        padding: 8px 12px;
+      }
+
+      .metadata-property-value {
+        padding-inline-end: 12px;
+      }
+    }
+
+    .mod-root .metadata-container .text-icon-button {
+      margin-top: 4px;
+      padding-inline: 0;
+      text-transform: none;
+    }
+
+    .mod-root .metadata-content {
+      transform: none !important;
+      width: 100% !important;
+    }
+
+    .callout:not([data-callout="note-toolbar"]) {
+      border-width: 0 0 0 3px;
+      border-radius: var(--radius-s);
+      box-shadow: none;
+      background-color: color-mix(in srgb, rgb(var(--callout-color)) 9%, var(--background-primary));
+      padding: 12px 14px;
+
+      .callout-content {
+        margin-inline-start: 0;
+      }
+
+      .callout-content > *:first-child {
+        margin-block-start: 6px;
+      }
+    }
+
+    .markdown-rendered pre {
+      border: var(--code-border-width) solid var(--background-modifier-border);
+      border-radius: var(--radius-s);
+      box-shadow: none;
+      background: var(--background-secondary);
+    }
+
+    .markdown-rendered code {
+      border-radius: 3px;
+      background-color: var(--background-secondary);
+    }
+
+    .markdown-embed:not(.image-embed, .canvas-node-content) {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    div:is(.markdown-preview-view, .is-live-preview) table {
+      border-color: var(--background-modifier-border);
+      border-radius: var(--radius-s);
+      box-shadow: none;
+
+      th,
+      td {
+        padding: 8px 10px;
+      }
+
+      > thead > tr > th {
+        background-color: var(--background-secondary);
+      }
+    }
+
+    .workspace-leaf-content[data-type="markdown"] img:not(.link-favicon, .emoji, [alt="banner"]) {
+      box-shadow: none;
+    }
+  }
+}

@@ -1,3 +1,6 @@
+@use "variables/tokens.scss";
+@use "variables/devices.scss";
+
 @use "app/root.scss";
 @use "app/icons.scss";
 @use "app/tabs.scss";
@@ -8,6 +11,7 @@
 @use "app/status-bar.scss";
 @use "app/empty-state.scss";
 @use "app/mobile.scss";
+@use "app/workspace.scss";
 @use "app/core-plugins.scss";
 @use "app/community-plugins.scss";
 @use "app/style-settings.scss";
@@ -19,21 +23,15 @@
 @use "editor/table.scss";
 @use "editor/bases.scss";
 
-@use "layouts/classic.scss";
-@use "layouts/cupertino.scss" as layout-cupertino;
-@use "layouts/macos.scss";
-@use "layouts/fusion.scss";
+@use "layouts/desktop.scss";
 
 @use "elements/baseline.scss";
-@use "elements/cupertino.scss" as element-cupertino;
-@use "elements/cupertino-dialog.scss";
-@use "elements/cupertino-settings.scss";
-@use "elements/cupertino-prompt.scss";
-@use "elements/cupertino-mobile.scss";
-@use "elements/fluent.scss";
-@use "elements/material.scss";
-@use "elements/adwaita.scss" as element-adwaita;
-@use "elements/adaptive-minimal.scss";
+@use "elements/dialogs.scss" as element-dialogs;
+@use "elements/settings.scss" as element-settings;
+@use "elements/prompt.scss" as element-prompt;
+@use "elements/shared.scss";
+@use "elements/windows.scss";
+@use "elements/android.scss";
 
 @use "features/alternative-checkboxes.scss";
 @use "features/banners.scss";
@@ -47,7 +45,6 @@
 @use "features/focus-mode.scss";
 @use "features/hover-sidedock.scss";
 @use "features/file-explorer.scss";
+@use "features/content.scss";
 
-@use "color-schemes/adwaita.scss" as color-adwaita;
-@use "color-schemes/cupertino.scss" as color-cupertino;
-@use "color-schemes/material.scss" as color-material;
+@use "color-schemes/lumin.scss";

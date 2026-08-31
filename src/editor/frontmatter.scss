@@ -12,6 +12,10 @@
   }
   .metadata-container {
     --metadata-divider-width: 0 !important;
+    --metadata-label-background: transparent;
+    --metadata-label-background-hover: var(--background-modifier-hover);
+    --metadata-input-background: transparent;
+    --metadata-input-background-active: var(--background-primary);
   }
   .metadata-properties-heading {
     padding-inline: 0;
@@ -22,6 +26,19 @@
   }
   .metadata-property-key {
     padding-inline: 8px;
+    color: var(--text-muted);
+    background-color: transparent !important;
+    font-weight: var(--font-normal);
+  }
+
+  .metadata-property-key-input {
+    color: var(--text-muted);
+    background-color: transparent !important;
+    font-weight: var(--font-normal);
+  }
+
+  .metadata-property-value {
+    color: var(--text-normal);
   }
   .metadata-property-key-input,
   .metadata-input {

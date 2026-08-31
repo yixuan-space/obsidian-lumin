@@ -21,7 +21,7 @@ Lumin keeps the note at the center of the workspace. Clear hierarchy, measured s
 
 ## At a glance
 
-- **Platform-aware by default.** Lumin adapts its interface to macOS, Windows, Linux, Android, and mobile Obsidian, while still letting you turn off adaptive mode.
+- **One visual language everywhere.** Lumin uses the same calm, Mac-inspired interface on macOS, Windows, Linux, Android, and mobile Obsidian, with only density and touch sizing adjusted per device.
 - **Built for reading and writing.** Refined typography, comfortable reading width, richer tables, callouts, embeds, banners, media, and image handling keep notes easy to scan.
 - **A workspace that stays out of the way.** Use hoverable ribbons and sidebars, focus view, compact panel controls, and centered tabs to shape the desktop around your work.
 - **Personal without patching CSS.** The optional Style Settings plugin exposes appearance, editor, and accessibility preferences directly in Obsidian.
@@ -62,7 +62,7 @@ Task states get a compact visual vocabulary while remaining standard Obsidian ta
 
 Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) community plugin to configure Lumin without custom CSS. Available controls include:
 
-- Adaptive-mode and color preferences, including sidebar tint and Android dynamic color where supported.
+- Color preferences, including sidebar tint and Android dynamic color where supported.
 - Desktop behavior such as hover ribbons, hover sidebars, focus view, tab alignment, compact panel controls, and media zoom.
 - Editor preferences including reading width, block and media width, banner treatment, active-line highlight, link underlines, and image alignment.
 - Accessibility options for motion, focus contrast, interface type size, and icon size.
@@ -81,7 +81,7 @@ Commit the generated `theme.css` together with source changes.
 
 Lumin is based on [Cupertino](https://github.com/aaaaalexis/obsidian-cupertino). It includes MIT-licensed snippets from [Minimal](https://github.com/kepano/obsidian-minimal) and public-domain references from [Alternative Checkboxes Reference Set](https://github.com/damiankorcz/Alternative-Checkboxes-Reference-Set). See [third-party notices](THIRD_PARTY_NOTICES.md) for the applicable attribution and terms.
 
-Craft and Material Design are visual references only; this repository does not redistribute their code or assets.
+Craft is a visual reference only; this repository does not redistribute its code or assets.
 
 ## License
 

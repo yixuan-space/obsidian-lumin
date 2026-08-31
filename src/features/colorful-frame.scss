@@ -1,4 +1,4 @@
-body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile):not(.is-translucent).colorful-frame {
+body:not(.is-mobile):not(.is-translucent).colorful-frame {
   // Workspace: Use sidedock for tint
   &.theme-light .mod-sidedock.mod-left-split {
     background-color: color-mix(in srgb, #fff, var(--color-accent) 2%);

@@ -1,4 +1,4 @@
-body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
+body:not(.is-mobile) {
   // Editor panel
   .mod-root {
     z-index: 5;
@@ -22,7 +22,7 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
   }
 }
 
-body:is(.mod-macos, .adaptive-mode-off):not(.is-phone) {
+body:not(.is-phone) {
   // Editor panel
   &.theme-light {
     --shadow-tab: var(--shadow-base), 0 0 1px rgba(0, 0, 0, 0.2), inset 0 -8px 48px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.025), 0 2px 4px rgba(0, 0, 0, 0.025);
@@ -44,7 +44,7 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-phone) {
   }
 
   // Editor panel: Tab style
-  &:is(.mod-macos, .adaptive-mode-off) {
+  & {
     .mod-root .workspace-tabs:not(.mod-stacked) {
       .workspace-tab-header {
         @starting-style {
@@ -82,7 +82,7 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-phone) {
   }
 }
 
-body:is(.mod-macos, .adaptive-mode-off).is-tablet {
+body.is-tablet {
   .workspace-drawer.mod-left.is-pinned {
     margin-right: 8px;
   }

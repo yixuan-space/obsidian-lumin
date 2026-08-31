@@ -1,0 +1,21 @@
+// Device-specific sizing only. Component visuals live in tokens.scss and
+// elements/shared.scss so every platform shares the same Mac-inspired UI.
+body.is-mobile {
+  --input-height: 48px;
+  --input-radius: 24px;
+  --button-radius: 24px;
+  --input-padding: 0 var(--side-padding);
+  --dropdown-padding-start: var(--side-padding);
+  --toggle-border-width: 2px;
+  --toggle-thumb-height: 24px;
+  --toggle-thumb-width: 37px;
+  --toggle-width: 68px;
+}
+
+body.is-phone {
+  --input-height: 52px;
+}
+
+body.is-tablet {
+  --input-height: 40px;
+}

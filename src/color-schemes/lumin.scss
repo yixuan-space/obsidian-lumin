@@ -3,7 +3,7 @@ Lumin
 https://developer.apple.com/design/human-interface-guidelines/color
 */
 
-body:is(.mod-macos, .adaptive-mode-off).theme-light {
+body.theme-light {
   --color-red-rgb: 255, 56, 60;
   --color-orange-rgb: 255, 141, 40;
   --color-yellow-rgb: 255, 204, 0;
@@ -13,7 +13,7 @@ body:is(.mod-macos, .adaptive-mode-off).theme-light {
   --color-purple-rgb: 203, 48, 224;
   --color-pink-rgb: 255, 45, 85;
 }
-body:is(.mod-macos, .adaptive-mode-off).theme-light:not(.is-mobile) {
+body.theme-light:not(.is-mobile) {
   --background-primary: #fff;
   --background-primary-alt: color-mix(in srgb, var(--background-primary), black 3%);
   --background-secondary: color-mix(in srgb, var(--background-primary), black 5%);
@@ -26,7 +26,7 @@ body:is(.mod-macos, .adaptive-mode-off).theme-light:not(.is-mobile) {
   --text-muted: #737373; // rgba(var(--mono-rgb-100), 55%)
   --text-faint: #bfbfbf; // rgba(var(--mono-rgb-100), 25%)
 }
-body:is(.mod-macos, .adaptive-mode-off).theme-light.is-mobile {
+body.theme-light.is-mobile {
   --background-primary: #fff;
   --background-primary-alt: #f2f2f7;
   --background-secondary: #f2f2f7;
@@ -40,7 +40,7 @@ body:is(.mod-macos, .adaptive-mode-off).theme-light.is-mobile {
   --text-faint: #c4c4c7; // rgba(60, 60, 67, 30%)
 }
 
-body:is(.mod-macos, .adaptive-mode-off).theme-dark {
+body.theme-dark {
   --color-red-rgb: 255, 66, 69;
   --color-orange-rgb: 255, 146, 48;
   --color-yellow-rgb: 255, 214, 0;
@@ -50,7 +50,7 @@ body:is(.mod-macos, .adaptive-mode-off).theme-dark {
   --color-purple-rgb: 107, 52, 242;
   --color-pink-rgb: 255, 55, 95;
 }
-body:is(.mod-macos, .adaptive-mode-off).theme-dark:not(.is-mobile) {
+body.theme-dark:not(.is-mobile) {
   --background-primary: #1e1e1e;
   --background-primary-alt: color-mix(in srgb, var(--background-primary), white 3%);
   --background-secondary: color-mix(in srgb, var(--background-primary), white 5%);
@@ -63,7 +63,7 @@ body:is(.mod-macos, .adaptive-mode-off).theme-dark:not(.is-mobile) {
   --text-muted: #9a9a9a; // rgba(var(--mono-rgb-100), 55%)
   --text-faint: #565656; // rgba(var(--mono-rgb-100), 25%)
 }
-body:is(.mod-macos, .adaptive-mode-off).theme-dark.is-mobile {
+body.theme-dark.is-mobile {
   --background-primary: #000;
   --background-primary-alt: #1c1c1e;
   --background-secondary: #1c1c1e;

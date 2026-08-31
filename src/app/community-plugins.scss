@@ -41,7 +41,7 @@
 body:not(.is-mobile) .omnisearch-input-container__buttons {
   display: none;
 }
-body:is(.mod-macos, .adaptive-mode-off).is-phone {
+body.is-phone {
   @media only screen and (max-width: 600px) {
     .omnisearch-modal {
       --prompt-top: calc(var(--safe-area-inset-top) + var(--header-height)) !important;
@@ -210,7 +210,7 @@ body:not(.is-mobile):not(.nav-action-center) .mod-sidedock .workspace-leaf-conte
   }
 }
 
-body:is(.mod-macos, .adaptive-mode-off).is-mobile .workspace-drawer .novel-word-count--active {
+body.is-mobile .workspace-drawer .novel-word-count--active {
   .nav-buttons-container {
     overflow: visible;
   }

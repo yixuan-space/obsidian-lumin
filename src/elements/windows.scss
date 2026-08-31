@@ -1,0 +1,59 @@
+body.mod-windows {
+  --font-interface-theme: "Segoe UI Variable Display", "Segoe UI Variable";
+  --font-text-theme: "Segoe UI Variable Text", "Segoe UI Variable";
+
+  --slider-thumb-border-width: 4px;
+  --slider-thumb-width: 18px;
+  --slider-thumb-height: 18px;
+  --slider-track-background: var(--color-base-50);
+  --slider-track-height: 4px;
+
+  &.is-mobile {
+    --slider-thumb-width: 24px;
+    --slider-thumb-height: 24px;
+  }
+}
+
+body.mod-windows:not(.is-mobile) {
+  // Side panels
+  @keyframes workspaceLeafInWindows {
+    from {
+      transform: translateY(16px);
+      opacity: 0;
+    }
+  }
+
+  .mod-sidedock .workspace-leaf {
+    animation: workspaceLeafInWindows var(--anim-duration-moderate);
+  }
+
+  .modal-bg {
+    background-color: black;
+    opacity: 0.3 !important;
+  }
+
+  .modal-close-button {
+    top: 0;
+    inset-inline-end: 0 !important;
+    padding-inline: 16px;
+    border-radius: 0;
+
+    &:empty::before {
+      margin: 0;
+      width: var(--icon-s);
+      height: var(--icon-s);
+      font-size: var(--icon-xs);
+      font-weight: 100;
+    }
+
+    &:hover {
+      background-color: var(--color-red);
+      color: white;
+    }
+  }
+
+  // Settings
+  .modal.mod-sidebar-layout .vertical-tab-content {
+    animation: workspaceLeafInWindows var(--anim-duration-moderate);
+  }
+}

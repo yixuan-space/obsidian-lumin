@@ -14,7 +14,7 @@ body {
   --tab-text-color-focused-active: var(--text-normal);
   --tab-text-color-focused-active-current: unset;
 }
-body.mod-macos {
+body:not(.is-mobile) {
   --header-height: 52px;
 }
 body:not(.is-mobile) {
@@ -143,7 +143,7 @@ body:not(.is-phone):not(.tab-floating) .mod-root .workspace-tabs:not(.mod-stacke
   }
 }
 
-body.mod-macos:not(.is-mobile):not(.tab-floating) {
+body:not(.is-mobile):not(.tab-floating) {
   .mod-root .workspace-tabs:not(.mod-stacked) {
     @container (min-width: 560px) {
       // Right sidedock hidden
@@ -161,7 +161,7 @@ body.mod-macos:not(.is-mobile):not(.tab-floating) {
     @container (min-width: 560px) {
       // Both sidedocks hidden
       &.mod-top-left-space.mod-top-right-space .workspace-tab-header-container-inner {
-        padding-right: calc(var(--frame-left-space) + calc(--tab-action-width) * 2);
+        padding-right: calc(var(--frame-left-space) + var(--tab-action-width) * 2);
       }
       // Left sidedock hidden
       &.mod-top-left-space:not(.mod-top-right-space) .workspace-tab-header-container-inner {
@@ -179,39 +179,6 @@ body.mod-macos:not(.is-mobile):not(.tab-floating) {
       // Left sidedock hidden
       &.mod-top-left-space:not(.mod-top-right-space) .workspace-tab-header-container-inner {
         padding-left: var(--tab-action-width);
-      }
-    }
-  }
-}
-
-body:not(.mod-macos):not(.is-mobile):not(.tab-floating) {
-  .mod-root .workspace-tabs:not(.mod-stacked) {
-    @container (min-width: 560px) {
-      // Both sidedocks hidden
-      &.mod-top-left-space.mod-top-right-space .workspace-tab-header-container-inner {
-        padding-left: calc(var(--frame-right-space) + var(--tab-action-width) * 2);
-      }
-      // Left sidedock hidden
-      &.mod-top-left-space:not(.mod-top-right-space) .workspace-tab-header-container-inner {
-        padding-left: calc(var(--tab-action-width) * 2);
-      }
-      // Right sidedock hidden
-      &:not(.mod-top-left-space).mod-top-right-space .workspace-tab-header-container-inner {
-        padding-left: calc(var(--frame-right-space) + var(--tab-action-width) * 3);
-      }
-      // Both sidedocks shown
-      &:not(.mod-top-left-space):not(.mod-top-right-space).mod-top .workspace-tab-header-container-inner {
-        padding-left: calc(var(--tab-action-width) * 3);
-      }
-
-      // Left sidedock hidden left split pane
-      &:is(.mod-root > .workspace-tabs):not(:only-of-type).mod-top-left-space:not(.mod-top-right-space) .workspace-tab-header-container-inner {
-        padding-left: var(--tab-action-width);
-      }
-      // Left split pane & Non-top pane
-      &:is(.mod-root > .workspace-tabs):not(:only-of-type):first-of-type:not(.mod-top-left-space):not(.mod-top-right-space) .workspace-tab-header-container-inner,
-      &:not(.mod-top) .workspace-tab-header-container-inner {
-        padding-left: calc(var(--tab-action-width) * 2);
       }
     }
   }
@@ -354,11 +321,11 @@ body:not(.tab-icon) .mod-sidedock .workspace-tabs:not(.mod-top) .workspace-tab-h
 }
 
 // Side panels: Platforms
-body:not(.mod-macos).is-hidden-frameless .mod-sidedock .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+body.is-hidden-frameless:not(.is-mobile) .mod-sidedock .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
   padding-right: var(--frame-right-space);
 }
 
-body.mod-macos.is-frameless:not(.is-popout-window) .workspace {
+body.is-frameless:not(.is-popout-window) .workspace {
   .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
     padding-right: 8px;
   }
@@ -369,7 +336,7 @@ body.mod-macos.is-frameless:not(.is-popout-window) .workspace {
   }
 }
 
-body.mod-macos:not(.is-mobile) .workspace:not(.is-right-sidedock-open) .mod-root {
+body:not(.is-mobile) .workspace:not(.is-right-sidedock-open) .mod-root {
   .workspace-tabs.mod-top-right-space .workspace-tab-header-container,
   .sidebar-toggle-button.mod-right {
     background-color: var(--background-secondary);

@@ -1,0 +1,46 @@
+// Shared Lumin tokens. Platform files may adjust density, but the visual
+// language remains consistent across desktop, tablet, and phone.
+body {
+  --side-padding: 20px;
+  --macos-window-controls-space: 0px;
+  --frame-left-space: 0px;
+  --p-spacing: 1rem;
+  --input-height: 32px;
+  --input-radius: 8px;
+  --button-radius: 8px;
+  --clickable-icon-radius: 100vh;
+  --setting-items-radius: 12px;
+  --menu-radius: 10px;
+  --modal-radius: 12px;
+  --input-shadow: none;
+  --input-shadow-hover: none;
+  --input-shadow-active: 0 0 0 2px var(--interactive-accent);
+  --background-modifier-border: color-mix(in srgb, var(--text-normal) 10%, transparent);
+  --background-modifier-border-hover: var(--background-modifier-border);
+  --background-modifier-border-focus: hsla(var(--interactive-accent-hsl), 0.5);
+  --interactive-hover: var(--interactive-normal);
+  --blur-s: blur(2px) saturate(1.5) brightness(1.025);
+  --blur-m: blur(4px) saturate(1.5) brightness(1.025);
+  --blur-l: blur(8px) saturate(1.5) brightness(1.025);
+  --divider-color: var(--background-modifier-border);
+  --toggle-border-width: 1.5px;
+  --toggle-thumb-height: 13px;
+  --toggle-thumb-width: 21px;
+  --toggle-width: 36px;
+  --toggle-s-border-width: var(--toggle-border-width);
+  --toggle-s-thumb-height: var(--toggle-thumb-height);
+  --toggle-s-thumb-width: var(--toggle-thumb-width);
+  --toggle-s-width: var(--toggle-width);
+}
+
+body.theme-light {
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 6%);
+  --shadow-s: 0 8px 16px rgb(0 0 0 / 12%);
+  --shadow-l: 0 16px 48px rgb(0 0 0 / 16%);
+}
+
+body.theme-dark {
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 20%);
+  --shadow-s: 0 8px 16px rgb(0 0 0 / 28%);
+  --shadow-l: 0 16px 48px rgb(0 0 0 / 40%);
+}

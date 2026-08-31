@@ -1,4 +1,4 @@
-body:is(.mod-macos, .adaptive-mode-off).is-mobile {
+body.is-mobile {
   // Liquid Glass
   &:where(.is-phone):not(.mode-switcher-off) .mod-root .workspace-leaf-content[data-type="markdown"] .view-actions button:nth-last-child(2),
   &:where(.is-phone) .prompt-input,
@@ -53,7 +53,7 @@ body:is(.mod-macos, .adaptive-mode-off).is-mobile {
   &.theme-dark .mod-raised::after {
     content: none !important;
   }
-  &.mod-macos.theme-light {
+  &.theme-light {
     .mod-raised::after,
     &.is-phone:not(.mode-switcher-off) .mod-root .workspace-leaf-content[data-type="markdown"] .view-actions button:nth-last-child(2)::after,
     &.is-phone .prompt-input-container::after,
@@ -102,7 +102,7 @@ body:is(.mod-macos, .adaptive-mode-off).is-mobile {
   }
 }
 
-body:is(.mod-macos, .adaptive-mode-off).is-phone {
+body.is-phone {
   // Editor panel
   .mod-root {
     .view-header-left,

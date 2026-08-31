@@ -173,19 +173,12 @@ body.is-frameless:not(.is-translucent, .is-hidden-frameless, .is-fullscreen) .ti
   background-color: var(--background-secondary);
 }
 
-body.mod-macos:not(.is-mobile) {
+body:not(.is-mobile) {
   --titlebar-background: var(--background-primary);
   --titlebar-background-focused: var(--background-primary);
 }
 
-// The non-adaptive desktop layout shares macOS-style spacing, but Electron on
-// Windows and Linux otherwise falls back to its black native title bar.
-body:not(.mod-macos):not(.is-mobile).adaptive-mode-off {
-  --titlebar-background: var(--background-secondary);
-  --titlebar-background-focused: var(--background-secondary);
-}
-
-body.mod-macos:has(.modal.mod-settings) {
+body:has(.modal.mod-settings) {
   --titlebar-background: var(--background-primary);
   --titlebar-background-focused: var(--background-primary);
 }
@@ -193,7 +186,7 @@ body.mod-macos:has(.modal.mod-settings) {
 body.titlebar-text-off .titlebar-text {
   display: none;
 }
-body:not(.mod-macos):not(.is-mobile) {
+body:not(.is-mobile) {
   --frame-right-space: 144px;
 
   &.is-hidden-frameless .titlebar {

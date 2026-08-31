@@ -1,0 +1,291 @@
+// Shared Mac-inspired surface for every platform.
+body {
+  .search-input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-height: var(--input-height);
+    border-radius: var(--input-radius);
+    border: 1px solid var(--background-modifier-border) !important;
+    background-color: var(--background-primary) !important;
+    box-shadow: none;
+
+    &::before {
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      inset-inline-start: 12px;
+      width: var(--icon-s);
+      height: var(--icon-s);
+    }
+
+    input:is([type="search"], [type="text"]) {
+      min-height: var(--input-height);
+      height: var(--input-height);
+      border: 0 !important;
+      border-radius: inherit;
+      background-color: transparent !important;
+      box-shadow: none;
+      padding-inline: var(--input-height) 12px;
+    }
+  }
+
+  input:is([type="text"], [type="search"], [type="email"], [type="password"], [type="number"]),
+  textarea,
+  select,
+  .dropdown,
+  .combobox-button {
+    min-height: var(--input-height);
+    border: var(--input-border-width, 1px) solid var(--background-modifier-border);
+    border-radius: var(--input-radius);
+    background-color: var(--background-modifier-form-field);
+    box-shadow: var(--input-shadow);
+
+    &:focus,
+    &:focus-visible {
+      border-color: var(--interactive-accent);
+      box-shadow: var(--input-shadow-active);
+    }
+  }
+
+  button:where(:not(.clickable-icon, .ant-switch, .copy-code-button)),
+  .mod-cta {
+    min-height: var(--input-height);
+    border-radius: var(--button-radius);
+    padding: 4px 12px;
+  }
+
+  &:not(.is-mobile) {
+    --tab-action-width: 40px;
+
+    .clickable-icon {
+      min-width: var(--tab-action-width);
+    }
+
+    .clickable-icon:not([aria-disabled="true"]):hover,
+    .clickable-icon.has-active-menu,
+    .modal-close-button:hover {
+      box-shadow: var(--shadow-xs);
+      background-color: var(--raised-background);
+    }
+  }
+
+  .checkbox-container {
+    box-shadow: none;
+
+    &:not(:active) {
+      overflow: hidden;
+    }
+
+    &::after {
+      transition: var(--anim-duration-moderate) var(--anim-motion-baseline) !important;
+      box-shadow: 0 1px 4px rgb(0 0 0 / 8%), 0 1px 16px rgb(0 0 0 / 10%);
+    }
+
+    &:active::after {
+      --toggle-border-width: -2.5px;
+      --toggle-thumb-height: 21px;
+      --toggle-thumb-width: 35.5px;
+      --toggle-s-border-width: var(--toggle-border-width);
+      --toggle-s-thumb-height: var(--toggle-thumb-height);
+      --toggle-s-thumb-width: var(--toggle-thumb-width);
+    }
+  }
+
+  --slider-thumb-border-width: 0;
+  --slider-thumb-y: -5px;
+  --slider-thumb-height: 16px;
+  --slider-thumb-width: 20px;
+  --slider-thumb-radius: var(--toggle-thumb-radius);
+  --slider-track-height: 6px;
+  --slider-track-background: var(--background-modifier-border-hover);
+
+  input[type="range"]::-webkit-slider-thumb {
+    transition: var(--anim-duration-moderate) var(--anim-motion-baseline) !important;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 8%), 0 1px 16px rgb(0 0 0 / 10%) !important;
+
+    &:active {
+      scale: 1.2;
+      background-color: var(--raised-background);
+    }
+  }
+
+  .menu,
+  .suggestion-container,
+  .popover,
+  .prompt,
+  .modal {
+    border-radius: var(--modal-radius);
+    box-shadow: var(--shadow-s);
+  }
+
+  .prompt-input-container,
+  .omnisearch-input-field {
+    align-items: center;
+
+    &::before {
+      position: absolute;
+      left: var(--side-padding);
+      -webkit-mask-position: 50% 50%;
+      -webkit-mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      background-color: var(--search-icon-color);
+      width: var(--search-icon-size);
+      height: var(--search-icon-size);
+      content: "";
+      -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 20 20'%3e%3cg clip-path='url(%23a)'%3e%3cpath fill='white' d='M0 7.793c0 4.297 3.496 7.793 7.793 7.793 1.7 0 3.252-.547 4.531-1.465l4.805 4.815c.224.224.517.332.83.332.664 0 1.123-.498 1.123-1.153a1.118 1.118 0 0 0-.322-.8l-4.776-4.805a7.703 7.703 0 0 0 1.602-4.717C15.586 3.496 12.09 0 7.793 0 3.496 0 0 3.496 0 7.793Zm1.67 0A6.127 6.127 0 0 1 7.793 1.67a6.127 6.127 0 0 1 6.123 6.123 6.127 6.127 0 0 1-6.123 6.123A6.127 6.127 0 0 1 1.67 7.793Z'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='a'%3e%3cpath fill='white' d='M0 0h20v20H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
+      z-index: 1;
+    }
+  }
+
+  .prompt-input {
+    border-bottom: none;
+    padding-inline-start: calc(var(--search-icon-size) + var(--side-padding) + 12px) !important;
+  }
+
+  .prompt .suggestion-item {
+    border-radius: var(--radius-m);
+    padding: calc(12px * var(--density-modifier)) var(--side-padding);
+  }
+
+  .prompt-instructions {
+    border-top: none;
+  }
+
+  .setting-items,
+  .setting-group {
+    border-radius: var(--setting-items-radius);
+  }
+
+  // Keep Lumin's colored settings icons while sharing the layout rules.
+  .modal.mod-sidebar-layout.mod-settings .vertical-tab-nav-item {
+    .vertical-tab-nav-item-icon {
+      --icon-size: var(--icon-xs) !important;
+      --icon-stroke: var(--icon-xs-stroke-width) !important;
+      box-shadow:
+        inset 0.5px 0.5px 0.5px rgb(255 255 255 / 25%),
+        inset -0.5px -0.5px 0.5px rgb(255 255 255 / 25%),
+        0 0 2px rgb(0 0 0 / 25%),
+        0 1px 4px rgb(0 0 0 / 15%);
+      border-radius: 6px;
+      background-image: linear-gradient(
+        color-mix(in srgb, var(--setting-nav-icon-background) 112.5%, white),
+        color-mix(in srgb, var(--setting-nav-icon-background) 97.5%, black)
+      ) !important;
+      background-color: var(--setting-nav-icon-background) !important;
+      padding: 4px !important;
+      color: var(--setting-nav-icon-color, white) !important;
+    }
+  }
+
+  // Minimal-like cards for native settings. Style Settings has its own
+  // unboxed hierarchy and is intentionally excluded here.
+  .modal.mod-settings:not(:has(.style-settings-container)) {
+    .vertical-tab-content {
+      padding: 20px clamp(16px, 3vw, 32px) 40px;
+    }
+
+    .setting-items,
+    .setting-group .setting-items {
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .setting-items > .setting-item:not(.setting-item-heading),
+    .setting-group > .setting-item:not(.setting-item-heading),
+    div:not(.setting-items, .hotkey-list-container, .style-settings-container) > .setting-item:not(.setting-item-heading) {
+      margin: 0 0 8px;
+      padding: calc(14px * var(--density-modifier)) 16px;
+      border: 1px solid var(--background-modifier-border);
+      border-radius: 12px;
+      background: var(--background-primary);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 4%);
+    }
+
+    .setting-items > .setting-item-heading,
+    .setting-group > .setting-item-heading {
+      margin: 16px 0 6px;
+      padding: 8px 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .setting-item-info {
+      min-width: 0;
+    }
+
+    .setting-item-name {
+      font-size: var(--font-ui-small);
+      line-height: 1.35;
+    }
+
+    .setting-item-description {
+      margin-top: 4px;
+      color: var(--text-muted);
+      font-size: var(--font-ui-smaller);
+      line-height: 1.4;
+    }
+  }
+}
+
+body.is-mobile {
+  --slider-thumb-y: -9px;
+  --slider-thumb-height: 24px;
+  --slider-thumb-width: 37px;
+
+  input[type="range"]::-webkit-slider-thumb:active {
+    scale: 1.4;
+  }
+
+  .search-input-container input:is([type="search"], [type="text"]) {
+    padding-inline-start: 44px;
+  }
+
+  button:where(:not(.clickable-icon, .ant-switch, .copy-code-button)),
+  .mod-cta {
+    min-height: 48px;
+    padding-inline: var(--side-padding);
+  }
+
+  .checkbox-container {
+    --interactive-accent: var(--color-green);
+
+    &:active::after {
+      --toggle-border-width: -6px;
+      --toggle-thumb-height: 40px;
+      --toggle-thumb-width: 59px;
+      --toggle-s-border-width: var(--toggle-border-width);
+      --toggle-s-thumb-height: var(--toggle-thumb-height);
+      --toggle-s-thumb-width: var(--toggle-thumb-width);
+    }
+  }
+
+  .prompt {
+    .prompt-input {
+      border-radius: 100vh;
+    }
+
+    .suggestion-item {
+      padding: var(--nav-item-padding);
+    }
+  }
+
+  .modal.mod-settings:not(:has(.style-settings-container)) {
+    .vertical-tab-content {
+      padding: 16px 16px 32px;
+    }
+
+    .vertical-tab-header,
+    .vertical-tab-content {
+      padding-top: var(--modal-header-height, 76px) !important;
+    }
+
+    .setting-items > .setting-item:not(.setting-item-heading),
+    .setting-group > .setting-item:not(.setting-item-heading),
+    div:not(.setting-items, .hotkey-list-container, .style-settings-container) > .setting-item:not(.setting-item-heading) {
+      margin-bottom: 8px;
+      padding: 16px;
+      border-radius: 16px;
+    }
+  }
+}

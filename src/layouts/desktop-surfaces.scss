@@ -1,4 +1,4 @@
-body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
+body:not(.is-mobile) {
   --shadow-sidedock-spread: -32px 0 0 32px var(--background-primary);
   --shadow-surface: 0 0 0 1px var(--background-modifier-hover);
   --tab-outline-width: 1px;
@@ -32,11 +32,10 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
   }
 
   &.show-ribbon {
-    &:not(.mod-macos) .workspace-ribbon.mod-left:not(.is-collapsed),
-    &.mod-macos.is-frameless:not(.is-hidden-frameless) .workspace-ribbon.mod-left:not(.is-collapsed) {
+    .workspace-ribbon.mod-left:not(.is-collapsed) {
       margin-block: 8px;
     }
-    &:not(.mod-macos) .workspace-ribbon.mod-left:not(.is-collapsed) .sidebar-toggle-button {
+    .workspace-ribbon.mod-left:not(.is-collapsed) .sidebar-toggle-button {
       height: calc(var(--header-height) - 24px);
     }
     &:not(.hover-ribbon) .workspace-ribbon.mod-left:not(.is-collapsed) {
@@ -95,7 +94,7 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
   }
 
   // Settings
-  &.mod-macos .modal-container:has(.modal.mod-settings) {
+  .modal-container:has(.modal.mod-settings) {
     background-color: var(--background-primary);
   }
 
@@ -112,7 +111,7 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
   }
 }
 
-body:is(.mod-macos, .adaptive-mode-off).is-tablet {
+body.is-tablet {
   &.theme-light {
     --shadow-surface: inset 1px 1px 2px rgba(255, 255, 255, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.5), inset 0 4px 16px rgba(255, 255, 255, 0.025), 0 0 1px rgba(0, 0, 0, 0.25), 0 8px 16px 0 rgba(0, 0, 0, 0.05);
   }
@@ -158,18 +157,5 @@ body:is(.mod-macos, .adaptive-mode-off).is-tablet {
     z-index: 1;
     background-color: var(--raised-background);
     box-shadow: var(--shadow-surface);
-  }
-}
-
-// Windows uses the Cupertino layout when adaptive mode is disabled. Its
-// settings container must remain transparent so the workspace is not covered.
-body.mod-windows.adaptive-mode-off:not(.is-mobile) {
-  .modal-container:has(.modal.mod-settings) {
-    background-color: transparent;
-  }
-
-  .modal-bg {
-    background-color: black;
-    opacity: 0.2 !important;
   }
 }

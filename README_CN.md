@@ -15,7 +15,7 @@ Lumin 让笔记始终位于工作区的视觉中心。清晰的层级、克制�
 
 ## 一览
 
-- **默认适应平台。** 可根据 macOS、Windows、Linux、Android 和移动端 Obsidian 自动调整界面，也可在设置中关闭自适应模式。
+- **统一的视觉语言。** macOS、Windows、Linux、Android 和移动端 Obsidian 共享 Mac 风格，仅根据设备调整密度与触控尺寸。
 - **为阅读与写作而设。** 精心调整的排版、舒适的阅读宽度，以及对表格、Callout、嵌入、Banner、媒体和图片的优化，让笔记更易浏览。
 - **让工作区保持安静。** 可通过悬停功能区和侧边栏、专注视图、紧凑面板操作区与居中标签，调整桌面端的工作方式。
 - **无需编写 CSS 也可自定义。** 安装可选的 Style Settings 插件后，即可直接在 Obsidian 中调整外观、编辑器和辅助功能选项。
@@ -56,7 +56,7 @@ Lumin 在桌面、平板和手机上延续以内容为先的层级，同时完�
 
 安装 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 社区插件后，可直接在 Obsidian 中调整 Lumin，无需编写 CSS。可用选项包括：
 
-- 自适应模式与配色偏好，包括侧边栏着色，以及受支持 Android 设备上的动态配色。
+- 配色偏好，包括侧边栏着色，以及受支持 Android 设备上的动态配色。
 - 桌面端行为，如悬停显示功能区与侧边栏、专注视图、标签对齐、紧凑面板操作区和媒体缩放。
 - 编辑器偏好，如阅读宽度、块级与媒体宽度、Banner 样式、当前行高亮、链接下划线和图片对齐。
 - 辅助功能选项，如动态效果、失焦对比变化、界面字号和图标尺寸。
@@ -75,7 +75,7 @@ npx --yes sass src/theme.scss theme.css --no-source-map
 
 Lumin 基于 [Cupertino](https://github.com/aaaaalexis/obsidian-cupertino)。其中包含来自 [Minimal](https://github.com/kepano/obsidian-minimal) 的 MIT 许可片段，以及来自 [Alternative Checkboxes Reference Set](https://github.com/damiankorcz/Alternative-Checkboxes-Reference-Set) 的公共领域参考内容。适用的署名和许可条款见[第三方声明](THIRD_PARTY_NOTICES.md)。
 
-Craft 与 Material Design 仅为视觉参考；本仓库不再分发其代码或素材。
+Craft 仅为视觉参考；本仓库不再分发其代码或素材。
 
 ## 许可证
 

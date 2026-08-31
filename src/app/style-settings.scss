@@ -9,31 +9,11 @@ id: lumin
 collapsed: true
 settings:
     -
-        id: lumin-desc
-        description: "Lumin 提供简洁的原生风格界面。"
-        description.en: "Lumin offers a simplified, native-style interface."
-        type: info-text
-        markdown: true
-    -
         id: colorful-frame
         title: 侧边栏着色
         title.en: Tinted sidebar
         description: 根据强调色为侧边栏施加淡淡着色。
         description.en: Apply a subtle tint to the sidebar based on accent color.
-        type: class-toggle
-    -
-        id: material-color
-        title: 动态配色
-        title.en: Dynamic color
-        description: 根据强调色应用动态主题配色。
-        description.en: Apply dynamic theming based on accent color.
-        type: class-toggle
-    -
-        id: adaptive-mode-off
-        title: 关闭自适应模式
-        title.en: Disable adaptive mode
-        description: 停止根据操作系统自动调整样式。
-        description.en: Prevent automatic styling based on operating system.
         type: class-toggle
     -
         id: tab-floating
@@ -237,256 +217,322 @@ settings:
         format: px
 */
 
-// The grouped, indented presentation belongs to the Cupertino layout. Native
-// Android and Windows settings keep Obsidian's denser, platform-appropriate flow.
-body:is(.mod-macos, .adaptive-mode-off) {
-  .view-content .style-settings-container .style-settings-container .setting-item {
-    align-items: center;
-    padding: 16px;
-
-    &:not(.setting-item-heading) {
-      flex-direction: row;
-    }
-
-    .setting-item-control {
-      padding-top: 0;
-    }
-  }
-  .style-settings-heading:not(.is-collapsed) {
-    border-bottom: none;
-  }
-  .style-settings-heading,
-  .style-settings-container {
-    margin-block: 0 !important;
-    padding-left: 32px;
-  }
-  .style-settings-heading {
-    border-radius: 0;
-    padding: 16px !important;
-  }
-  .style-settings-heading .setting-item-name {
-    color: var(--text-normal) !important;
-  }
-
-  .style-settings-container .setting-item {
-    margin-bottom: 0;
-    border-radius: 0;
-    gap: 4px !important;
-  }
-  .style-settings-container .setting-item-description > div:last-child {
-    display: none;
-  }
-  .style-settings-container .setting-item:not(.style-settings-heading) > .setting-item-control {
-    min-height: var(--input-height);
-  }
-  .style-settings-container .setting-item:nth-child(1 of .setting-item:not(.setting-item-heading)) {
-    border-top-right-radius: var(--setting-items-radius);
-    border-top-left-radius: var(--setting-items-radius);
-  }
-  .style-settings-container .setting-item:nth-last-child(1 of .setting-item:not(.setting-item-heading)) {
-    border-bottom-right-radius: var(--setting-items-radius);
-    border-bottom-left-radius: var(--setting-items-radius);
-  }
-}
-
-body:is(.is-android, .mod-windows):not(.adaptive-mode-off) {
+// Style Settings follows Minimal's quiet, unboxed hierarchy on every platform.
+body {
+  .workspace-leaf-content[data-type="style-settings"],
   .modal.mod-settings:has(.style-settings-container) {
-    --setting-items-background: transparent;
-    --setting-items-padding: 0;
-    --setting-items-radius: var(--radius-s);
-    --toggle-width: 36px;
-    --toggle-border-width: 3px;
-    --toggle-thumb-width: 16px;
-    --toggle-thumb-height: 16px;
+    --style-settings-content-width: 760px;
+    --style-settings-line: var(--background-modifier-border);
 
+    .view-content,
     .vertical-tab-content {
       background-color: var(--settings-background);
     }
 
-    .style-settings-heading,
-    .style-settings-container {
-      margin-block: 0 !important;
-      padding-inline-start: 0;
+    .view-content {
+      padding: 24px clamp(16px, 4vw, 40px) 48px;
     }
 
-    .style-settings-container[data-level="2"] {
-      margin: 0 !important;
-      border: 0;
-      border-radius: 0;
-      background-color: transparent;
+    .view-content > .style-settings-container,
+    .view-content > .setting-item,
+    .view-content > .setting-group-search,
+    .vertical-tab-content > .style-settings-container,
+    .vertical-tab-content > .setting-item,
+    .vertical-tab-content > .setting-group-search {
+      width: min(100%, var(--style-settings-content-width));
+      margin-inline: auto;
+    }
+
+    .style-settings-container,
+    .style-settings-heading,
+    .setting-item {
+      margin-block: 0 !important;
+      padding-inline: 0;
+    }
+
+    // Search and import/export are the only framed surface on this page.
+    .setting-group-search {
+      margin-block: 0 12px;
       padding: 0;
     }
 
-    .style-settings-heading {
-      border-bottom: var(--border-width) solid var(--background-modifier-border);
-      border-radius: 0;
-      padding: 12px 0 8px !important;
+    :is(
+      .setting-group-search,
+      .setting-item:has(.style-settings-import) .setting-item-info
+    ) .search-input-container {
+      min-height: 32px;
+      height: 32px;
+      border: 1px solid var(--background-modifier-border);
+      border-radius: 100vh;
+      background-color: var(--background-primary);
+      box-shadow: none;
     }
 
-    .style-settings-container .setting-item {
-      align-items: center;
+    :is(
+      .setting-group-search,
+      .setting-item:has(.style-settings-import) .setting-item-info
+    ) .search-input-container::before {
+      inset-inline-start: 13px;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      transform: translateY(-50%);
+    }
+
+    :is(
+      .setting-group-search,
+      .setting-item:has(.style-settings-import) .setting-item-info
+    ) .search-input-container input {
+      width: 100%;
+      height: 30px;
+      min-height: 30px;
+      padding-inline: 36px 12px;
       border: 0;
-      border-bottom: var(--border-width) solid var(--background-modifier-border);
+      border-radius: inherit;
+      background: transparent;
+      box-shadow: none;
+      line-height: 30px;
+    }
+
+    .setting-item:has(.style-settings-import) {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      min-height: 44px;
+      margin-block: 0 28px !important;
+      padding: 8px 12px;
+      border: 1px solid var(--background-modifier-border);
+      border-radius: 10px;
+      background: var(--background-primary);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 4%);
+    }
+
+    .setting-item:has(.style-settings-import) .setting-item-info {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      flex: none;
+    }
+
+    .setting-item:has(.style-settings-import) .setting-item-info .search-input-container {
+      width: 100%;
+      margin: 0;
+    }
+
+    .setting-item:has(.style-settings-import) .setting-item-control {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
+      margin: 0;
+      margin-top: 10px;
+      padding: 0;
+    }
+
+    .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export) {
+      flex: 1 1 0;
+      min-height: 32px;
+      margin: 0;
+      padding: 6px 10px;
+      border-radius: 7px;
+      color: var(--text-muted);
+      font-size: var(--font-ui-small);
+      font-weight: var(--font-medium);
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export):hover {
+      color: var(--text-normal);
+      background: var(--background-modifier-hover);
+    }
+
+    .style-settings-heading[data-level="0"] {
+      min-height: 42px;
+      margin-top: 20px !important;
+      padding: 10px 0 8px !important;
+      border-bottom: 1px solid var(--style-settings-line);
       border-radius: 0;
-      background-color: transparent;
-      gap: 12px !important;
+      background: transparent;
+    }
+
+    .style-settings-heading[data-level="0"] .setting-item-name {
+      padding-inline-start: 8px;
+      color: var(--text-normal) !important;
+      font-size: var(--font-ui-small);
+      font-weight: var(--font-semibold);
+    }
+
+    .style-settings-heading[data-level="0"] .style-settings-collapse-indicator {
+      inset-inline-start: 0;
+    }
+
+    .style-settings-heading[data-level="0"] + .style-settings-container {
+      margin: 0 0 20px !important;
+      padding-block: 0;
+      padding-inline-start: 36px;
+      padding-inline-end: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .style-settings-container[data-level="2"] {
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .style-settings-container .setting-item:not(.setting-item-heading) {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      min-height: 64px;
       margin: 0;
       padding: 12px 0;
-    }
-
-    .style-settings-container .setting-item:last-child {
-      border-bottom: 0;
+      border: 0;
+      border-bottom: 1px solid var(--style-settings-line);
+      border-radius: 0;
+      background: transparent;
+      gap: 20px !important;
     }
 
     .style-settings-container .setting-item-info {
       min-width: 0;
+      flex: 1 1 auto;
     }
 
     .style-settings-container .setting-item-name {
+      color: var(--text-normal);
+      font-size: var(--font-ui-smaller);
       font-weight: var(--font-medium);
+      line-height: 1.35;
     }
 
     .style-settings-container .setting-item-description {
-      font-size: var(--font-ui-small);
+      max-width: 620px;
+      margin-top: 3px;
+      color: var(--text-muted);
+      font-size: var(--font-ui-smaller);
+      line-height: 1.4;
     }
 
     .style-settings-container .setting-item-description > div:last-child {
       display: none;
     }
 
-    // The plugin puts search and import/export in the same top-level item.
-    // Keep that tool area distinct without turning the configuration itself
-    // into nested cards.
+    .style-settings-container .setting-item-control {
+      display: flex;
+      align-items: center;
+      flex: 0 0 auto;
+      min-height: var(--input-height);
+      margin-inline-start: auto;
+      padding: 0;
+    }
+
+    .style-settings-container .checkbox-container {
+      flex: 0 0 auto;
+      box-shadow: none;
+    }
+
+    .style-settings-container .slider {
+      width: clamp(120px, 18vw, 180px);
+    }
+
+    .style-settings-container .style-settings-reset-button {
+      margin-inline-start: 8px;
+    }
+
+    .style-settings-container .setting-item:last-child {
+      border-bottom: 0;
+    }
+
+    .style-settings-info-text {
+      min-height: 0 !important;
+      padding: 8px 0 14px !important;
+    }
+  }
+}
+
+body.is-mobile {
+  .workspace-leaf-content[data-type="style-settings"],
+  .modal.mod-settings:has(.style-settings-container) {
+    .view-content {
+      padding: 16px 20px 36px;
+    }
+
+    :is(
+      .setting-group-search,
+      .setting-item:has(.style-settings-import) .setting-item-info
+    ) .search-input-container {
+      min-height: 44px;
+      height: 44px;
+      border-radius: 100vh;
+    }
+
+    :is(
+      .setting-group-search,
+      .setting-item:has(.style-settings-import) .setting-item-info
+    ) .search-input-container input {
+      height: 42px;
+      min-height: 42px;
+      line-height: 42px;
+      padding-inline-start: 40px;
+    }
+
+    .style-settings-container .setting-item:not(.setting-item-heading) {
+      min-height: 72px;
+      gap: 14px !important;
+    }
+  }
+}
+
+body.is-phone {
+  .workspace-leaf-content[data-type="style-settings"],
+  .modal.mod-settings:has(.style-settings-container) {
+    .view-content {
+      padding-inline: 16px;
+    }
+
     .setting-item:has(.style-settings-import) {
-      align-items: stretch;
-      flex-direction: column;
-      border: 0;
-      border-radius: var(--radius-s);
-      background-color: var(--background-primary);
-      margin: 0 0 20px;
-      padding: 16px;
+      margin-bottom: 24px !important;
+      border-radius: 16px;
+      padding: 14px 16px;
     }
-    .setting-item:has(.style-settings-import) .setting-item-info {
-      width: 100%;
+
+    .style-settings-container .setting-item:not(.setting-item-heading) {
+      align-items: flex-start;
+      flex-wrap: wrap;
+      min-height: 0;
+      padding-block: 15px;
     }
-    .setting-item:has(.style-settings-import) .setting-item-control {
+
+    .style-settings-container .setting-item-info {
+      flex-basis: calc(100% - 56px);
+    }
+
+    .style-settings-container .setting-item-control {
       align-self: flex-start;
-      margin-top: 12px;
-      padding-top: 0;
+      min-height: 32px;
     }
-    .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export) {
-      border-radius: var(--radius-s);
-      color: var(--text-muted);
-      font-size: var(--font-ui-small);
-      font-weight: var(--font-medium);
-      margin: 0;
-      padding: 4px 8px;
-      text-decoration: none;
+
+    .style-settings-container .setting-item-description {
+      max-width: none;
+    }
+
+    .style-settings-container .setting-item:has(.slider) .setting-item-control,
+    .style-settings-container .setting-item:has(select) .setting-item-control {
+      flex-basis: 100%;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+
+    .style-settings-container .setting-item:has(.slider) .slider {
+      width: min(100%, 220px);
     }
   }
-}
-
-body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) {
-  .vertical-tab-content {
-    background-color: var(--settings-background);
-  }
-
-  .setting-group-search {
-    margin: 0 0 16px;
-    padding: 0;
-  }
-  .setting-item:has(.style-settings-import) {
-    border-radius: var(--radius-xl);
-    padding: 20px 24px;
-  }
-  .search-input-container {
-    align-items: center;
-    display: flex;
-    min-height: 52px;
-    position: relative;
-    border-radius: 100vh;
-    background-color: var(--background-modifier-hover);
-    padding-inline: 16px;
-  }
-  .search-input-container::before {
-    inset-inline-start: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .search-input-container input:is([type="search"], [type="text"]) {
-    height: 52px;
-    border: 0 !important;
-    border-radius: 100vh;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    padding-inline-start: 40px;
-  }
-
-  // Style Settings uses nested containers rather than Obsidian's setting groups.
-  // The configuration stays on the page surface, like Minimal's style view.
-  .style-settings-heading[data-level="0"] {
-    margin: 20px 0 0;
-    border-bottom: var(--border-width) solid var(--background-modifier-border);
-    border-radius: 0;
-    background-color: transparent;
-    padding: 16px 0 8px !important;
-  }
-  .style-settings-heading[data-level="0"] + .style-settings-container {
-    margin: 0 0 20px !important;
-    border-radius: 0;
-    background-color: transparent;
-    overflow: visible;
-    padding: 0;
-  }
-  .style-settings-container {
-    flex: none !important;
-    height: auto !important;
-    min-height: 0 !important;
-    padding-bottom: 8px;
-  }
-  .style-settings-info-text {
-    display: block;
-    flex: none !important;
-    min-height: 0 !important;
-    padding: 8px 0 16px !important;
-  }
-  .style-settings-info-text .setting-item-info {
-    flex: none;
-    width: 100%;
-  }
-
-  .checkbox-container,
-  .checkbox-container:not(.is-enabled) {
-    --toggle-width: 52px;
-    --toggle-border-width: 4px;
-    --toggle-thumb-width: 24px;
-    --toggle-thumb-height: 24px;
-    --toggle-s-width: 52px;
-    --toggle-s-border-width: 4px;
-    --toggle-s-thumb-width: 24px;
-    --toggle-s-thumb-height: 24px;
-    box-shadow: none;
-  }
-
-  .style-settings-heading:not([data-level="0"]) {
-    margin: 0;
-    border-bottom: var(--border-width) solid var(--background-modifier-border);
-    padding: 16px 0 10px !important;
-  }
-  .style-settings-container .setting-item:not(.setting-item-heading) {
-    flex-wrap: wrap;
-    padding: 16px 0;
-  }
-
-  .style-settings-container .setting-item-info {
-    flex: 1 1 220px;
-  }
-  .style-settings-container .setting-item-control {
-    align-self: flex-end;
-    margin-inline-start: auto;
-  }
-}
-body:not(.mod-macos, .adaptive-mode-off) .setting-item[data-id="colorful-frame"],
-body:not(.is-android:not(.adaptive-mode-off)) .setting-item[data-id="material-color"] {
-  display: none;
 }

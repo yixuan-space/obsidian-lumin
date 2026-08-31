@@ -1,7 +1,10 @@
 body:not(.is-mobile) {
   --hover-sidedock-width: 320px;
-  --hover-sidedock-delay: 160ms;
+  --hover-sidedock-delay: 120ms;
   --hover-sidedock-trigger-area: 4px;
+  --hover-reveal-duration: calc(280ms * var(--anim-speed-modifier));
+  --hover-fade-duration: calc(200ms * var(--anim-speed-modifier));
+  --hover-reveal-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 // Window drag fix
@@ -22,6 +25,10 @@ body:not(.is-mobile).hover-sidedock {
     z-index: 11;
     background-color: transparent;
     width: var(--hover-sidedock-width) !important;
+    transition:
+      transform var(--hover-reveal-duration) var(--hover-reveal-easing),
+      opacity var(--hover-fade-duration) ease-out;
+    will-change: transform, opacity;
 
     .workspace-tabs {
       visibility: visible;
@@ -49,7 +56,8 @@ body:not(.is-mobile).hover-sidedock {
     &::before {
       position: absolute;
       z-index: 0;
-      transition: var(--anim-duration-moderate);
+      opacity: 0;
+      transition: opacity var(--hover-fade-duration) ease-out;
       inset-block: 0;
       width: 150%;
       content: "";
@@ -85,6 +93,10 @@ body:not(.is-mobile).hover-ribbon.show-ribbon {
     opacity: 0;
     transform: translateX(calc(-1 * var(--ribbon-width) + var(--hover-sidedock-trigger-area)));
     background-color: transparent;
+    transition:
+      transform var(--hover-reveal-duration) var(--hover-reveal-easing),
+      opacity var(--hover-fade-duration) ease-out !important;
+    will-change: transform, opacity;
   }
   .workspace-ribbon.mod-left:hover {
     opacity: 1;

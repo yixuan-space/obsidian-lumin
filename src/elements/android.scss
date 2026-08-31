@@ -1,0 +1,39 @@
+body.is-android {
+  @font-face {
+    font-family: "Google Sans System";
+    font-style: normal;
+    font-weight: 1 1000;
+    src: local("GoogleSansFlex-Regular"), local("Google Sans Flex");
+  }
+  @font-face {
+    font-family: "Google Sans System";
+    font-style: italic;
+    font-weight: 1 1000;
+    src: local("GoogleSans-Italic"), local("Google Sans Italic");
+  }
+
+  --font-interface-theme: "Google Sans System", "Google Sans Flex", "Google Sans";
+  --font-text-theme: "Google Sans System", "Google Sans Flex", "Google Sans";
+
+  --slider-thumb-border-width: 0;
+  --slider-thumb-height: 44px;
+  --slider-thumb-width: 4px;
+  --slider-thumb-y: -19px;
+  --slider-thumb-radius: 100vh;
+  --slider-track-height: 16px;
+
+  input[type="range"]:active {
+    --slider-thumb-y: -23px;
+    --slider-thumb-height: 52px;
+  }
+
+}
+
+body.is-android.is-phone {
+  // Android WebView can expose these decorative overlays during navigation.
+  &.is-floating-nav .mod-root .workspace-leaf-content[data-type="markdown"] > .view-content::before,
+  &.is-floating-nav .mod-root .workspace-leaf-content[data-type="markdown"] > .view-content::after {
+    content: none;
+  }
+
+}

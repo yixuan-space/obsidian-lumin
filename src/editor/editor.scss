@@ -43,8 +43,8 @@
     --file-header-border: none;
   }
 
-  body:is(.mod-macos, .adaptive-mode-off):not(.font-variant-off) .markdown-reading-view,
-  body:is(.mod-macos, .adaptive-mode-off):not(.font-variant-off) .markdown-source-view {
+  body:not(.font-variant-off) .markdown-reading-view,
+  body:not(.font-variant-off) .markdown-source-view {
     font-feature-settings:
       "ss01" 1,
       "ss07" 1,
@@ -55,16 +55,6 @@
     border-radius: var(--tab-radius);
     transition: var(--anim-duration-moderate);
     overflow: hidden;
-  }
-
-  // Editor panel
-  body:not(.mod-macos, .adaptive-mode-off):not(.is-phone) {
-    .workspace-split.mod-vertical {
-      gap: 8px;
-    }
-    .workspace-split:not(.mod-sidedock) > * > .workspace-leaf-resize-handle:not(:hover) {
-      border-color: transparent;
-    }
   }
 
   .markdown-preview-view,
@@ -129,7 +119,7 @@
   .markdown-rendered pre code {
     white-space: var(--code-white-space);
   }
-  body:is(.mod-macos, .adaptive-mode-off) .markdown-rendered pre {
+  body .markdown-rendered pre {
     background: linear-gradient(var(--background-primary-alt), var(--background-secondary));
     box-shadow: var(--shadow-tactile);
   }

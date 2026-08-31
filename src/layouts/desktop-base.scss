@@ -1,4 +1,4 @@
-body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
+body:not(.is-mobile) {
   --radius-window: 8px;
 
   .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) {
@@ -42,7 +42,7 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
   }
 }
 
-body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
+body:not(.is-mobile) {
   .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) .mod-root {
     padding-bottom: 0;
   }
@@ -64,7 +64,7 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-mobile) {
   }
 }
 
-body:is(.mod-macos, .adaptive-mode-off):not(.is-phone) .workspace:is(.is-left-sidedock-open, .is-right-sidedock-open) {
+body:not(.is-phone) .workspace:is(.is-left-sidedock-open, .is-right-sidedock-open) {
   // Editor panel
   .workspace-split.mod-vertical {
     gap: 8px;
@@ -74,7 +74,7 @@ body:is(.mod-macos, .adaptive-mode-off):not(.is-phone) .workspace:is(.is-left-si
   }
 }
 
-body:is(.mod-macos, .adaptive-mode-off).is-tablet {
+body.is-tablet {
   .workspace-drawer.mod-left.is-pinned + .mod-root:has(+ .workspace-drawer.mod-right:not(.is-pinned)) .workspace-tabs:last-of-type .workspace-tab-container {
     margin-right: 8px;
   }

@@ -71,7 +71,31 @@ body.bold-folders .nav-folder-title {
 }
 
 // Ribbon
-body.mod-macos.is-hidden-frameless .workspace-ribbon.mod-left {
+// Reserve the native macOS window-control area before laying out the left
+// sidebar header. Other platforms do not have traffic lights in this region.
+body.mod-macos:not(.is-mobile) {
+  --macos-window-controls-space: max(
+    84px,
+    calc(env(titlebar-area-x, 0px) + env(titlebar-area-width, 0px))
+  );
+  --macos-window-controls-height: max(
+    40px,
+    calc(env(titlebar-area-y, 0px) + env(titlebar-area-height, 0px))
+  );
+  --frame-left-space: var(--macos-window-controls-space);
+
+  .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
+    padding-inline-start: var(--frame-left-space);
+  }
+
+  // Keep the Ribbon actions below the native traffic-light controls while
+  // preserving the Ribbon's continuous hit area.
+  .workspace-ribbon.mod-left .side-dock-actions {
+    padding-top: var(--macos-window-controls-height);
+  }
+}
+
+body.is-hidden-frameless:not(.is-mobile) .workspace-ribbon.mod-left {
   padding-top: 0;
 }
 .workspace-ribbon.mod-left {
@@ -110,17 +134,15 @@ body.mod-macos.is-hidden-frameless .workspace-ribbon.mod-left {
   width: var(--tab-action-width);
 }
 
-body:not(.mod-macos):not(.is-mobile) .workspace-ribbon.mod-left,
-body.mod-macos:not(.is-hidden-frameless):not(.is-mobile) .workspace-ribbon.mod-left {
+body:not(.is-mobile):not(.is-hidden-frameless) .workspace-ribbon.mod-left {
   margin-top: 0;
 }
-body:not(.mod-macos):not(.is-mobile) .workspace-ribbon.mod-left .sidebar-toggle-button,
-body.mod-macos:not(.is-hidden-frameless):not(.is-mobile) .workspace-ribbon.mod-left .sidebar-toggle-button {
+body:not(.is-mobile):not(.is-hidden-frameless) .workspace-ribbon.mod-left .sidebar-toggle-button {
   height: auto;
   padding: 0;
   margin: 0 auto;
 }
-body:not(.mod-macos):not(.is-mobile) .workspace-ribbon.mod-left .sidebar-toggle-button {
+body:not(.is-mobile).is-hidden-frameless .workspace-ribbon.mod-left .sidebar-toggle-button {
   height: calc(var(--header-height) - 16px);
 }
 

@@ -1,0 +1,133 @@
+body {
+  &.is-mobile {
+    --titlebar-background: transparent;
+    --titlebar-background-focused: transparent;
+  }
+  &.is-phone {
+    --nav-item-padding: calc(16px * var(--density-modifier)) var(--side-padding);
+  }
+
+  &.is-mobile.theme-dark {
+    --settings-background: var(--background-secondary);
+    --setting-items-background: var(--background-secondary-alt);
+
+    .modal.mod-sidebar-layout {
+      --background-modifier-border: color-mix(in srgb, var(--background-secondary), white 15%);
+    }
+  }
+  &.is-phone.theme-dark {
+    --modal-sidebar-background: var(--background-secondary);
+    --mobile-sidebar-background: var(--background-primary);
+  }
+
+  // Ribbon
+  .workspace-ribbon.mod-left .sidebar-toggle-button .clickable-icon:hover,
+  .workspace-ribbon.mod-left .side-dock-actions .side-dock-ribbon-action:hover {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    color: var(--text-normal);
+  }
+
+  // Side panels
+  &:not(.is-mobile) .mod-sidedock .workspace-tabs {
+    .workspace-tab-header-container-inner {
+      -webkit-app-region: no-drag;
+      gap: 0px;
+      transition: var(--anim-duration-moderate);
+      border-radius: var(--clickable-icon-radius);
+      padding: 0;
+      outline: 2px solid transparent;
+      background-clip: content-box;
+      height: auto;
+      z-index: 1;
+    }
+
+    .workspace-tab-header-container-inner:hover {
+      background-color: var(--background-modifier-hover);
+      outline-color: var(--background-modifier-hover);
+    }
+    .workspace-tab-header-container-inner:hover .workspace-tab-header.is-active {
+      background-color: var(--background-primary);
+      box-shadow: var(--shadow-xs);
+
+      .workspace-tab-header-inner-icon {
+        color: var(--text-normal) !important;
+      }
+    }
+
+    .workspace-tab-header {
+      border-radius: var(--clickable-icon-radius);
+    }
+    .workspace-tab-header-inner {
+      padding: 8px;
+    }
+    .workspace-tab-header:not(.is-active):hover .workspace-tab-header-inner {
+      background-color: var(--background-modifier-hover);
+    }
+    .sidebar-toggle-button,
+    .workspace-tab-header-inner {
+      border-radius: var(--clickable-icon-radius);
+      width: var(--tab-action-width);
+      height: fit-content;
+      z-index: 1;
+    }
+
+    .workspace-tab-header-status-container {
+      margin-left: -8px;
+    }
+    .workspace-tab-header-status-icon,
+    .workspace-tab-header-inner-close-button {
+      --icon-size: 12px;
+      color: var(--text-muted);
+    }
+  }
+
+  // Panel actions
+  &:not(.nav-action-center) .mod-sidedock .workspace-leaf-content .nav-header:first-child .nav-buttons-container {
+    border-radius: var(--clickable-icon-radius);
+    background-color: var(--background-modifier-hover);
+    padding: 2px;
+    gap: 0;
+
+    .nav-action-button {
+      position: relative;
+      padding: 8px;
+      border-radius: var(--clickable-icon-radius);
+    }
+    .nav-action-button:hover:not([aria-disabled="true"]) {
+      background-color: var(--background-modifier-hover);
+      box-shadow: none;
+    }
+  }
+
+  .mod-sidedock .workspace-tab-container,
+  .mod-sidedock .workspace-leaf,
+  .mod-sidedock .workspace-leaf-content {
+    contain: size !important;
+    overflow: visible;
+  }
+
+  // Editor panel
+  .markdown-source-view,
+  .markdown-preview-view {
+    transition: transform var(--anim-duration-slow) var(--anim-motion-baseline);
+  }
+  .workspace-leaf-content[data-mode="source"] > .view-content > .markdown-reading-view > .markdown-preview-view {
+    transform: scale(0.995);
+    opacity: 0;
+  }
+  .workspace-leaf-content[data-mode="preview"] > .view-content > .markdown-source-view {
+    transform: scale(0.995);
+    opacity: 0;
+  }
+
+  &:not(.mode-switcher-off) .mod-root .workspace-leaf-content[data-type="markdown"][data-mode="source"] .view-header .view-actions button:nth-last-child(2) {
+    background-color: rgb(from var(--interactive-accent) r g b / 95%);
+    color: oklch(from var(--interactive-accent) 0.95 c h);
+    box-shadow: var(--shadow-xs);
+  }
+
+  &:not(.tab-icon) .mod-sidedock .workspace-tabs:not(.mod-top) .workspace-tab-header-container:not(:hover) .workspace-tab-header-container-inner {
+    gap: calc(8px * var(--density-modifier));
+  }
+}
