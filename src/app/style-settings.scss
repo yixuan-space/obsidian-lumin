@@ -161,16 +161,13 @@ settings:
         default: image-align-center
         options:
             -
-                label: 左
-                label.en: Left
+                label: 左 Left
                 value: image-align-left
             -
-                label: 居中
-                label.en: Center
+                label: 居中 Center
                 value: image-align-center
             -
-                label: 右
-                label.en: Right
+                label: 右 Right
                 value: image-align-right
     -
         id: clean-link-off
