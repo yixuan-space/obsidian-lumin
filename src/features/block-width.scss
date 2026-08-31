@@ -1,10 +1,12 @@
 body:not(.block-width-off) {
   --line-width-wide: 50rem;
 
-  .wide {
+  // Use namespaced page classes so ordinary cssclasses never override
+  // Obsidian's native readable line width setting.
+  .lumin-wide {
     --file-line-width: min(100cqw, var(--line-width-wide));
   }
-  .max {
+  .lumin-max {
     --file-line-width: 100%;
   }
 

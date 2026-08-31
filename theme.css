@@ -5782,10 +5782,10 @@ body:not(.banner-off) .mod-root .view-content:not(.pixel-banner, .has-banner) di
 body:not(.block-width-off) {
   --line-width-wide: 50rem;
 }
-body:not(.block-width-off) .wide {
+body:not(.block-width-off) .lumin-wide {
   --file-line-width: min(100cqw, var(--line-width-wide));
 }
-body:not(.block-width-off) .max {
+body:not(.block-width-off) .lumin-max {
   --file-line-width: 100%;
 }
 body:not(.block-width-off) {
