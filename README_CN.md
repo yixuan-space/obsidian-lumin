@@ -79,4 +79,4 @@ Craft 仅为视觉参考；本仓库不再分发其代码或素材。
 
 ## 许可证
 
-YiXuan 对 Lumin 的原创贡献以 [MIT 许可证](LICENSE.txt) 发布；其中包含的第三方材料仍适用各自的条款，详见 [第三方声明](THIRD_PARTY_NOTICES.md)。
+YiXuan 对 Lumin 的原创贡献以 [MIT 许可证](LICENSE) 发布；其中包含的第三方材料仍适用各自的条款，详见 [第三方声明](THIRD_PARTY_NOTICES.md)。

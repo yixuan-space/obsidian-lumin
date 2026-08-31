@@ -85,4 +85,4 @@ Craft is a visual reference only; this repository does not redistribute its code
 
 ## License
 
-YiXuan's original Lumin contributions are released under the [MIT License](LICENSE.txt). Included third-party material remains under its own terms in [THIRD_PARTY_NOTICES.md].
+YiXuan's original Lumin contributions are released under the [MIT License](LICENSE). Included third-party material remains under its own terms in [THIRD_PARTY_NOTICES.md].
