@@ -6,12 +6,12 @@ body {
   --frame-left-space: 0px;
   --p-spacing: 1rem;
   --input-height: 32px;
-  --input-radius: 8px;
-  --button-radius: 8px;
+  --input-radius: var(--lumin-radius);
+  --button-radius: var(--lumin-radius);
   --clickable-icon-radius: 100vh;
-  --setting-items-radius: 12px;
-  --menu-radius: 10px;
-  --modal-radius: 12px;
+  --setting-items-radius: var(--lumin-radius);
+  --menu-radius: var(--lumin-radius);
+  --modal-radius: var(--lumin-radius);
   --input-shadow: none;
   --input-shadow-hover: none;
   --input-shadow-active: 0 0 0 2px var(--interactive-accent);

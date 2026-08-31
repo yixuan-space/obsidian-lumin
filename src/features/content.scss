@@ -86,7 +86,7 @@
     }
 
     .markdown-rendered code {
-      border-radius: 3px;
+      border-radius: var(--lumin-radius);
       background-color: var(--background-secondary);
     }
 

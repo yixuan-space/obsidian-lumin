@@ -35,7 +35,7 @@
 
     --tag-padding-x: 8px;
     --tag-padding-y: 4px;
-    --tag-radius: 8px;
+    --tag-radius: var(--lumin-radius);
     --tag-weight: var(--font-medium);
 
     --indentation-guide-width: 0px;

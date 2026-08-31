@@ -1,5 +1,5 @@
 body:not(.is-mobile) {
-  --radius-window: 8px;
+  --radius-window: var(--lumin-radius);
 
   .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) {
     background-color: var(--background-primary);

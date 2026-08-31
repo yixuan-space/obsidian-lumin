@@ -5,12 +5,12 @@ body {
   --frame-left-space: 0px;
   --p-spacing: 1rem;
   --input-height: 32px;
-  --input-radius: 8px;
-  --button-radius: 8px;
+  --input-radius: var(--lumin-radius);
+  --button-radius: var(--lumin-radius);
   --clickable-icon-radius: 100vh;
-  --setting-items-radius: 12px;
-  --menu-radius: 10px;
-  --modal-radius: 12px;
+  --setting-items-radius: var(--lumin-radius);
+  --menu-radius: var(--lumin-radius);
+  --modal-radius: var(--lumin-radius);
   --input-shadow: none;
   --input-shadow-hover: none;
   --input-shadow-active: 0 0 0 2px var(--interactive-accent);
@@ -46,8 +46,8 @@ body.theme-dark {
 
 body.is-mobile {
   --input-height: 48px;
-  --input-radius: 24px;
-  --button-radius: 24px;
+  --input-radius: var(--lumin-radius);
+  --button-radius: var(--lumin-radius);
   --input-padding: 0 var(--side-padding);
   --dropdown-padding-start: var(--side-padding);
   --toggle-border-width: 2px;
@@ -1681,16 +1681,12 @@ body.is-phone .mobile-tab .close-button {
 }
 
 body.is-mobile {
-  --touch-radius-xxs: var(--radius-s);
-  --touch-radius-xs: var(--radius-s);
-  --touch-radius-s: var(--radius-s);
-  --touch-radius-m: var(--radius-m);
-  --touch-radius-l: var(--radius-l);
-  --touch-radius-xl: var(--radius-xl);
-  --radius-s: calc(16px * var(--radius-modifier));
-  --radius-m: calc(16px * var(--radius-modifier));
-  --radius-l: calc(24px * var(--radius-modifier));
-  --radius-xl: calc(32px * var(--radius-modifier));
+  --touch-radius-xxs: var(--lumin-radius);
+  --touch-radius-xs: var(--lumin-radius);
+  --touch-radius-s: var(--lumin-radius);
+  --touch-radius-m: var(--lumin-radius);
+  --touch-radius-l: var(--lumin-radius);
+  --touch-radius-xl: var(--lumin-radius);
   --tab-radius: var(--radius-s);
   --tab-curve: var(--tab-radius);
   --font-ui-smaller: calc(var(--font-text-size) * 0.8 + var(--font-ui-modifier));
@@ -2918,7 +2914,7 @@ body .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style
   margin-block: 0 28px !important;
   padding: 8px 12px;
   border: 1px solid var(--background-modifier-border);
-  border-radius: 10px;
+  border-radius: var(--lumin-radius);
   background: var(--background-primary);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
@@ -2950,7 +2946,7 @@ body .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style
   min-height: 32px;
   margin: 0;
   padding: 6px 10px;
-  border-radius: 7px;
+  border-radius: var(--lumin-radius);
   color: var(--text-muted);
   font-size: var(--font-ui-small);
   font-weight: var(--font-medium);
@@ -3106,7 +3102,7 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .view-content {
 body.is-phone .workspace-leaf-content[data-type=style-settings] .setting-item:has(.style-settings-import),
 body.is-phone .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) {
   margin-bottom: 24px !important;
-  border-radius: 16px;
+  border-radius: var(--lumin-radius);
   padding: 14px 16px;
 }
 body.is-phone .workspace-leaf-content[data-type=style-settings] .style-settings-container .setting-item:not(.setting-item-heading),
@@ -3170,7 +3166,7 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .style-settings
     --metadata-gap: 8px;
     --tag-padding-x: 8px;
     --tag-padding-y: 4px;
-    --tag-radius: 8px;
+    --tag-radius: var(--lumin-radius);
     --tag-weight: var(--font-medium);
     --indentation-guide-width: 0px;
     --file-header-border: none;
@@ -3970,7 +3966,7 @@ body.is-phone .cm-content > .cm-lang-base {
 }
 
 body:not(.is-mobile) {
-  --radius-window: 8px;
+  --radius-window: var(--lumin-radius);
 }
 body:not(.is-mobile) .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) {
   background-color: var(--background-primary);
@@ -4242,13 +4238,14 @@ body.is-tablet .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header
 body {
   --input-height: 32px;
   --radius-modifier: 1;
-  --input-radius: var(--radius-s);
-  --radius-s: calc(8px * var(--radius-modifier));
-  --radius-m: calc(12px * var(--radius-modifier));
-  --radius-l: calc(20px * var(--radius-modifier));
-  --radius-xl: calc(28px * var(--radius-modifier));
+  --lumin-radius: calc(8px * var(--radius-modifier));
+  --input-radius: var(--lumin-radius);
+  --radius-s: var(--lumin-radius);
+  --radius-m: var(--lumin-radius);
+  --radius-l: var(--lumin-radius);
+  --radius-xl: var(--lumin-radius);
   --background-modifier-form-field: var(--interactive-normal);
-  --button-radius: calc(8px * var(--radius-modifier));
+  --button-radius: var(--lumin-radius);
 }
 
 .theme-light {
@@ -4874,7 +4871,7 @@ body .modal.mod-sidebar-layout.mod-settings .vertical-tab-nav-item .vertical-tab
   --icon-size: var(--icon-xs) !important;
   --icon-stroke: var(--icon-xs-stroke-width) !important;
   box-shadow: inset 0.5px 0.5px 0.5px rgba(255, 255, 255, 0.25), inset -0.5px -0.5px 0.5px rgba(255, 255, 255, 0.25), 0 0 2px rgba(0, 0, 0, 0.25), 0 1px 4px rgba(0, 0, 0, 0.15);
-  border-radius: 6px;
+  border-radius: var(--lumin-radius);
   background-image: linear-gradient(color-mix(in srgb, var(--setting-nav-icon-background) 112.5%, white), color-mix(in srgb, var(--setting-nav-icon-background) 97.5%, black)) !important;
   background-color: var(--setting-nav-icon-background) !important;
   padding: 4px !important;
@@ -4895,7 +4892,7 @@ body .modal.mod-settings:not(:has(.style-settings-container)) div:not(.setting-i
   margin: 0 0 8px;
   padding: calc(14px * var(--density-modifier)) 16px;
   border: 1px solid var(--background-modifier-border);
-  border-radius: 12px;
+  border-radius: var(--lumin-radius);
   background: var(--background-primary);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
@@ -4966,7 +4963,7 @@ body.is-phone .modal.mod-settings:not(:has(.style-settings-container)) .setting-
 body.is-phone .modal.mod-settings:not(:has(.style-settings-container)) div:not(.setting-items, .hotkey-list-container, .style-settings-container) > .setting-item:not(.setting-item-heading) {
   margin-bottom: 8px;
   padding: 16px;
-  border-radius: 16px;
+  border-radius: var(--lumin-radius);
 }
 
 body.is-tablet .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-content {
@@ -6719,7 +6716,7 @@ body:not(.is-mobile) .nav-files-container > div {
     background: var(--background-secondary);
   }
   body .markdown-rendered code {
-    border-radius: 3px;
+    border-radius: var(--lumin-radius);
     background-color: var(--background-secondary);
   }
   body .markdown-embed:not(.image-embed, .canvas-node-content) {

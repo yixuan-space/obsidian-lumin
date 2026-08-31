@@ -2,15 +2,16 @@ body {
   --input-height: 32px;
 
   --radius-modifier: 1;
-  --input-radius: var(--radius-s);
-  --radius-s: calc(8px * var(--radius-modifier));
-  --radius-m: calc(12px * var(--radius-modifier));
-  --radius-l: calc(20px * var(--radius-modifier));
-  --radius-xl: calc(28px * var(--radius-modifier));
+  --lumin-radius: calc(8px * var(--radius-modifier));
+  --input-radius: var(--lumin-radius);
+  --radius-s: var(--lumin-radius);
+  --radius-m: var(--lumin-radius);
+  --radius-l: var(--lumin-radius);
+  --radius-xl: var(--lumin-radius);
 
   --background-modifier-form-field: var(--interactive-normal);
 
-  --button-radius: calc(8px * var(--radius-modifier));
+  --button-radius: var(--lumin-radius);
 }
 
 .theme-light {

@@ -317,7 +317,7 @@ body {
       margin-block: 0 28px !important;
       padding: 8px 12px;
       border: 1px solid var(--background-modifier-border);
-      border-radius: 10px;
+      border-radius: var(--lumin-radius);
       background: var(--background-primary);
       box-shadow: 0 1px 2px rgb(0 0 0 / 4%);
     }
@@ -349,7 +349,7 @@ body {
       min-height: 32px;
       margin: 0;
       padding: 6px 10px;
-      border-radius: 7px;
+      border-radius: var(--lumin-radius);
       color: var(--text-muted);
       font-size: var(--font-ui-small);
       font-weight: var(--font-medium);
@@ -515,7 +515,7 @@ body.is-phone {
 
     .setting-item:has(.style-settings-import) {
       margin-bottom: 24px !important;
-      border-radius: 16px;
+      border-radius: var(--lumin-radius);
       padding: 14px 16px;
     }
 

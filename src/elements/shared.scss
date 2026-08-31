@@ -166,7 +166,7 @@ body {
         inset -0.5px -0.5px 0.5px rgb(255 255 255 / 25%),
         0 0 2px rgb(0 0 0 / 25%),
         0 1px 4px rgb(0 0 0 / 15%);
-      border-radius: 6px;
+      border-radius: var(--lumin-radius);
       background-image: linear-gradient(
         color-mix(in srgb, var(--setting-nav-icon-background) 112.5%, white),
         color-mix(in srgb, var(--setting-nav-icon-background) 97.5%, black)
@@ -197,7 +197,7 @@ body {
       margin: 0 0 8px;
       padding: calc(14px * var(--density-modifier)) 16px;
       border: 1px solid var(--background-modifier-border);
-      border-radius: 12px;
+      border-radius: var(--lumin-radius);
       background: var(--background-primary);
       box-shadow: 0 1px 2px rgb(0 0 0 / 4%);
     }
@@ -287,7 +287,7 @@ body.is-phone .modal.mod-settings:not(:has(.style-settings-container)) {
   div:not(.setting-items, .hotkey-list-container, .style-settings-container) > .setting-item:not(.setting-item-heading) {
     margin-bottom: 8px;
     padding: 16px;
-    border-radius: 16px;
+    border-radius: var(--lumin-radius);
   }
 }
 

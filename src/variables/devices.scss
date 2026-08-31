@@ -2,8 +2,8 @@
 // elements/shared.scss so every platform shares the same Mac-inspired UI.
 body.is-mobile {
   --input-height: 48px;
-  --input-radius: 24px;
-  --button-radius: 24px;
+  --input-radius: var(--lumin-radius);
+  --button-radius: var(--lumin-radius);
   --input-padding: 0 var(--side-padding);
   --dropdown-padding-start: var(--side-padding);
   --toggle-border-width: 2px;
