@@ -27,7 +27,9 @@ body.is-phone {
     max-height: calc(100% - var(--safe-area-inset-top));
 
     .modal-setting-back-button {
+      top: calc(var(--safe-area-inset-top) + 2px) !important;
       inset-inline-start: var(--safe-area-inset-side);
+      bottom: auto;
     }
     .modal-close-button {
       top: var(--safe-area-inset-side);
@@ -47,7 +49,7 @@ body.is-phone {
     --modal-header-height: 76px;
 
     .modal-title {
-      margin-top: 16px;
+      margin-top: calc(var(--safe-area-inset-top) + 2px);
     }
   }
 

@@ -22,6 +22,28 @@ settings:
         description: 将标签栏改为传统左侧对齐，而非居中排列。
         description.en: Use left-aligned tabs instead of centered tabs in the tab bar.
         type: class-toggle
+    -
+        id: lumin-palette
+        title: 配色方案
+        title.en: Color palette
+        description: 在默认、雾蓝、苔绿和暖灰配色之间切换。
+        description.en: Choose between default, mist blue, moss green, and warm gray palettes.
+        type: class-select
+        allowEmpty: false
+        default: lumin-default
+        options:
+            -
+                label: 默认 Default
+                value: lumin-default
+            -
+                label: 雾蓝 Mist
+                value: lumin-mist
+            -
+                label: 苔绿 Moss
+                value: lumin-moss
+            -
+                label: 暖灰 Warm gray
+                value: lumin-warmgray
 */
 /* @settings
 

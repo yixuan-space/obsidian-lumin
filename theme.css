@@ -2619,6 +2619,28 @@ settings:
         description: 将标签栏改为传统左侧对齐，而非居中排列。
         description.en: Use left-aligned tabs instead of centered tabs in the tab bar.
         type: class-toggle
+    -
+        id: lumin-palette
+        title: 配色方案
+        title.en: Color palette
+        description: 在默认、雾蓝、苔绿和暖灰配色之间切换。
+        description.en: Choose between default, mist blue, moss green, and warm gray palettes.
+        type: class-select
+        allowEmpty: false
+        default: lumin-default
+        options:
+            -
+                label: 默认 Default
+                value: lumin-default
+            -
+                label: 雾蓝 Mist
+                value: lumin-mist
+            -
+                label: 苔绿 Moss
+                value: lumin-moss
+            -
+                label: 暖灰 Warm gray
+                value: lumin-warmgray
 */
 /* @settings
 
@@ -4549,7 +4571,9 @@ body.is-phone .modal.mod-sidebar-layout {
   max-height: calc(100% - var(--safe-area-inset-top));
 }
 body.is-phone .modal.mod-sidebar-layout .modal-setting-back-button {
+  top: calc(var(--safe-area-inset-top) + 2px) !important;
   inset-inline-start: var(--safe-area-inset-side);
+  bottom: auto;
 }
 body.is-phone .modal.mod-sidebar-layout .modal-close-button {
   top: var(--safe-area-inset-side);
@@ -4566,7 +4590,7 @@ body.is-phone .modal.mod-settings {
   --modal-header-height: 76px;
 }
 body.is-phone .modal.mod-settings .modal-title {
-  margin-top: 16px;
+  margin-top: calc(var(--safe-area-inset-top) + 2px);
 }
 body.is-phone .modal.mod-community-modal .modal-header {
   position: absolute;
@@ -6538,12 +6562,12 @@ body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=d
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-right-split::before {
   background: linear-gradient(to left, var(--background-primary) 50%, transparent);
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display]:hover, body:not(.is-mobile).hover-sidedock.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock, body:not(.is-mobile).hover-sidedock:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:has(> .workspace-tabs.mod-active) {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display]:hover, body:not(.is-mobile).hover-sidedock.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock, body:not(.is-mobile).hover-sidedock:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:not(.is-sidedock-collapsed):has(> .workspace-tabs.mod-active) {
   transition-delay: var(--hover-sidedock-delay);
   transform: none;
   opacity: 1;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display]:hover::before, body:not(.is-mobile).hover-sidedock.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock::before, body:not(.is-mobile).hover-sidedock:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:has(> .workspace-tabs.mod-active)::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display]:hover::before, body:not(.is-mobile).hover-sidedock.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock::before, body:not(.is-mobile).hover-sidedock:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:not(.is-sidedock-collapsed):has(> .workspace-tabs.mod-active)::before {
   opacity: 1;
 }
 
@@ -6780,4 +6804,106 @@ body.theme-dark.is-mobile {
   --text-normal: #fff;
   --text-muted: #8d8d93;
   --text-faint: #47474a;
+}
+
+body.lumin-mist.theme-light {
+  --background-primary: #f8fafc;
+  --background-primary-alt: #f1f5f9;
+  --background-secondary: #edf2f7;
+  --background-secondary-alt: #e4ebf1;
+  --interactive-normal: rgb(48 70 92 / 6%);
+  --interactive-hover: rgb(48 70 92 / 10%);
+  --text-normal: #1f2d3a;
+  --text-muted: #627282;
+  --text-faint: #b5c0ca;
+  --link-color: #2563a6;
+  --link-color-hover: #174a80;
+  --link-external-color: #2563a6;
+  --link-external-color-hover: #174a80;
+  --link-unresolved-color: #557d9f;
+}
+
+body.lumin-mist.theme-dark {
+  --background-primary: #18232e;
+  --background-primary-alt: #1c2934;
+  --background-secondary: #202d38;
+  --background-secondary-alt: #2c3a46;
+  --interactive-normal: rgb(217 232 245 / 7%);
+  --interactive-hover: rgb(217 232 245 / 11%);
+  --text-normal: #dce7f0;
+  --text-muted: #a3b3c1;
+  --text-faint: #5d6d7a;
+  --link-color: #8dc5f5;
+  --link-color-hover: #c0e2ff;
+  --link-external-color: #8dc5f5;
+  --link-external-color-hover: #c0e2ff;
+  --link-unresolved-color: #93b2cc;
+}
+
+body.lumin-moss.theme-light {
+  --background-primary: #fafbf8;
+  --background-primary-alt: #f4f7f2;
+  --background-secondary: #eff3ed;
+  --background-secondary-alt: #e5ece3;
+  --interactive-normal: rgb(51 72 58 / 6%);
+  --interactive-hover: rgb(51 72 58 / 10%);
+  --text-normal: #243128;
+  --text-muted: #68756b;
+  --text-faint: #bac3ba;
+  --link-color: #2c7058;
+  --link-color-hover: #1e513f;
+  --link-external-color: #2c7058;
+  --link-external-color-hover: #1e513f;
+  --link-unresolved-color: #5c8876;
+}
+
+body.lumin-moss.theme-dark {
+  --background-primary: #19231d;
+  --background-primary-alt: #1d2921;
+  --background-secondary: #233026;
+  --background-secondary-alt: #2d3d31;
+  --interactive-normal: rgb(220 235 220 / 7%);
+  --interactive-hover: rgb(220 235 220 / 11%);
+  --text-normal: #dce8df;
+  --text-muted: #a8b8aa;
+  --text-faint: #5f6f62;
+  --link-color: #82c8a8;
+  --link-color-hover: #b3e5cb;
+  --link-external-color: #82c8a8;
+  --link-external-color-hover: #b3e5cb;
+  --link-unresolved-color: #91b9a2;
+}
+
+body.lumin-warmgray.theme-light {
+  --background-primary: #fbfaf8;
+  --background-primary-alt: #f5f3f0;
+  --background-secondary: #efeeeb;
+  --background-secondary-alt: #e5e3df;
+  --interactive-normal: rgb(70 67 62 / 6%);
+  --interactive-hover: rgb(70 67 62 / 10%);
+  --text-normal: #302f2c;
+  --text-muted: #73716c;
+  --text-faint: #bdbab3;
+  --link-color: #586b85;
+  --link-color-hover: #3f5068;
+  --link-external-color: #586b85;
+  --link-external-color-hover: #3f5068;
+  --link-unresolved-color: #77859a;
+}
+
+body.lumin-warmgray.theme-dark {
+  --background-primary: #242322;
+  --background-primary-alt: #292827;
+  --background-secondary: #302f2d;
+  --background-secondary-alt: #3a3936;
+  --interactive-normal: rgb(240 237 232 / 7%);
+  --interactive-hover: rgb(240 237 232 / 11%);
+  --text-normal: #e4e1dc;
+  --text-muted: #b2afa9;
+  --text-faint: #696761;
+  --link-color: #a9bdd8;
+  --link-color-hover: #d0dded;
+  --link-external-color: #a9bdd8;
+  --link-external-color-hover: #d0dded;
+  --link-unresolved-color: #a8b5c5;
 }

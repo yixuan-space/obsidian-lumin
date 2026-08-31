@@ -62,7 +62,7 @@ Task states get a compact visual vocabulary while remaining standard Obsidian ta
 
 Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) community plugin to configure Lumin without custom CSS. Available controls include:
 
-- Color preferences, including sidebar tint and Android dynamic color where supported.
+- Color preferences, including default, mist blue, moss green, and warm gray palettes. Each adapts to light and dark appearance, alongside sidebar tint and Android dynamic color where supported.
 - Desktop behavior such as hover ribbons, hover sidebars, focus view, tab alignment, compact panel controls, and media zoom.
 - Editor preferences including reading width, block and media width, banner treatment, active-line highlight, link underlines, and image alignment.
 - Accessibility options for motion, focus contrast, interface type size, and icon size.

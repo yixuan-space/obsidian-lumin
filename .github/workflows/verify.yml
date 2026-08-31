@@ -1,0 +1,24 @@
+name: Validate theme CSS
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build and validate distributable CSS
+        run: |
+          npx --yes sass src/theme.scss theme.css --no-source-map
+          git diff --check
+          git diff --exit-code -- theme.css
