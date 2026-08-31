@@ -4,8 +4,9 @@
 # 主文案为中文，保证任意语言回退时仍为中文；英文界面通过 Style Settings 的 title.en / description.en 读取。
 # Primary strings are Chinese so UI stays Chinese even when title.zh does not match Obsidian’s language code.
 
-name: Lumin · 流明
+name: 基础设置 · General
 id: lumin
+collapsed: true
 settings:
     -
         id: lumin-desc
@@ -41,13 +42,13 @@ settings:
         description: 将标签栏改为传统左侧对齐，而非居中排列。
         description.en: Use left-aligned tabs instead of centered tabs in the tab bar.
         type: class-toggle
-    -
-        id: desktop-header
-        title: 桌面端
-        title.en: Desktop
-        type: heading
-        level: 1
-        collapsed: true
+*/
+/* @settings
+
+name: 桌面端 · Desktop
+id: desktop-header
+collapsed: true
+settings:
     -
         id: hover-ribbon
         title: 悬停显示功能区
@@ -100,13 +101,13 @@ settings:
         description: 关闭图片与媒体的点击放大效果。
         description.en: Disable click-to-zoom behavior on images and media.
         type: class-toggle
-    -
-        id: editor
-        title: 编辑器
-        title.en: Editor
-        type: heading
-        level: 1
-        collapsed: true
+*/
+/* @settings
+
+name: 编辑器 · Editor
+id: editor
+collapsed: true
+settings:
     -
         id: active-line-off
         title: 关闭当前行高亮
@@ -185,13 +186,13 @@ settings:
         description: 隐藏状态栏区域的快速明暗配色切换入口。
         description.en: Hide the quick light/dark switch in the status bar area.
         type: class-toggle
-    -
-        id: accessibility
-        title: 辅助功能
-        title.en: Accessibility
-        type: heading
-        level: 1
-        collapsed: true
+*/
+/* @settings
+
+name: 辅助功能 · Accessibility
+id: accessibility
+collapsed: true
+settings:
     -
         id: reduce-contrast-change
         title: 减弱失焦对比变化
@@ -239,52 +240,254 @@ settings:
         format: px
 */
 
-.view-content .style-settings-container .style-settings-container .setting-item {
-  align-items: center;
-  padding: 16px;
+// The grouped, indented presentation belongs to the Cupertino layout. Native
+// Android and Windows settings keep Obsidian's denser, platform-appropriate flow.
+body:is(.mod-macos, .adaptive-mode-off) {
+  .view-content .style-settings-container .style-settings-container .setting-item {
+    align-items: center;
+    padding: 16px;
 
-  &:not(.setting-item-heading) {
-    flex-direction: row;
+    &:not(.setting-item-heading) {
+      flex-direction: row;
+    }
+
+    .setting-item-control {
+      padding-top: 0;
+    }
+  }
+  .style-settings-heading:not(.is-collapsed) {
+    border-bottom: none;
+  }
+  .style-settings-heading,
+  .style-settings-container {
+    margin-block: 0 !important;
+    padding-left: 32px;
+  }
+  .style-settings-heading {
+    border-radius: 0;
+    padding: 16px !important;
+  }
+  .style-settings-heading .setting-item-name {
+    color: var(--text-normal) !important;
   }
 
-  .setting-item-control {
-    padding-top: 0;
+  .style-settings-container .setting-item {
+    margin-bottom: 0;
+    border-radius: 0;
+    gap: 4px !important;
+  }
+  .style-settings-container .setting-item-description > div:last-child {
+    display: none;
+  }
+  .style-settings-container .setting-item:not(.style-settings-heading) > .setting-item-control {
+    min-height: var(--input-height);
+  }
+  .style-settings-container .setting-item:nth-child(1 of .setting-item:not(.setting-item-heading)) {
+    border-top-right-radius: var(--setting-items-radius);
+    border-top-left-radius: var(--setting-items-radius);
+  }
+  .style-settings-container .setting-item:nth-last-child(1 of .setting-item:not(.setting-item-heading)) {
+    border-bottom-right-radius: var(--setting-items-radius);
+    border-bottom-left-radius: var(--setting-items-radius);
   }
 }
-.style-settings-heading:not(.is-collapsed) {
-  border-bottom: none;
-}
-.style-settings-heading,
-.style-settings-container {
-  margin-block: 0 !important;
-  padding-left: 32px;
-}
-.style-settings-heading {
-  border-radius: 0;
-  padding: 16px !important;
-}
-.style-settings-heading .setting-item-name {
-  color: var(--text-normal) !important;
+
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) {
+  .modal.mod-settings:has(.style-settings-container) {
+    --setting-items-background: transparent;
+    --setting-items-padding: 0;
+    --setting-items-radius: var(--radius-s);
+    --toggle-width: 36px;
+    --toggle-border-width: 3px;
+    --toggle-thumb-width: 16px;
+    --toggle-thumb-height: 16px;
+
+    .vertical-tab-content {
+      background-color: var(--settings-background);
+    }
+
+    .style-settings-heading,
+    .style-settings-container {
+      margin-block: 0 !important;
+      padding-inline-start: 0;
+    }
+
+    .style-settings-container[data-level="2"] {
+      margin: 0 !important;
+      border: 0;
+      border-radius: 0;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .style-settings-heading {
+      border-bottom: var(--border-width) solid var(--background-modifier-border);
+      border-radius: 0;
+      padding: 12px 0 8px !important;
+    }
+
+    .style-settings-container .setting-item {
+      align-items: center;
+      border: 0;
+      border-bottom: var(--border-width) solid var(--background-modifier-border);
+      border-radius: 0;
+      background-color: transparent;
+      gap: 12px !important;
+      margin: 0;
+      padding: 12px 0;
+    }
+
+    .style-settings-container .setting-item:last-child {
+      border-bottom: 0;
+    }
+
+    .style-settings-container .setting-item-info {
+      min-width: 0;
+    }
+
+    .style-settings-container .setting-item-name {
+      font-weight: var(--font-medium);
+    }
+
+    .style-settings-container .setting-item-description {
+      font-size: var(--font-ui-small);
+    }
+
+    .style-settings-container .setting-item-description > div:last-child {
+      display: none;
+    }
+
+    // The plugin puts search and import/export in the same top-level item.
+    // Keep that tool area distinct without turning the configuration itself
+    // into nested cards.
+    .setting-item:has(.style-settings-import) {
+      align-items: stretch;
+      flex-direction: column;
+      border: 0;
+      border-radius: var(--radius-s);
+      background-color: var(--background-primary);
+      margin: 0 0 20px;
+      padding: 16px;
+    }
+    .setting-item:has(.style-settings-import) .setting-item-info {
+      width: 100%;
+    }
+    .setting-item:has(.style-settings-import) .setting-item-control {
+      align-self: flex-start;
+      margin-top: 12px;
+      padding-top: 0;
+    }
+    .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export) {
+      border-radius: var(--radius-s);
+      color: var(--text-muted);
+      font-size: var(--font-ui-small);
+      font-weight: var(--font-medium);
+      margin: 0;
+      padding: 4px 8px;
+      text-decoration: none;
+    }
+  }
 }
 
-.style-settings-container .setting-item {
-  margin-bottom: 0;
-  border-radius: 0;
-  gap: 4px !important;
-}
-.style-settings-container .setting-item-description > div:last-child {
-  display: none;
-}
-.style-settings-container .setting-item:not(.style-settings-heading) > .setting-item-control {
-  min-height: var(--input-height);
-}
-.style-settings-container .setting-item:nth-child(1 of .setting-item:not(.setting-item-heading)) {
-  border-top-right-radius: var(--setting-items-radius);
-  border-top-left-radius: var(--setting-items-radius);
-}
-.style-settings-container .setting-item:nth-last-child(1 of .setting-item:not(.setting-item-heading)) {
-  border-bottom-right-radius: var(--setting-items-radius);
-  border-bottom-left-radius: var(--setting-items-radius);
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) {
+  .vertical-tab-content {
+    background-color: var(--settings-background);
+  }
+
+  .setting-group-search {
+    margin: 0 0 16px;
+    padding: 0;
+  }
+  .setting-item:has(.style-settings-import) {
+    border-radius: var(--radius-xl);
+    padding: 20px 24px;
+  }
+  .search-input-container {
+    align-items: center;
+    display: flex;
+    min-height: 52px;
+    position: relative;
+    border-radius: 100vh;
+    background-color: var(--background-modifier-hover);
+    padding-inline: 16px;
+  }
+  .search-input-container::before {
+    inset-inline-start: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .search-input-container input:is([type="search"], [type="text"]) {
+    height: 52px;
+    border: 0 !important;
+    border-radius: 100vh;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    padding-inline-start: 40px;
+  }
+
+  // Style Settings uses nested containers rather than Obsidian's setting groups.
+  // The configuration stays on the page surface, like Minimal's style view.
+  .style-settings-heading[data-level="0"] {
+    margin: 20px 0 0;
+    border-bottom: var(--border-width) solid var(--background-modifier-border);
+    border-radius: 0;
+    background-color: transparent;
+    padding: 16px 0 8px !important;
+  }
+  .style-settings-heading[data-level="0"] + .style-settings-container {
+    margin: 0 0 20px !important;
+    border-radius: 0;
+    background-color: transparent;
+    overflow: visible;
+    padding: 0;
+  }
+  .style-settings-container {
+    flex: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 8px;
+  }
+  .style-settings-info-text {
+    display: block;
+    flex: none !important;
+    min-height: 0 !important;
+    padding: 8px 0 16px !important;
+  }
+  .style-settings-info-text .setting-item-info {
+    flex: none;
+    width: 100%;
+  }
+
+  .checkbox-container,
+  .checkbox-container:not(.is-enabled) {
+    --toggle-width: 52px;
+    --toggle-border-width: 4px;
+    --toggle-thumb-width: 24px;
+    --toggle-thumb-height: 24px;
+    --toggle-s-width: 52px;
+    --toggle-s-border-width: 4px;
+    --toggle-s-thumb-width: 24px;
+    --toggle-s-thumb-height: 24px;
+    box-shadow: none;
+  }
+
+  .style-settings-heading:not([data-level="0"]) {
+    margin: 0;
+    border-bottom: var(--border-width) solid var(--background-modifier-border);
+    padding: 16px 0 10px !important;
+  }
+  .style-settings-container .setting-item:not(.setting-item-heading) {
+    flex-wrap: wrap;
+    padding: 16px 0;
+  }
+
+  .style-settings-container .setting-item-info {
+    flex: 1 1 220px;
+  }
+  .style-settings-container .setting-item-control {
+    align-self: flex-end;
+    margin-inline-start: auto;
+  }
 }
 body:not(.mod-macos, .adaptive-mode-off) .setting-item[data-id="colorful-frame"],
 body:not(.is-android:not(.adaptive-mode-off)) .setting-item[data-id="material-color"] {

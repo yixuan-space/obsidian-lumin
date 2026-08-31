@@ -94,18 +94,14 @@ body.is-android:not(.adaptive-mode-off) {
   .combobox-button,
   .dropdown {
     transition: var(--anim-duration-fast);
-    box-shadow: inset 0 0 var(--interactive-accent);
-    border-width: 0 0 var(--border-width);
-    border-style: solid;
-    border-color: var(--background-modifier-border-focus);
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+    background-color: var(--background-modifier-form-field);
+    border: var(--input-border-width) solid var(--background-modifier-border);
+    border-radius: var(--input-radius);
+    box-shadow: var(--input-shadow);
 
     &:focus {
-      box-shadow: inset 0 -2px var(--interactive-accent);
-      border-color: transparent;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
+      border-color: var(--interactive-accent);
+      box-shadow: 0 0 0 1px var(--interactive-accent);
     }
   }
 
@@ -144,7 +140,9 @@ body.is-android:not(.adaptive-mode-off) {
   .prompt,
   .modal,
   .cm-tooltip {
-    border: none;
+    background-color: var(--background-secondary);
+    border: var(--border-width) solid var(--background-modifier-border);
+    box-shadow: var(--shadow-s);
   }
 
   // Menu
@@ -165,7 +163,7 @@ body.is-android:not(.adaptive-mode-off) {
   &.theme-dark .modal.mod-sidebar-layout {
     background-color: var(--background-primary);
   }
-  .modal.mod-settings {
+  .modal.mod-settings:not(:has(.style-settings-container)) {
     .vertical-tab-header-group-title {
       display: none;
     }
@@ -230,7 +228,7 @@ body.is-android:not(.adaptive-mode-off) {
 
 body.is-android:not(.adaptive-mode-off).is-mobile {
   // Settings
-  .modal.mod-settings {
+  .modal.mod-settings:not(:has(.style-settings-container)) {
     .setting-group .setting-item:not(:last-child):not(.setting-item-heading) {
       margin-bottom: 2px;
     }
@@ -324,7 +322,7 @@ body.is-android:not(.adaptive-mode-off).is-phone {
   }
 
   // Settings
-  .modal.mod-settings {
+  .modal.mod-settings:not(:has(.style-settings-container)) {
     .vertical-tab-header-group-items {
       gap: 2px;
       background-color: transparent;

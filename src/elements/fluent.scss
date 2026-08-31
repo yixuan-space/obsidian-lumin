@@ -85,13 +85,15 @@ body.mod-windows:not(.adaptive-mode-off) {
 
   // Text input
   input:is([type="text"], [type="search"], [type="email"], [type="password"], [type="number"]):not(.prompt-input) {
-    box-shadow: 0 -0.5px 0 var(--color-base-50) inset;
+    background-color: var(--background-modifier-form-field);
+    border-radius: var(--input-radius);
+    box-shadow: var(--input-shadow);
 
     &:active,
     &:focus,
     &:focus-visible {
-      box-shadow: 0 -2px 0 var(--interactive-accent) inset;
-      border-color: var(--background-modifier-border);
+      box-shadow: var(--input-shadow-active);
+      border-color: var(--interactive-accent);
     }
   }
 
@@ -129,13 +131,14 @@ body.mod-windows:not(.adaptive-mode-off) {
   .modal,
   .cm-tooltip,
   .notice {
-    background-color: var(--modal-background) !important;
-    backdrop-filter: var(--blur-l);
-    border: none;
+    background-color: var(--background-secondary) !important;
+    backdrop-filter: none;
+    border: var(--border-width) solid var(--background-modifier-border);
+    box-shadow: var(--shadow-s);
   }
 
   // Settings
-  .modal.mod-settings {
+  .modal.mod-settings:not(:has(.style-settings-container)) {
     --setting-items-padding: 0px;
 
     .vertical-tab-header-group-title,

@@ -2258,8 +2258,9 @@ body.minimal-theme .workspace::before {
 # 主文案为中文，保证任意语言回退时仍为中文；英文界面通过 Style Settings 的 title.en / description.en 读取。
 # Primary strings are Chinese so UI stays Chinese even when title.zh does not match Obsidian’s language code.
 
-name: Lumin · 流明
+name: 基础设置 · General
 id: lumin
+collapsed: true
 settings:
     -
         id: lumin-desc
@@ -2295,13 +2296,13 @@ settings:
         description: 将标签栏改为传统左侧对齐，而非居中排列。
         description.en: Use left-aligned tabs instead of centered tabs in the tab bar.
         type: class-toggle
-    -
-        id: desktop-header
-        title: 桌面端
-        title.en: Desktop
-        type: heading
-        level: 1
-        collapsed: true
+*/
+/* @settings
+
+name: 桌面端 · Desktop
+id: desktop-header
+collapsed: true
+settings:
     -
         id: hover-ribbon
         title: 悬停显示功能区
@@ -2354,13 +2355,13 @@ settings:
         description: 关闭图片与媒体的点击放大效果。
         description.en: Disable click-to-zoom behavior on images and media.
         type: class-toggle
-    -
-        id: editor
-        title: 编辑器
-        title.en: Editor
-        type: heading
-        level: 1
-        collapsed: true
+*/
+/* @settings
+
+name: 编辑器 · Editor
+id: editor
+collapsed: true
+settings:
     -
         id: active-line-off
         title: 关闭当前行高亮
@@ -2439,13 +2440,13 @@ settings:
         description: 隐藏状态栏区域的快速明暗配色切换入口。
         description.en: Hide the quick light/dark switch in the status bar area.
         type: class-toggle
-    -
-        id: accessibility
-        title: 辅助功能
-        title.en: Accessibility
-        type: heading
-        level: 1
-        collapsed: true
+*/
+/* @settings
+
+name: 辅助功能 · Accessibility
+id: accessibility
+collapsed: true
+settings:
     -
         id: reduce-contrast-change
         title: 减弱失焦对比变化
@@ -2492,58 +2493,222 @@ settings:
         step: 1
         format: px
 */
-.view-content .style-settings-container .style-settings-container .setting-item {
+body:is(.mod-macos, .adaptive-mode-off) .view-content .style-settings-container .style-settings-container .setting-item {
   align-items: center;
   padding: 16px;
 }
-.view-content .style-settings-container .style-settings-container .setting-item:not(.setting-item-heading) {
+body:is(.mod-macos, .adaptive-mode-off) .view-content .style-settings-container .style-settings-container .setting-item:not(.setting-item-heading) {
   flex-direction: row;
 }
-.view-content .style-settings-container .style-settings-container .setting-item .setting-item-control {
+body:is(.mod-macos, .adaptive-mode-off) .view-content .style-settings-container .style-settings-container .setting-item .setting-item-control {
   padding-top: 0;
 }
-
-.style-settings-heading:not(.is-collapsed) {
+body:is(.mod-macos, .adaptive-mode-off) .style-settings-heading:not(.is-collapsed) {
   border-bottom: none;
 }
-
-.style-settings-heading,
-.style-settings-container {
+body:is(.mod-macos, .adaptive-mode-off) .style-settings-heading,
+body:is(.mod-macos, .adaptive-mode-off) .style-settings-container {
   margin-block: 0 !important;
   padding-left: 32px;
 }
-
-.style-settings-heading {
+body:is(.mod-macos, .adaptive-mode-off) .style-settings-heading {
   border-radius: 0;
   padding: 16px !important;
 }
-
-.style-settings-heading .setting-item-name {
+body:is(.mod-macos, .adaptive-mode-off) .style-settings-heading .setting-item-name {
   color: var(--text-normal) !important;
 }
-
-.style-settings-container .setting-item {
+body:is(.mod-macos, .adaptive-mode-off) .style-settings-container .setting-item {
   margin-bottom: 0;
   border-radius: 0;
   gap: 4px !important;
 }
-
-.style-settings-container .setting-item-description > div:last-child {
+body:is(.mod-macos, .adaptive-mode-off) .style-settings-container .setting-item-description > div:last-child {
   display: none;
 }
-
-.style-settings-container .setting-item:not(.style-settings-heading) > .setting-item-control {
+body:is(.mod-macos, .adaptive-mode-off) .style-settings-container .setting-item:not(.style-settings-heading) > .setting-item-control {
   min-height: var(--input-height);
 }
-
-.style-settings-container .setting-item:nth-child(1 of .setting-item:not(.setting-item-heading)) {
+body:is(.mod-macos, .adaptive-mode-off) .style-settings-container .setting-item:nth-child(1 of .setting-item:not(.setting-item-heading)) {
   border-top-right-radius: var(--setting-items-radius);
   border-top-left-radius: var(--setting-items-radius);
 }
-
-.style-settings-container .setting-item:nth-last-child(1 of .setting-item:not(.setting-item-heading)) {
+body:is(.mod-macos, .adaptive-mode-off) .style-settings-container .setting-item:nth-last-child(1 of .setting-item:not(.setting-item-heading)) {
   border-bottom-right-radius: var(--setting-items-radius);
   border-bottom-left-radius: var(--setting-items-radius);
+}
+
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) {
+  --setting-items-background: transparent;
+  --setting-items-padding: 0;
+  --setting-items-radius: var(--radius-s);
+  --toggle-width: 36px;
+  --toggle-border-width: 3px;
+  --toggle-thumb-width: 16px;
+  --toggle-thumb-height: 16px;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .vertical-tab-content {
+  background-color: var(--settings-background);
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .style-settings-heading,
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .style-settings-container {
+  margin-block: 0 !important;
+  padding-inline-start: 0;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .style-settings-container[data-level="2"] {
+  margin: 0 !important;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  padding: 0;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .style-settings-heading {
+  border-bottom: var(--border-width) solid var(--background-modifier-border);
+  border-radius: 0;
+  padding: 12px 0 8px !important;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .style-settings-container .setting-item {
+  align-items: center;
+  border: 0;
+  border-bottom: var(--border-width) solid var(--background-modifier-border);
+  border-radius: 0;
+  background-color: transparent;
+  gap: 12px !important;
+  margin: 0;
+  padding: 12px 0;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .style-settings-container .setting-item:last-child {
+  border-bottom: 0;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .style-settings-container .setting-item-info {
+  min-width: 0;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .style-settings-container .setting-item-name {
+  font-weight: var(--font-medium);
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .style-settings-container .setting-item-description {
+  font-size: var(--font-ui-small);
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .style-settings-container .setting-item-description > div:last-child {
+  display: none;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) {
+  align-items: stretch;
+  flex-direction: column;
+  border: 0;
+  border-radius: var(--radius-s);
+  background-color: var(--background-primary);
+  margin: 0 0 20px;
+  padding: 16px;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) .setting-item-info {
+  width: 100%;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) .setting-item-control {
+  align-self: flex-start;
+  margin-top: 12px;
+  padding-top: 0;
+}
+body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export) {
+  border-radius: var(--radius-s);
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-medium);
+  margin: 0;
+  padding: 4px 8px;
+  text-decoration: none;
+}
+
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .vertical-tab-content {
+  background-color: var(--settings-background);
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .setting-group-search {
+  margin: 0 0 16px;
+  padding: 0;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) {
+  border-radius: var(--radius-xl);
+  padding: 20px 24px;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .search-input-container {
+  align-items: center;
+  display: flex;
+  min-height: 52px;
+  position: relative;
+  border-radius: 100vh;
+  background-color: var(--background-modifier-hover);
+  padding-inline: 16px;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .search-input-container::before {
+  inset-inline-start: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .search-input-container input:is([type=search], [type=text]) {
+  height: 52px;
+  border: 0 !important;
+  border-radius: 100vh;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding-inline-start: 40px;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .style-settings-heading[data-level="0"] {
+  margin: 20px 0 0;
+  border-bottom: var(--border-width) solid var(--background-modifier-border);
+  border-radius: 0;
+  background-color: transparent;
+  padding: 16px 0 8px !important;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .style-settings-heading[data-level="0"] + .style-settings-container {
+  margin: 0 0 20px !important;
+  border-radius: 0;
+  background-color: transparent;
+  overflow: visible;
+  padding: 0;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .style-settings-container {
+  flex: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding-bottom: 8px;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .style-settings-info-text {
+  display: block;
+  flex: none !important;
+  min-height: 0 !important;
+  padding: 8px 0 16px !important;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .style-settings-info-text .setting-item-info {
+  flex: none;
+  width: 100%;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .checkbox-container,
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .checkbox-container:not(.is-enabled) {
+  --toggle-width: 52px;
+  --toggle-border-width: 4px;
+  --toggle-thumb-width: 24px;
+  --toggle-thumb-height: 24px;
+  --toggle-s-width: 52px;
+  --toggle-s-border-width: 4px;
+  --toggle-s-thumb-width: 24px;
+  --toggle-s-thumb-height: 24px;
+  box-shadow: none;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .style-settings-heading:not([data-level="0"]) {
+  margin: 0;
+  border-bottom: var(--border-width) solid var(--background-modifier-border);
+  padding: 16px 0 10px !important;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .style-settings-container .setting-item:not(.setting-item-heading) {
+  flex-wrap: wrap;
+  padding: 16px 0;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .style-settings-container .setting-item-info {
+  flex: 1 1 220px;
+}
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:has(.style-settings-container) .style-settings-container .setting-item-control {
+  align-self: flex-end;
+  margin-inline-start: auto;
 }
 
 body:not(.mod-macos, .adaptive-mode-off) .setting-item[data-id=colorful-frame],
@@ -4838,11 +5003,13 @@ body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .clickable-icon.has-act
   background-color: var(--background-modifier-hover);
 }
 body.mod-windows:not(.adaptive-mode-off) input:is([type=text], [type=search], [type=email], [type=password], [type=number]):not(.prompt-input) {
-  box-shadow: 0 -0.5px 0 var(--color-base-50) inset;
+  background-color: var(--background-modifier-form-field);
+  border-radius: var(--input-radius);
+  box-shadow: var(--input-shadow);
 }
 body.mod-windows:not(.adaptive-mode-off) input:is([type=text], [type=search], [type=email], [type=password], [type=number]):not(.prompt-input):active, body.mod-windows:not(.adaptive-mode-off) input:is([type=text], [type=search], [type=email], [type=password], [type=number]):not(.prompt-input):focus, body.mod-windows:not(.adaptive-mode-off) input:is([type=text], [type=search], [type=email], [type=password], [type=number]):not(.prompt-input):focus-visible {
-  box-shadow: 0 -2px 0 var(--interactive-accent) inset;
-  border-color: var(--background-modifier-border);
+  box-shadow: var(--input-shadow-active);
+  border-color: var(--interactive-accent);
 }
 body.mod-windows:not(.adaptive-mode-off) input[type=range]::-webkit-slider-thumb {
   transition: var(--anim-duration-fast);
@@ -4871,24 +5038,25 @@ body.mod-windows:not(.adaptive-mode-off) .prompt,
 body.mod-windows:not(.adaptive-mode-off) .modal,
 body.mod-windows:not(.adaptive-mode-off) .cm-tooltip,
 body.mod-windows:not(.adaptive-mode-off) .notice {
-  background-color: var(--modal-background) !important;
-  backdrop-filter: var(--blur-l);
-  border: none;
+  background-color: var(--background-secondary) !important;
+  backdrop-filter: none;
+  border: var(--border-width) solid var(--background-modifier-border);
+  box-shadow: var(--shadow-s);
 }
-body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings {
+body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) {
   --setting-items-padding: 0px;
 }
-body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-header-group-title,
-body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-nav-item {
+body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-header-group-title,
+body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-nav-item {
   padding: calc(8px * var(--density-modifier)) 16px;
   position: relative;
   border-radius: var(--setting-items-radius);
 }
-body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-nav-item.is-active {
+body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-nav-item.is-active {
   background-color: var(--background-modifier-hover);
   color: var(--text-normal);
 }
-body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-nav-item.is-active::before {
+body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-nav-item.is-active::before {
   position: absolute;
   top: 8px;
   bottom: 8px;
@@ -4900,17 +5068,17 @@ body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-nav-i
   margin-left: unset;
   height: unset;
 }
-body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings .setting-items {
+body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-items {
   background-color: transparent;
   padding-block: 0;
 }
-body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings .setting-item:not(.setting-item-heading) {
+body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-item:not(.setting-item-heading) {
   border: var(--border-width) solid rgba(0, 0, 0, 0.1);
   border-radius: var(--radius-m);
   padding: calc(16px * var(--density-modifier));
   background-color: var(--setting-items-background);
 }
-body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings .setting-item:not(.setting-item-heading):not(:first-child) {
+body.mod-windows:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-item:not(.setting-item-heading):not(:first-child) {
   margin-top: 4px;
 }
 body.mod-windows:not(.adaptive-mode-off) .notice {
@@ -5145,22 +5313,18 @@ body.is-android:not(.adaptive-mode-off) select,
 body.is-android:not(.adaptive-mode-off) .combobox-button,
 body.is-android:not(.adaptive-mode-off) .dropdown {
   transition: var(--anim-duration-fast);
-  box-shadow: inset 0 0 var(--interactive-accent);
-  border-width: 0 0 var(--border-width);
-  border-style: solid;
-  border-color: var(--background-modifier-border-focus);
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  background-color: var(--background-modifier-form-field);
+  border: var(--input-border-width) solid var(--background-modifier-border);
+  border-radius: var(--input-radius);
+  box-shadow: var(--input-shadow);
 }
 body.is-android:not(.adaptive-mode-off) textarea:focus,
 body.is-android:not(.adaptive-mode-off) input:is([type=text], [type=search], [type=email], [type=password], [type=number]):not(.prompt-input):focus,
 body.is-android:not(.adaptive-mode-off) select:focus,
 body.is-android:not(.adaptive-mode-off) .combobox-button:focus,
 body.is-android:not(.adaptive-mode-off) .dropdown:focus {
-  box-shadow: inset 0 -2px var(--interactive-accent);
-  border-color: transparent;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  border-color: var(--interactive-accent);
+  box-shadow: 0 0 0 1px var(--interactive-accent);
 }
 body.is-android:not(.adaptive-mode-off) input[type=range]::-webkit-slider-thumb {
   outline: 6px solid var(--setting-items-background);
@@ -5191,7 +5355,9 @@ body.is-android:not(.adaptive-mode-off) .popover,
 body.is-android:not(.adaptive-mode-off) .prompt,
 body.is-android:not(.adaptive-mode-off) .modal,
 body.is-android:not(.adaptive-mode-off) .cm-tooltip {
-  border: none;
+  background-color: var(--background-secondary);
+  border: var(--border-width) solid var(--background-modifier-border);
+  box-shadow: var(--shadow-s);
 }
 body.is-android:not(.adaptive-mode-off) .menu .menu-item-icon .svg-icon,
 body.is-android:not(.adaptive-mode-off) .suggestion-container .menu-item-icon .svg-icon {
@@ -5207,13 +5373,13 @@ body.is-android:not(.adaptive-mode-off).theme-light .modal.mod-sidebar-layout {
 body.is-android:not(.adaptive-mode-off).theme-dark .modal.mod-sidebar-layout {
   background-color: var(--background-primary);
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-header-group-title {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-header-group-title {
   display: none;
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-header-group-items {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-header-group-items {
   gap: 0;
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-nav-item {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-nav-item {
   border-radius: var(--button-radius);
   padding: calc(12px * var(--density-modifier)) 16px;
   width: fit-content;
@@ -5222,10 +5388,10 @@ body.is-android:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-nav-it
   cursor: pointer;
   align-items: center;
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-nav-item.is-active {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-nav-item.is-active {
   background-color: var(--setting-items-background);
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-nav-item .vertical-tab-nav-item-icon {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-nav-item .vertical-tab-nav-item-icon {
   --icon-size: 20px;
   --setting-nav-icon-background: var(--color-base-50);
   padding: 10px;
@@ -5236,38 +5402,38 @@ body.is-android:not(.adaptive-mode-off) .modal.mod-settings .vertical-tab-nav-it
   margin-left: -8px;
   margin-bottom: -4px;
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .setting-items {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-items {
   padding: 0;
   background-color: transparent;
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .setting-item:not(.setting-item-heading) {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-item:not(.setting-item-heading) {
   border-top: none;
   border-radius: var(--radius-xs);
   background-color: var(--setting-items-background);
   padding: var(--setting-items-padding);
   margin-bottom: 2px;
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .setting-item:nth-child(1 of .setting-item:not(.setting-item-heading)),
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .setting-item-heading + .setting-item {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-item:nth-child(1 of .setting-item:not(.setting-item-heading)),
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-item-heading + .setting-item {
   border-top-left-radius: var(--setting-items-radius);
   border-top-right-radius: var(--setting-items-radius);
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .setting-item:nth-last-child(1 of .setting-item:not(.setting-item-heading)),
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .setting-item:has(+ .setting-item-heading) {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-item:nth-last-child(1 of .setting-item:not(.setting-item-heading)),
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-item:has(+ .setting-item-heading) {
   border-bottom-left-radius: var(--setting-items-radius);
   border-bottom-right-radius: var(--setting-items-radius);
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .setting-item-name {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-item-name {
   font-weight: var(--font-medium);
 }
-body.is-android:not(.adaptive-mode-off) .modal.mod-settings .setting-item-description {
+body.is-android:not(.adaptive-mode-off) .modal.mod-settings:not(:has(.style-settings-container)) .setting-item-description {
   font-size: var(--font-ui-small);
 }
 
-body.is-android:not(.adaptive-mode-off).is-mobile .modal.mod-settings .setting-group .setting-item:not(:last-child):not(.setting-item-heading) {
+body.is-android:not(.adaptive-mode-off).is-mobile .modal.mod-settings:not(:has(.style-settings-container)) .setting-group .setting-item:not(:last-child):not(.setting-item-heading) {
   margin-bottom: 2px;
 }
-body.is-android:not(.adaptive-mode-off).is-mobile .modal.mod-settings .setting-item-control button:not(.clickable-icon) {
+body.is-android:not(.adaptive-mode-off).is-mobile .modal.mod-settings:not(:has(.style-settings-container)) .setting-item-control button:not(.clickable-icon) {
   width: fit-content;
   padding: 16px;
 }
@@ -5336,19 +5502,19 @@ body.is-android:not(.adaptive-mode-off).is-phone .menu .menu-item:not(:last-chil
 body.is-android:not(.adaptive-mode-off).is-phone .menu .menu-item::after {
   content: none;
 }
-body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings .vertical-tab-header-group-items {
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-header-group-items {
   gap: 2px;
   background-color: transparent;
 }
-body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings .vertical-tab-nav-item {
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-nav-item {
   width: 100%;
   border-radius: var(--radius-xs);
   padding: calc(16px * var(--density-modifier)) 20px;
   height: auto;
   background-color: var(--setting-items-background);
 }
-body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings .vertical-tab-nav-item-title,
-body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings .vertical-tab-nav-item-chevron {
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-nav-item-title,
+body.is-android:not(.adaptive-mode-off).is-phone .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-nav-item-chevron {
   border-bottom: none;
 }
 body.is-android:not(.adaptive-mode-off).is-phone .prompt .prompt-input {
@@ -5686,6 +5852,275 @@ body.mod-linux:not(.is-android):not(.adaptive-mode-off).is-phone .modal.mod-sett
   padding: calc(16px * var(--density-modifier)) 16px;
 }
 
+@media screen, print {
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) {
+    --input-height: 36px;
+    --toggle-width: 36px;
+    --toggle-border-width: 2px;
+    --toggle-thumb-width: 16px;
+    --toggle-thumb-height: 16px;
+    --toggle-s-width: var(--toggle-width);
+    --toggle-s-border-width: var(--toggle-border-width);
+    --toggle-s-thumb-width: var(--toggle-thumb-width);
+    --toggle-s-thumb-height: var(--toggle-thumb-height);
+    --metadata-gap: 0;
+    --metadata-padding: 0;
+    --metadata-property-radius: 0;
+    --metadata-property-radius-hover: 0;
+    --metadata-property-radius-focus: 0;
+    --embed-background: transparent;
+    --embed-border-start: 2px solid var(--background-modifier-border);
+    --table-row-alt-background: transparent;
+    --table-row-hover-background: var(--background-modifier-hover);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .inline-title {
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings {
+    --setting-items-background: transparent;
+    --setting-items-padding: 0;
+    --setting-items-radius: 0;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings .setting-items {
+    background-color: transparent;
+    padding: 0;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings .setting-group {
+    margin-bottom: 24px;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings .setting-item:not(.setting-item-heading) {
+    border: 0;
+    border-bottom: var(--border-width) solid var(--background-modifier-border);
+    border-radius: 0;
+    background-color: transparent;
+    margin: 0;
+    padding: 12px 0;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings .setting-item:last-child {
+    border-bottom: 0;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings .setting-item-heading {
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 8px 0;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings .setting-item-name {
+    font-weight: var(--font-medium);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings .setting-item-description {
+    font-size: var(--font-ui-small);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .modal.mod-settings .setting-item-control {
+    min-height: var(--input-height);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) button:where(:not(.clickable-icon, .ant-switch, .workspace-leaf-content:not([data-type=markdown]) button, .copy-code-button)) {
+    min-height: var(--input-height);
+    padding: 6px 12px;
+    border-radius: var(--button-radius);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .checkbox-container:not(.is-enabled) {
+    --toggle-border-width: 2px;
+    --toggle-thumb-width: 16px;
+    --toggle-thumb-height: 16px;
+    --toggle-s-border-width: 2px;
+    --toggle-s-thumb-width: 16px;
+    --toggle-s-thumb-height: 16px;
+    box-shadow: none;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off).is-phone .modal.mod-settings {
+    --setting-items-background: var(--background-primary);
+    --setting-items-radius: var(--radius-xl);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off).is-phone .modal.mod-settings .setting-group {
+    margin: 0 0 28px;
+    border-radius: var(--setting-items-radius);
+    background-color: var(--setting-items-background);
+    overflow: hidden;
+    padding-inline: 24px;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off).is-phone .modal.mod-settings .setting-item:not(.setting-item-heading) {
+    padding: 20px 0;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off).is-phone .modal.mod-settings .setting-item-heading {
+    margin: 0 -24px;
+    padding: 8px 24px 12px;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off).is-phone .modal.mod-settings .setting-item-control :is(select, .dropdown, .combobox-button),
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off).is-phone .modal.mod-settings .setting-item-control button:not(.clickable-icon) {
+    min-height: 52px;
+    border: 0;
+    border-radius: 100vh;
+    background-color: var(--background-modifier-hover);
+    box-shadow: none;
+    padding-inline: 20px;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off).is-phone .modal.mod-settings .setting-item-control :is(select, .dropdown, .combobox-button):focus {
+    box-shadow: 0 0 0 2px var(--interactive-accent);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off).is-android.is-phone .checkbox-container, body:is(.is-android, .mod-windows):not(.adaptive-mode-off).is-android.is-phone .checkbox-container:not(.is-enabled) {
+    --toggle-width: 52px;
+    --toggle-border-width: 4px;
+    --toggle-thumb-width: 24px;
+    --toggle-thumb-height: 24px;
+    --toggle-s-width: 52px;
+    --toggle-s-border-width: 4px;
+    --toggle-s-thumb-width: 24px;
+    --toggle-s-thumb-height: 24px;
+    box-shadow: none;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .workspace-split .metadata-container {
+    padding: 0 !important;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .workspace-split .metadata-container .metadata-properties {
+    border: var(--border-width) solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    background-color: transparent;
+    overflow: hidden;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .workspace-split .metadata-container .metadata-property {
+    min-height: 36px;
+    border-bottom: var(--border-width) solid var(--background-modifier-border);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .workspace-split .metadata-container .metadata-property:last-child {
+    border-bottom: 0;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .workspace-split .metadata-container .metadata-property-key,
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .workspace-split .metadata-container .text-icon-button {
+    padding: 8px 12px;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .workspace-split .metadata-container .metadata-property-value {
+    padding-inline-end: 12px;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .mod-root .metadata-container .text-icon-button {
+    margin-top: 4px;
+    padding-inline: 0;
+    text-transform: none;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .mod-root .metadata-content {
+    transform: none !important;
+    width: 100% !important;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .callout:not([data-callout=note-toolbar]) {
+    border-width: 0 0 0 3px;
+    border-radius: var(--radius-s);
+    box-shadow: none;
+    background-color: color-mix(in srgb, rgb(var(--callout-color)) 9%, var(--background-primary));
+    padding: 12px 14px;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .callout:not([data-callout=note-toolbar]) .callout-content {
+    margin-inline-start: 0;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .callout:not([data-callout=note-toolbar]) .callout-content > *:first-child {
+    margin-block-start: 6px;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .markdown-rendered pre {
+    border: var(--code-border-width) solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    box-shadow: none;
+    background: var(--background-secondary);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .markdown-rendered code {
+    border-radius: 3px;
+    background-color: var(--background-secondary);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .markdown-embed:not(.image-embed, .canvas-node-content) {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) div:is(.markdown-preview-view, .is-live-preview) table {
+    border-color: var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    box-shadow: none;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) div:is(.markdown-preview-view, .is-live-preview) table th,
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) div:is(.markdown-preview-view, .is-live-preview) table td {
+    padding: 8px 10px;
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) div:is(.markdown-preview-view, .is-live-preview) table > thead > tr > th {
+    background-color: var(--background-secondary);
+  }
+  body:is(.is-android, .mod-windows):not(.adaptive-mode-off) .workspace-leaf-content[data-type=markdown] img:not(.link-favicon, .emoji, [alt=banner]) {
+    box-shadow: none;
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) {
+    --input-height: 32px;
+    --input-radius: 4px;
+    --button-radius: 4px;
+    --toggle-width: 40px;
+    --toggle-border-width: 2px;
+    --toggle-thumb-width: 20px;
+    --toggle-thumb-height: 20px;
+    --toggle-s-width: 40px;
+    --toggle-s-border-width: 2px;
+    --toggle-s-thumb-width: 20px;
+    --toggle-s-thumb-height: 20px;
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .modal-sidebar,
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .vertical-tab-content {
+    background-color: var(--background-primary);
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .vertical-tab-header {
+    border-inline-end: var(--border-width) solid var(--background-modifier-border);
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .vertical-tab-nav-item {
+    border-radius: var(--radius-s);
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .vertical-tab-nav-item.is-active {
+    background-color: var(--background-modifier-hover);
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .vertical-tab-nav-item.is-active::before {
+    content: none;
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .setting-group {
+    margin-bottom: 20px;
+    border: var(--border-width) solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    background-color: var(--background-primary);
+    overflow: hidden;
+    padding-inline: 16px;
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .setting-item:not(.setting-item-heading) {
+    padding: 12px 0;
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .setting-item-heading {
+    margin: 0 -16px;
+    padding: 8px 16px;
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .setting-item-control :is(select, .dropdown, .combobox-button),
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings .setting-item-control button:not(.clickable-icon) {
+    min-height: var(--input-height);
+    border-radius: var(--button-radius);
+    padding-inline: 10px;
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings input:is([type=text], [type=search]),
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal.mod-settings :is(select, .dropdown, .combobox-button) {
+    background-color: var(--background-modifier-form-field);
+    border: var(--input-border-width) solid var(--background-modifier-border);
+    border-radius: var(--input-radius);
+    box-shadow: none;
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .checkbox-container,
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .checkbox-container:not(.is-enabled) {
+    --toggle-width: 40px;
+    --toggle-border-width: 2px;
+    --toggle-thumb-width: 20px;
+    --toggle-thumb-height: 20px;
+    --toggle-s-width: 40px;
+    --toggle-s-border-width: 2px;
+    --toggle-s-thumb-width: 20px;
+    --toggle-s-thumb-height: 20px;
+    box-shadow: none;
+  }
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .menu,
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .suggestion-container,
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .prompt,
+  body.mod-windows:not(.adaptive-mode-off):not(.is-mobile) .modal:not(.mod-settings) {
+    border-radius: var(--radius-s);
+    box-shadow: var(--shadow-s);
+  }
+}
 /* https://github.com/damiankorcz/Alternative-Checkboxes-Reference-Set */
 input[type=checkbox]:checked {
   border: none;
