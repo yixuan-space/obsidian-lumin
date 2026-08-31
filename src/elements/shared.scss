@@ -270,22 +270,27 @@ body.is-mobile {
     }
   }
 
-  .modal.mod-settings:not(:has(.style-settings-container)) {
-    .vertical-tab-content {
-      padding: 16px 16px 32px;
-    }
+}
 
-    .vertical-tab-header,
-    .vertical-tab-content {
-      padding-top: var(--modal-header-height, 76px) !important;
-    }
-
-    .setting-items > .setting-item:not(.setting-item-heading),
-    .setting-group > .setting-item:not(.setting-item-heading),
-    div:not(.setting-items, .hotkey-list-container, .style-settings-container) > .setting-item:not(.setting-item-heading) {
-      margin-bottom: 8px;
-      padding: 16px;
-      border-radius: 16px;
-    }
+body.is-phone .modal.mod-settings:not(:has(.style-settings-container)) {
+  .vertical-tab-content {
+    padding: 16px 16px 32px;
   }
+
+  .vertical-tab-header,
+  .vertical-tab-content {
+    padding-top: calc(var(--modal-header-height) + var(--size-4-4)) !important;
+  }
+
+  .setting-items > .setting-item:not(.setting-item-heading),
+  .setting-group > .setting-item:not(.setting-item-heading),
+  div:not(.setting-items, .hotkey-list-container, .style-settings-container) > .setting-item:not(.setting-item-heading) {
+    margin-bottom: 8px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+}
+
+body.is-tablet .modal.mod-settings:not(:has(.style-settings-container)) .vertical-tab-content {
+  padding-top: 48px !important;
 }

@@ -62,6 +62,11 @@
     line-height: var(--line-height-tight) !important;
   }
 
+  .mod-root .metadata-property-value[data-property-type="tags"] .multi-select-container {
+    row-gap: 4px;
+    padding-block: 4px 8px;
+  }
+
   // Side panels
   .workspace > .workspace-split:not(.mod-root) .metadata-container .metadata-properties {
     --metadata-divider-width: 0px;

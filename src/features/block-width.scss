@@ -1,12 +1,3 @@
-body {
-  --file-line-width: 100%;
-  --line-width: 700px;
-}
-
-body.reading-width-limit :is(.markdown-reading-view, .is-live-preview) {
-  --file-line-width: min(var(--line-width), 100%);
-}
-
 body:not(.block-width-off) {
   --line-width-wide: 50rem;
 

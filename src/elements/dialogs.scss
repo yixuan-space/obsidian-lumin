@@ -84,11 +84,11 @@ body.is-mobile {
 }
 body.is-phone {
   --menu-shadow: var(--shadow-s);
-  --menu-padding: 32px var(--safe-area-inset-side);
+  --menu-padding: 32px var(--phone-inline-inset);
 
   .menu {
-    margin: 8px;
-    border-radius: var(--modal-radius) var(--modal-radius) calc(var(--safe-area-inset-top) - 8px) calc(var(--safe-area-inset-top) - 8px);
+    margin: var(--phone-modal-inset);
+    border-radius: var(--modal-radius) var(--modal-radius) max(0px, calc(var(--safe-area-inset-top) - 8px)) max(0px, calc(var(--safe-area-inset-top) - 8px));
   }
 
   .menu .menu-item {
@@ -188,27 +188,28 @@ body.is-phone {
   --modal-radius: var(--radius-xl);
 
   .modal-container.mod-confirmation .modal {
-    border-radius: var(--radius-xl) var(--radius-xl) calc(var(--safe-area-inset-top) - 8px) calc(var(--safe-area-inset-top) - 8px);
+    border-radius: var(--radius-xl) var(--radius-xl) max(0px, calc(var(--safe-area-inset-top) - 8px)) max(0px, calc(var(--safe-area-inset-top) - 8px));
   }
   .modal:not(.mod-sidebar-layout) {
     --modal-radius: var(--radius-xl);
 
-    margin: 0 8px 8px;
-    width: calc(100vw - 16px) !important;
-    left: 0 !important;
+    margin: 0 0 8px;
+    width: calc(100vw - var(--phone-modal-inset) * 2) !important;
+    inset-inline-start: var(--phone-modal-inset) !important;
+    inset-inline-end: auto !important;
 
     .modal-close-button {
       top: 16px !important;
-      inset-inline-end: 16px !important;
+      inset-inline-end: var(--phone-inline-inset) !important;
     }
 
     .modal-content {
-      padding: 0 var(--safe-area-inset-side);
+      padding: 0 var(--phone-inline-inset);
     }
 
     .modal-button-container {
       gap: 8px;
-      padding: 16px var(--safe-area-inset-side) 0;
+      padding: 16px var(--phone-inline-inset) 0;
     }
     .modal-button-container button {
       margin-top: 0;
@@ -222,6 +223,8 @@ body {
     box-shadow: var(--shadow-l);
     border-radius: var(--radius-m);
     padding: calc(16px * var(--density-modifier)) var(--side-padding);
+    // Notices should remain distinct from translucent modal surfaces.
+    background-color: var(--background-primary);
     color: var(--text-muted);
   }
 
@@ -243,6 +246,10 @@ body:not(.is-mobile) .notice {
 
 body.is-mobile .notice {
   box-shadow: var(--shadow-xs);
+
+  &::after {
+    content: none;
+  }
 
   &:last-child {
     transition: var(--anim-duration-slow) var(--anim-motion-baseline) !important;

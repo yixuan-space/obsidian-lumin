@@ -36,14 +36,14 @@ body.is-phone {
     padding-bottom: 0;
 
     .prompt-input-container {
-      width: calc(100% - var(--safe-area-inset-side) * 2);
+      width: auto;
     }
     .prompt-input-container,
     .suggester-input {
       border: none;
       gap: 8px;
       position: absolute;
-      inset: auto var(--safe-area-inset-side) calc(var(--safe-area-inset-side) + var(--safe-area-inset-bottom));
+      inset: auto var(--phone-inline-inset) calc(var(--safe-area-inset-side) + var(--safe-area-inset-bottom));
       z-index: 1;
       background-color: transparent;
       box-shadow: none;

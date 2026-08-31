@@ -24,21 +24,26 @@ body.is-phone {
 
   .modal.mod-sidebar-layout {
     --modal-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    --modal-header-control-top: var(--safe-area-inset-top);
+    --modal-header-control-inset: max(var(--safe-area-inset-side), var(--safe-area-inset-left), var(--safe-area-inset-right));
     max-height: calc(100% - var(--safe-area-inset-top));
 
+    .modal-setting-back-button,
+    .modal-close-button {
+      top: var(--modal-header-control-top) !important;
+    }
+
     .modal-setting-back-button {
-      top: calc(var(--safe-area-inset-top) + 2px) !important;
-      inset-inline-start: var(--safe-area-inset-side);
+      inset-inline-start: var(--modal-header-control-inset);
       bottom: auto;
     }
     .modal-close-button {
-      top: var(--safe-area-inset-side);
-      inset-inline-end: var(--safe-area-inset-side) !important;
+      inset-inline-end: var(--modal-header-control-inset) !important;
     }
 
     .vertical-tab-header,
     .vertical-tab-content {
-      padding-top: var(--modal-header-height);
+      padding-top: calc(var(--modal-header-height) + var(--size-4-4));
     }
 
     .vertical-tab-nav-item {
@@ -46,24 +51,29 @@ body.is-phone {
     }
   }
   .modal.mod-settings {
-    --modal-header-height: 76px;
+    --modal-header-height: calc(var(--safe-area-inset-top) + var(--size-4-12));
 
     .modal-title {
-      margin-top: calc(var(--safe-area-inset-top) + 2px);
+      margin-top: var(--modal-header-control-top);
+      height: var(--touch-size-m);
     }
   }
 
   .modal.mod-community-modal {
+    --modal-header-height: calc(var(--safe-area-inset-top) + var(--size-4-12));
+
     .modal-header {
       position: absolute;
+      inset: 0 0 auto;
     }
     .modal-title {
-      height: calc(var(--touch-size-m) + 32px);
+      margin-top: var(--modal-header-control-top);
+      height: var(--touch-size-m);
     }
 
     .modal-content .modal-sidebar,
     .modal-content .community-modal-info {
-      padding-top: calc(var(--touch-size-m) + 32px);
+      padding-top: 0;
       border-radius: var(--modal-radius);
     }
   }

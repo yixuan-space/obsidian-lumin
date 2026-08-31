@@ -223,6 +223,8 @@ body.is-mobile {
 
 body.is-phone {
   --mobile-sidebar-radius: 0;
+  --phone-inline-inset: max(var(--safe-area-inset-side), var(--safe-area-inset-left), var(--safe-area-inset-right));
+  --phone-modal-inset: max(8px, var(--safe-area-inset-left), var(--safe-area-inset-right));
 
   // Side panels
   .workspace-drawer {
