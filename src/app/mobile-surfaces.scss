@@ -82,7 +82,7 @@ body.is-mobile {
 
     &.is-phone .prompt-input-container::after {
       height: auto;
-      border-radius: 100vh;
+      border-radius: var(--lumin-radius);
       margin-right: 56px;
     }
   }

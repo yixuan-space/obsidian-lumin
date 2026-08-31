@@ -1549,7 +1549,7 @@ body.is-mobile.theme-light .notice::after {
 }
 body.is-mobile.theme-light.is-phone .prompt-input-container::after {
   height: auto;
-  border-radius: 100vh;
+  border-radius: var(--lumin-radius);
   margin-right: 56px;
 }
 body.is-mobile .bases-cards-item {
@@ -2877,7 +2877,7 @@ body .modal.mod-settings:has(.style-settings-container) :is(.setting-group-searc
   min-height: 32px;
   height: 32px;
   border: 1px solid var(--background-modifier-border);
-  border-radius: 100vh;
+  border-radius: var(--lumin-radius);
   background-color: var(--background-primary);
   box-shadow: none;
 }
@@ -3078,7 +3078,7 @@ body.is-mobile .modal.mod-settings:has(.style-settings-container) :is(.setting-g
 .setting-item:has(.style-settings-import) .setting-item-info) .search-input-container {
   min-height: 44px;
   height: 44px;
-  border-radius: 100vh;
+  border-radius: var(--lumin-radius);
 }
 body.is-mobile .workspace-leaf-content[data-type=style-settings] :is(.setting-group-search,
 .setting-item:has(.style-settings-import) .setting-item-info) .search-input-container input,
@@ -4238,7 +4238,7 @@ body.is-tablet .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header
 body {
   --input-height: 32px;
   --radius-modifier: 1;
-  --lumin-radius: calc(8px * var(--radius-modifier));
+  --lumin-radius: calc(12px * var(--radius-modifier));
   --input-radius: var(--lumin-radius);
   --radius-s: var(--lumin-radius);
   --radius-m: var(--lumin-radius);
@@ -4460,7 +4460,7 @@ body:not(.is-mobile) .modal:not(.mod-sidebar-layout) .modal-title {
 body:not(.is-mobile) .modal:not(.mod-sidebar-layout) .modal-button-container button {
   flex: 1;
   margin: 0;
-  border-radius: 100vh;
+  border-radius: var(--button-radius);
   min-height: 32px;
 }
 
@@ -4535,6 +4535,12 @@ body.is-mobile .notice:last-child {
     filter: blur(4px);
     opacity: 0;
   }
+}
+
+body.is-tablet .modal-container:has(.modal.mod-community-modal) {
+  inset-block: max(48px, var(--safe-area-inset-top) + 24px) 24px;
+  inset-inline: 24px;
+  width: auto;
 }
 
 body:not(.is-mobile) {
@@ -4945,7 +4951,7 @@ body.is-mobile .checkbox-container:active::after {
   --toggle-s-thumb-width: var(--toggle-thumb-width);
 }
 body.is-mobile .prompt .prompt-input {
-  border-radius: 100vh;
+  border-radius: var(--lumin-radius);
 }
 body.is-mobile .prompt .suggestion-item {
   padding: var(--nav-item-padding);

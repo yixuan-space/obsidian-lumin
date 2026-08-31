@@ -262,7 +262,7 @@ body.is-mobile {
 
   .prompt {
     .prompt-input {
-      border-radius: 100vh;
+      border-radius: var(--lumin-radius);
     }
 
     .suggestion-item {

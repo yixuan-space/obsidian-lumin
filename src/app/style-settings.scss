@@ -278,7 +278,7 @@ body {
       min-height: 32px;
       height: 32px;
       border: 1px solid var(--background-modifier-border);
-      border-radius: 100vh;
+      border-radius: var(--lumin-radius);
       background-color: var(--background-primary);
       box-shadow: none;
     }
@@ -486,7 +486,7 @@ body.is-mobile {
     ) .search-input-container {
       min-height: 44px;
       height: 44px;
-      border-radius: 100vh;
+      border-radius: var(--lumin-radius);
     }
 
     :is(
