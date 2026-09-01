@@ -12,8 +12,8 @@ body.is-android {
     src: local("GoogleSans-Italic"), local("Google Sans Italic");
   }
 
-  --font-interface-theme: "Google Sans System", "Google Sans Flex", "Google Sans";
-  --font-text-theme: "Google Sans System", "Google Sans Flex", "Google Sans";
+  --font-interface-theme: system-ui, "Google Sans System", "Google Sans Flex", "Google Sans", sans-serif;
+  --font-text-theme: system-ui, "Google Sans System", "Google Sans Flex", "Google Sans", sans-serif;
 
   --slider-thumb-border-width: 0;
   --slider-thumb-height: 44px;

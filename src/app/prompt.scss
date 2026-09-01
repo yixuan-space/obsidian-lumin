@@ -29,7 +29,7 @@ body.is-phone {
     border-radius: var(--radius-l) var(--radius-l) 0 0;
 
     .prompt-results {
-      padding: var(--safe-area-inset-side);
+      padding: var(--mobile-inset-top) var(--mobile-inset-inline-end) var(--mobile-inset-bottom) var(--mobile-inset-inline-start);
     }
     .prompt-input-container {
       width: auto;

@@ -112,7 +112,7 @@ body.is-phone {
     }
 
     .view-header {
-      padding-inline: var(--safe-area-inset-side);
+      padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
     }
     .view-header-title-parent {
       font-size: var(--font-ui-smaller);

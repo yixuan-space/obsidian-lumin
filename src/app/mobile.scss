@@ -43,11 +43,14 @@ body.is-mobile {
 
   --input-border-width-focus: 0;
 
-  --navbar-max-width: auto !important;
-  --navbar-bottom-offset: max(var(--safe-area-inset-bottom), var(--safe-area-inset-side));
-  --navbar-side-offset: min(var(--navbar-bottom-offset), 32px);
+  --mobile-inset-inline-start: max(16px, var(--safe-area-inset-left));
+  --mobile-inset-inline-end: max(16px, var(--safe-area-inset-right));
+  --mobile-inset-top: max(8px, var(--safe-area-inset-top));
+  --mobile-inset-bottom: max(8px, var(--safe-area-inset-bottom));
 
-  --safe-area-inset-side: 16px;
+  --navbar-max-width: auto !important;
+  --navbar-bottom-offset: var(--mobile-inset-bottom);
+  --navbar-side-offset: min(var(--navbar-bottom-offset), 32px);
 
   --mobile-left-sidebar-width: 360px;
   --mobile-right-sidebar-width: 360px;
@@ -76,7 +79,7 @@ body.is-mobile {
   .workspace-drawer {
     .workspace-leaf-content > .node-insert-event,
     .workspace-leaf-content > .view-content > .node-insert-event {
-      padding-inline: var(--safe-area-inset-side);
+      padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
     }
 
     .workspace-leaf-content:after {
@@ -89,7 +92,7 @@ body.is-mobile {
 
     .workspace-drawer-header {
       padding-top: 8px;
-      padding-inline: var(--safe-area-inset-side);
+      padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
       z-index: 1;
       min-height: var(--touch-size-m);
       box-sizing: content-box;
@@ -131,11 +134,11 @@ body.is-mobile {
     }
     .search-row,
     .nav-header .search-input-container {
-      margin: 8px var(--safe-area-inset-side) 0;
+      margin: 8px var(--mobile-inset-inline-end) 0 var(--mobile-inset-inline-start);
       width: stretch;
     }
     .nav-buttons-container {
-      padding: 0 var(--safe-area-inset-side);
+      padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
     }
     .nav-buttons-container::after {
       content: none !important;
@@ -212,15 +215,15 @@ body.is-mobile {
   }
 
   .pull-down-action {
-    inset: calc(var(--safe-area-inset-top) + 8px) 8px auto;
+    inset: calc(var(--mobile-inset-top) + 8px) var(--mobile-inset-inline-end) auto var(--mobile-inset-inline-start);
     max-width: 480px;
   }
 }
 
 body.is-phone {
   --mobile-sidebar-radius: 0;
-  --phone-inline-inset: max(var(--safe-area-inset-side), var(--safe-area-inset-left), var(--safe-area-inset-right));
-  --phone-modal-inset: max(8px, var(--safe-area-inset-left), var(--safe-area-inset-right));
+  --phone-inline-inset: max(var(--mobile-inset-inline-start), var(--mobile-inset-inline-end));
+  --phone-modal-inset: max(8px, var(--mobile-inset-inline-start), var(--mobile-inset-inline-end));
 
   // Side panels
   .workspace-drawer {
@@ -235,7 +238,7 @@ body.is-phone {
     flex-direction: row;
     align-items: center;
     margin: 8px;
-    inset: var(--safe-area-inset-top) var(--safe-area-inset-side) auto;
+    inset: var(--mobile-inset-top) var(--mobile-inset-inline-end) auto var(--mobile-inset-inline-start);
     gap: 8px;
   }
   .workspace-drawer-header-name {
@@ -253,11 +256,11 @@ body.is-phone {
     bottom: var(--navbar-bottom-offset);
     z-index: 2;
     width: stretch;
-    margin-inline: var(--safe-area-inset-side);
+    margin-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
     height: var(--touch-size-m);
   }
   .workspace-drawer-tab-options.is-collapsed {
-    margin-right: calc(var(--safe-area-inset-side) + var(--touch-size-m));
+    margin-inline-end: calc(var(--mobile-inset-inline-end) + var(--touch-size-m));
   }
   .workspace-drawer-tab-select {
     height: 100%;
@@ -291,7 +294,7 @@ body.is-phone {
       transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
       will-change: top;
       z-index: 3;
-      padding-inline: var(--safe-area-inset-side);
+      padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
     }
     .view-actions {
       padding: 0;
@@ -525,7 +528,7 @@ body.is-tablet {
       width: var(--mobile-right-sidebar-width-pinned, var(--mobile-sidebar-width-pinned));
     }
     &:not(.is-pinned) {
-      margin: var(--safe-area-inset-top) 8px calc(var(--keyboard-height) + 8px);
+      margin: var(--mobile-inset-top) 8px calc(var(--keyboard-height) + var(--mobile-inset-bottom));
       padding-top: 0;
       border-radius: var(--mobile-sidebar-radius);
       height: auto;

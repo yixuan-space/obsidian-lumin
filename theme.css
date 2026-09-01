@@ -229,40 +229,40 @@ body.titlebar-text-off .titlebar-text {
   display: none;
 }
 
-body:not(.is-mobile) {
+body.mod-windows:not(.is-mobile) {
   --frame-right-space: 144px;
 }
-body:not(.is-mobile).is-hidden-frameless .titlebar {
+body.mod-windows:not(.is-mobile).is-hidden-frameless .titlebar {
   height: var(--header-height);
 }
-body:not(.is-mobile) .titlebar-button-container.mod-right {
+body.mod-windows:not(.is-mobile) .titlebar-button-container.mod-right {
   width: var(--frame-right-space);
 }
-body:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button {
+body.mod-windows:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button {
   justify-content: center;
   flex: 1;
 }
-body:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button path,
-body:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button rect,
-body:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button circle {
+body.mod-windows:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button path,
+body.mod-windows:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button rect,
+body.mod-windows:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button circle {
   visibility: hidden;
 }
-body:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button svg {
+body.mod-windows:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button svg {
   -webkit-mask-size: 100% 100%;
   background-color: currentcolor;
   width: auto;
   height: 10px;
 }
-body:not(.is-mobile) .titlebar-button.mod-minimize svg {
+body.mod-windows:not(.is-mobile) .titlebar-button.mod-minimize svg {
   -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='2' fill='none' viewBox='0 0 12 2'%3e%3cpath fill='black' d='M.598 1.201A.604.604 0 0 1 0 .604.61.61 0 0 1 .598 0h10.804c.324 0 .598.281.598.604a.605.605 0 0 1-.598.597H.598Z'/%3e%3c/svg%3e");
 }
-body:not(.is-mobile) .titlebar-button.mod-maximize svg {
+body.mod-windows:not(.is-mobile) .titlebar-button.mod-maximize svg {
   -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3e%3cpath fill='black' d='M1.77 12C.825 12 0 11.175 0 10.23V1.77C0 .83.828 0 1.77 0h8.46C11.167 0 12 .833 12 1.77v8.46c0 .942-.83 1.77-1.77 1.77H1.77Zm8.431-1.201a.605.605 0 0 0 .598-.598V1.8a.606.606 0 0 0-.599-.6H1.8a.605.605 0 0 0-.6.6v8.4c0 .325.273.598.598.598H10.2Z'/%3e%3c/svg%3e");
 }
-body:not(.is-mobile) .titlebar-button.mod-close svg {
+body.mod-windows:not(.is-mobile) .titlebar-button.mod-close svg {
   -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3e%3cpath fill='black' d='m6 6.848-4.975 4.974a.618.618 0 0 1-.856.006.618.618 0 0 1 .006-.855L5.15 5.998.175 1.024c-.226-.227-.24-.628 0-.85a.606.606 0 0 1 .85 0l4.974 4.975L10.974.174a.606.606 0 0 1 .85 0 .606.606 0 0 1 0 .85L6.848 5.998l4.974 4.975a.606.606 0 0 1 0 .85c-.222.239-.623.225-.85 0L6 6.847Z'/%3e%3c/svg%3e");
 }
-body:not(.is-mobile).is-maximized .titlebar-button.mod-maximize svg {
+body.mod-windows:not(.is-mobile).is-maximized .titlebar-button.mod-maximize svg {
   -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3e%3cpath fill='black' d='M10.799 3.557C10.799 2.27 9.67 1.2 8.396 1.2H2.502a1.808 1.808 0 0 1 1.7-1.2h4.194C10.352 0 12 1.641 12 3.598v4.2c0 .758-.484 1.45-1.201 1.7V3.557ZM1.769 12C.826 12 0 11.175 0 10.23V4.172c0-.941.828-1.77 1.77-1.77h6.058c.945 0 1.77.825 1.77 1.77v6.058c0 .942-.829 1.77-1.77 1.77H1.77Zm6.03-1.201a.61.61 0 0 0 .603-.598v-6a.607.607 0 0 0-.603-.603h-6A.61.61 0 0 0 1.2 4.2v6c0 .325.273.598.598.598h6Z'/%3e%3c/svg%3e");
 }
 
@@ -1056,15 +1056,15 @@ body.is-phone .modal:not(.mod-sidebar-layout) .modal-header {
   padding-top: 24px;
 }
 body.is-phone .modal:not(.mod-sidebar-layout) .modal-content {
-  padding: var(--safe-area-inset-side);
+  padding: var(--mobile-inset-top) var(--mobile-inset-inline-end) var(--mobile-inset-bottom) var(--mobile-inset-inline-start);
 }
 body.is-phone .modal:not(.mod-sidebar-layout) .modal-nav-action {
   position: relative;
   background-color: var(--interactive-normal);
-  margin: 0 var(--safe-area-inset-side) 8px;
+  margin: 0 var(--mobile-inset-inline-end) 8px var(--mobile-inset-inline-start);
 }
 body.is-phone .modal:not(.mod-sidebar-layout) > button:last-child {
-  margin-bottom: var(--safe-area-inset-bottom) !important;
+  margin-bottom: var(--mobile-inset-bottom) !important;
 }
 
 body.is-tablet {
@@ -1111,7 +1111,7 @@ body.is-phone .prompt {
   border-radius: var(--radius-l) var(--radius-l) 0 0;
 }
 body.is-phone .prompt .prompt-results {
-  padding: var(--safe-area-inset-side);
+  padding: var(--mobile-inset-top) var(--mobile-inset-inline-end) var(--mobile-inset-bottom) var(--mobile-inset-inline-start);
 }
 body.is-phone .prompt .prompt-input-container {
   width: auto;
@@ -1134,39 +1134,39 @@ body.is-tablet .prompt-input {
   background-color: transparent;
 }
 
-body:not(.is-phone) {
+body:not(.is-mobile) {
   --setting-items-radius: var(--radius-m);
   --setting-items-padding: calc(16px * var(--density-modifier)) 16px;
   --setting-group-heading-color: var(--text-faint);
   --setting-group-heading-size: var(--font-ui-small);
 }
-body:not(.is-phone) .modal-sidebar {
+body:not(.is-mobile) .modal-sidebar {
   --background-modifier-form-field: var(--interactive-normal);
 }
-body:not(.is-phone) .modal.mod-sidebar-layout .vertical-tab-header {
+body:not(.is-mobile) .modal.mod-sidebar-layout .vertical-tab-header {
   border-inline-end: none;
 }
-body:not(.is-phone) .modal.mod-sidebar-layout .vertical-tab-header-group-title,
-body:not(.is-phone) .modal.mod-sidebar-layout .vertical-tab-nav-item {
+body:not(.is-mobile) .modal.mod-sidebar-layout .vertical-tab-header-group-title,
+body:not(.is-mobile) .modal.mod-sidebar-layout .vertical-tab-nav-item {
   padding: calc(8px * var(--density-modifier)) 12px;
   align-items: center;
   font-size: var(--font-ui-small);
 }
-body:not(.is-phone) .modal.mod-sidebar-layout .vertical-tab-content {
+body:not(.is-mobile) .modal.mod-sidebar-layout .vertical-tab-content {
   background-color: var(--modal-sidebar-background);
 }
-body:not(.is-phone) .modal.mod-sidebar-layout .setting-group-search {
+body:not(.is-mobile) .modal.mod-sidebar-layout .setting-group-search {
   padding: 0 0 8px;
   background-color: transparent;
 }
-body:not(.is-phone) .modal.mod-sidebar-layout .setting-item-name {
+body:not(.is-mobile) .modal.mod-sidebar-layout .setting-item-name {
   overflow: visible;
 }
-body:not(.is-phone) .installed-plugins-container .setting-item .setting-item-description div:last-child {
+body:not(.is-mobile) .installed-plugins-container .setting-item .setting-item-description div:last-child {
   color: var(--text-muted);
   margin-top: 4px;
 }
-body:not(.is-phone) .installed-plugins-container .setting-items {
+body:not(.is-mobile) .installed-plugins-container .setting-items {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: 1fr;
@@ -1174,7 +1174,7 @@ body:not(.is-phone) .installed-plugins-container .setting-items {
   padding: 0;
   background-color: transparent;
 }
-body:not(.is-phone) .installed-plugins-container .setting-items .setting-item {
+body:not(.is-mobile) .installed-plugins-container .setting-items .setting-item {
   display: flex;
   flex-direction: column;
   margin: 0px !important;
@@ -1184,27 +1184,27 @@ body:not(.is-phone) .installed-plugins-container .setting-items .setting-item {
   padding: calc(16px * var(--density-modifier)) !important;
   overflow: hidden;
 }
-body:not(.is-phone) .installed-plugins-container .setting-items .setting-item-info {
+body:not(.is-mobile) .installed-plugins-container .setting-items .setting-item-info {
   margin-inline-end: 0;
   width: 100%;
 }
-body:not(.is-phone) .installed-plugins-container .setting-items .setting-item-description > div:last-child {
+body:not(.is-mobile) .installed-plugins-container .setting-items .setting-item-description > div:last-child {
   display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
 }
-body:not(.is-phone) .installed-plugins-container .setting-items .setting-item-control {
+body:not(.is-mobile) .installed-plugins-container .setting-items .setting-item-control {
   flex: none;
   flex-wrap: wrap;
   align-self: flex-end;
   width: 100%;
 }
-body:not(.is-phone) .installed-plugins-container .setting-items .setting-item-control button.mod-cta {
+body:not(.is-mobile) .installed-plugins-container .setting-items .setting-item-control button.mod-cta {
   flex-grow: 1;
   flex-basis: 100%;
 }
-body:not(.is-phone) .installed-plugins-container .setting-items .setting-item:has(button) {
+body:not(.is-mobile) .installed-plugins-container .setting-items .setting-item:has(button) {
   order: -1;
 }
 
@@ -1566,7 +1566,7 @@ body.is-phone .mod-root .view-actions {
   position: relative;
 }
 body.is-phone .mod-root .view-header {
-  padding-inline: var(--safe-area-inset-side);
+  padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
 }
 body.is-phone .mod-root .view-header-title-parent {
   font-size: var(--font-ui-smaller);
@@ -1708,10 +1708,13 @@ body.is-mobile {
   --tab-switcher-preview-radius: var(--radius-m);
   --icon-opacity-hover: var(--icon-opacity);
   --input-border-width-focus: 0;
+  --mobile-inset-inline-start: max(16px, var(--safe-area-inset-left));
+  --mobile-inset-inline-end: max(16px, var(--safe-area-inset-right));
+  --mobile-inset-top: max(8px, var(--safe-area-inset-top));
+  --mobile-inset-bottom: max(8px, var(--safe-area-inset-bottom));
   --navbar-max-width: auto !important;
-  --navbar-bottom-offset: max(var(--safe-area-inset-bottom), var(--safe-area-inset-side));
+  --navbar-bottom-offset: var(--mobile-inset-bottom);
   --navbar-side-offset: min(var(--navbar-bottom-offset), 32px);
-  --safe-area-inset-side: 16px;
   --mobile-left-sidebar-width: 360px;
   --mobile-right-sidebar-width: 360px;
   --mobile-left-sidebar-width-pinned: 300px;
@@ -1734,7 +1737,7 @@ body.is-mobile:not(.dynamic-type-off) .markdown-source-view {
 }
 body.is-mobile .workspace-drawer .workspace-leaf-content > .node-insert-event,
 body.is-mobile .workspace-drawer .workspace-leaf-content > .view-content > .node-insert-event {
-  padding-inline: var(--safe-area-inset-side);
+  padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
 }
 body.is-mobile .workspace-drawer .workspace-leaf-content:after {
   content: none !important;
@@ -1744,7 +1747,7 @@ body.is-mobile .workspace-drawer .workspace-drawer-inner {
 }
 body.is-mobile .workspace-drawer .workspace-drawer-header {
   padding-top: 8px;
-  padding-inline: var(--safe-area-inset-side);
+  padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
   z-index: 1;
   min-height: var(--touch-size-m);
   box-sizing: content-box;
@@ -1783,11 +1786,11 @@ body.is-mobile .workspace-drawer .nav-header {
 }
 body.is-mobile .workspace-drawer .search-row,
 body.is-mobile .workspace-drawer .nav-header .search-input-container {
-  margin: 8px var(--safe-area-inset-side) 0;
+  margin: 8px var(--mobile-inset-inline-end) 0 var(--mobile-inset-inline-start);
   width: stretch;
 }
 body.is-mobile .workspace-drawer .nav-buttons-container {
-  padding: 0 var(--safe-area-inset-side);
+  padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
 }
 body.is-mobile .workspace-drawer .nav-buttons-container::after {
   content: none !important;
@@ -1853,14 +1856,14 @@ body.is-mobile .pull-action.pull-action.mod-activated {
   border-color: transparent;
 }
 body.is-mobile .pull-down-action {
-  inset: calc(var(--safe-area-inset-top) + 8px) 8px auto;
+  inset: calc(var(--mobile-inset-top) + 8px) var(--mobile-inset-inline-end) auto var(--mobile-inset-inline-start);
   max-width: 480px;
 }
 
 body.is-phone {
   --mobile-sidebar-radius: 0;
-  --phone-inline-inset: max(var(--safe-area-inset-side), var(--safe-area-inset-left), var(--safe-area-inset-right));
-  --phone-modal-inset: max(8px, var(--safe-area-inset-left), var(--safe-area-inset-right));
+  --phone-inline-inset: max(var(--mobile-inset-inline-start), var(--mobile-inset-inline-end));
+  --phone-modal-inset: max(8px, var(--mobile-inset-inline-start), var(--mobile-inset-inline-end));
 }
 body.is-phone .workspace-drawer {
   width: var(--mobile-sidebar-width-override, var(--mobile-sidebar-width));
@@ -1874,7 +1877,7 @@ body.is-phone .workspace-drawer-header-left {
   flex-direction: row;
   align-items: center;
   margin: 8px;
-  inset: var(--safe-area-inset-top) var(--safe-area-inset-side) auto;
+  inset: var(--mobile-inset-top) var(--mobile-inset-inline-end) auto var(--mobile-inset-inline-start);
   gap: 8px;
 }
 body.is-phone .workspace-drawer-header-name {
@@ -1892,11 +1895,11 @@ body.is-phone .workspace-drawer-tab-options {
   bottom: var(--navbar-bottom-offset);
   z-index: 2;
   width: stretch;
-  margin-inline: var(--safe-area-inset-side);
+  margin-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
   height: var(--touch-size-m);
 }
 body.is-phone .workspace-drawer-tab-options.is-collapsed {
-  margin-right: calc(var(--safe-area-inset-side) + var(--touch-size-m));
+  margin-inline-end: calc(var(--mobile-inset-inline-end) + var(--touch-size-m));
 }
 body.is-phone .workspace-drawer-tab-select {
   height: 100%;
@@ -1926,7 +1929,7 @@ body.is-phone .mod-root .view-header {
   transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
   will-change: top;
   z-index: 3;
-  padding-inline: var(--safe-area-inset-side);
+  padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
 }
 body.is-phone .mod-root .view-actions {
   padding: 0;
@@ -2114,7 +2117,7 @@ body.is-tablet .workspace-drawer.is-pinned.mod-right {
   width: var(--mobile-right-sidebar-width-pinned, var(--mobile-sidebar-width-pinned));
 }
 body.is-tablet .workspace-drawer:not(.is-pinned) {
-  margin: var(--safe-area-inset-top) 8px calc(var(--keyboard-height) + 8px);
+  margin: var(--mobile-inset-top) 8px calc(var(--keyboard-height) + var(--mobile-inset-bottom));
   padding-top: 0;
   border-radius: var(--mobile-sidebar-radius);
   height: auto;
@@ -2371,13 +2374,13 @@ body:not(.is-mobile) .omnisearch-input-container__buttons {
     mask: none !important;
     border-radius: var(--modal-radius) var(--modal-radius) 0 0;
     background-color: var(--modal-background);
-    padding-top: var(--safe-area-inset-side) !important;
-    padding-bottom: var(--safe-area-inset-bottom);
+    padding-top: var(--mobile-inset-top) !important;
+    padding-bottom: var(--mobile-inset-bottom);
   }
   body.is-phone .omnisearch-modal .omnisearch-input-container {
     gap: 8px;
-    margin-bottom: var(--safe-area-inset-side);
-    padding-inline: var(--safe-area-inset-side);
+    margin-bottom: var(--mobile-inset-bottom);
+    padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
   }
   body.is-phone .omnisearch-modal .prompt-input {
     width: 100%;
@@ -2906,21 +2909,22 @@ body .workspace-leaf-content[data-type=style-settings] .setting-item:has(.style-
 body .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) {
   display: flex;
   align-items: center;
-  flex-direction: column;
-  min-height: 44px;
+  flex-direction: row;
+  gap: 16px;
+  min-height: 56px;
   margin-block: 0 28px !important;
   padding: 8px 12px;
-  border: 1px solid var(--background-modifier-border);
+  border: 0;
   border-radius: var(--lumin-radius);
-  background: var(--background-primary);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  background: var(--background-secondary);
+  box-shadow: none;
 }
 body .workspace-leaf-content[data-type=style-settings] .setting-item:has(.style-settings-import) .setting-item-info,
 body .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) .setting-item-info {
   display: block;
   width: 100%;
   min-width: 0;
-  flex: none;
+  flex: 1 1 auto;
 }
 body .workspace-leaf-content[data-type=style-settings] .setting-item:has(.style-settings-import) .setting-item-info .search-input-container,
 body .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) .setting-item-info .search-input-container {
@@ -2931,18 +2935,18 @@ body .workspace-leaf-content[data-type=style-settings] .setting-item:has(.style-
 body .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) .setting-item-control {
   display: flex;
   align-items: center;
-  gap: 4px;
-  width: 100%;
+  gap: 8px;
+  width: auto;
   margin: 0;
-  margin-top: 10px;
   padding: 0;
+  flex: 0 0 auto;
 }
 body .workspace-leaf-content[data-type=style-settings] .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export),
 body .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export) {
-  flex: 1 1 0;
+  flex: 0 0 auto;
   min-height: 32px;
   margin: 0;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: var(--lumin-radius);
   color: var(--text-muted);
   font-size: var(--font-ui-small);
@@ -3101,6 +3105,20 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .setting-item:h
   margin-bottom: 24px !important;
   border-radius: var(--lumin-radius);
   padding: 14px 16px;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+body.is-phone .workspace-leaf-content[data-type=style-settings] .setting-item:has(.style-settings-import) .setting-item-control,
+body.is-phone .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) .setting-item-control {
+  justify-content: space-between;
+  width: 100%;
+}
+body.is-phone .workspace-leaf-content[data-type=style-settings] .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export),
+body.is-phone .modal.mod-settings:has(.style-settings-container) .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export) {
+  flex: 1 1 0;
+  min-height: 44px;
 }
 body.is-phone .workspace-leaf-content[data-type=style-settings] .style-settings-container .setting-item:not(.setting-item-heading),
 body.is-phone .modal.mod-settings:has(.style-settings-container) .style-settings-container .setting-item:not(.setting-item-heading) {
@@ -3981,7 +3999,8 @@ body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=d
   border-radius: var(--radius-window, var(--radius-m));
   background-color: var(--modal-background) !important;
   backdrop-filter: var(--blur-m);
-  height: -webkit-fill-available;
+  align-self: stretch;
+  height: auto;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-left-split {
   margin: 8px 0 8px 8px;
@@ -4089,7 +4108,8 @@ body:not(.is-mobile) .mod-sidedock.mod-left-split {
   margin: 8px 0 8px 8px;
   box-shadow: var(--shadow-surface), var(--shadow-sidedock-spread);
   border-radius: var(--radius-window, var(--radius-m));
-  height: -webkit-fill-available;
+  align-self: stretch;
+  height: auto;
   overflow: hidden;
 }
 body:not(.is-mobile) .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
@@ -4234,13 +4254,15 @@ body.is-tablet .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header
 
 body {
   --input-height: 32px;
-  --radius-modifier: 1;
-  --lumin-radius: calc(12px * var(--radius-modifier));
+  --lumin-radius: 16px;
   --input-radius: var(--lumin-radius);
   --radius-s: var(--lumin-radius);
   --radius-m: var(--lumin-radius);
   --radius-l: var(--lumin-radius);
   --radius-xl: var(--lumin-radius);
+  --media-radius: var(--lumin-radius);
+  --banner-image-radius: var(--lumin-radius);
+  --bases-embed-border-radius: var(--lumin-radius);
   --background-modifier-form-field: var(--interactive-normal);
   --button-radius: var(--lumin-radius);
 }
@@ -4566,9 +4588,9 @@ body.is-phone {
 }
 body.is-phone .modal.mod-sidebar-layout {
   --modal-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  --modal-header-control-top: var(--safe-area-inset-top);
-  --modal-header-control-inset: max(var(--safe-area-inset-side), var(--safe-area-inset-left), var(--safe-area-inset-right));
-  max-height: calc(100% - var(--safe-area-inset-top));
+  --modal-header-control-top: var(--mobile-inset-top);
+  --modal-header-control-inset: max(var(--mobile-inset-inline-start), var(--mobile-inset-inline-end));
+  max-height: calc(100% - var(--mobile-inset-top));
 }
 body.is-phone .modal.mod-sidebar-layout .modal-setting-back-button,
 body.is-phone .modal.mod-sidebar-layout .modal-close-button {
@@ -4626,6 +4648,38 @@ body.is-tablet .modal.mod-settings .vertical-tab-nav-item.is-active {
   background-color: var(--background-modifier-hover);
 }
 
+body .modal.mod-settings .setting-group.mod-list.mod-no-icon:has(.setting-item-heading + .setting-group-search + .setting-items) .setting-group-search {
+  margin: 0;
+  padding: 16px 16px 8px;
+  border: var(--setting-items-border-width) solid var(--setting-items-border-color);
+  border-bottom: 0;
+  border-radius: var(--setting-items-radius) var(--setting-items-radius) 0 0;
+  background-color: var(--setting-items-background);
+}
+body .modal.mod-settings .setting-group.mod-list.mod-no-icon:has(.setting-item-heading + .setting-group-search + .setting-items) .setting-group-search > .search-input-container {
+  margin-inline: 0;
+  background-color: var(--interactive-normal);
+}
+body .modal.mod-settings .setting-group.mod-list.mod-no-icon:has(.setting-item-heading + .setting-group-search + .setting-items) .setting-group-search:not(:empty) + .setting-items {
+  margin: 0;
+  padding: 8px 16px 12px;
+  border: var(--setting-items-border-width) solid var(--setting-items-border-color);
+  border-top: 0;
+  border-radius: 0 0 var(--setting-items-radius) var(--setting-items-radius);
+  background-color: var(--setting-items-background);
+}
+body .modal.mod-settings .setting-group.mod-list.mod-no-icon:has(.setting-item-heading + .setting-group-search + .setting-items) .setting-group-search:not(:empty) + .setting-items > .setting-item {
+  margin: 0;
+  padding: 12px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+body .modal.mod-settings .setting-group.mod-list.mod-no-icon:has(.setting-item-heading + .setting-group-search + .setting-items) .setting-group-search:not(:empty) + .setting-items > .setting-item + .setting-item {
+  border-top: var(--setting-items-divider-width) solid var(--background-modifier-border);
+}
+
 body:not(.is-phone) {
   --prompt-input-height: 56px;
 }
@@ -4668,7 +4722,7 @@ body.is-phone .prompt .suggester-input {
   border: none;
   gap: 8px;
   position: absolute;
-  inset: auto var(--phone-inline-inset) calc(var(--safe-area-inset-side) + var(--safe-area-inset-bottom));
+  inset: auto var(--phone-inline-inset) var(--mobile-inset-bottom);
   z-index: 1;
   background-color: transparent;
   box-shadow: none;
@@ -5028,8 +5082,8 @@ body.mod-windows:not(.is-mobile) .modal.mod-sidebar-layout .vertical-tab-content
   src: local("GoogleSans-Italic"), local("Google Sans Italic");
 }
 body.is-android {
-  --font-interface-theme: "Google Sans System", "Google Sans Flex", "Google Sans";
-  --font-text-theme: "Google Sans System", "Google Sans Flex", "Google Sans";
+  --font-interface-theme: system-ui, "Google Sans System", "Google Sans Flex", "Google Sans", sans-serif;
+  --font-text-theme: system-ui, "Google Sans System", "Google Sans Flex", "Google Sans", sans-serif;
   --slider-thumb-border-width: 0;
   --slider-thumb-height: 44px;
   --slider-thumb-width: 4px;
@@ -6578,7 +6632,9 @@ body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=d
 body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left {
   position: absolute;
   z-index: 12;
-  height: -webkit-fill-available;
+  top: 0;
+  bottom: 0;
+  height: auto;
   opacity: 0;
   transform: translateX(calc(-1 * var(--ribbon-width) + var(--hover-sidedock-trigger-area)));
   background-color: transparent;

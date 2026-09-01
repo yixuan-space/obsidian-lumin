@@ -24,9 +24,9 @@ body.is-phone {
 
   .modal.mod-sidebar-layout {
     --modal-radius: var(--radius-xl) var(--radius-xl) 0 0;
-    --modal-header-control-top: var(--safe-area-inset-top);
-    --modal-header-control-inset: max(var(--safe-area-inset-side), var(--safe-area-inset-left), var(--safe-area-inset-right));
-    max-height: calc(100% - var(--safe-area-inset-top));
+    --modal-header-control-top: var(--mobile-inset-top);
+    --modal-header-control-inset: max(var(--mobile-inset-inline-start), var(--mobile-inset-inline-end));
+    max-height: calc(100% - var(--mobile-inset-top));
 
     .modal-setting-back-button,
     .modal-close-button {
@@ -94,5 +94,47 @@ body.is-tablet {
       color: var(--interactive-accent);
       background-color: var(--background-modifier-hover);
     }
+
+  }
+}
+
+// Obsidian 1.13 renders installed plugins as a mod-list group, not an
+// .installed-plugins-container. Keep its search and rows in one surface on
+// desktop, tablet, and phone while preserving platform-specific control size.
+body .modal.mod-settings .setting-group.mod-list.mod-no-icon:has(.setting-item-heading + .setting-group-search + .setting-items) {
+  .setting-group-search {
+    margin: 0;
+    padding: 16px 16px 8px;
+    border: var(--setting-items-border-width) solid var(--setting-items-border-color);
+    border-bottom: 0;
+    border-radius: var(--setting-items-radius) var(--setting-items-radius) 0 0;
+    background-color: var(--setting-items-background);
+  }
+
+  .setting-group-search > .search-input-container {
+    margin-inline: 0;
+    background-color: var(--interactive-normal);
+  }
+
+  .setting-group-search:not(:empty) + .setting-items {
+    margin: 0;
+    padding: 8px 16px 12px;
+    border: var(--setting-items-border-width) solid var(--setting-items-border-color);
+    border-top: 0;
+    border-radius: 0 0 var(--setting-items-radius) var(--setting-items-radius);
+    background-color: var(--setting-items-background);
+  }
+
+  .setting-group-search:not(:empty) + .setting-items > .setting-item {
+    margin: 0;
+    padding: 12px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .setting-group-search:not(:empty) + .setting-items > .setting-item + .setting-item {
+    border-top: var(--setting-items-divider-width) solid var(--background-modifier-border);
   }
 }

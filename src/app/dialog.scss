@@ -186,17 +186,17 @@ body.is-phone {
     }
 
     .modal-content {
-      padding: var(--safe-area-inset-side);
+      padding: var(--mobile-inset-top) var(--mobile-inset-inline-end) var(--mobile-inset-bottom) var(--mobile-inset-inline-start);
     }
 
     .modal-nav-action {
       position: relative;
       background-color: var(--interactive-normal);
-      margin: 0 var(--safe-area-inset-side) 8px;
+      margin: 0 var(--mobile-inset-inline-end) 8px var(--mobile-inset-inline-start);
     }
 
     & > button:last-child {
-      margin-bottom: var(--safe-area-inset-bottom) !important;
+      margin-bottom: var(--mobile-inset-bottom) !important;
     }
   }
 }

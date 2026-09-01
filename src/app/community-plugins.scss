@@ -63,13 +63,13 @@ body.is-phone {
         mask: none !important;
         border-radius: var(--modal-radius) var(--modal-radius) 0 0;
         background-color: var(--modal-background);
-        padding-top: var(--safe-area-inset-side) !important;
-        padding-bottom: var(--safe-area-inset-bottom);
+        padding-top: var(--mobile-inset-top) !important;
+        padding-bottom: var(--mobile-inset-bottom);
       }
       .omnisearch-input-container {
         gap: 8px;
-        margin-bottom: var(--safe-area-inset-side);
-        padding-inline: var(--safe-area-inset-side);
+        margin-bottom: var(--mobile-inset-bottom);
+        padding-inline: var(--mobile-inset-inline-start) var(--mobile-inset-inline-end);
       }
       .prompt-input {
         width: 100%;

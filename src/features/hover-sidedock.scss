@@ -89,7 +89,9 @@ body:not(.is-mobile).hover-ribbon.show-ribbon {
   .workspace-ribbon.mod-left {
     position: absolute;
     z-index: 12;
-    height: -webkit-fill-available;
+    top: 0;
+    bottom: 0;
+    height: auto;
     opacity: 0;
     transform: translateX(calc(-1 * var(--ribbon-width) + var(--hover-sidedock-trigger-area)));
     background-color: transparent;

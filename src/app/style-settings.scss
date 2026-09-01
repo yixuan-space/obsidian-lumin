@@ -312,21 +312,22 @@ body {
     .setting-item:has(.style-settings-import) {
       display: flex;
       align-items: center;
-      flex-direction: column;
-      min-height: 44px;
+      flex-direction: row;
+      gap: 16px;
+      min-height: 56px;
       margin-block: 0 28px !important;
       padding: 8px 12px;
-      border: 1px solid var(--background-modifier-border);
+      border: 0;
       border-radius: var(--lumin-radius);
-      background: var(--background-primary);
-      box-shadow: 0 1px 2px rgb(0 0 0 / 4%);
+      background: var(--background-secondary);
+      box-shadow: none;
     }
 
     .setting-item:has(.style-settings-import) .setting-item-info {
       display: block;
       width: 100%;
       min-width: 0;
-      flex: none;
+      flex: 1 1 auto;
     }
 
     .setting-item:has(.style-settings-import) .setting-item-info .search-input-container {
@@ -337,18 +338,18 @@ body {
     .setting-item:has(.style-settings-import) .setting-item-control {
       display: flex;
       align-items: center;
-      gap: 4px;
-      width: 100%;
+      gap: 8px;
+      width: auto;
       margin: 0;
-      margin-top: 10px;
       padding: 0;
+      flex: 0 0 auto;
     }
 
     .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export) {
-      flex: 1 1 0;
+      flex: 0 0 auto;
       min-height: 32px;
       margin: 0;
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: var(--lumin-radius);
       color: var(--text-muted);
       font-size: var(--font-ui-small);
@@ -517,6 +518,20 @@ body.is-phone {
       margin-bottom: 24px !important;
       border-radius: var(--lumin-radius);
       padding: 14px 16px;
+      align-items: stretch;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .setting-item:has(.style-settings-import) .setting-item-control {
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .setting-item:has(.style-settings-import) :is(.style-settings-import, .style-settings-export) {
+      flex: 1 1 0;
+      min-height: 44px;
     }
 
     .style-settings-container .setting-item:not(.setting-item-heading) {

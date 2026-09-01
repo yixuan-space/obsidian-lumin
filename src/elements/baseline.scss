@@ -1,13 +1,15 @@
 body {
   --input-height: 32px;
 
-  --radius-modifier: 1;
-  --lumin-radius: calc(12px * var(--radius-modifier));
+  --lumin-radius: 16px;
   --input-radius: var(--lumin-radius);
   --radius-s: var(--lumin-radius);
   --radius-m: var(--lumin-radius);
   --radius-l: var(--lumin-radius);
   --radius-xl: var(--lumin-radius);
+  --media-radius: var(--lumin-radius);
+  --banner-image-radius: var(--lumin-radius);
+  --bases-embed-border-radius: var(--lumin-radius);
 
   --background-modifier-form-field: var(--interactive-normal);
 

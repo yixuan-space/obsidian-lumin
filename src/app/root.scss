@@ -186,7 +186,9 @@ body:has(.modal.mod-settings) {
 body.titlebar-text-off .titlebar-text {
   display: none;
 }
-body:not(.is-mobile) {
+// Preserve Obsidian's native macOS and Linux titlebar treatments. Windows
+// alone gets the custom caption-button geometry and glyphs.
+body.mod-windows:not(.is-mobile) {
   --frame-right-space: 144px;
 
   &.is-hidden-frameless .titlebar {

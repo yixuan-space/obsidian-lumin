@@ -1,4 +1,6 @@
-body:not(.is-phone) {
+// Desktop-only settings density and marketplace cards. Tablets retain
+// Obsidian's mobile settings structure below.
+body:not(.is-mobile) {
   --setting-items-radius: var(--radius-m);
   --setting-items-padding: calc(16px * var(--density-modifier)) 16px;
   --setting-group-heading-color: var(--text-faint);
