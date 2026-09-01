@@ -1,40 +1,50 @@
 <h1 align="center">Lumin</h1>
 
-<p align="center">一款为专注写作和日常知识管理打造的清透、安静、原生感十足的 Obsidian 主题。</p>
+<p align="center">一款为专注写作和日常知识管理打造的安静、清透且具有原生感的 Obsidian 主题。</p>
 
 <p align="center">
   <a href="https://community.obsidian.md/themes/lumin"><img src="img/open-in-obsidian-button.svg" alt="在 Obsidian 中打开 Lumin" width="150"></a>
   <a href="https://ko-fi.com/yixuanhq"><img src="img/support-on-kofi-button.svg" alt="在 Ko-fi 支持 Lumin" width="150"></a>
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/yixuan-space/obsidian-lumin?style=flat-square&label=version&color=7c3aed" alt="最新版本">
+  <img src="https://img.shields.io/github/downloads/yixuan-space/obsidian-lumin/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=3d79b7" alt="下载量">
+  <img src="https://img.shields.io/github/license/yixuan-space/obsidian-lumin?style=flat-square&label=license&color=4f8a10" alt="MIT 许可证">
+</p>
+
+<p align="center"><a href="README.md">English</a></p>
+
 ![Lumin 主题预览](img/hero.png)
 
 Lumin 让笔记始终位于工作区的视觉中心。清晰的层级、克制的留白和贴合平台的细节，让长时间写作更专注，也不牺牲笔记周边的操作效率。
 
-[English README](README.md)
+## 亮点
 
-## 一览
+- **以内容为先的工作区。** 舒适的阅读宽度、经过调整的排版与明确的层级，适合写作、复盘和查阅。
+- **完整的笔记表面。** 元数据、表格、Callout、代码、任务、嵌入、Banner、图片和媒体均有统一而克制的样式。
+- **需要时才出现的桌面控件。** 悬停功能区和侧边栏、专注视图、紧凑面板操作区与居中标签，使宽屏工作区保持灵活。
+- **无需编写 CSS 也可自定义。** 可选的 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 提供配色、编辑器、桌面行为和辅助功能选项。
 
-- **统一的视觉语言。** macOS、Windows、Linux、Android 和移动端 Obsidian 共享 Mac 风格，仅根据设备调整密度与触控尺寸。
-- **为阅读与写作而设。** 精心调整的排版、舒适的阅读宽度，以及对表格、Callout、嵌入、Banner、媒体和图片的优化，让笔记更易浏览。
-- **让工作区保持安静。** 可通过悬停功能区和侧边栏、专注视图、紧凑面板操作区与居中标签，调整桌面端的工作方式。
-- **无需编写 CSS 也可自定义。** 安装可选的 Style Settings 插件后，即可直接在 Obsidian 中调整外观、编辑器和辅助功能选项。
+## 跨设备体验
 
-## 每块屏幕，一致的视觉语言
+Lumin 在所有 Obsidian 平台上延续同一套视觉语言，同时根据设备调整密度、导航、安全区和触控尺寸。
 
-Lumin 在桌面、平板和手机上延续以内容为先的层级，同时完整支持浅色与深色外观。
+| 平台 | Lumin 的适配方式 |
+| --- | --- |
+| macOS、Windows、Linux | 感知窗口状态的表面、标签、侧边栏与桌面交互 |
+| iPad 和 Android 平板 | 触控尺寸、灵活抽屉与适合平板的设置布局 |
+| iPhone 和 Android 手机 | 感知安全区的导航、底部面板、抽屉和移动控件 |
 
 ![Lumin 在桌面、平板和手机上的界面](img/adaptive.png)
 
 ## 为笔记细节而设计
 
-主题覆盖 Obsidian 工作区中每天都会用到的构成：元数据、标题、任务列表、Callout、代码、表格、图片和嵌入内容。
+主题让每天都会用到的笔记组件更容易浏览，同时保持一致的视觉系统。
 
 ![深色模式下的 Lumin 组件展示](img/desktop.gif)
 
-### 替代复选框
-
-为任务状态提供紧凑、清晰的视觉表达，同时保持标准 Obsidian 任务项的行为。
+替代复选框为任务状态提供紧凑、清晰的表达，同时保留标准 Obsidian 任务项的行为。
 
 ![Lumin 复选框样式](img/checkbox.png)
 
@@ -50,26 +60,30 @@ Lumin 在桌面、平板和手机上延续以内容为先的层级，同时完�
 1. 从[最新发布版本](https://github.com/yixuan-space/obsidian-lumin/releases)下载 `manifest.json` 和 `theme.css`。
 2. 在 Vault 中创建 `.obsidian/themes/Lumin/`。
 3. 将两个文件放入该目录。
-4. 打开 Obsidian 的“设置 > 外观 > 主题”，选择 **Lumin**。
+4. 在“设置 > 外观 > 主题”中选择 **Lumin**。
 
 ## 自定义
 
-安装 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 社区插件后，可直接在 Obsidian 中调整 Lumin，无需编写 CSS。可用选项包括：
+安装 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 后，即可在 Obsidian 设置中调整 Lumin。
 
-- 配色偏好，包括默认、雾蓝、苔绿和暖灰配色；每套均同步适配浅色与深色模式，并保留侧边栏着色及受支持 Android 设备上的动态配色。
-- 桌面端行为，如悬停显示功能区与侧边栏、专注视图、标签对齐、紧凑面板操作区和媒体缩放。
-- 编辑器偏好，如阅读宽度、块级与媒体宽度、Banner 样式、当前行高亮、链接下划线和图片对齐。
-- 辅助功能选项，如动态效果、失焦对比变化、界面字号和图标尺寸。
+- 在默认、雾蓝、苔绿和暖灰配色之间选择，并同步适配浅色与深色外观。
+- 调整悬停功能区、悬停侧边栏、专注视图、标签对齐、紧凑面板操作区和媒体缩放等桌面行为。
+- 设置阅读宽度、块级与媒体宽度、Banner 样式、当前行高亮、链接下划线和图片对齐。
+- 减少动态效果、减弱失焦对比变化，或微调界面和图标尺寸。
+
+## 兼容性
+
+Lumin 需要 Obsidian `1.11.6` 或更高版本，支持 macOS、Windows、Linux、Android 和 iOS 的浅色与深色外观。主题会在宿主提供相应设备和窗口类时采用平台专属行为。
 
 ## 开发
 
-Lumin 需要 Obsidian `1.11.6` 或更高版本及 Node.js。SCSS 源文件位于 `src/`，根目录 `theme.css` 为最终主题文件。修改 SCSS 后运行：
+SCSS 源文件位于 `src/`，根目录 `theme.css` 是可发布主题文件。安装 Node.js 后，修改 SCSS 可运行：
 
 ```bash
 npx --yes sass src/theme.scss theme.css --no-source-map
 ```
 
-请将生成的 `theme.css` 与源文件改动一并提交。
+请将生成的 `theme.css` 与源文件改动一并提交；发布或提交 PR 前建议运行 `git diff --check`。
 
 ## 致谢
 
@@ -79,4 +93,4 @@ Craft 仅为视觉参考；本仓库不再分发其代码或素材。
 
 ## 许可证
 
-YiXuan 对 Lumin 的原创贡献以 [MIT 许可证](LICENSE) 发布；其中包含的第三方材料仍适用各自的条款，详见 [第三方声明](THIRD_PARTY_NOTICES.md)。
+YiXuan 对 Lumin 的原创贡献以 [MIT 许可证](LICENSE) 发布；其中包含的第三方材料仍适用各自的条款，详见[第三方声明](THIRD_PARTY_NOTICES.md)。

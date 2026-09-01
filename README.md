@@ -3,44 +3,48 @@
 <p align="center">A calm, native-feeling Obsidian theme for focused writing and everyday knowledge work.</p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/downloads/yixuan-space/obsidian-lumin/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=7c3aed" alt="Downloads">
-  <img src="https://img.shields.io/github/stars/yixuan-space/obsidian-lumin?style=flat-square&logo=github&label=stars&color=3d79b7" alt="GitHub stars">
-  <img src="https://img.shields.io/github/last-commit/yixuan-space/obsidian-lumin?style=flat-square&label=last%20commit&color=4f8a10" alt="Last commit">
-</p>
-
-<p align="center">
   <a href="https://community.obsidian.md/themes/lumin"><img src="img/open-in-obsidian-button.svg" alt="Open Lumin in Obsidian" width="150"></a>
   <a href="https://ko-fi.com/yixuanhq"><img src="img/support-on-kofi-button.svg" alt="Support Lumin on Ko-fi" width="150"></a>
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/yixuan-space/obsidian-lumin?style=flat-square&label=version&color=7c3aed" alt="Latest release">
+  <img src="https://img.shields.io/github/downloads/yixuan-space/obsidian-lumin/total?style=flat-square&logo=obsidian&logoColor=white&label=downloads&color=3d79b7" alt="Downloads">
+  <img src="https://img.shields.io/github/license/yixuan-space/obsidian-lumin?style=flat-square&label=license&color=4f8a10" alt="MIT License">
+</p>
+
+<p align="center"><a href="README_CN.md">简体中文</a></p>
+
 ![Lumin theme preview](img/hero.png)
 
-Lumin keeps the note at the center of the workspace. Clear hierarchy, measured spacing, and familiar platform details make long writing sessions feel quieter without reducing the tools around your notes.
+Lumin keeps the note at the center of the workspace. Its measured spacing, clear hierarchy, and platform-aware details make long writing sessions feel quieter without hiding the tools that support them.
 
-[简体中文说明](README_CN.md)
+## Highlights
 
-## At a glance
+- **Content-first workspace.** Comfortable reading width, refined typography, and deliberate hierarchy for writing, review, and reference.
+- **A complete note surface.** Thoughtful styling for properties, tables, callouts, code, tasks, embeds, banners, images, and media.
+- **Desktop controls when you need them.** Hoverable ribbons and sidebars, focus view, compact panel actions, and centered tabs keep wide workspaces adaptable.
+- **Configure without CSS.** Optional [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) controls cover color, editor, desktop behavior, and accessibility preferences.
 
-- **One visual language everywhere.** Lumin uses the same calm, Mac-inspired interface on macOS, Windows, Linux, Android, and mobile Obsidian, with only density and touch sizing adjusted per device.
-- **Built for reading and writing.** Refined typography, comfortable reading width, richer tables, callouts, embeds, banners, media, and image handling keep notes easy to scan.
-- **A workspace that stays out of the way.** Use hoverable ribbons and sidebars, focus view, compact panel controls, and centered tabs to shape the desktop around your work.
-- **Personal without patching CSS.** The optional Style Settings plugin exposes appearance, editor, and accessibility preferences directly in Obsidian.
+## Across Devices
 
-## Every screen, one visual language
+Lumin shares one visual language across every Obsidian platform while adapting density, navigation, safe-area spacing, and touch targets to the device.
 
-Lumin carries the same content-first hierarchy from desktop to tablet and phone, with light and dark appearance support throughout.
+| Platform | Lumin adapts |
+| --- | --- |
+| macOS, Windows, Linux | Window-aware surfaces, tabs, sidebars, and desktop interactions |
+| iPad and Android tablets | Touch-sized controls, flexible drawers, and tablet settings layouts |
+| iPhone and Android phones | Safe-area-aware navigation, sheets, drawers, and mobile controls |
 
 ![Lumin across desktop, tablet, and phone](img/adaptive.png)
 
-## Details that support the note
+## Note Details
 
-The theme styles the everyday building blocks of an Obsidian workspace: metadata, headings, task lists, callouts, code, tables, images, and embeds.
+The theme makes everyday note components easier to scan without turning them into separate visual systems.
 
 ![Lumin component gallery in dark mode](img/desktop.gif)
 
-### Alternative checkboxes
-
-Task states get a compact visual vocabulary while remaining standard Obsidian task items.
+Alternative checkbox states add a compact vocabulary for tasks while preserving standard Obsidian task behavior.
 
 ![Lumin checkbox styles](img/checkbox.png)
 
@@ -51,31 +55,35 @@ Task states get a compact visual vocabulary while remaining standard Obsidian ta
 1. Open **Settings > Appearance > Themes**.
 2. Select **Manage**, search for **Lumin**, then install and enable it.
 
-### Manually
+### Manual Install
 
 1. Download `manifest.json` and `theme.css` from the [latest release](https://github.com/yixuan-space/obsidian-lumin/releases).
 2. Create `.obsidian/themes/Lumin/` in your vault.
 3. Put both files in that directory.
-4. In Obsidian, open **Settings > Appearance > Themes** and select **Lumin**.
+4. In **Settings > Appearance > Themes**, select **Lumin**.
 
 ## Customize
 
-Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) community plugin to configure Lumin without custom CSS. Available controls include:
+Install [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) to adjust Lumin from Obsidian's settings interface.
 
-- Color preferences, including default, mist blue, moss green, and warm gray palettes. Each adapts to light and dark appearance, alongside sidebar tint and Android dynamic color where supported.
-- Desktop behavior such as hover ribbons, hover sidebars, focus view, tab alignment, compact panel controls, and media zoom.
-- Editor preferences including reading width, block and media width, banner treatment, active-line highlight, link underlines, and image alignment.
-- Accessibility options for motion, focus contrast, interface type size, and icon size.
+- Choose the default, mist blue, moss green, or warm gray palette in light and dark appearance.
+- Tune desktop behavior, including hover ribbons, hover sidebars, focus view, tab alignment, compact panel actions, and media zoom.
+- Adjust reading width, block and media width, banner treatment, active-line highlight, link underlines, and image alignment.
+- Reduce motion, soften unfocused contrast changes, or adjust interface and icon sizing.
+
+## Compatibility
+
+Lumin requires Obsidian `1.11.6` or later. It supports light and dark appearance on macOS, Windows, Linux, Android, and iOS. Platform-specific behavior follows Obsidian's native device and window classes where available.
 
 ## Development
 
-Lumin requires Obsidian `1.11.6` or later and Node.js. Source styles live in `src/`; the root `theme.css` is the distributable theme file. Rebuild after SCSS changes:
+Source styles live in `src/`; the root `theme.css` is the distributable file. Rebuild it after SCSS changes with Node.js available:
 
 ```bash
 npx --yes sass src/theme.scss theme.css --no-source-map
 ```
 
-Commit the generated `theme.css` together with source changes.
+Commit the generated `theme.css` with its source changes. Run `git diff --check` before opening a pull request or publishing a release.
 
 ## Credits
 
@@ -85,4 +93,4 @@ Craft is a visual reference only; this repository does not redistribute its code
 
 ## License
 
-YiXuan's original Lumin contributions are released under the [MIT License](LICENSE). Included third-party material remains under its own terms in [THIRD_PARTY_NOTICES.md].
+YiXuan's original Lumin contributions are released under the [MIT License](LICENSE). Included third-party material remains under its own terms in [third-party notices](THIRD_PARTY_NOTICES.md).
