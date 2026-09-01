@@ -152,17 +152,6 @@ body.is-tablet {
 
 // Modal
 body:not(.is-mobile) {
-  @keyframes modalInCupertino {
-    from {
-      opacity: 1;
-      filter: none;
-      transform: scale(0.99);
-    }
-  }
-  .modal {
-    animation: modalInCupertino var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
-  }
-
   .modal:not(.mod-sidebar-layout) {
     .modal-title {
       width: 100%;

@@ -156,19 +156,6 @@ body {
 }
 
 body:not(.is-mobile) {
-  @keyframes modalIn {
-    from {
-      opacity: 0;
-      transform: scale(0.975);
-    }
-  }
-
-  .modal-bg {
-    opacity: 0.2 !important;
-  }
-  .modal {
-    animation: modalIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
-  }
   .modal-title {
     margin-left: 0;
   }

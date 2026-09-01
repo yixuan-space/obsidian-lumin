@@ -18,6 +18,13 @@ body:not(.is-mobile) {
   }
 }
 
+// Desktop settings open in a dedicated popout window. Avoid translucent
+// intermediate layers while the window establishes its final dimensions.
+body.is-popout-modal > .modal.mod-settings {
+  --modal-background: var(--settings-background);
+  background-color: var(--settings-background);
+}
+
 body.is-phone {
   --setting-items-radius: var(--radius-m);
   --setting-group-heading-size: var(--font-ui-medium);

@@ -162,10 +162,13 @@ body:not(.is-mobile) {
   --tab-outline-color: var(--background-modifier-border);
 }
 
-// Popout window
-.is-popout-window {
+// Popout windows briefly outlive their child content while opening and closing.
+// Keep their compositor surface opaque so macOS never exposes Electron's black
+// default background during that handoff.
+body:not(.is-mobile).is-popout-window,
+body:not(.is-mobile).is-popout-modal {
   --workspace-background-translucent: var(--background-secondary);
-  background-color: rgb(var(--mono-rgb-100));
+  background-color: var(--background-primary);
 }
 
 // Title bar

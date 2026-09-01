@@ -1,10 +1,17 @@
+@keyframes promptIn {
+  from {
+    opacity: 0;
+    transform: scale(0.975);
+  }
+}
+
 body {
   --prompt-input-height: 64px;
   --prompt-border-color: var(--background-modifier-border);
 
   .prompt {
     background-color: var(--background-secondary);
-    animation: modalIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
+    animation: promptIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
 
     .prompt-input,
     .prompt-input:hover,

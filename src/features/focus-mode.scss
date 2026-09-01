@@ -5,6 +5,7 @@ body.focus-view:not(.is-mobile):not(.is-popout-window) .workspace:not(.is-left-s
   .workspace-tab-header-container {
     height: 0;
     border-width: 0px;
+    background-color: transparent;
 
     > div:not(.sidebar-toggle-button) {
       opacity: 0;
@@ -37,6 +38,7 @@ body.focus-view:not(.is-mobile):not(.is-popout-window) .workspace:not(.is-left-s
     }
     &.mod-right {
       right: calc(var(--frame-right-space) + 8px);
+      background-color: transparent;
     }
 
     &:not(:hover) {

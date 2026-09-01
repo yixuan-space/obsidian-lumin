@@ -108,7 +108,7 @@ body:not(.is-mobile) {
     margin: 8px 0 8px 8px;
     box-shadow: var(--shadow-surface);
     border-radius: max(calc(var(--modal-radius) - 8px), var(--radius-s));
-    background-color: rgba(from var(--background-primary) r g b / 75%);
+    background-color: var(--background-primary);
   }
 }
 

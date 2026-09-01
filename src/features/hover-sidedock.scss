@@ -18,12 +18,13 @@ body:not(.is-mobile).hover-ribbon .workspace-ribbon.mod-left:hover ~ .mod-root {
 }
 
 body:not(.is-mobile).hover-sidedock {
-  .mod-sidedock.is-sidedock-collapsed[style*="display"] {
+  // Obsidian no longer consistently writes an inline display value when a
+  // sidedock is collapsed. The state class is the stable signal to restore it.
+  .mod-sidedock.is-sidedock-collapsed {
     display: flex !important;
     position: absolute;
     opacity: 0;
     z-index: 11;
-    background-color: transparent;
     width: var(--hover-sidedock-width) !important;
     transition:
       transform var(--hover-reveal-duration) var(--hover-reveal-easing),
@@ -72,7 +73,7 @@ body:not(.is-mobile).hover-sidedock {
   }
 
   // Hovered
-  .mod-sidedock.is-sidedock-collapsed[style*="display"]:hover,
+  .mod-sidedock.is-sidedock-collapsed:hover,
   &.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock,
   &:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:not(.is-sidedock-collapsed):has(> .workspace-tabs.mod-active) {
     transition-delay: var(--hover-sidedock-delay);

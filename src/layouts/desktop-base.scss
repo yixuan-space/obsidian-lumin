@@ -17,13 +17,13 @@ body:not(.is-mobile) {
 
   // Hover sidedock
   &.hover-sidedock {
-    .mod-sidedock.is-sidedock-collapsed[style*="display"] {
+    .mod-sidedock.is-sidedock-collapsed {
       box-shadow: var(--shadow-s);
       border-radius: var(--radius-window, var(--radius-m));
       background-color: var(--modal-background) !important;
       backdrop-filter: var(--blur-m);
       align-self: stretch;
-      height: auto;
+      height: -webkit-fill-available;
 
       &.mod-left-split {
         margin: 8px 0 8px 8px;

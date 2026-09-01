@@ -206,9 +206,10 @@ body:not(.is-mobile) .workspace-split {
   --tab-outline-color: var(--background-modifier-border);
 }
 
-.is-popout-window {
+body:not(.is-mobile).is-popout-window,
+body:not(.is-mobile).is-popout-modal {
   --workspace-background-translucent: var(--background-secondary);
-  background-color: rgb(var(--mono-rgb-100));
+  background-color: var(--background-primary);
 }
 
 body.is-frameless:not(.is-translucent, .is-hidden-frameless, .is-fullscreen) .titlebar {
@@ -1032,18 +1033,6 @@ body .modal-close-button:empty::before {
   font-weight: bold;
 }
 
-@keyframes modalIn {
-  from {
-    opacity: 0;
-    transform: scale(0.975);
-  }
-}
-body:not(.is-mobile) .modal-bg {
-  opacity: 0.2 !important;
-}
-body:not(.is-mobile) .modal {
-  animation: modalIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
-}
 body:not(.is-mobile) .modal-title {
   margin-left: 0;
 }
@@ -1084,13 +1073,19 @@ body.is-tablet {
   border: none !important;
 }
 
+@keyframes promptIn {
+  from {
+    opacity: 0;
+    transform: scale(0.975);
+  }
+}
 body {
   --prompt-input-height: 64px;
   --prompt-border-color: var(--background-modifier-border);
 }
 body .prompt {
   background-color: var(--background-secondary);
-  animation: modalIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
+  animation: promptIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
 }
 body .prompt .prompt-input,
 body .prompt .prompt-input:hover,
@@ -3991,22 +3986,22 @@ body:not(.is-mobile) .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-
   height: 32px;
   margin: auto 0;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display] {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed {
   box-shadow: var(--shadow-s);
   border-radius: var(--radius-window, var(--radius-m));
   background-color: var(--modal-background) !important;
   backdrop-filter: var(--blur-m);
   align-self: stretch;
-  height: auto;
+  height: -webkit-fill-available;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-left-split {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split {
   margin: 8px 0 8px 8px;
   overflow: visible;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-right-split {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split {
   margin: 8px 8px 8px 0;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display]::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed::before {
   background: none;
   margin-inline: -8px;
   pointer-events: auto;
@@ -4135,7 +4130,7 @@ body:not(.is-mobile) .modal.mod-settings .vertical-tab-header {
   margin: 8px 0 8px 8px;
   box-shadow: var(--shadow-surface);
   border-radius: max(var(--modal-radius) - 8px, var(--radius-s));
-  background-color: rgba(from var(--background-primary) r g b/75%);
+  background-color: var(--background-primary);
 }
 
 body.is-tablet.theme-light {
@@ -4276,10 +4271,13 @@ body {
 }
 
 button,
-.clickable-icon,
+.clickable-icon {
+  transition: var(--anim-duration-moderate) var(--anim-motion-baseline), background-color var(--anim-duration-fast);
+}
+
 select,
 .dropdown {
-  transition: var(--anim-duration-moderate) var(--anim-motion-baseline), background-color var(--anim-duration-fast);
+  transition: color var(--anim-duration-moderate) var(--anim-motion-baseline), background-color var(--anim-duration-fast), border-color var(--anim-duration-moderate) var(--anim-motion-baseline), box-shadow var(--anim-duration-moderate) var(--anim-motion-baseline);
 }
 
 button:where(:not(.clickable-icon, .ant-switch, .workspace-leaf-content:not([data-type=markdown]) button, .copy-code-button)) {
@@ -4460,16 +4458,6 @@ body.is-tablet .suggestion-container {
   border-radius: var(--radius-m);
 }
 
-@keyframes modalInCupertino {
-  from {
-    opacity: 1;
-    filter: none;
-    transform: scale(0.99);
-  }
-}
-body:not(.is-mobile) .modal {
-  animation: modalInCupertino var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
-}
 body:not(.is-mobile) .modal:not(.mod-sidebar-layout) .modal-title {
   width: 100%;
 }
@@ -4577,6 +4565,11 @@ body:not(.is-mobile) .modal.mod-sidebar-layout {
 }
 body:not(.is-mobile) .modal.mod-settings .installed-plugins-container .extra-setting-button {
   min-width: unset;
+}
+
+body.is-popout-modal > .modal.mod-settings {
+  --modal-background: var(--settings-background);
+  background-color: var(--settings-background);
 }
 
 body.is-phone {
@@ -6508,6 +6501,7 @@ body.focus-view:not(.is-mobile):not(.is-popout-window) .workspace:not(.is-left-s
 body.focus-view:not(.is-mobile):not(.is-popout-window) .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) .mod-root .workspace-tab-header-container {
   height: 0;
   border-width: 0px;
+  background-color: transparent;
 }
 body.focus-view:not(.is-mobile):not(.is-popout-window) .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) .mod-root .workspace-tab-header-container > div:not(.sidebar-toggle-button) {
   opacity: 0;
@@ -6536,6 +6530,7 @@ body.focus-view:not(.is-mobile):not(.is-popout-window) .workspace:not(.is-left-s
 }
 body.focus-view:not(.is-mobile):not(.is-popout-window) .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) .mod-root .sidebar-toggle-button.mod-right {
   right: calc(var(--frame-right-space) + 8px);
+  background-color: transparent;
 }
 body.focus-view:not(.is-mobile):not(.is-popout-window) .workspace:not(.is-left-sidedock-open):not(.is-right-sidedock-open) .mod-root .sidebar-toggle-button:not(:hover) {
   opacity: 0.5;
@@ -6561,34 +6556,33 @@ body:not(.is-mobile).hover-ribbon .workspace-ribbon.mod-left:hover ~ .mod-root d
   -webkit-app-region: no-drag;
 }
 
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display] {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed {
   display: flex !important;
   position: absolute;
   opacity: 0;
   z-index: 11;
-  background-color: transparent;
   width: var(--hover-sidedock-width) !important;
   transition: transform var(--hover-reveal-duration) var(--hover-reveal-easing), opacity var(--hover-fade-duration) ease-out;
   will-change: transform, opacity;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display] .workspace-tabs {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed .workspace-tabs {
   visibility: visible;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-left-split {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split {
   transform: translateX(calc(-1 * (var(--hover-sidedock-width) - var(--hover-sidedock-trigger-area))));
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-right-split {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split {
   transform: translateX(calc(var(--hover-sidedock-width) - var(--hover-sidedock-trigger-area)));
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-left-split, body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-left-split::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split, body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split::before {
   right: auto;
   left: 0;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-right-split, body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-right-split::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split, body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split::before {
   right: 0;
   left: auto;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display]::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed::before {
   position: absolute;
   z-index: 0;
   opacity: 0;
@@ -6598,18 +6592,18 @@ body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=d
   content: "";
   pointer-events: none;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-left-split::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split::before {
   background: linear-gradient(to right, var(--background-primary) 50%, transparent);
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display].mod-right-split::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split::before {
   background: linear-gradient(to left, var(--background-primary) 50%, transparent);
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display]:hover, body:not(.is-mobile).hover-sidedock.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock, body:not(.is-mobile).hover-sidedock:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:not(.is-sidedock-collapsed):has(> .workspace-tabs.mod-active) {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover, body:not(.is-mobile).hover-sidedock.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock, body:not(.is-mobile).hover-sidedock:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:not(.is-sidedock-collapsed):has(> .workspace-tabs.mod-active) {
   transition-delay: var(--hover-sidedock-delay);
   transform: none;
   opacity: 1;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed[style*=display]:hover::before, body:not(.is-mobile).hover-sidedock.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock::before, body:not(.is-mobile).hover-sidedock:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:not(.is-sidedock-collapsed):has(> .workspace-tabs.mod-active)::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover::before, body:not(.is-mobile).hover-sidedock.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock::before, body:not(.is-mobile).hover-sidedock:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:not(.is-sidedock-collapsed):has(> .workspace-tabs.mod-active)::before {
   opacity: 1;
 }
 
