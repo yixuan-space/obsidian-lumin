@@ -1207,47 +1207,44 @@ body:not(.is-phone) .installed-plugins-container .setting-items .setting-item-co
 body:not(.is-phone) .installed-plugins-container .setting-items .setting-item:has(button) {
   order: -1;
 }
-body:not(.is-phone) .modal.mod-community-modal .modal-sidebar {
+
+body:not(.is-mobile) .modal.mod-community-modal .modal-sidebar {
   padding: 0;
 }
-body:not(.is-phone) .modal.mod-community-modal .community-modal-controls {
+body:not(.is-mobile) .modal.mod-community-modal .community-modal-controls {
   display: flex;
   height: auto;
   align-items: center;
-  padding: 0 8px;
+  padding: 16px 8px 0;
   width: 100%;
   flex-wrap: wrap;
 }
-body:not(.is-phone) .modal.mod-community-modal .modal-sidebar:not(:only-child) .community-modal-controls .setting-item {
+body:not(.is-mobile) .modal.mod-community-modal .modal-sidebar:not(:only-child) .community-modal-controls .setting-item {
   width: 100%;
   margin-right: 0;
 }
-body:not(.is-phone) .modal.mod-community-modal .community-modal-controls .setting-item {
+body:not(.is-mobile) .modal.mod-community-modal .community-modal-controls .setting-item {
   margin: 0;
   padding: 8px 0;
   display: flex;
   align-items: center;
 }
-body:not(.is-phone) .modal.mod-community-modal .community-modal-controls .setting-item:first-child {
+body:not(.is-mobile) .modal.mod-community-modal .community-modal-controls .setting-item:first-child {
   margin-right: auto;
 }
-body:not(.is-phone) .modal.mod-community-modal .community-modal-controls .setting-item.mod-toggle {
+body:not(.is-mobile) .modal.mod-community-modal .community-modal-controls .setting-item.mod-toggle {
   margin-right: 48px;
 }
-body:not(.is-phone) .modal.mod-community-modal .community-modal-controls .setting-item:first-child .setting-item-info,
-body:not(.is-phone) .modal.mod-community-modal .community-modal-search-summary {
+body:not(.is-mobile) .modal.mod-community-modal .community-modal-controls .setting-item:first-child .setting-item-info,
+body:not(.is-mobile) .modal.mod-community-modal .community-modal-search-summary {
   display: none;
 }
-body:not(.is-phone) .modal.mod-community-modal .community-modal-search-results {
+body:not(.is-mobile) .modal.mod-community-modal .community-modal-search-results {
   gap: 8px;
   padding: 8px;
 }
-body:not(.is-phone) .modal.mod-community-modal .community-item:not(.is-selected) {
+body:not(.is-mobile) .modal.mod-community-modal .community-item:not(.is-selected) {
   background-color: var(--setting-items-background);
-}
-
-body:not(.is-mobile) .modal.mod-community-modal .community-modal-controls {
-  padding-top: 16px;
 }
 
 body.is-phone .modal.mod-sidebar-layout {
@@ -4535,12 +4532,6 @@ body.is-mobile .notice:last-child {
     filter: blur(4px);
     opacity: 0;
   }
-}
-
-body.is-tablet .modal-container:has(.modal.mod-community-modal) {
-  inset-block: max(48px, var(--safe-area-inset-top) + 24px) 24px;
-  inset-inline: 24px;
-  width: auto;
 }
 
 body:not(.is-mobile) {

@@ -262,14 +262,6 @@ body.is-mobile .notice {
   }
 }
 
-// Community theme and plugin managers run in their own modal on tablets.
-// Reserve room below the system status area so the modal never crowds it.
-body.is-tablet .modal-container:has(.modal.mod-community-modal) {
-  inset-block: max(48px, calc(var(--safe-area-inset-top) + 24px)) 24px;
-  inset-inline: 24px;
-  width: auto;
-}
-
 // Drag ghost
 body:not(.is-mobile) {
   --drag-ghost-background: var(--background-primary);

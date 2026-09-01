@@ -82,50 +82,49 @@ body:not(.is-phone) {
     }
   }
 
-  .modal.mod-community-modal {
-    .modal-sidebar {
-      padding: 0;
-    }
-    .community-modal-controls {
-      display: flex;
-      height: auto;
-      align-items: center;
-      padding: 0 8px;
-      width: 100%;
-      flex-wrap: wrap;
-    }
-    .modal-sidebar:not(:only-child) .community-modal-controls .setting-item {
-      width: 100%;
-      margin-right: 0;
-    }
-    .community-modal-controls .setting-item {
-      margin: 0;
-      padding: 8px 0;
-      display: flex;
-      align-items: center;
-    }
-    .community-modal-controls .setting-item:first-child {
-      margin-right: auto;
-    }
-    .community-modal-controls .setting-item.mod-toggle {
-      margin-right: 48px;
-    }
-    .community-modal-controls .setting-item:first-child .setting-item-info,
-    .community-modal-search-summary {
-      display: none;
-    }
-    .community-modal-search-results {
-      gap: 8px;
-      padding: 8px;
-    }
-    .community-item:not(.is-selected) {
-      background-color: var(--setting-items-background);
-    }
-  }
 }
 
-body:not(.is-mobile) .modal.mod-community-modal .community-modal-controls {
-  padding-top: 16px;
+// Keep the desktop market density, while tablets use Obsidian's native mobile
+// market structure and its centered modal layout.
+body:not(.is-mobile) .modal.mod-community-modal {
+  .modal-sidebar {
+    padding: 0;
+  }
+  .community-modal-controls {
+    display: flex;
+    height: auto;
+    align-items: center;
+    padding: 16px 8px 0;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .modal-sidebar:not(:only-child) .community-modal-controls .setting-item {
+    width: 100%;
+    margin-right: 0;
+  }
+  .community-modal-controls .setting-item {
+    margin: 0;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+  }
+  .community-modal-controls .setting-item:first-child {
+    margin-right: auto;
+  }
+  .community-modal-controls .setting-item.mod-toggle {
+    margin-right: 48px;
+  }
+  .community-modal-controls .setting-item:first-child .setting-item-info,
+  .community-modal-search-summary {
+    display: none;
+  }
+  .community-modal-search-results {
+    gap: 8px;
+    padding: 8px;
+  }
+  .community-item:not(.is-selected) {
+    background-color: var(--setting-items-background);
+  }
 }
 
 body.is-phone {
