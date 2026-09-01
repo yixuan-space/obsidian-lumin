@@ -1279,9 +1279,6 @@ body.is-phone .modal.mod-settings .modal-title {
   margin-top: var(--safe-area-inset-top);
   height: var(--touch-size-m);
 }
-body.is-phone .modal.mod-community-modal .modal-title {
-  height: calc(var(--touch-size-m) + 16px);
-}
 
 body.is-tablet.theme-dark {
   --settings-background: var(--background-secondary);
@@ -4617,21 +4614,8 @@ body.is-phone .modal.mod-settings .modal-title {
   margin-top: var(--modal-header-control-top);
   height: var(--touch-size-m);
 }
-body.is-phone .modal.mod-community-modal {
-  --modal-header-height: calc(var(--safe-area-inset-top) + var(--size-4-12));
-}
-body.is-phone .modal.mod-community-modal .modal-header {
-  position: absolute;
-  inset: 0 0 auto;
-}
 body.is-phone .modal.mod-community-modal .modal-title {
-  margin-top: var(--modal-header-control-top);
-  height: var(--touch-size-m);
-}
-body.is-phone .modal.mod-community-modal .modal-content .modal-sidebar,
-body.is-phone .modal.mod-community-modal .modal-content .community-modal-info {
-  padding-top: 0;
-  border-radius: var(--modal-radius);
+  margin-top: var(--mobile-inset-top);
 }
 
 body.is-tablet {

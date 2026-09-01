@@ -165,9 +165,6 @@ body.is-phone {
     margin-top: var(--safe-area-inset-top);
     height: var(--touch-size-m);
   }
-  .modal.mod-community-modal .modal-title {
-    height: calc(var(--touch-size-m) + 16px);
-  }
 }
 
 body.is-tablet {

@@ -59,23 +59,10 @@ body.is-phone {
     }
   }
 
-  .modal.mod-community-modal {
-    --modal-header-height: calc(var(--safe-area-inset-top) + var(--size-4-12));
-
-    .modal-header {
-      position: absolute;
-      inset: 0 0 auto;
-    }
-    .modal-title {
-      margin-top: var(--modal-header-control-top);
-      height: var(--touch-size-m);
-    }
-
-    .modal-content .modal-sidebar,
-    .modal-content .community-modal-info {
-      padding-top: 0;
-      border-radius: var(--modal-radius);
-    }
+  // Community market lists are not sidebar-layout modals, so offset only
+  // their title from the status-bar safe area and leave native detail sheets intact.
+  .modal.mod-community-modal .modal-title {
+    margin-top: var(--mobile-inset-top);
   }
 
 }
