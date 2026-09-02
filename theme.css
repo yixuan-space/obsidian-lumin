@@ -1135,26 +1135,26 @@ body:not(.is-mobile) {
   --setting-group-heading-color: var(--text-faint);
   --setting-group-heading-size: var(--font-ui-small);
 }
-body:not(.is-mobile) .modal-sidebar {
+body:not(.is-mobile) .modal.mod-settings .modal-sidebar {
   --background-modifier-form-field: var(--interactive-normal);
 }
-body:not(.is-mobile) .modal.mod-sidebar-layout .vertical-tab-header {
+body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .vertical-tab-header {
   border-inline-end: none;
 }
-body:not(.is-mobile) .modal.mod-sidebar-layout .vertical-tab-header-group-title,
-body:not(.is-mobile) .modal.mod-sidebar-layout .vertical-tab-nav-item {
+body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .vertical-tab-header-group-title,
+body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .vertical-tab-nav-item {
   padding: calc(8px * var(--density-modifier)) 12px;
   align-items: center;
   font-size: var(--font-ui-small);
 }
-body:not(.is-mobile) .modal.mod-sidebar-layout .vertical-tab-content {
+body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .vertical-tab-content {
   background-color: var(--modal-sidebar-background);
 }
-body:not(.is-mobile) .modal.mod-sidebar-layout .setting-group-search {
+body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .setting-group-search {
   padding: 0 0 8px;
   background-color: transparent;
 }
-body:not(.is-mobile) .modal.mod-sidebar-layout .setting-item-name {
+body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .setting-item-name {
   overflow: visible;
 }
 body:not(.is-mobile) .installed-plugins-container .setting-item .setting-item-description div:last-child {
@@ -1242,32 +1242,32 @@ body:not(.is-mobile) .modal.mod-community-modal .community-item:not(.is-selected
   background-color: var(--setting-items-background);
 }
 
-body.is-phone .modal.mod-sidebar-layout {
+body.is-phone .modal.mod-settings.mod-sidebar-layout {
   box-shadow: none;
 }
-body.is-phone .modal.mod-sidebar-layout .modal-header {
+body.is-phone .modal.mod-settings.mod-sidebar-layout .modal-header {
   padding: 0;
   align-items: center;
   display: inline;
   z-index: 1;
 }
-body.is-phone .modal.mod-sidebar-layout .modal-title {
+body.is-phone .modal.mod-settings.mod-sidebar-layout .modal-title {
   display: flex;
   align-items: center;
   min-width: fit-content;
   max-width: 0;
 }
-body.is-phone .modal.mod-sidebar-layout .modal-title:not(:has(.modal-setting-back-button)) {
+body.is-phone .modal.mod-settings.mod-sidebar-layout .modal-title:not(:has(.modal-setting-back-button)) {
   font-size: 1.5rem;
   font-weight: calc(var(--font-weight) + var(--bold-modifier));
   max-width: 100%;
   padding-left: 20px;
 }
-body.is-phone .modal.mod-sidebar-layout .modal-setting-back-button {
+body.is-phone .modal.mod-settings.mod-sidebar-layout .modal-setting-back-button {
   inset-inline-start: 8px;
   bottom: unset;
 }
-body.is-phone .modal.mod-sidebar-layout .vertical-tab-header-group-title {
+body.is-phone .modal.mod-settings.mod-sidebar-layout .vertical-tab-header-group-title {
   display: none;
 }
 body.is-phone .modal.mod-settings .modal-title {
@@ -1279,8 +1279,8 @@ body.is-tablet.theme-dark {
   --settings-background: var(--background-secondary);
   --setting-items-background: var(--background-primary);
 }
-body.is-tablet .modal.mod-sidebar-layout .vertical-tab-header-group-title,
-body.is-tablet .modal.mod-sidebar-layout .vertical-tab-nav-item {
+body.is-tablet .modal.mod-settings.mod-sidebar-layout .vertical-tab-header-group-title,
+body.is-tablet .modal.mod-settings.mod-sidebar-layout .vertical-tab-nav-item {
   padding: calc(12px * var(--density-modifier)) 16px;
 }
 
@@ -2148,7 +2148,7 @@ body.is-mobile.theme-dark {
   --settings-background: var(--background-secondary);
   --setting-items-background: var(--background-secondary-alt);
 }
-body.is-mobile.theme-dark .modal.mod-sidebar-layout {
+body.is-mobile.theme-dark .modal.mod-settings.mod-sidebar-layout {
   --background-modifier-border: color-mix(in srgb, var(--background-secondary), white 15%);
 }
 body.is-phone.theme-dark {
@@ -4559,7 +4559,7 @@ body:not(.is-mobile) {
   --setting-items-padding: calc(12px * var(--density-modifier)) var(--side-padding);
   --setting-group-heading-color: var(--text-normal);
 }
-body:not(.is-mobile) .modal.mod-sidebar-layout {
+body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout {
   background-color: var(--background-primary);
   border: none;
 }
@@ -4576,28 +4576,28 @@ body.is-phone {
   --setting-items-radius: var(--radius-m);
   --setting-group-heading-size: var(--font-ui-medium);
 }
-body.is-phone .modal.mod-sidebar-layout {
+body.is-phone .modal.mod-settings.mod-sidebar-layout {
   --modal-radius: var(--radius-xl) var(--radius-xl) 0 0;
   --modal-header-control-top: var(--mobile-inset-top);
   --modal-header-control-inset: max(var(--mobile-inset-inline-start), var(--mobile-inset-inline-end));
   max-height: calc(100% - var(--mobile-inset-top));
 }
-body.is-phone .modal.mod-sidebar-layout .modal-setting-back-button,
-body.is-phone .modal.mod-sidebar-layout .modal-close-button {
+body.is-phone .modal.mod-settings.mod-sidebar-layout .modal-setting-back-button,
+body.is-phone .modal.mod-settings.mod-sidebar-layout .modal-close-button {
   top: var(--modal-header-control-top) !important;
 }
-body.is-phone .modal.mod-sidebar-layout .modal-setting-back-button {
+body.is-phone .modal.mod-settings.mod-sidebar-layout .modal-setting-back-button {
   inset-inline-start: var(--modal-header-control-inset);
   bottom: auto;
 }
-body.is-phone .modal.mod-sidebar-layout .modal-close-button {
+body.is-phone .modal.mod-settings.mod-sidebar-layout .modal-close-button {
   inset-inline-end: var(--modal-header-control-inset) !important;
 }
-body.is-phone .modal.mod-sidebar-layout .vertical-tab-header,
-body.is-phone .modal.mod-sidebar-layout .vertical-tab-content {
+body.is-phone .modal.mod-settings.mod-sidebar-layout .vertical-tab-header,
+body.is-phone .modal.mod-settings.mod-sidebar-layout .vertical-tab-content {
   padding-top: calc(var(--modal-header-height) + var(--size-4-4));
 }
-body.is-phone .modal.mod-sidebar-layout .vertical-tab-nav-item {
+body.is-phone .modal.mod-settings.mod-sidebar-layout .vertical-tab-nav-item {
   height: var(--touch-size-xl);
 }
 body.is-phone .modal.mod-settings {
@@ -4606,9 +4606,6 @@ body.is-phone .modal.mod-settings {
 body.is-phone .modal.mod-settings .modal-title {
   margin-top: var(--modal-header-control-top);
   height: var(--touch-size-m);
-}
-body.is-phone .modal.mod-community-modal .modal-title {
-  margin-top: var(--mobile-inset-top);
 }
 
 body.is-tablet {
@@ -5042,7 +5039,7 @@ body.mod-windows:not(.is-mobile) .modal-close-button:hover {
   background-color: var(--color-red);
   color: white;
 }
-body.mod-windows:not(.is-mobile) .modal.mod-sidebar-layout .vertical-tab-content {
+body.mod-windows:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .vertical-tab-content {
   animation: workspaceLeafInWindows var(--anim-duration-moderate);
 }
 

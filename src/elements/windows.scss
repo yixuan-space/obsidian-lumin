@@ -53,7 +53,7 @@ body.mod-windows:not(.is-mobile) {
   }
 
   // Settings
-  .modal.mod-sidebar-layout .vertical-tab-content {
+  .modal.mod-settings.mod-sidebar-layout .vertical-tab-content {
     animation: workspaceLeafInWindows var(--anim-duration-moderate);
   }
 }
