@@ -873,15 +873,6 @@ body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-prof
 body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher.has-active-menu {
   background-color: var(--interactive-normal);
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover) {
-  pointer-events: none;
-}
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:not(:hover) .workspace-drawer-vault-switcher:not(.has-active-menu) {
-  opacity: 0;
-  filter: blur(4px);
-  pointer-events: none;
-  transform: scale(0.95);
-}
 body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-drawer-vault-switcher,
 body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-drawer-vault-actions .clickable-icon {
   transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
