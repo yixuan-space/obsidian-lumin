@@ -1,14 +1,15 @@
 # Third-Party Notices
 
-Lumin contains and adapts third-party material. This file preserves the
-required notices and license terms for that material. It is part of every
-source and release distribution of Lumin.
+This file records third-party material redistributed in this repository or
+incorporated into Lumin's distributable theme files. Lumin's original
+contributions are licensed under the repository's [MIT License](LICENSE); the
+material listed below remains subject to its own terms.
 
 ## Cupertino
 
 Lumin is based on [Cupertino](https://github.com/aaaaalexis/obsidian-cupertino)
-by aaaaalexis. Portions of the theme source and generated `theme.css` are
-derived from Cupertino and are licensed under the MIT License.
+by aaaaalexis. Portions of Lumin derived from Cupertino are licensed under the
+MIT License.
 
 Copyright (c) 2025 aaaaalexis
 
@@ -36,9 +37,9 @@ SOFTWARE.
 
 ## Minimal snippets
 
-The following files contain snippets from
+The following files incorporate MIT-licensed snippets from
 [Minimal](https://github.com/kepano/obsidian-minimal) by Stephan Ango
-(@kepano), marked in the source as MIT-licensed:
+(@kepano):
 
 - `src/features/dataview-cards.scss`
 - `src/features/helpers-tables.scss`
@@ -46,29 +47,63 @@ The following files contain snippets from
 
 Copyright (c) Stephan Ango (@kepano)
 
-These snippets are licensed under the MIT License reproduced in the
-Cupertino section above.
+The MIT License text in the Cupertino section applies to these snippets.
 
 ## Alternative Checkboxes Reference Set
 
 `src/features/alternative-checkboxes.scss` incorporates task-state icon
 references from [Alternative-Checkboxes-Reference-Set](https://github.com/damiankorcz/Alternative-Checkboxes-Reference-Set)
-by damiankorcz. That project is dedicated to the public domain under the
-[Unlicense](https://unlicense.org/).
+by damiankorcz. The source project is released under the Unlicense.
 
-## Design References and Compatibility Selectors
+```text
+This is free and unencumbered software released into the public domain.
 
-The names Adwaita, Material Design, and platform fonts in this repository
-describe visual references or local font fallbacks; no font files or design
-assets from those projects are redistributed here. Selectors for third-party
-Obsidian plugins are compatibility styling written for their public CSS class
-names and do not incorporate their code.
+Anyone is free to copy, modify, publish, use, compile, sell, or distribute
+this software, either in source code form or as a compiled binary, for any
+purpose, commercial or non-commercial, and by any means.
 
-## Assets and Future Contributions
+In jurisdictions that recognize copyright laws, the author or authors of this
+software dedicate any and all copyright interest in the software to the public
+domain. We make this dedication for the benefit of the public at large and to
+the detriment of our heirs and successors. We intend this dedication to be an
+overt act of relinquishment in perpetuity of all present and future rights to
+this software under copyright law.
 
-The Lumin name, project screenshots, documentation, and custom assets may be
-credited to YiXuan only where YiXuan created them or has the right to license
-them. Before adding any copied code, icon, font, image, or other asset, retain
-its original copyright notice and add its source and license to this file.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-This notice is an attribution and license record, not legal advice.
+For more information, please refer to <https://unlicense.org>
+```
+
+## PDF.js stylesheet
+
+`app.css` includes a stylesheet generated from Mozilla's
+[PDF.js](https://github.com/mozilla/pdf.js) project. The file retains its
+original copyright and Apache-2.0 notice.
+
+Copyright 2014 Mozilla Foundation
+
+```text
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+
+## References not redistributed
+
+Craft is a visual reference only. Lumin does not redistribute Craft code or
+assets. References to Obsidian plugins, platform design systems, and system
+fonts describe compatibility targets or font fallbacks; they do not incorporate
+code, assets, or font files from those projects.

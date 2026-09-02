@@ -48,6 +48,26 @@ Lumin 在所有 Obsidian 平台上延续同一套视觉语言，同时根据设�
 
 ![Lumin 复选框样式](img/checkbox.png)
 
+### 任务状态
+
+使用 Obsidian 的任务语法为任务标记更具体的状态。Lumin 保留标准任务的语义，并为下列常用状态提供不同的图标或视觉处理。
+
+| 语法 | 状态 |
+| --- | --- |
+| `- [ ]` | 待办 |
+| `- [/]` | 进行中 |
+| `- [x]` | 已完成 |
+| `- [-]` | 已取消 |
+| `- [>]` | 已转交 |
+| `- [<]` | 已安排 |
+| `- [?]` | 疑问 |
+| `- [!]` | 重要 |
+| `- [*]` | 星标 |
+| `- [I]` | 想法 |
+| `- [p]` / `- [c]` | 优点 / 缺点 |
+
+此外还支持引用、地点、书签、信息、储蓄、钥匙、胜利、时间、电话、喜爱等任务状态。
+
 ## 安装
 
 ### 通过 Obsidian 安装
@@ -64,16 +84,50 @@ Lumin 在所有 Obsidian 平台上延续同一套视觉语言，同时根据设�
 
 ## 自定义
 
-安装 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 后，即可在 Obsidian 设置中调整 Lumin。
+不安装附加插件也可完整使用 Lumin。安装并启用 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 后，可在“设置 > Style Settings”中调整主题。
 
 - 在默认、雾蓝、苔绿和暖灰配色之间选择，并同步适配浅色与深色外观。
 - 调整悬停功能区、悬停侧边栏、专注视图、标签对齐、紧凑面板操作区和媒体缩放等桌面行为。
 - 设置阅读宽度、块级与媒体宽度、Banner 样式、当前行高亮、链接下划线和图片对齐。
 - 减少动态效果、减弱失焦对比变化，或微调界面和图标尺寸。
 
+## 单篇笔记布局
+
+通过笔记 frontmatter 中的 `cssclasses` 属性，可以只改变当前笔记的布局，不影响整个 Vault。
+
+```yaml
+---
+cssclasses:
+  - cards
+  - cards-16-9
+  - cards-cols-3
+  - table-wide
+---
+```
+
+| 类名 | 效果 |
+| --- | --- |
+| `cards`、`list-cards` | 将 Dataview 表格或列表显示为卡片 |
+| `cards-cover`、`cards-16-9`、`cards-1-1`、`cards-2-1`、`cards-2-3` | 控制卡片图片适配方式与比例 |
+| `cards-cols-1` 至 `cards-cols-8` | 设置卡片网格列数 |
+| `table-wide`、`table-max`、`table-100` | 让表格和 Dataview 块突破阅读栏宽度 |
+| `img-wide`、`img-max`、`img-100` | 扩展图片与嵌入内容宽度 |
+| `bases-wide`、`bases-max`、`bases-100` | 扩展 Obsidian Bases 视图宽度 |
+| `table-small`、`table-tiny`、`table-nowrap`、`table-numbers`、`row-lines`、`col-lines` | 调整表格密度、换行、行号与分隔线 |
+
+## 集成支持
+
+Lumin 为 Obsidian 属性、Bases、表格、Callout、Banner、嵌入内容和任务状态提供专门样式，同时适配 Dataview 表格与卡片布局，为 Datacore 块提供宽度工具，并处理 Banner 类插件常用的横幅区域。
+
 ## 兼容性
 
 Lumin 需要 Obsidian `1.11.6` 或更高版本，支持 macOS、Windows、Linux、Android 和 iOS 的浅色与深色外观。主题会在宿主提供相应设备和窗口类时采用平台专属行为。
+
+Lumin 有意保持以内容为中心，并尽量遵循 Obsidian 原生交互。大幅替换工作区布局的 CSS snippet 与主题同时使用时，可能需要额外调整。
+
+## 反馈
+
+如需报告问题或提出功能建议，请先搜索已有 [Issues](https://github.com/yixuan-space/obsidian-lumin/issues)，再使用对应模板创建新 Issue。请附上 Obsidian 版本、操作系统，以及会影响相关界面的已启用 CSS snippet 或插件。
 
 ## 开发
 

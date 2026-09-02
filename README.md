@@ -48,6 +48,26 @@ Alternative checkbox states add a compact vocabulary for tasks while preserving 
 
 ![Lumin checkbox styles](img/checkbox.png)
 
+### Task States
+
+Use Obsidian task syntax to give a task a more specific state. Lumin preserves the meaning of standard tasks and adds a distinct icon or treatment for the following commonly used states.
+
+| Syntax | State |
+| --- | --- |
+| `- [ ]` | To-do |
+| `- [/]` | In progress |
+| `- [x]` | Done |
+| `- [-]` | Canceled |
+| `- [>]` | Forwarded |
+| `- [<]` | Scheduled |
+| `- [?]` | Question |
+| `- [!]` | Important |
+| `- [*]` | Starred |
+| `- [I]` | Idea |
+| `- [p]` / `- [c]` | Pros / cons |
+
+Additional symbols cover quotation, location, bookmark, information, savings, key, win, time, telephone, love, and other task states.
+
 ## Install
 
 ### From Obsidian
@@ -64,16 +84,50 @@ Alternative checkbox states add a compact vocabulary for tasks while preserving 
 
 ## Customize
 
-Install [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) to adjust Lumin from Obsidian's settings interface.
+Lumin works without companion plugins. Install and enable [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) to adjust Lumin in **Settings > Style Settings**.
 
 - Choose the default, mist blue, moss green, or warm gray palette in light and dark appearance.
 - Tune desktop behavior, including hover ribbons, hover sidebars, focus view, tab alignment, compact panel actions, and media zoom.
 - Adjust reading width, block and media width, banner treatment, active-line highlight, link underlines, and image alignment.
 - Reduce motion, soften unfocused contrast changes, or adjust interface and icon sizing.
 
+## Per-Note Layouts
+
+Use the `cssclasses` property in a note's frontmatter to change the layout of that note without affecting the rest of the vault.
+
+```yaml
+---
+cssclasses:
+  - cards
+  - cards-16-9
+  - cards-cols-3
+  - table-wide
+---
+```
+
+| Classes | Effect |
+| --- | --- |
+| `cards`, `list-cards` | Display Dataview tables or lists as cards |
+| `cards-cover`, `cards-16-9`, `cards-1-1`, `cards-2-1`, `cards-2-3` | Control card image fit and aspect ratio |
+| `cards-cols-1` through `cards-cols-8` | Set a card grid's column count |
+| `table-wide`, `table-max`, `table-100` | Expand tables and Dataview blocks beyond the reading column |
+| `img-wide`, `img-max`, `img-100` | Expand images and embeds |
+| `bases-wide`, `bases-max`, `bases-100` | Expand Obsidian Bases views |
+| `table-small`, `table-tiny`, `table-nowrap`, `table-numbers`, `row-lines`, `col-lines` | Refine table density, wrapping, numbering, and dividers |
+
+## Integrations
+
+Lumin includes dedicated styling for Obsidian properties, Bases, tables, callouts, banners, embeds, and task states. It also styles Dataview tables and card layouts, supports block-width utilities for Datacore blocks, and handles banner areas used by banner-style plugins.
+
 ## Compatibility
 
 Lumin requires Obsidian `1.11.6` or later. It supports light and dark appearance on macOS, Windows, Linux, Android, and iOS. Platform-specific behavior follows Obsidian's native device and window classes where available.
+
+Lumin is intentionally content-first and close to Obsidian's native interaction model. CSS snippets that substantially replace the workspace layout may need adjustment when used with the theme.
+
+## Feedback
+
+For bugs and feature requests, please search existing [issues](https://github.com/yixuan-space/obsidian-lumin/issues) first, then open a new issue using the relevant template. Include your Obsidian version, operating system, and any enabled CSS snippets or plugins that affect the affected view.
 
 ## Development
 
