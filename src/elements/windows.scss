@@ -32,6 +32,12 @@ body.mod-windows:not(.is-mobile) {
     opacity: 0.3 !important;
   }
 
+  // Settings should fully cover the workspace while the modal is open.
+  &:has(.modal.mod-settings) .modal-bg {
+    background-color: var(--background-primary);
+    opacity: 1 !important;
+  }
+
   .modal-close-button {
     top: 0;
     inset-inline-end: 0 !important;

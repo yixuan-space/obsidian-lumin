@@ -4124,6 +4124,12 @@ body:not(.is-mobile) .modal.mod-settings .vertical-tab-header {
   background-color: var(--background-primary);
 }
 
+body.mod-macos:not(.is-mobile) .modal.mod-settings .vertical-tab-header {
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 body.is-tablet.theme-light {
   --shadow-surface: inset 1px 1px 2px rgba(255, 255, 255, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.5), inset 0 4px 16px rgba(255, 255, 255, 0.025), 0 0 1px rgba(0, 0, 0, 0.25), 0 8px 16px 0 rgba(0, 0, 0, 0.05);
 }
@@ -5012,6 +5018,10 @@ body.mod-windows:not(.is-mobile) .mod-sidedock .workspace-leaf {
 body.mod-windows:not(.is-mobile) .modal-bg {
   background-color: black;
   opacity: 0.3 !important;
+}
+body.mod-windows:not(.is-mobile):has(.modal.mod-settings) .modal-bg {
+  background-color: var(--background-primary);
+  opacity: 1 !important;
 }
 body.mod-windows:not(.is-mobile) .modal-close-button {
   top: 0;
