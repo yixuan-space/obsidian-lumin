@@ -233,9 +233,8 @@ body.titlebar-text-off .titlebar-text {
 body:not(.mod-macos):not(.is-mobile) {
   --frame-right-space: 144px;
 }
-body:not(.mod-macos):not(.is-mobile) .titlebar-button-container.mod-right,
-body:not(.mod-macos):not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button {
-  background-color: var(--background-secondary) !important;
+body:not(.mod-macos):not(.is-mobile).is-hidden-frameless:not(.is-popout-modal, .is-popout-window, .starter, .in-progress, .is-fullscreen):not(:has(.modal.mod-settings)) .titlebar-button-container.mod-right {
+  background-color: transparent;
 }
 body:not(.mod-macos):not(.is-mobile).is-hidden-frameless .titlebar {
   height: var(--header-height);
@@ -632,24 +631,16 @@ body:not(.tab-icon) .mod-sidedock .workspace-tabs:not(.mod-top) .workspace-tab-h
   opacity: 0;
 }
 
-body.is-hidden-frameless:not(.is-mobile) .mod-sidedock .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+body:not(.mod-macos):not(.is-mobile).is-hidden-frameless:not(.is-fullscreen) .mod-sidedock .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
   padding-right: var(--frame-right-space);
 }
 
-body.is-frameless:not(.is-popout-window) .workspace .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+body.mod-macos.is-frameless:not(.is-popout-window) .workspace .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
   padding-right: 8px;
 }
-body.is-frameless:not(.is-popout-window) .workspace .mod-root .sidebar-toggle-button.mod-right {
+body.mod-macos.is-frameless:not(.is-popout-window) .workspace .mod-root .sidebar-toggle-button.mod-right {
   position: relative;
   padding-right: 0;
-}
-
-body:not(.is-mobile):not(.mod-macos).is-hidden-frameless .workspace.is-left-sidedock-open:not(.is-right-sidedock-open) .mod-root .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
-  padding-right: var(--frame-right-space);
-}
-
-body:not(.mod-macos):not(.is-mobile).is-hidden-frameless .mod-sidedock .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
-  padding-right: var(--frame-right-space);
 }
 
 body:not(.is-mobile) .workspace:not(.is-right-sidedock-open) .mod-root .workspace-tabs.mod-top-right-space .workspace-tab-header-container,
@@ -3992,21 +3983,20 @@ body:not(.is-mobile) .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed {
   box-shadow: var(--shadow-s);
   border-radius: var(--radius-window, var(--radius-m));
-  background-color: var(--modal-background) !important;
-  backdrop-filter: var(--blur-m);
+  background-color: var(--background-primary) !important;
   align-self: stretch;
-  height: -webkit-fill-available;
+  height: auto;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split {
-  margin: 8px 0 8px 8px;
+  margin: 0;
   overflow: visible;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split {
-  margin: 8px 8px 8px 0;
+  margin: 0;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed::before {
   background: none;
-  margin-inline: -8px;
+  margin-inline: 0;
   pointer-events: auto;
   width: 8px;
 }
@@ -6558,7 +6548,9 @@ body.focus-view:not(.mod-macos):not(.is-mobile):not(.is-popout-window):not(.is-h
 
 body:not(.is-mobile) {
   --hover-sidedock-width: 320px;
-  --hover-sidedock-delay: 120ms;
+  --hover-sidedock-delay: 160ms;
+  --hover-sidedock-close-delay: 160ms;
+  --hover-sidedock-inset: 8px;
   --hover-sidedock-trigger-area: 4px;
   --hover-reveal-duration: calc(280ms * var(--anim-speed-modifier));
   --hover-fade-duration: calc(200ms * var(--anim-speed-modifier));
@@ -6578,49 +6570,57 @@ body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed {
   opacity: 0;
   z-index: 11;
   width: var(--hover-sidedock-width) !important;
+  top: var(--hover-sidedock-inset);
+  bottom: var(--hover-sidedock-inset);
+  height: auto;
+  box-sizing: border-box;
+  overflow: visible;
   transition: transform var(--hover-reveal-duration) var(--hover-reveal-easing), opacity var(--hover-fade-duration) ease-out;
-  will-change: transform, opacity;
+  transition-delay: var(--hover-sidedock-close-delay);
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed .workspace-tabs {
   visibility: visible;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split {
-  transform: translateX(calc(-1 * (var(--hover-sidedock-width) - var(--hover-sidedock-trigger-area))));
+  transform: translateX(calc(-100% - var(--hover-sidedock-inset) + var(--hover-sidedock-trigger-area)));
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split {
-  transform: translateX(calc(var(--hover-sidedock-width) - var(--hover-sidedock-trigger-area)));
+  transform: translateX(calc(100% + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area)));
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split, body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split {
   right: auto;
-  left: 0;
+  left: var(--hover-sidedock-inset);
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split, body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split::before {
-  right: 0;
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split {
+  right: var(--hover-sidedock-inset);
   left: auto;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed::before {
   position: absolute;
   z-index: 0;
-  opacity: 0;
-  transition: opacity var(--hover-fade-duration) ease-out;
   inset-block: 0;
-  width: 150%;
+  width: var(--hover-sidedock-inset);
   content: "";
-  pointer-events: none;
+  pointer-events: auto;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split::before {
-  background: linear-gradient(to right, var(--background-primary) 50%, transparent);
+  left: calc(-1 * var(--hover-sidedock-inset));
+  right: auto;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split::before {
-  background: linear-gradient(to left, var(--background-primary) 50%, transparent);
+  right: calc(-1 * var(--hover-sidedock-inset));
+  left: auto;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover, body:not(.is-mobile).hover-sidedock.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock, body:not(.is-mobile).hover-sidedock:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:not(.is-sidedock-collapsed):has(> .workspace-tabs.mod-active) {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:is(:hover, :has(.has-active-menu)), body:not(.is-mobile).hover-sidedock.hover-ribbon.show-ribbon .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)) + .mod-sidedock.is-sidedock-collapsed {
   transition-delay: var(--hover-sidedock-delay);
   transform: none;
   opacity: 1;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover::before, body:not(.is-mobile).hover-sidedock.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock::before, body:not(.is-mobile).hover-sidedock:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:not(.is-sidedock-collapsed):has(> .workspace-tabs.mod-active)::before {
-  opacity: 1;
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed .workspace-leaf {
+  animation: none !important;
+}
+body:not(.is-mobile).hover-sidedock:not(.mod-macos).is-hidden-frameless:not(.is-fullscreen) .mod-sidedock.mod-right-split.is-sidedock-collapsed .workspace-tabs.mod-top .workspace-tab-header-container {
+  padding-right: var(--frame-right-space);
 }
 
 body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left {
@@ -6629,37 +6629,37 @@ body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left {
   top: 0;
   bottom: 0;
   height: auto;
+  margin-block: 0;
+  padding-left: 0;
+  left: 0;
   opacity: 0;
-  transform: translateX(calc(-1 * var(--ribbon-width) + var(--hover-sidedock-trigger-area)));
+  transform: translateX(calc(-100% + var(--hover-sidedock-trigger-area)));
   background-color: transparent;
   transition: transform var(--hover-reveal-duration) var(--hover-reveal-easing), opacity var(--hover-fade-duration) ease-out !important;
-  will-change: transform, opacity;
+  transition-delay: var(--hover-sidedock-close-delay) !important;
 }
-body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left:hover {
+body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)), body:not(.is-mobile).hover-ribbon.show-ribbon.hover-sidedock .workspace-ribbon.mod-left:has(+ .mod-sidedock.mod-left-split.is-sidedock-collapsed:is(:hover, :has(.has-active-menu))) {
   opacity: 1;
   transform: none;
-}
-body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left:hover + .mod-sidedock {
-  padding-left: calc(var(--ribbon-width) - 8px);
-}
-body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left.is-collapsed:hover,
-body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock {
   transition-delay: var(--hover-sidedock-delay) !important;
+}
+body:not(.is-mobile).hover-ribbon.show-ribbon.hover-sidedock .workspace-ribbon.mod-left + .mod-sidedock.mod-left-split.is-sidedock-collapsed {
+  padding-left: calc(var(--ribbon-width) - 8px);
 }
 body:not(.is-mobile).hover-ribbon.show-ribbon.hover-sidedock .workspace-ribbon.mod-left.is-collapsed {
   z-index: 13;
 }
-body:not(.is-mobile).hover-ribbon.show-ribbon.mod-macos:not(.is-fullscreen).is-hidden-frameless .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
-  transition-timing-function: ease;
-}
-body:not(.is-mobile).hover-ribbon.show-ribbon.mod-macos:not(.is-fullscreen).is-hidden-frameless .workspace-ribbon.mod-left:not(.is-collapsed):hover ~ .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
-  padding-left: 52px;
-}
-body:not(.is-mobile).hover-ribbon.show-ribbon.mod-macos:not(.is-fullscreen).is-hidden-frameless .workspace-ribbon.mod-left:not(.is-collapsed):not(:hover) ~ .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container,
+body:not(.is-mobile).hover-ribbon.show-ribbon.mod-macos:not(.is-fullscreen).is-hidden-frameless .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container,
 body:not(.is-mobile).hover-ribbon.show-ribbon.mod-macos:not(.is-fullscreen).is-hidden-frameless .workspace-ribbon.mod-left.is-collapsed ~ .mod-root > div:first-of-type .workspace-tab-header-container {
-  padding-left: 88px;
+  padding-left: var(--frame-left-space);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  body:not(.is-mobile) {
+    --hover-reveal-duration: 0ms;
+    --hover-fade-duration: 0ms;
+  }
+}
 body.mod-windows .nav-files-container > div {
   --nav-item-background-active: var(--background-modifier-hover);
   --nav-item-color-active: var(--nav-item-color);

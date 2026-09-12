@@ -1,6 +1,8 @@
 body:not(.is-mobile) {
   --hover-sidedock-width: 320px;
-  --hover-sidedock-delay: 120ms;
+  --hover-sidedock-delay: 160ms;
+  --hover-sidedock-close-delay: 160ms;
+  --hover-sidedock-inset: 8px;
   --hover-sidedock-trigger-area: 4px;
   --hover-reveal-duration: calc(280ms * var(--anim-speed-modifier));
   --hover-fade-duration: calc(200ms * var(--anim-speed-modifier));
@@ -26,10 +28,15 @@ body:not(.is-mobile).hover-sidedock {
     opacity: 0;
     z-index: 11;
     width: var(--hover-sidedock-width) !important;
+    top: var(--hover-sidedock-inset);
+    bottom: var(--hover-sidedock-inset);
+    height: auto;
+    box-sizing: border-box;
+    overflow: visible;
     transition:
       transform var(--hover-reveal-duration) var(--hover-reveal-easing),
       opacity var(--hover-fade-duration) ease-out;
-    will-change: transform, opacity;
+    transition-delay: var(--hover-sidedock-close-delay);
 
     .workspace-tabs {
       visibility: visible;
@@ -37,52 +44,57 @@ body:not(.is-mobile).hover-sidedock {
 
     // Position
     &.mod-left-split {
-      transform: translateX(calc(-1 * (var(--hover-sidedock-width) - var(--hover-sidedock-trigger-area))));
+      transform: translateX(calc(-100% - var(--hover-sidedock-inset) + var(--hover-sidedock-trigger-area)));
     }
     &.mod-right-split {
-      transform: translateX(calc(var(--hover-sidedock-width) - var(--hover-sidedock-trigger-area)));
+      transform: translateX(calc(100% + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area)));
     }
-    &.mod-left-split,
-    &.mod-left-split::before {
+    &.mod-left-split {
       right: auto;
-      left: 0;
+      left: var(--hover-sidedock-inset);
     }
-    &.mod-right-split,
-    &.mod-right-split::before {
-      right: 0;
+    &.mod-right-split {
+      right: var(--hover-sidedock-inset);
       left: auto;
     }
 
-    // Background
+    // Bridge the window edge to the floating panel without moving its hit area.
+    // The panel owns its background; this pseudo-element is only a hit target.
     &::before {
       position: absolute;
       z-index: 0;
-      opacity: 0;
-      transition: opacity var(--hover-fade-duration) ease-out;
       inset-block: 0;
-      width: 150%;
+      width: var(--hover-sidedock-inset);
       content: "";
-      pointer-events: none;
+      pointer-events: auto;
     }
     &.mod-left-split::before {
-      background: linear-gradient(to right, var(--background-primary) 50%, transparent);
+      left: calc(-1 * var(--hover-sidedock-inset));
+      right: auto;
     }
     &.mod-right-split::before {
-      background: linear-gradient(to left, var(--background-primary) 50%, transparent);
+      right: calc(-1 * var(--hover-sidedock-inset));
+      left: auto;
     }
   }
 
-  // Hovered
-  .mod-sidedock.is-sidedock-collapsed:hover,
-  &.hover-ribbon .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock,
-  &:not(.hover-sidedock-active-off) > .app-container > .horizontal-main-container > .workspace > .mod-sidedock:not(.is-sidedock-collapsed):has(> .workspace-tabs.mod-active) {
+  // Reveal on pointer interaction, not retained focus: clicking the dock toggle
+  // can leave focus inside the now-collapsed panel and immediately reopen it.
+  .mod-sidedock.is-sidedock-collapsed:is(:hover, :has(.has-active-menu)),
+  &.hover-ribbon.show-ribbon .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)) + .mod-sidedock.is-sidedock-collapsed {
     transition-delay: var(--hover-sidedock-delay);
     transform: none;
     opacity: 1;
+  }
 
-    &::before {
-      opacity: 1;
-    }
+  // Avoid replaying a second content animation inside the sliding panel.
+  .mod-sidedock.is-sidedock-collapsed .workspace-leaf {
+    animation: none !important;
+  }
+
+  // Keep Windows caption space even while the dock is overlaid on the editor.
+  &:not(.mod-macos).is-hidden-frameless:not(.is-fullscreen) .mod-sidedock.mod-right-split.is-sidedock-collapsed .workspace-tabs.mod-top .workspace-tab-header-container {
+    padding-right: var(--frame-right-space);
   }
 }
 
@@ -93,42 +105,44 @@ body:not(.is-mobile).hover-ribbon.show-ribbon {
     top: 0;
     bottom: 0;
     height: auto;
+    margin-block: 0;
+    padding-left: 0;
+    left: 0;
     opacity: 0;
-    transform: translateX(calc(-1 * var(--ribbon-width) + var(--hover-sidedock-trigger-area)));
+    transform: translateX(calc(-100% + var(--hover-sidedock-trigger-area)));
     background-color: transparent;
     transition:
       transform var(--hover-reveal-duration) var(--hover-reveal-easing),
       opacity var(--hover-fade-duration) ease-out !important;
-    will-change: transform, opacity;
+    transition-delay: var(--hover-sidedock-close-delay) !important;
   }
-  .workspace-ribbon.mod-left:hover {
+  .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)),
+  &.hover-sidedock .workspace-ribbon.mod-left:has(+ .mod-sidedock.mod-left-split.is-sidedock-collapsed:is(:hover, :has(.has-active-menu))) {
     opacity: 1;
     transform: none;
-  }
-
-  .workspace-ribbon.mod-left:hover + .mod-sidedock {
-    padding-left: calc(var(--ribbon-width) - 8px);
-  }
-  .workspace-ribbon.mod-left.is-collapsed:hover,
-  .workspace-ribbon.mod-left.is-collapsed:hover + .mod-sidedock {
     transition-delay: var(--hover-sidedock-delay) !important;
   }
 
+  // Reserve this space throughout the interaction instead of reflowing on hover.
+  &.hover-sidedock .workspace-ribbon.mod-left + .mod-sidedock.mod-left-split.is-sidedock-collapsed {
+    padding-left: calc(var(--ribbon-width) - 8px);
+  }
   &.hover-sidedock .workspace-ribbon.mod-left.is-collapsed {
     z-index: 13;
   }
 
   // macOS fix
   &.mod-macos:not(.is-fullscreen).is-hidden-frameless {
-    .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
-      transition-timing-function: ease;
-    }
-    .workspace-ribbon.mod-left:not(.is-collapsed):hover ~ .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
-      padding-left: 52px;
-    }
-    .workspace-ribbon.mod-left:not(.is-collapsed):not(:hover) ~ .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container,
+    .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container,
     .workspace-ribbon.mod-left.is-collapsed ~ .mod-root > div:first-of-type .workspace-tab-header-container {
-      padding-left: 88px;
+      padding-left: var(--frame-left-space);
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.is-mobile) {
+    --hover-reveal-duration: 0ms;
+    --hover-fade-duration: 0ms;
   }
 }

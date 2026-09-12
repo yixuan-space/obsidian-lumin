@@ -321,11 +321,13 @@ body:not(.tab-icon) .mod-sidedock .workspace-tabs:not(.mod-top) .workspace-tab-h
 }
 
 // Side panels: Platforms
-body.is-hidden-frameless:not(.is-mobile) .mod-sidedock .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+body:not(.mod-macos):not(.is-mobile).is-hidden-frameless:not(.is-fullscreen) .mod-sidedock .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
   padding-right: var(--frame-right-space);
 }
 
-body.is-frameless:not(.is-popout-window) .workspace {
+// Cupertino's compact right edge is macOS-only. On Windows, Obsidian reserves
+// frame-right-space on the rightmost tab strip, including when both docks close.
+body.mod-macos.is-frameless:not(.is-popout-window) .workspace {
   .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
     padding-right: 8px;
   }
@@ -334,17 +336,6 @@ body.is-frameless:not(.is-popout-window) .workspace {
     position: relative;
     padding-right: 0;
   }
-}
-
-// Reserve the native Windows caption-button area so right-side tabs and
-// actions remain fully clickable when the window uses a frameless titlebar.
-body:not(.is-mobile):not(.mod-macos).is-hidden-frameless .workspace.is-left-sidedock-open:not(.is-right-sidedock-open) {
-  .mod-root .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
-    padding-right: var(--frame-right-space);
-  }
-}
-body:not(.mod-macos):not(.is-mobile).is-hidden-frameless .mod-sidedock .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
-  padding-right: var(--frame-right-space);
 }
 
 body:not(.is-mobile) .workspace:not(.is-right-sidedock-open) .mod-root {

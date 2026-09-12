@@ -193,9 +193,13 @@ body.titlebar-text-off .titlebar-text {
 body:not(.mod-macos):not(.is-mobile) {
   --frame-right-space: 144px;
 
-  .titlebar-button-container.mod-right,
-  .titlebar-button-container.mod-right .titlebar-button {
-    background-color: var(--background-secondary) !important;
+  // Cupertino leaves the caption background transparent in the main workspace.
+  // Let the actual workspace/hover-sidedock surface show through, including
+  // during reveal and fade-out; dedicated windows retain their titlebar colors.
+  &.is-hidden-frameless:not(.is-popout-modal, .is-popout-window, .starter, .in-progress, .is-fullscreen):not(:has(.modal.mod-settings)) {
+    .titlebar-button-container.mod-right {
+      background-color: transparent;
+    }
   }
 
   &.is-hidden-frameless .titlebar {
