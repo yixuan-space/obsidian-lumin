@@ -32,7 +32,9 @@ body:not(.is-mobile) {
   }
 
   &.show-ribbon {
-    .workspace-ribbon.mod-left:not(.is-collapsed) {
+    // Keep the Ribbon at the same height when Obsidian toggles is-collapsed.
+    // Otherwise the collapsed state falls back to margin-top: --header-height.
+    .workspace-ribbon.mod-left {
       margin-block: 8px;
     }
     .workspace-ribbon.mod-left:not(.is-collapsed) .sidebar-toggle-button {
