@@ -336,6 +336,17 @@ body.is-frameless:not(.is-popout-window) .workspace {
   }
 }
 
+// Reserve the native Windows caption-button area so right-side tabs and
+// actions remain fully clickable when the window uses a frameless titlebar.
+body:not(.is-mobile):not(.mod-macos).is-hidden-frameless .workspace.is-left-sidedock-open:not(.is-right-sidedock-open) {
+  .mod-root .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+    padding-right: var(--frame-right-space);
+  }
+}
+body:not(.mod-macos):not(.is-mobile).is-hidden-frameless .mod-sidedock .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+  padding-right: var(--frame-right-space);
+}
+
 body:not(.is-mobile) .workspace:not(.is-right-sidedock-open) .mod-root {
   .workspace-tabs.mod-top-right-space .workspace-tab-header-container,
   .sidebar-toggle-button.mod-right {

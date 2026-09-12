@@ -189,10 +189,14 @@ body:has(.modal.mod-settings) {
 body.titlebar-text-off .titlebar-text {
   display: none;
 }
-// Preserve Obsidian's native macOS and Linux titlebar treatments. Windows
-// alone gets the custom caption-button geometry and glyphs.
-body.mod-windows:not(.is-mobile) {
+// Match Cupertino's compact caption-button layout on Windows and Linux.
+body:not(.mod-macos):not(.is-mobile) {
   --frame-right-space: 144px;
+
+  .titlebar-button-container.mod-right,
+  .titlebar-button-container.mod-right .titlebar-button {
+    background-color: var(--background-secondary) !important;
+  }
 
   &.is-hidden-frameless .titlebar {
     height: var(--header-height);

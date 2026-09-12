@@ -122,6 +122,16 @@ body.mod-macos:not(.is-mobile) {
   }
 }
 
+// The Windows settings sidebar sits directly on the window surface; its
+// parent already provides the outer shape, so avoid a second rounded panel.
+body.mod-windows:not(.is-mobile) {
+  .modal.mod-settings .vertical-tab-header {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
 body.is-tablet {
   &.theme-light {
     --shadow-surface: inset 1px 1px 2px rgba(255, 255, 255, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.5), inset 0 4px 16px rgba(255, 255, 255, 0.025), 0 0 1px rgba(0, 0, 0, 0.25), 0 8px 16px 0 rgba(0, 0, 0, 0.05);
