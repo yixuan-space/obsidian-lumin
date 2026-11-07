@@ -3,7 +3,8 @@ body:not(.is-mobile) {
   --hover-sidedock-delay: 160ms;
   --hover-sidedock-close-delay: 160ms;
   --hover-sidedock-inset: 8px;
-  --hover-sidedock-trigger-area: 4px;
+  // Wide enough to sit past the native window resize border on Windows.
+  --hover-sidedock-trigger-area: 10px;
   --hover-reveal-duration: calc(280ms * var(--anim-speed-modifier));
   --hover-fade-duration: calc(200ms * var(--anim-speed-modifier));
   --hover-reveal-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -58,23 +59,26 @@ body:not(.is-mobile).hover-sidedock {
       left: auto;
     }
 
-    // Bridge the window edge to the floating panel without moving its hit area.
-    // The panel owns its background; this pseudo-element is only a hit target.
+    // Stationary hover strip over the window edge. It is counter-translated
+    // while revealing so it never moves with the panel: a moving hit target
+    // drops :hover mid-slide and makes the panel peek out and snap back.
     &::before {
       position: absolute;
       z-index: 0;
       inset-block: 0;
-      width: var(--hover-sidedock-inset);
+      width: var(--hover-sidedock-trigger-area);
       content: "";
       pointer-events: auto;
+      transition: transform var(--hover-reveal-duration) var(--hover-reveal-easing);
+      transition-delay: var(--hover-sidedock-close-delay);
     }
     &.mod-left-split::before {
-      left: calc(-1 * var(--hover-sidedock-inset));
-      right: auto;
+      left: auto;
+      right: 0;
     }
     &.mod-right-split::before {
-      right: calc(-1 * var(--hover-sidedock-inset));
-      left: auto;
+      right: auto;
+      left: 0;
     }
   }
 
@@ -85,6 +89,16 @@ body:not(.is-mobile).hover-sidedock {
     transition-delay: var(--hover-sidedock-delay);
     transform: none;
     opacity: 1;
+
+    &::before {
+      transition-delay: var(--hover-sidedock-delay);
+    }
+    &.mod-left-split::before {
+      transform: translateX(calc(-1 * (var(--hover-sidedock-width) + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area))));
+    }
+    &.mod-right-split::before {
+      transform: translateX(calc(var(--hover-sidedock-width) + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area)));
+    }
   }
 
   // Avoid replaying a second content animation inside the sliding panel.

@@ -36,7 +36,7 @@ body:not(.is-mobile) {
         background: none;
         margin-inline: 0;
         pointer-events: auto;
-        width: 8px;
+        width: var(--hover-sidedock-trigger-area);
       }
     }
   }

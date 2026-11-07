@@ -15,18 +15,6 @@ body.mod-windows {
 }
 
 body.mod-windows:not(.is-mobile) {
-  // Side panels
-  @keyframes workspaceLeafInWindows {
-    from {
-      transform: translateY(16px);
-      opacity: 0;
-    }
-  }
-
-  .mod-sidedock .workspace-leaf {
-    animation: workspaceLeafInWindows var(--anim-duration-moderate);
-  }
-
   .modal-bg {
     background-color: black;
     opacity: 0.3 !important;
@@ -59,7 +47,9 @@ body.mod-windows:not(.is-mobile) {
   }
 
   // Settings
-  .modal.mod-settings.mod-sidebar-layout .vertical-tab-content {
-    animation: workspaceLeafInWindows var(--anim-duration-moderate);
+  // The Windows settings window reads oversized next to macOS; scale the
+  // whole modal (fonts, spacing, controls) down to match.
+  .modal.mod-settings {
+    zoom: 0.9;
   }
 }
