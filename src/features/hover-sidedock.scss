@@ -1,15 +1,9 @@
 body:not(.is-mobile) {
   --hover-sidedock-width: 320px;
-  --hover-sidedock-delay: 160ms;
-  --hover-sidedock-close-delay: 160ms;
   --hover-sidedock-inset: 8px;
   // Wide enough to sit past the native window resize border on Windows.
   --hover-sidedock-trigger-area: 10px;
-  --hover-reveal-duration: calc(280ms * var(--anim-speed-modifier));
-  --hover-fade-duration: calc(200ms * var(--anim-speed-modifier));
-  --hover-reveal-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
-
 // Window drag fix
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split:hover + .mod-root,
 body:not(.is-mobile).hover-sidedock .mod-root:has(+ .mod-sidedock.is-sidedock-collapsed.mod-right-split:hover),
@@ -19,7 +13,6 @@ body:not(.is-mobile).hover-ribbon .workspace-ribbon.mod-left:hover ~ .mod-root {
     -webkit-app-region: no-drag;
   }
 }
-
 body:not(.is-mobile).hover-sidedock {
   // Obsidian no longer consistently writes an inline display value when a
   // sidedock is collapsed. The state class is the stable signal to restore it.
@@ -34,13 +27,19 @@ body:not(.is-mobile).hover-sidedock {
     height: auto;
     box-sizing: border-box;
     overflow: visible;
-    transition:
-      transform var(--hover-reveal-duration) var(--hover-reveal-easing),
-      opacity var(--hover-fade-duration) ease-out;
-    transition-delay: var(--hover-sidedock-close-delay);
+    // Only the edge strip (::before) may wake the panel. Without this, closing
+    // the dock leaves the pointer over the hidden overlay, whose :hover keeps
+    // it on screen.
+    pointer-events: none;
+    transition: none !important;
 
     .workspace-tabs {
       visibility: visible;
+      pointer-events: none;
+
+      * {
+        pointer-events: none !important;
+      }
     }
 
     // Position
@@ -69,8 +68,7 @@ body:not(.is-mobile).hover-sidedock {
       width: var(--hover-sidedock-trigger-area);
       content: "";
       pointer-events: auto;
-      transition: transform var(--hover-reveal-duration) var(--hover-reveal-easing);
-      transition-delay: var(--hover-sidedock-close-delay);
+      transition: none;
     }
     &.mod-left-split::before {
       left: auto;
@@ -84,20 +82,34 @@ body:not(.is-mobile).hover-sidedock {
 
   // Reveal on pointer interaction, not retained focus: clicking the dock toggle
   // can leave focus inside the now-collapsed panel and immediately reopen it.
-  .mod-sidedock.is-sidedock-collapsed:is(:hover, :has(.has-active-menu)),
-  &.hover-ribbon.show-ribbon .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)) + .mod-sidedock.is-sidedock-collapsed {
-    transition-delay: var(--hover-sidedock-delay);
+  .mod-sidedock.is-sidedock-collapsed:hover {
+    transition: none !important;
     transform: none;
     opacity: 1;
+    pointer-events: auto;
+
+    .workspace-tabs,
+    .workspace-tabs * {
+      pointer-events: auto !important;
+    }
 
     &::before {
-      transition-delay: var(--hover-sidedock-delay);
+      transition: none;
     }
     &.mod-left-split::before {
       transform: translateX(calc(-1 * (var(--hover-sidedock-width) + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area))));
     }
     &.mod-right-split::before {
       transform: translateX(calc(var(--hover-sidedock-width) + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area)));
+    }
+  }
+
+  // Ignore the transient hover state left behind by the left dock toggle.
+  .mod-sidedock.is-sidedock-collapsed:hover.mod-left-split {
+    transition: transform 0s linear 60ms, opacity 0s linear 60ms !important;
+
+    &::before {
+      transition: transform 0s linear 60ms;
     }
   }
 
@@ -125,16 +137,13 @@ body:not(.is-mobile).hover-ribbon.show-ribbon {
     opacity: 0;
     transform: translateX(calc(-100% + var(--hover-sidedock-trigger-area)));
     background-color: transparent;
-    transition:
-      transform var(--hover-reveal-duration) var(--hover-reveal-easing),
-      opacity var(--hover-fade-duration) ease-out !important;
-    transition-delay: var(--hover-sidedock-close-delay) !important;
+    transition: none !important;
   }
-  .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)),
-  &.hover-sidedock .workspace-ribbon.mod-left:has(+ .mod-sidedock.mod-left-split.is-sidedock-collapsed:is(:hover, :has(.has-active-menu))) {
+  .workspace-ribbon.mod-left:hover,
+  &.hover-sidedock .workspace-ribbon.mod-left:has(+ .mod-sidedock.mod-left-split.is-sidedock-collapsed:hover) {
     opacity: 1;
     transform: none;
-    transition-delay: var(--hover-sidedock-delay) !important;
+    transition: none !important;
   }
 
   // Reserve this space throughout the interaction instead of reflowing on hover.
@@ -151,12 +160,5 @@ body:not(.is-mobile).hover-ribbon.show-ribbon {
     .workspace-ribbon.mod-left.is-collapsed ~ .mod-root > div:first-of-type .workspace-tab-header-container {
       padding-left: var(--frame-left-space);
     }
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body:not(.is-mobile) {
-    --hover-reveal-duration: 0ms;
-    --hover-fade-duration: 0ms;
   }
 }

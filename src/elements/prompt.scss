@@ -1,18 +1,8 @@
 body:not(.is-phone) {
   --prompt-input-height: 56px;
 
-  @keyframes bounceInScale {
-    from {
-      transform: scale(1.15);
-      opacity: 0;
-    }
-    50% {
-      transform: scale(0.99);
-    }
-  }
-
   .prompt {
-    animation: var(--anim-duration-moderate) bounceInScale var(--anim-motion-baseline) forwards;
+    animation: promptIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
     border-radius: var(--radius-xl);
   }
 

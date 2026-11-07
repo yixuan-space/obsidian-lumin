@@ -1083,7 +1083,6 @@ body.is-tablet {
 @keyframes promptIn {
   from {
     opacity: 0;
-    transform: scale(0.975);
   }
 }
 body {
@@ -1099,13 +1098,19 @@ body .prompt .prompt-input:hover,
 body .prompt .prompt-input:focus,
 body .prompt .prompt-input:focus-visible {
   background-color: transparent;
-  border-bottom-color: var(--divider-color);
+  border: 0;
+  box-shadow: none;
+  outline: none;
 }
 body .prompt .prompt-results {
   flex: 1;
 }
 body .prompt .suggestion-item {
   padding: 12px;
+}
+body .prompt .suggestion-item:is(.is-selected, .selected) {
+  background-color: var(--background-modifier-hover);
+  border-radius: var(--radius-m);
 }
 
 body.is-phone .prompt {
@@ -4098,7 +4103,7 @@ body:not(.is-mobile).is-translucent .mod-sidedock.mod-left-split {
   background-color: rgba(from var(--background-primary) r g b/50%) !important;
 }
 body:not(.is-mobile) .mod-sidedock {
-  transition: var(--anim-duration-moderate), background-color 0s, box-shadow 0s;
+  transition: transform var(--anim-duration-moderate), opacity var(--anim-duration-moderate), background-color 0s, box-shadow 0s;
 }
 body:not(.is-mobile) .mod-sidedock.mod-left-split {
   corner-shape: var(--corner-shape);
@@ -4675,17 +4680,8 @@ body .modal.mod-settings .setting-group.mod-list.mod-no-icon:has(.setting-item-h
 body:not(.is-phone) {
   --prompt-input-height: 56px;
 }
-@keyframes bounceInScale {
-  from {
-    transform: scale(1.15);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(0.99);
-  }
-}
 body:not(.is-phone) .prompt {
-  animation: var(--anim-duration-moderate) bounceInScale var(--anim-motion-baseline) forwards;
+  animation: promptIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
   border-radius: var(--radius-xl);
 }
 body:not(.is-phone) .prompt-input-container::after {
@@ -6552,13 +6548,8 @@ body.focus-view:not(.mod-macos):not(.is-mobile):not(.is-popout-window):not(.is-h
 
 body:not(.is-mobile) {
   --hover-sidedock-width: 320px;
-  --hover-sidedock-delay: 160ms;
-  --hover-sidedock-close-delay: 160ms;
   --hover-sidedock-inset: 8px;
   --hover-sidedock-trigger-area: 10px;
-  --hover-reveal-duration: calc(280ms * var(--anim-speed-modifier));
-  --hover-fade-duration: calc(200ms * var(--anim-speed-modifier));
-  --hover-reveal-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split:hover + .mod-root div:is(.workspace-tab-header-container, .workspace-tab-header-container-inner),
@@ -6579,11 +6570,15 @@ body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed {
   height: auto;
   box-sizing: border-box;
   overflow: visible;
-  transition: transform var(--hover-reveal-duration) var(--hover-reveal-easing), opacity var(--hover-fade-duration) ease-out;
-  transition-delay: var(--hover-sidedock-close-delay);
+  pointer-events: none;
+  transition: none !important;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed .workspace-tabs {
   visibility: visible;
+  pointer-events: none;
+}
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed .workspace-tabs * {
+  pointer-events: none !important;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split {
   transform: translateX(calc(-100% - var(--hover-sidedock-inset) + var(--hover-sidedock-trigger-area)));
@@ -6606,8 +6601,7 @@ body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed::before 
   width: var(--hover-sidedock-trigger-area);
   content: "";
   pointer-events: auto;
-  transition: transform var(--hover-reveal-duration) var(--hover-reveal-easing);
-  transition-delay: var(--hover-sidedock-close-delay);
+  transition: none;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split::before {
   left: auto;
@@ -6617,19 +6611,30 @@ body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-righ
   right: auto;
   left: 0;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:is(:hover, :has(.has-active-menu)), body:not(.is-mobile).hover-sidedock.hover-ribbon.show-ribbon .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)) + .mod-sidedock.is-sidedock-collapsed {
-  transition-delay: var(--hover-sidedock-delay);
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover {
+  transition: none !important;
   transform: none;
   opacity: 1;
+  pointer-events: auto;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:is(:hover, :has(.has-active-menu))::before, body:not(.is-mobile).hover-sidedock.hover-ribbon.show-ribbon .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)) + .mod-sidedock.is-sidedock-collapsed::before {
-  transition-delay: var(--hover-sidedock-delay);
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover .workspace-tabs,
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover .workspace-tabs * {
+  pointer-events: auto !important;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:is(:hover, :has(.has-active-menu)).mod-left-split::before, body:not(.is-mobile).hover-sidedock.hover-ribbon.show-ribbon .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)) + .mod-sidedock.is-sidedock-collapsed.mod-left-split::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover::before {
+  transition: none;
+}
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover.mod-left-split::before {
   transform: translateX(calc(-1 * (var(--hover-sidedock-width) + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area))));
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:is(:hover, :has(.has-active-menu)).mod-right-split::before, body:not(.is-mobile).hover-sidedock.hover-ribbon.show-ribbon .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)) + .mod-sidedock.is-sidedock-collapsed.mod-right-split::before {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover.mod-right-split::before {
   transform: translateX(calc(var(--hover-sidedock-width) + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area)));
+}
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover.mod-left-split {
+  transition: transform 0s linear 60ms, opacity 0s linear 60ms !important;
+}
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover.mod-left-split::before {
+  transition: transform 0s linear 60ms;
 }
 body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed .workspace-leaf {
   animation: none !important;
@@ -6650,13 +6655,12 @@ body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left {
   opacity: 0;
   transform: translateX(calc(-100% + var(--hover-sidedock-trigger-area)));
   background-color: transparent;
-  transition: transform var(--hover-reveal-duration) var(--hover-reveal-easing), opacity var(--hover-fade-duration) ease-out !important;
-  transition-delay: var(--hover-sidedock-close-delay) !important;
+  transition: none !important;
 }
-body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left:is(:hover, :has(.has-active-menu)), body:not(.is-mobile).hover-ribbon.show-ribbon.hover-sidedock .workspace-ribbon.mod-left:has(+ .mod-sidedock.mod-left-split.is-sidedock-collapsed:is(:hover, :has(.has-active-menu))) {
+body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left:hover, body:not(.is-mobile).hover-ribbon.show-ribbon.hover-sidedock .workspace-ribbon.mod-left:has(+ .mod-sidedock.mod-left-split.is-sidedock-collapsed:hover) {
   opacity: 1;
   transform: none;
-  transition-delay: var(--hover-sidedock-delay) !important;
+  transition: none !important;
 }
 body:not(.is-mobile).hover-ribbon.show-ribbon.hover-sidedock .workspace-ribbon.mod-left + .mod-sidedock.mod-left-split.is-sidedock-collapsed {
   padding-left: calc(var(--ribbon-width) - 8px);
@@ -6669,12 +6673,6 @@ body:not(.is-mobile).hover-ribbon.show-ribbon.mod-macos:not(.is-fullscreen).is-h
   padding-left: var(--frame-left-space);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  body:not(.is-mobile) {
-    --hover-reveal-duration: 0ms;
-    --hover-fade-duration: 0ms;
-  }
-}
 body.mod-windows .nav-files-container > div {
   --nav-item-background-active: var(--background-modifier-hover);
   --nav-item-color-active: var(--nav-item-color);

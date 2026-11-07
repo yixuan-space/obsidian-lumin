@@ -1,7 +1,6 @@
 @keyframes promptIn {
   from {
     opacity: 0;
-    transform: scale(0.975);
   }
 }
 
@@ -18,7 +17,9 @@ body {
     .prompt-input:focus,
     .prompt-input:focus-visible {
       background-color: transparent;
-      border-bottom-color: var(--divider-color);
+      border: 0;
+      box-shadow: none;
+      outline: none;
     }
 
     .prompt-results {
@@ -26,6 +27,10 @@ body {
     }
     .suggestion-item {
       padding: 12px;
+    }
+    .suggestion-item:is(.is-selected, .selected) {
+      background-color: var(--background-modifier-hover);
+      border-radius: var(--radius-m);
     }
   }
 }

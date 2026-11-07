@@ -61,8 +61,12 @@ body:not(.is-mobile) {
     background-color: rgba(from var(--background-primary) r g b / 50%) !important;
   }
   .mod-sidedock {
+    // Obsidian animates the dock width itself (140ms); a CSS width transition
+    // here would resume after that animation ends and drag the width back to
+    // its old value, which reads as the panel shaking on every toggle.
     transition:
-      var(--anim-duration-moderate),
+      transform var(--anim-duration-moderate),
+      opacity var(--anim-duration-moderate),
       background-color 0s,
       box-shadow 0s;
   }
