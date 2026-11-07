@@ -205,6 +205,14 @@ body:not(.mod-macos):not(.is-mobile) {
   &.is-hidden-frameless .titlebar {
     height: var(--header-height);
   }
+  &.is-hidden-frameless:not(.is-popout-modal, .is-popout-window, .starter, .in-progress, .is-fullscreen):not(:has(.modal.mod-settings)) {
+    --titlebar-background: transparent;
+    --titlebar-background-focused: transparent;
+    .titlebar,
+    .titlebar-button-container {
+      background-color: transparent !important;
+    }
+  }
   .titlebar-button-container.mod-right {
     width: var(--frame-right-space);
   }
@@ -288,5 +296,13 @@ body.reduce-motion {
     color: var(--text-muted);
     font-size: var(--font-ui-medium);
     white-space: pre-wrap;
+  }
+}
+
+// Color the underlying workspace instead of placing a pseudo-element over
+// macOS traffic lights. Native window controls must keep their own surface.
+body.mod-macos:not(.is-mobile):not(.is-popout-window, .is-popout-modal):not(.is-translucent) {
+  .workspace {
+    background-color: var(--background-secondary) !important;
   }
 }

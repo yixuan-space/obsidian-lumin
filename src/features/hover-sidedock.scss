@@ -1,126 +1,94 @@
+// The reveal hit area is clipped, not translated: its coordinates never pass
+// across a toggle button during Obsidian's collapse transition.
 body:not(.is-mobile) {
   --hover-sidedock-width: 320px;
-  --hover-sidedock-inset: 8px;
-  // Wide enough to sit past the native window resize border on Windows.
   --hover-sidedock-trigger-area: 10px;
+  --hover-sidedock-left: 0px;
 }
-// Window drag fix
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split:hover + .mod-root,
-body:not(.is-mobile).hover-sidedock .mod-root:has(+ .mod-sidedock.is-sidedock-collapsed.mod-right-split:hover),
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed,
-body:not(.is-mobile).hover-ribbon .workspace-ribbon.mod-left:hover ~ .mod-root {
-  div:is(.workspace-tab-header-container, .workspace-tab-header-container-inner) {
-    -webkit-app-region: no-drag;
-  }
+body:not(.is-mobile).show-ribbon {
+  --hover-sidedock-left: var(--ribbon-width);
 }
+
 body:not(.is-mobile).hover-sidedock {
-  // Obsidian no longer consistently writes an inline display value when a
-  // sidedock is collapsed. The state class is the stable signal to restore it.
   .mod-sidedock.is-sidedock-collapsed {
     display: flex !important;
     position: absolute;
-    opacity: 0;
-    z-index: 11;
-    width: var(--hover-sidedock-width) !important;
-    top: var(--hover-sidedock-inset);
-    bottom: var(--hover-sidedock-inset);
+    top: calc(var(--header-height) + 8px);
+    bottom: 8px;
     height: auto;
+    width: min(var(--hover-sidedock-width), calc(100% - var(--hover-sidedock-left) - 16px)) !important;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    z-index: 14;
     overflow: visible;
-    // Only the edge strip (::before) may wake the panel. Without this, closing
-    // the dock leaves the pointer over the hidden overlay, whose :hover keeps
-    // it on screen.
-    pointer-events: none;
+    transform: none;
+    opacity: 0;
     transition: none !important;
+    box-shadow: var(--shadow-s);
+    border-radius: var(--radius-window, var(--radius-m));
+    background-color: var(--background-primary) !important;
 
+    &.mod-left-split {
+      left: var(--hover-sidedock-left);
+      right: auto;
+      clip-path: inset(0 calc(100% - var(--hover-sidedock-trigger-area)) 0 0);
+    }
+    &.mod-right-split {
+      right: 0;
+      left: auto;
+      clip-path: inset(0 0 0 calc(100% - var(--hover-sidedock-trigger-area)));
+    }
+    &::before {
+      content: none;
+    }
     .workspace-tabs {
       visibility: visible;
-      pointer-events: none;
-
-      * {
-        pointer-events: none !important;
-      }
     }
+    .workspace-leaf {
+      animation: none !important;
+    }
+    // Floating panels sit below native caption controls on both platforms.
+    .workspace-tab-header-container {
+      -webkit-app-region: no-drag;
+      padding-inline: 8px;
+    }
+    &:hover {
+      clip-path: inset(-32px);
+      opacity: 1;
+    }
+  }
 
-    // Position
+  // Explicitly exclude toggles, including ones reparented by Obsidian while
+  // collapsing. Focus/active tabs and Ribbon hover are not reveal signals.
+  &:has(.sidebar-toggle-button:hover) .mod-sidedock.is-sidedock-collapsed {
+    opacity: 0;
     &.mod-left-split {
-      transform: translateX(calc(-100% - var(--hover-sidedock-inset) + var(--hover-sidedock-trigger-area)));
+      clip-path: inset(0 calc(100% - var(--hover-sidedock-trigger-area)) 0 0);
     }
     &.mod-right-split {
-      transform: translateX(calc(100% + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area)));
-    }
-    &.mod-left-split {
-      right: auto;
-      left: var(--hover-sidedock-inset);
-    }
-    &.mod-right-split {
-      right: var(--hover-sidedock-inset);
-      left: auto;
-    }
-
-    // Stationary hover strip over the window edge. It is counter-translated
-    // while revealing so it never moves with the panel: a moving hit target
-    // drops :hover mid-slide and makes the panel peek out and snap back.
-    &::before {
-      position: absolute;
-      z-index: 0;
-      inset-block: 0;
-      width: var(--hover-sidedock-trigger-area);
-      content: "";
-      pointer-events: auto;
-      transition: none;
-    }
-    &.mod-left-split::before {
-      left: auto;
-      right: 0;
-    }
-    &.mod-right-split::before {
-      right: auto;
-      left: 0;
+      clip-path: inset(0 0 0 calc(100% - var(--hover-sidedock-trigger-area)));
     }
   }
+}
 
-  // Reveal on pointer interaction, not retained focus: clicking the dock toggle
-  // can leave focus inside the now-collapsed panel and immediately reopen it.
-  .mod-sidedock.is-sidedock-collapsed:hover {
-    transition: none !important;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
+// Native caption space is measured from the window edge. The root tab strip
+// already starts after a pinned Ribbon, so reserve only the remaining width.
+body.mod-macos:not(.is-mobile).hover-sidedock.is-hidden-frameless:not(.is-fullscreen) {
+  --hover-sidedock-caption-offset: 0px;
 
-    .workspace-tabs,
-    .workspace-tabs * {
-      pointer-events: auto !important;
-    }
-
-    &::before {
-      transition: none;
-    }
-    &.mod-left-split::before {
-      transform: translateX(calc(-1 * (var(--hover-sidedock-width) + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area))));
-    }
-    &.mod-right-split::before {
-      transform: translateX(calc(var(--hover-sidedock-width) + var(--hover-sidedock-inset) - var(--hover-sidedock-trigger-area)));
-    }
+  &.show-ribbon:not(.hover-ribbon) {
+    --hover-sidedock-caption-offset: var(--ribbon-width);
   }
 
-  // Ignore the transient hover state left behind by the left dock toggle.
-  .mod-sidedock.is-sidedock-collapsed:hover.mod-left-split {
-    transition: transform 0s linear 60ms, opacity 0s linear 60ms !important;
-
-    &::before {
-      transition: transform 0s linear 60ms;
-    }
+  .workspace:not(.is-left-sidedock-open) .mod-root .workspace-tabs.mod-top-left-space {
+    --frame-left-space: max(0px, calc(var(--macos-window-controls-space) - var(--hover-sidedock-caption-offset)));
   }
 
-  // Avoid replaying a second content animation inside the sliding panel.
-  .mod-sidedock.is-sidedock-collapsed .workspace-leaf {
-    animation: none !important;
-  }
-
-  // Keep Windows caption space even while the dock is overlaid on the editor.
-  &:not(.mod-macos).is-hidden-frameless:not(.is-fullscreen) .mod-sidedock.mod-right-split.is-sidedock-collapsed .workspace-tabs.mod-top .workspace-tab-header-container {
-    padding-right: var(--frame-right-space);
+  // Floating tabs are below the traffic lights, not alongside them.
+  .mod-sidedock.mod-left-split.is-sidedock-collapsed .mod-top-left-space .workspace-tab-header-container {
+    padding-inline-start: 8px;
   }
 }
 
@@ -128,37 +96,22 @@ body:not(.is-mobile).hover-ribbon.show-ribbon {
   .workspace-ribbon.mod-left {
     position: absolute;
     z-index: 12;
-    top: 0;
+    top: var(--header-height);
     bottom: 0;
-    height: auto;
-    margin-block: 0;
-    padding-left: 0;
     left: 0;
+    height: auto;
+    margin: 0;
+    padding-left: 0;
     opacity: 0;
     transform: translateX(calc(-100% + var(--hover-sidedock-trigger-area)));
-    background-color: transparent;
+    background-color: var(--background-primary);
     transition: none !important;
   }
-  .workspace-ribbon.mod-left:hover,
-  &.hover-sidedock .workspace-ribbon.mod-left:has(+ .mod-sidedock.mod-left-split.is-sidedock-collapsed:hover) {
+  .workspace-ribbon.mod-left:hover {
     opacity: 1;
     transform: none;
-    transition: none !important;
   }
-
-  // Reserve this space throughout the interaction instead of reflowing on hover.
-  &.hover-sidedock .workspace-ribbon.mod-left + .mod-sidedock.mod-left-split.is-sidedock-collapsed {
-    padding-left: calc(var(--ribbon-width) - 8px);
-  }
-  &.hover-sidedock .workspace-ribbon.mod-left.is-collapsed {
-    z-index: 13;
-  }
-
-  // macOS fix
-  &.mod-macos:not(.is-fullscreen).is-hidden-frameless {
-    .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container,
-    .workspace-ribbon.mod-left.is-collapsed ~ .mod-root > div:first-of-type .workspace-tab-header-container {
-      padding-left: var(--frame-left-space);
-    }
+  &.mod-macos .workspace-ribbon.mod-left .side-dock-actions {
+    padding-top: 0;
   }
 }
