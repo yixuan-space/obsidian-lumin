@@ -10,10 +10,10 @@ body:not(.is-mobile) {
   // Side panels
   --shadow-sidedock-spread: 0 0 transparent;
 
-  .mod-sidedock.mod-left-split {
+  .mod-sidedock:is(.mod-left-split, .mod-primary-split) {
     margin-right: 8px;
   }
-  .mod-sidedock.mod-right-split {
+  .mod-sidedock:is(.mod-right-split, .mod-secondary-split) {
     background-color: transparent !important;
 
     > .workspace-leaf-resize-handle {

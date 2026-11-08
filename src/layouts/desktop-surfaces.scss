@@ -13,7 +13,7 @@ body:not(.is-mobile) {
       opacity: 0.5;
     }
     .modal.mod-settings .vertical-tab-header,
-    .mod-sidedock.mod-left-split,
+    .mod-sidedock:is(.mod-left-split, .mod-primary-split),
     .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header {
       background-color: var(--background-modifier-hover) !important;
       box-shadow: none !important;
@@ -22,10 +22,10 @@ body:not(.is-mobile) {
   }
 
   // Side panels
-  &.is-fullscreen .mod-sidedock.mod-left-split {
+  &.is-fullscreen .mod-sidedock:is(.mod-left-split, .mod-primary-split) {
     border-radius: var(--radius-m);
 
-    .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
+    .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container {
       height: calc(var(--header-height) - 8px);
       padding-left: var(--frame-left-space);
     }
@@ -34,22 +34,22 @@ body:not(.is-mobile) {
   &.show-ribbon {
     // Keep the Ribbon at the same height when Obsidian toggles is-collapsed.
     // Otherwise the collapsed state falls back to margin-top: --header-height.
-    .workspace-ribbon.mod-left {
+    .workspace-ribbon:is(.mod-left, .mod-primary) {
       margin-block: 8px;
     }
-    .workspace-ribbon.mod-left:not(.is-collapsed) .sidebar-toggle-button {
+    .workspace-ribbon:is(.mod-left, .mod-primary):not(.is-collapsed) .sidebar-toggle-button {
       height: calc(var(--header-height) - 24px);
     }
-    &:not(.hover-ribbon) .workspace-ribbon.mod-left:not(.is-collapsed) {
+    &:not(.hover-ribbon) .workspace-ribbon:is(.mod-left, .mod-primary):not(.is-collapsed) {
       padding-left: 16px;
     }
-    &:not(.hover-ribbon) .mod-sidedock.mod-left-split:not(.is-sidedock-collapsed) {
+    &:not(.hover-ribbon) .mod-sidedock:is(.mod-left-split, .mod-primary-split):not(.is-sidedock-collapsed) {
       margin-left: calc(-1 * var(--ribbon-width) + 8px);
       padding-left: var(--ribbon-width);
     }
 
-    .workspace-ribbon.mod-left .sidebar-toggle-button .clickable-icon:hover,
-    .workspace-ribbon.mod-left .side-dock-actions .side-dock-ribbon-action:hover {
+    .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button .clickable-icon:hover,
+    .workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions .side-dock-ribbon-action:hover {
       box-shadow: none !important;
       background-color: transparent !important;
       color: var(--text-normal);
@@ -59,20 +59,16 @@ body:not(.is-mobile) {
   &:not(.is-translucent).theme-dark .mod-sidedock {
     background-color: hsl(from var(--background-primary) h s calc(l - 2));
   }
-  &.is-translucent .mod-sidedock.mod-left-split {
+  &.is-translucent .mod-sidedock:is(.mod-left-split, .mod-primary-split) {
     background-color: rgba(from var(--background-primary) r g b / 50%) !important;
   }
   .mod-sidedock {
     // Obsidian animates the dock width itself (140ms); a CSS width transition
     // here would resume after that animation ends and drag the width back to
     // its old value, which reads as the panel shaking on every toggle.
-    transition:
-      transform var(--anim-duration-moderate),
-      opacity var(--anim-duration-moderate),
-      background-color 0s,
-      box-shadow 0s;
+    transition: none;
   }
-  .mod-sidedock.mod-left-split {
+  .mod-sidedock:is(.mod-left-split, .mod-primary-split) {
     corner-shape: var(--corner-shape);
     z-index: var(--layer-sidedock);
     margin: 8px 0 8px 8px;
@@ -83,11 +79,11 @@ body:not(.is-mobile) {
     overflow: hidden;
   }
 
-  .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
+  .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container {
     padding-block: 0px;
   }
-  .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container,
-  .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container .sidebar-toggle-button {
+  .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container,
+  .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container .sidebar-toggle-button {
     min-height: calc(var(--header-height) - 16px);
     max-height: calc(var(--header-height) - 16px);
 
@@ -96,7 +92,7 @@ body:not(.is-mobile) {
     }
   }
 
-  .mod-sidedock.mod-right-split > .workspace-leaf-resize-handle {
+  .mod-sidedock:is(.mod-right-split, .mod-secondary-split) > .workspace-leaf-resize-handle {
     border-color: var(--divider-color);
   }
 

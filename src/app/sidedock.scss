@@ -17,13 +17,6 @@ body.is-mobile {
   --nav-item-children-margin-start: 12px;
 }
 
-@keyframes workspaceLeafIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
-
 .sidebar-toggle-icon-inner {
   transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
 }
@@ -84,33 +77,34 @@ body.mod-macos:not(.is-mobile) {
   );
   --frame-left-space: var(--macos-window-controls-space);
 
-  .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
+  .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container {
     padding-inline-start: var(--frame-left-space);
   }
 
   // Keep the Ribbon actions below the native traffic-light controls while
   // preserving the Ribbon's continuous hit area.
-  .workspace-ribbon.mod-left .side-dock-actions {
+  .workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions {
     padding-top: var(--macos-window-controls-height);
   }
 }
 
-body.is-hidden-frameless:not(.is-mobile) .workspace-ribbon.mod-left {
+// Newer Obsidian builds use mod-primary instead of mod-left for the Ribbon.
+body.is-hidden-frameless:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary) {
   padding-top: 0;
 }
-.workspace-ribbon.mod-left {
+.workspace-ribbon:is(.mod-left, .mod-primary) {
   border-right: none;
   z-index: 11;
   transition: var(--anim-duration-moderate) !important;
   position: relative;
 }
-.workspace-ribbon.mod-left:not(.is-collapsed) {
+.workspace-ribbon:is(.mod-left, .mod-primary):not(.is-collapsed) {
   padding-left: 12px;
 }
-.workspace-ribbon.mod-left:before {
+.workspace-ribbon:is(.mod-left, .mod-primary):before {
   content: none;
 }
-.workspace-ribbon.mod-left .sidebar-toggle-button {
+.workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button {
   position: relative;
   display: flex;
   height: var(--header-height);
@@ -119,30 +113,30 @@ body.is-hidden-frameless:not(.is-mobile) .workspace-ribbon.mod-left {
   align-items: center;
   justify-content: center;
 }
-.workspace-ribbon.mod-left .sidebar-toggle-button .clickable-icon {
+.workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button .clickable-icon {
   pointer-events: auto;
   z-index: 1;
 }
-.workspace-ribbon.mod-left .side-dock-actions {
+.workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions {
   gap: 4px;
   transition: var(--anim-duration-moderate);
   z-index: 1;
   color: var(--icon-color);
 }
-.workspace-ribbon.mod-left .sidebar-toggle-button .clickable-icon,
-.workspace-ribbon.mod-left .side-dock-actions .side-dock-ribbon-action {
+.workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button .clickable-icon,
+.workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions .side-dock-ribbon-action {
   width: var(--tab-action-width);
 }
 
-body:not(.is-mobile):not(.is-hidden-frameless) .workspace-ribbon.mod-left {
+body:not(.is-mobile):not(.is-hidden-frameless) .workspace-ribbon:is(.mod-left, .mod-primary) {
   margin-top: 0;
 }
-body:not(.is-mobile):not(.is-hidden-frameless) .workspace-ribbon.mod-left .sidebar-toggle-button {
+body:not(.is-mobile):not(.is-hidden-frameless) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button {
   height: auto;
   padding: 0;
   margin: 0 auto;
 }
-body:not(.is-mobile).is-hidden-frameless .workspace-ribbon.mod-left .sidebar-toggle-button {
+body:not(.is-mobile).is-hidden-frameless .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button {
   height: calc(var(--header-height) - 16px);
 }
 
@@ -154,9 +148,6 @@ body:not(.is-mobile) {
 
   .mod-sidedock .workspace-leaf {
     background-color: transparent;
-  }
-  .mod-sidedock .workspace-leaf:not([style*="display: none"]) {
-    animation: workspaceLeafIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
   }
 
   // Sidedock padding
@@ -214,13 +205,13 @@ body:not(.nav-action-center) .mod-sidedock .workspace-leaf-content .nav-header:f
 }
 
 // Vault switcher
-body:not(.is-mobile) .workspace-split.mod-left-split .workspace-drawer-vault-actions .clickable-icon:first-child {
+body:not(.is-mobile) .workspace-split:is(.mod-left-split, .mod-primary-split) .workspace-drawer-vault-actions .clickable-icon:first-child {
   display: none;
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-sidedock-vault-profile {
   background-color: transparent;
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) {
   .workspace-sidedock-vault-profile {
     border-top: none;
     position: absolute;

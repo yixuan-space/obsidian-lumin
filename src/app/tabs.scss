@@ -32,7 +32,7 @@ body.is-tablet {
 
 // All panels
 body:not(.is-phone) .workspace-tab-header-container {
-  transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
+  transition: background-color var(--anim-duration-fast);
   background-color: transparent;
   border-bottom: none;
 }

@@ -174,17 +174,17 @@ body:not(.is-mobile) {
   --icon-xl: calc(32px + var(--icon-size-modifier));
 }
 body:not(.is-mobile) .app-container {
-  transition: var(--anim-duration-moderate);
+  transition: background-color var(--anim-duration-fast);
   align-items: center;
 }
 body:not(.is-mobile):not(.is-translucent) .workspace {
   background: var(--background-secondary);
 }
 body:not(.is-mobile) .workspace {
-  transition: var(--anim-duration-moderate);
+  transition: background-color var(--anim-duration-fast);
 }
 body:not(.is-mobile) .workspace-split {
-  transition: var(--anim-duration-moderate);
+  transition: background-color var(--anim-duration-fast);
   background-color: transparent;
 }
 
@@ -415,7 +415,7 @@ body.is-tablet {
 }
 
 body:not(.is-phone) .workspace-tab-header-container {
-  transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
+  transition: background-color var(--anim-duration-fast);
   background-color: transparent;
   border-bottom: none;
 }
@@ -677,12 +677,6 @@ body.is-mobile {
   --nav-item-children-margin-start: 12px;
 }
 
-@keyframes workspaceLeafIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
 .sidebar-toggle-icon-inner {
   transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
 }
@@ -744,33 +738,33 @@ body.mod-macos:not(.is-mobile) {
   );
   --frame-left-space: var(--macos-window-controls-space);
 }
-body.mod-macos:not(.is-mobile) .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
+body.mod-macos:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container {
   padding-inline-start: var(--frame-left-space);
 }
-body.mod-macos:not(.is-mobile) .workspace-ribbon.mod-left .side-dock-actions {
+body.mod-macos:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions {
   padding-top: var(--macos-window-controls-height);
 }
 
-body.is-hidden-frameless:not(.is-mobile) .workspace-ribbon.mod-left {
+body.is-hidden-frameless:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary) {
   padding-top: 0;
 }
 
-.workspace-ribbon.mod-left {
+.workspace-ribbon:is(.mod-left, .mod-primary) {
   border-right: none;
   z-index: 11;
   transition: var(--anim-duration-moderate) !important;
   position: relative;
 }
 
-.workspace-ribbon.mod-left:not(.is-collapsed) {
+.workspace-ribbon:is(.mod-left, .mod-primary):not(.is-collapsed) {
   padding-left: 12px;
 }
 
-.workspace-ribbon.mod-left:before {
+.workspace-ribbon:is(.mod-left, .mod-primary):before {
   content: none;
 }
 
-.workspace-ribbon.mod-left .sidebar-toggle-button {
+.workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button {
   position: relative;
   display: flex;
   height: var(--header-height);
@@ -780,34 +774,34 @@ body.is-hidden-frameless:not(.is-mobile) .workspace-ribbon.mod-left {
   justify-content: center;
 }
 
-.workspace-ribbon.mod-left .sidebar-toggle-button .clickable-icon {
+.workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button .clickable-icon {
   pointer-events: auto;
   z-index: 1;
 }
 
-.workspace-ribbon.mod-left .side-dock-actions {
+.workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions {
   gap: 4px;
   transition: var(--anim-duration-moderate);
   z-index: 1;
   color: var(--icon-color);
 }
 
-.workspace-ribbon.mod-left .sidebar-toggle-button .clickable-icon,
-.workspace-ribbon.mod-left .side-dock-actions .side-dock-ribbon-action {
+.workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button .clickable-icon,
+.workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions .side-dock-ribbon-action {
   width: var(--tab-action-width);
 }
 
-body:not(.is-mobile):not(.is-hidden-frameless) .workspace-ribbon.mod-left {
+body:not(.is-mobile):not(.is-hidden-frameless) .workspace-ribbon:is(.mod-left, .mod-primary) {
   margin-top: 0;
 }
 
-body:not(.is-mobile):not(.is-hidden-frameless) .workspace-ribbon.mod-left .sidebar-toggle-button {
+body:not(.is-mobile):not(.is-hidden-frameless) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button {
   height: auto;
   padding: 0;
   margin: 0 auto;
 }
 
-body:not(.is-mobile).is-hidden-frameless .workspace-ribbon.mod-left .sidebar-toggle-button {
+body:not(.is-mobile).is-hidden-frameless .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button {
   height: calc(var(--header-height) - 16px);
 }
 
@@ -816,9 +810,6 @@ body:not(.is-mobile) .mod-sidedock > .workspace-leaf-resize-handle:not(:hover) {
 }
 body:not(.is-mobile) .mod-sidedock .workspace-leaf {
   background-color: transparent;
-}
-body:not(.is-mobile) .mod-sidedock .workspace-leaf:not([style*="display: none"]) {
-  animation: workspaceLeafIn var(--anim-duration-moderate) var(--anim-motion-baseline) forwards;
 }
 body:not(.is-mobile) .mod-sidedock .workspace-leaf-content > .node-insert-event,
 body:not(.is-mobile) .mod-sidedock .workspace-leaf-content > .view-content {
@@ -866,15 +857,15 @@ body:not(.nav-action-center) .mod-sidedock .workspace-leaf-content .nav-header:f
   height: 0px;
 }
 
-body:not(.is-mobile) .workspace-split.mod-left-split .workspace-drawer-vault-actions .clickable-icon:first-child {
+body:not(.is-mobile) .workspace-split:is(.mod-left-split, .mod-primary-split) .workspace-drawer-vault-actions .clickable-icon:first-child {
   display: none;
 }
 
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-sidedock-vault-profile {
   background-color: transparent;
 }
 
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-sidedock-vault-profile {
   border-top: none;
   position: absolute;
   inset: auto 0 0 auto;
@@ -883,31 +874,31 @@ body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-prof
   width: auto;
   max-width: 100%;
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:hover ~ .workspace-tabs:last-child {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-sidedock-vault-profile:hover ~ .workspace-tabs:last-child {
   mask: linear-gradient(to top, transparent, black 64px);
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher.has-active-menu {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher.has-active-menu {
   background-color: var(--interactive-normal);
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher {
   flex: 0 1 auto;
   max-width: 0;
   padding-inline: 0;
   opacity: 0;
   transition: max-width var(--anim-duration-moderate) var(--anim-motion-baseline), padding var(--anim-duration-fast) ease-out, opacity var(--anim-duration-fast) ease-out;
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-sidedock-vault-profile:is(:hover, :has(.has-active-menu), :has(.clickable-icon:focus-visible)) .workspace-drawer-vault-switcher {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-sidedock-vault-profile:is(:hover, :has(.has-active-menu), :has(.clickable-icon:focus-visible)) .workspace-drawer-vault-switcher {
   max-width: 240px;
   padding-inline: var(--size-4-2);
   opacity: 1;
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-drawer-vault-switcher,
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-drawer-vault-actions .clickable-icon {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-drawer-vault-switcher,
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-drawer-vault-actions .clickable-icon {
   transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
   pointer-events: visible;
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-leaf-content > .node-insert-event,
-body:not(.is-mobile) .mod-sidedock.mod-left-split .workspace-leaf-content > .view-content {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-leaf-content > .node-insert-event,
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-leaf-content > .view-content {
   padding-bottom: 64px;
 }
 
@@ -2179,8 +2170,8 @@ body.is-phone.theme-dark {
   --modal-sidebar-background: var(--background-secondary);
   --mobile-sidebar-background: var(--background-primary);
 }
-body .workspace-ribbon.mod-left .sidebar-toggle-button .clickable-icon:hover,
-body .workspace-ribbon.mod-left .side-dock-actions .side-dock-ribbon-action:hover {
+body .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button .clickable-icon:hover,
+body .workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions .side-dock-ribbon-action:hover {
   box-shadow: none !important;
   background-color: transparent !important;
   color: var(--text-normal);
@@ -4056,34 +4047,34 @@ body:not(.is-mobile):not(.is-focused):not(.reduce-contrast-change) .mod-sidedock
   opacity: 0.5;
 }
 body:not(.is-mobile):not(.is-focused):not(.reduce-contrast-change) .modal.mod-settings .vertical-tab-header,
-body:not(.is-mobile):not(.is-focused):not(.reduce-contrast-change) .mod-sidedock.mod-left-split,
+body:not(.is-mobile):not(.is-focused):not(.reduce-contrast-change) .mod-sidedock:is(.mod-left-split, .mod-primary-split),
 body:not(.is-mobile):not(.is-focused):not(.reduce-contrast-change) .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header {
   background-color: var(--background-modifier-hover) !important;
   box-shadow: none !important;
   transition: none;
 }
-body:not(.is-mobile).is-fullscreen .mod-sidedock.mod-left-split {
+body:not(.is-mobile).is-fullscreen .mod-sidedock:is(.mod-left-split, .mod-primary-split) {
   border-radius: var(--radius-m);
 }
-body:not(.is-mobile).is-fullscreen .mod-sidedock.mod-left-split .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
+body:not(.is-mobile).is-fullscreen .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container {
   height: calc(var(--header-height) - 8px);
   padding-left: var(--frame-left-space);
 }
-body:not(.is-mobile).show-ribbon .workspace-ribbon.mod-left {
+body:not(.is-mobile).show-ribbon .workspace-ribbon:is(.mod-left, .mod-primary) {
   margin-block: 8px;
 }
-body:not(.is-mobile).show-ribbon .workspace-ribbon.mod-left:not(.is-collapsed) .sidebar-toggle-button {
+body:not(.is-mobile).show-ribbon .workspace-ribbon:is(.mod-left, .mod-primary):not(.is-collapsed) .sidebar-toggle-button {
   height: calc(var(--header-height) - 24px);
 }
-body:not(.is-mobile).show-ribbon:not(.hover-ribbon) .workspace-ribbon.mod-left:not(.is-collapsed) {
+body:not(.is-mobile).show-ribbon:not(.hover-ribbon) .workspace-ribbon:is(.mod-left, .mod-primary):not(.is-collapsed) {
   padding-left: 16px;
 }
-body:not(.is-mobile).show-ribbon:not(.hover-ribbon) .mod-sidedock.mod-left-split:not(.is-sidedock-collapsed) {
+body:not(.is-mobile).show-ribbon:not(.hover-ribbon) .mod-sidedock:is(.mod-left-split, .mod-primary-split):not(.is-sidedock-collapsed) {
   margin-left: calc(-1 * var(--ribbon-width) + 8px);
   padding-left: var(--ribbon-width);
 }
-body:not(.is-mobile).show-ribbon .workspace-ribbon.mod-left .sidebar-toggle-button .clickable-icon:hover,
-body:not(.is-mobile).show-ribbon .workspace-ribbon.mod-left .side-dock-actions .side-dock-ribbon-action:hover {
+body:not(.is-mobile).show-ribbon .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button .clickable-icon:hover,
+body:not(.is-mobile).show-ribbon .workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions .side-dock-ribbon-action:hover {
   box-shadow: none !important;
   background-color: transparent !important;
   color: var(--text-normal);
@@ -4091,13 +4082,13 @@ body:not(.is-mobile).show-ribbon .workspace-ribbon.mod-left .side-dock-actions .
 body:not(.is-mobile):not(.is-translucent).theme-dark .mod-sidedock {
   background-color: hsl(from var(--background-primary) h s calc(l - 2));
 }
-body:not(.is-mobile).is-translucent .mod-sidedock.mod-left-split {
+body:not(.is-mobile).is-translucent .mod-sidedock:is(.mod-left-split, .mod-primary-split) {
   background-color: rgba(from var(--background-primary) r g b/50%) !important;
 }
 body:not(.is-mobile) .mod-sidedock {
-  transition: transform var(--anim-duration-moderate), opacity var(--anim-duration-moderate), background-color 0s, box-shadow 0s;
+  transition: none;
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) {
   corner-shape: var(--corner-shape);
   z-index: var(--layer-sidedock);
   margin: 8px 0 8px 8px;
@@ -4107,19 +4098,19 @@ body:not(.is-mobile) .mod-sidedock.mod-left-split {
   height: auto;
   overflow: hidden;
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container {
   padding-block: 0px;
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container,
-body:not(.is-mobile) .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container .sidebar-toggle-button {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container,
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container .sidebar-toggle-button {
   min-height: calc(var(--header-height) - 16px);
   max-height: calc(var(--header-height) - 16px);
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container div:is(.workspace-tab-header-inner, .clickable-icon),
-body:not(.is-mobile) .mod-sidedock.mod-left-split .mod-top-left-space .workspace-tab-header-container .sidebar-toggle-button div:is(.workspace-tab-header-inner, .clickable-icon) {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container div:is(.workspace-tab-header-inner, .clickable-icon),
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .mod-top-left-space .workspace-tab-header-container .sidebar-toggle-button div:is(.workspace-tab-header-inner, .clickable-icon) {
   padding-block: 4px;
 }
-body:not(.is-mobile) .mod-sidedock.mod-right-split > .workspace-leaf-resize-handle {
+body:not(.is-mobile) .mod-sidedock:is(.mod-right-split, .mod-secondary-split) > .workspace-leaf-resize-handle {
   border-color: var(--divider-color);
 }
 body:not(.is-mobile) .modal-container:has(.modal.mod-settings) {
@@ -4198,13 +4189,13 @@ body:not(.is-mobile) .workspace-tabs {
 body:not(.is-mobile) {
   --shadow-sidedock-spread: 0 0 transparent;
 }
-body:not(.is-mobile) .mod-sidedock.mod-left-split {
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) {
   margin-right: 8px;
 }
-body:not(.is-mobile) .mod-sidedock.mod-right-split {
+body:not(.is-mobile) .mod-sidedock:is(.mod-right-split, .mod-secondary-split) {
   background-color: transparent !important;
 }
-body:not(.is-mobile) .mod-sidedock.mod-right-split > .workspace-leaf-resize-handle {
+body:not(.is-mobile) .mod-sidedock:is(.mod-right-split, .mod-secondary-split) > .workspace-leaf-resize-handle {
   border-color: transparent;
 }
 
@@ -6563,17 +6554,17 @@ body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed {
   overflow: visible;
   transform: none;
   opacity: 0;
-  transition: none !important;
+  transition: opacity var(--anim-duration-fast) ease-out !important;
   box-shadow: var(--shadow-s);
   border-radius: var(--radius-window, var(--radius-m));
   background-color: var(--background-primary) !important;
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-left-split {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:is(.mod-left-split, .mod-primary-split) {
   left: var(--hover-sidedock-left);
   right: auto;
   clip-path: inset(0 calc(100% - var(--hover-sidedock-trigger-area)) 0 0);
 }
-body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed.mod-right-split {
+body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:is(.mod-right-split, .mod-secondary-split) {
   right: 0;
   left: auto;
   clip-path: inset(0 0 0 calc(100% - var(--hover-sidedock-trigger-area)));
@@ -6597,14 +6588,20 @@ body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed:hover {
 }
 body:not(.is-mobile).hover-sidedock:has(.sidebar-toggle-button:hover) .mod-sidedock.is-sidedock-collapsed {
   opacity: 0;
+  transition: none !important;
 }
-body:not(.is-mobile).hover-sidedock:has(.sidebar-toggle-button:hover) .mod-sidedock.is-sidedock-collapsed.mod-left-split {
+body:not(.is-mobile).hover-sidedock:has(.sidebar-toggle-button:hover) .mod-sidedock.is-sidedock-collapsed:is(.mod-left-split, .mod-primary-split) {
   clip-path: inset(0 calc(100% - var(--hover-sidedock-trigger-area)) 0 0);
 }
-body:not(.is-mobile).hover-sidedock:has(.sidebar-toggle-button:hover) .mod-sidedock.is-sidedock-collapsed.mod-right-split {
+body:not(.is-mobile).hover-sidedock:has(.sidebar-toggle-button:hover) .mod-sidedock.is-sidedock-collapsed:is(.mod-right-split, .mod-secondary-split) {
   clip-path: inset(0 0 0 calc(100% - var(--hover-sidedock-trigger-area)));
 }
 
+@media (prefers-reduced-motion: reduce) {
+  body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed {
+    transition: none !important;
+  }
+}
 body.mod-macos:not(.is-mobile).hover-sidedock.is-hidden-frameless:not(.is-fullscreen) {
   --hover-sidedock-caption-offset: 0px;
 }
@@ -6614,11 +6611,11 @@ body.mod-macos:not(.is-mobile).hover-sidedock.is-hidden-frameless:not(.is-fullsc
 body.mod-macos:not(.is-mobile).hover-sidedock.is-hidden-frameless:not(.is-fullscreen) .workspace:not(.is-left-sidedock-open) .mod-root .workspace-tabs.mod-top-left-space {
   --frame-left-space: max(0px, calc(var(--macos-window-controls-space) - var(--hover-sidedock-caption-offset)));
 }
-body.mod-macos:not(.is-mobile).hover-sidedock.is-hidden-frameless:not(.is-fullscreen) .mod-sidedock.mod-left-split.is-sidedock-collapsed .mod-top-left-space .workspace-tab-header-container {
+body.mod-macos:not(.is-mobile).hover-sidedock.is-hidden-frameless:not(.is-fullscreen) .mod-sidedock:is(.mod-left-split, .mod-primary-split).is-sidedock-collapsed .mod-top-left-space .workspace-tab-header-container {
   padding-inline-start: 8px;
 }
 
-body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left {
+body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon:is(.mod-left, .mod-primary) {
   position: absolute;
   z-index: 12;
   top: var(--header-height);
@@ -6632,11 +6629,11 @@ body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left {
   background-color: var(--background-primary);
   transition: none !important;
 }
-body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon.mod-left:hover {
+body:not(.is-mobile).hover-ribbon.show-ribbon .workspace-ribbon:is(.mod-left, .mod-primary):hover {
   opacity: 1;
   transform: none;
 }
-body:not(.is-mobile).hover-ribbon.show-ribbon.mod-macos .workspace-ribbon.mod-left .side-dock-actions {
+body:not(.is-mobile).hover-ribbon.show-ribbon.mod-macos .workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions {
   padding-top: 0;
 }
 

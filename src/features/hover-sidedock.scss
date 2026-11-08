@@ -25,17 +25,19 @@ body:not(.is-mobile).hover-sidedock {
     overflow: visible;
     transform: none;
     opacity: 0;
-    transition: none !important;
+    // Keep clipping immediate so the edge hit area stays stationary. Only
+    // opacity animates; the panel never moves across a sidebar toggle.
+    transition: opacity var(--anim-duration-fast) ease-out !important;
     box-shadow: var(--shadow-s);
     border-radius: var(--radius-window, var(--radius-m));
     background-color: var(--background-primary) !important;
 
-    &.mod-left-split {
+    &:is(.mod-left-split, .mod-primary-split) {
       left: var(--hover-sidedock-left);
       right: auto;
       clip-path: inset(0 calc(100% - var(--hover-sidedock-trigger-area)) 0 0);
     }
-    &.mod-right-split {
+    &:is(.mod-right-split, .mod-secondary-split) {
       right: 0;
       left: auto;
       clip-path: inset(0 0 0 calc(100% - var(--hover-sidedock-trigger-area)));
@@ -64,12 +66,19 @@ body:not(.is-mobile).hover-sidedock {
   // collapsing. Focus/active tabs and Ribbon hover are not reveal signals.
   &:has(.sidebar-toggle-button:hover) .mod-sidedock.is-sidedock-collapsed {
     opacity: 0;
-    &.mod-left-split {
+    transition: none !important;
+    &:is(.mod-left-split, .mod-primary-split) {
       clip-path: inset(0 calc(100% - var(--hover-sidedock-trigger-area)) 0 0);
     }
-    &.mod-right-split {
+    &:is(.mod-right-split, .mod-secondary-split) {
       clip-path: inset(0 0 0 calc(100% - var(--hover-sidedock-trigger-area)));
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.is-mobile).hover-sidedock .mod-sidedock.is-sidedock-collapsed {
+    transition: none !important;
   }
 }
 
@@ -87,13 +96,13 @@ body.mod-macos:not(.is-mobile).hover-sidedock.is-hidden-frameless:not(.is-fullsc
   }
 
   // Floating tabs are below the traffic lights, not alongside them.
-  .mod-sidedock.mod-left-split.is-sidedock-collapsed .mod-top-left-space .workspace-tab-header-container {
+  .mod-sidedock:is(.mod-left-split, .mod-primary-split).is-sidedock-collapsed .mod-top-left-space .workspace-tab-header-container {
     padding-inline-start: 8px;
   }
 }
 
 body:not(.is-mobile).hover-ribbon.show-ribbon {
-  .workspace-ribbon.mod-left {
+  .workspace-ribbon:is(.mod-left, .mod-primary) {
     position: absolute;
     z-index: 12;
     top: var(--header-height);
@@ -107,11 +116,11 @@ body:not(.is-mobile).hover-ribbon.show-ribbon {
     background-color: var(--background-primary);
     transition: none !important;
   }
-  .workspace-ribbon.mod-left:hover {
+  .workspace-ribbon:is(.mod-left, .mod-primary):hover {
     opacity: 1;
     transform: none;
   }
-  &.mod-macos .workspace-ribbon.mod-left .side-dock-actions {
+  &.mod-macos .workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions {
     padding-top: 0;
   }
 }
