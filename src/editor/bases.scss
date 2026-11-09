@@ -1,6 +1,6 @@
 body {
   --bases-header-border-width: 0;
-  --bases-table-header-color: var(--text-faint);
+  --bases-table-header-color: var(--text-muted);
 }
 
 .bases-view {
@@ -24,14 +24,14 @@ body {
 }
 .bases-thead .bases-td {
   box-shadow: none;
-  border-radius: var(--radius-s);
+  border-radius: 0;
   overflow: visible;
 }
 .bases-thead .bases-td:hover {
   --bases-table-header-color: var(--text-normal);
 }
 .bases-table-header-resizer {
-  border-radius: var(--radius-s);
+  border-radius: 0;
 }
 
 .bases-table-cell > * {

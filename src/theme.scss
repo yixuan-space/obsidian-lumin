@@ -17,11 +17,14 @@
 @use "app/style-settings.scss";
 
 @use "editor/editor.scss";
+@use "editor/lists.scss";
+@use "editor/code.scss";
 @use "editor/frontmatter.scss";
 @use "editor/blockquote.scss";
 @use "editor/callout.scss";
 @use "editor/table.scss";
 @use "editor/bases.scss";
+@use "editor/details.scss";
 
 @use "layouts/desktop.scss";
 

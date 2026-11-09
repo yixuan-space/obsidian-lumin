@@ -1,0 +1,48 @@
+@media screen, print {
+  :is(.markdown-rendered, .markdown-source-view) {
+    --hr-thickness: 2px;
+    --hr-color: color-mix(in srgb, var(--text-normal) 14%, var(--background-primary));
+  }
+
+  .markdown-rendered hr {
+    margin-block: 1em;
+  }
+
+  .markdown-rendered kbd {
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    background: var(--background-primary-alt);
+    box-shadow: 0 1px 0 var(--background-modifier-border);
+    font-family: var(--font-monospace);
+    font-size: 0.85em;
+    color: var(--text-normal);
+  }
+
+  .markdown-rendered mark,
+  .markdown-source-view mark {
+    border-radius: 3px;
+    padding: 0 2px;
+    font-weight: inherit;
+  }
+
+  .cm-line .cm-highlight {
+    padding-block: 0;
+  }
+
+  .cm-line .cm-highlight:nth-child(1 of .cm-highlight) {
+    border-start-start-radius: 3px;
+    border-end-start-radius: 3px;
+    padding-inline-start: 2px;
+  }
+
+  .cm-line .cm-highlight:nth-last-child(1 of .cm-highlight) {
+    border-start-end-radius: 3px;
+    border-end-end-radius: 3px;
+    padding-inline-end: 2px;
+  }
+
+  .markdown-rendered .footnote-backref {
+    color: var(--text-muted);
+  }
+}

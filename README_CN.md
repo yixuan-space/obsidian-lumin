@@ -25,6 +25,7 @@ Lumin 让笔记始终位于工作区的视觉中心。清晰的层级、克制�
 - **完整的笔记表面。** 元数据、表格、Callout、代码、任务、嵌入、Banner、图片和媒体均有统一而克制的样式。
 - **需要时才出现的桌面控件。** 悬停功能区和侧边栏、专注视图、紧凑面板操作区与居中标签，使宽屏工作区保持灵活。
 - **无需编写 CSS 也可自定义。** 可选的 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 提供配色、编辑器、桌面行为和辅助功能选项。
+- **Typora 风格的写作细节。** 清晰的代码与棕褐注释、紧凑列表、小圆角表格，并提供可独立使用的 Windows/macOS 快捷键导入工具。
 
 ## 跨设备体验
 
@@ -84,6 +85,30 @@ Lumin 在所有 Obsidian 平台上延续同一套视觉语言，同时根据设�
 
 ## 自定义
 
+笔记排版参考 Typora GitHub 主题：正文采用跨平台无衬线字体回退，代码采用等宽字体，一级与二级标题带细分隔线。代码配色使用中性灰底色、深紫关键字、砖红字符串和棕褐注释，并适配深色外观。表格与代码块采用 8px 圆角，表格保留清晰网格、交替行底色及稳定的表头悬停效果。Obsidian 外观设置中的正文字体和等宽字体选择仍优先生效；主题不会下载或附带字体。
+
+有序与无序列表使用更清晰的标记和紧凑间距。阅读视图中每级缩进为 1.875em（16px 正文下为 30px），混合嵌套列表采用相同缩进，列表内多段文字保留适度间距；编辑视图保留 Obsidian 的原生缩进、编号和折叠行为。
+
+普通引用使用透明背景、4px 竖线与简洁留白；分隔线、高亮文字、键盘按键和脚注返回链接也采用更紧凑、清晰的样式。
+
+### Typora 风格快捷键
+
+快捷键工具与主题独立，安装主题不会自动改动你的键位。打开仓库中的 [`tools/typora-hotkeys`](tools/typora-hotkeys) 文件夹，按系统选择入口：
+
+| 系统 | 双击入口 | 操作方式 |
+| --- | --- | --- |
+| Windows 10/11 | [`Start.cmd`](tools/typora-hotkeys/Start.cmd) | 窗口选择笔记库，点击预览、导入或恢复 |
+| macOS（Apple Silicon / Intel） | [`Start.command`](tools/typora-hotkeys/Start.command) | 系统对话框选择笔记库与操作，终端显示结果 |
+| Linux / 命令行 | `node import-hotkeys.mjs --vault "/path/to/vault"` | 默认预览，加 `--apply` 后写入 |
+
+1. 通过 Git 克隆仓库，或在 GitHub 点击 **Code → Download ZIP** 后解压；请保留整个 `tools/typora-hotkeys` 文件夹，不要只下载启动文件。
+2. 安装 **Node.js 22 或更新的 LTS 版本**，无需安装 npm 依赖或社区插件。
+3. 完全退出 Obsidian（Mac 使用 Command+Q），双击对应入口并选择笔记库；可先预览改动，再导入。
+
+包含标题、正文、加粗、斜体、删除线、代码、引用、列表、链接、表格、源码切换等常用键位。`Mod` 自动对应 Windows/Linux 的 Ctrl 与 Mac 的 Command。写入前自动备份，支持恢复、冲突检测和保留其他自定义绑定。部分 Obsidian 原生键位会让位给 Typora 风格配置，完整映射与差异见[快捷键与多设备同步说明](docs/typora-hotkeys.zh-CN.md)。
+
+整个工具文件夹可以复制到其他电脑。同 Vault 可通过 Obsidian Sync 的快捷键设置同步；其他同步方式须包含 `.obsidian/hotkeys.json`。不同 Vault 分别导入一次，手机和平板可同步配置并配合外接键盘使用。Mac 首次下载若提示权限或来源限制，参见[工具说明](tools/typora-hotkeys/README.md#mac-首次打开)。
+
 不安装附加插件也可完整使用 Lumin。安装并启用 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 后，可在“设置 > Style Settings”中调整主题。
 
 - 在默认、雾蓝、苔绿和暖灰配色之间选择，并同步适配浅色与深色外观。
@@ -138,6 +163,8 @@ npx --yes sass src/theme.scss theme.css --no-source-map
 ```
 
 请将生成的 `theme.css` 与源文件改动一并提交；发布或提交 PR 前建议运行 `git diff --check`。
+
+开发依赖通过 `npm ci` 安装。运行 `npm run build` 构建，`npm run verify:edge` 使用本机 Microsoft Edge 和隔离临时会话验证主题，`npm run test:hotkeys` 验证快捷键导入工具。Edge 验证覆盖浅深色、四套配色、桌面/手机宽度与打印样式；它不会更改系统默认浏览器或使用个人浏览器配置。非标准安装位置可通过 `EDGE_PATH` 指定 Edge 可执行文件。本项目不使用 Tabbit 验证。
 
 ## 致谢
 

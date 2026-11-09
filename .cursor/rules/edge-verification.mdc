@@ -1,0 +1,9 @@
+---
+description: Use local Microsoft Edge for browser verification in this project
+alwaysApply: true
+---
+
+- Use locally installed Microsoft Edge with an isolated temporary profile for browser verification.
+- Do not use Tabbit, its CLI, or its browser runtime in this project.
+- Use `npm run verify:edge`; set `EDGE_PATH` if Edge is installed in a nonstandard location.
+- Do not change the operating system's default browser or attach to the user's personal Edge session.

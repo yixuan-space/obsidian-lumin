@@ -1,155 +1,156 @@
 @media screen, print {
   body {
-    --table-text-size: var(--font-small);
-
-    --table-border-color: color-mix(in srgb, var(--background-modifier-border), var(--background-primary) 45%);
-    --table-header-background: color-mix(in srgb, var(--background-primary), var(--text-normal) 4%);
-    --table-row-alt-background: color-mix(in srgb, var(--background-primary), var(--text-normal) 1.5%);
-    --table-row-hover-background: var(--background-modifier-hover);
-
+    --lumin-table-radius: 8px;
+    --table-text-size: var(--font-text-size);
+    --table-line-height: 1.6;
+    --table-border-color: color-mix(in srgb, var(--text-normal) 18%, var(--background-primary));
+    --table-header-border-color: var(--table-border-color);
+    --table-header-background: color-mix(in srgb, var(--background-primary) 94%, var(--text-normal));
+    --table-header-background-hover: var(--table-header-background);
+    --table-header-weight: 700;
+    --table-header-color: var(--text-normal);
+    --table-row-alt-background: color-mix(in srgb, var(--background-primary) 97.5%, var(--text-normal));
+    --table-row-background-hover: color-mix(in srgb, var(--background-primary) 95%, var(--text-normal));
+    --table-row-alt-background-hover: var(--table-row-background-hover);
     --table-add-button-border-width: 0;
-    --table-header-border-color: transparent;
-
     --embed-block-shadow-hover: none;
   }
-  body:not(.full-width-media-off) table,
+
+  body:not(.full-width-media-off) :is(.markdown-rendered, .cm-table-widget) table,
   body:not(.full-width-media-off) .markdown-source-view.mod-cm6 .cm-table-widget .table-wrapper {
     min-width: 100%;
   }
 
-  :root table {
+  :is(.markdown-rendered, .cm-html-embed) table {
+    --table-column-first-border-width: 0;
+    --table-column-last-border-width: 0;
+    --table-row-last-border-width: 0;
+    --table-header-border-width: 0;
+    border: var(--table-border-width) solid var(--table-border-color);
     border-collapse: separate;
     border-spacing: 0;
-    word-break: break-word;
+    border-radius: var(--lumin-table-radius);
+    box-shadow: none;
   }
 
-  div:is(.markdown-preview-view, .is-live-preview) {
+  :is(.markdown-rendered, .cm-html-embed) :is(th, td) {
+    border-color: var(--table-border-color);
+    border-radius: 0;
+    padding: 6px 13px;
+    vertical-align: top;
+    line-height: var(--table-line-height);
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  :is(.markdown-rendered, .cm-html-embed) th {
+    border-color: var(--table-header-border-color);
+  }
+
+  :is(.markdown-rendered, .cm-html-embed) table {
+    > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+      border-block-start-width: 0;
+      border-inline-start-width: 0;
+      border-inline-end-width: var(--table-border-width);
+      border-block-end-width: var(--table-border-width);
+    }
+
+    > :is(thead, tbody, tfoot) > tr > :last-child {
+      border-inline-end-width: 0;
+    }
+
+    > :is(thead, tbody, tfoot):last-child > tr:last-child > :is(th, td) {
+      border-block-end-width: 0;
+    }
+
+    > thead > tr,
+    > thead > tr:hover,
+    > tbody > tr,
+    > tbody > tr:hover,
+    > tfoot > tr,
+    > tfoot > tr:hover {
+      background-color: transparent;
+    }
+
+    > thead > tr > th {
+      background-color: var(--table-header-background);
+    }
+
+    > tbody > tr > :is(th, td) {
+      background-color: var(--table-background);
+    }
+
+    > tbody > tr:nth-child(odd) > :is(th, td) {
+      background-color: var(--table-row-alt-background);
+    }
+
+    > :is(thead, tbody) > tr > :nth-child(even) {
+      background-image: linear-gradient(var(--table-column-alt-background), var(--table-column-alt-background));
+    }
+
+    > :is(thead, tbody, tfoot):first-child > tr:first-child > :first-child {
+      border-start-start-radius: calc(var(--lumin-table-radius) - var(--table-border-width));
+    }
+
+    > :is(thead, tbody, tfoot):first-child > tr:first-child > :last-child {
+      border-start-end-radius: calc(var(--lumin-table-radius) - var(--table-border-width));
+    }
+
+    > :is(thead, tbody, tfoot):last-child > tr:last-child > :first-child {
+      border-end-start-radius: calc(var(--lumin-table-radius) - var(--table-border-width));
+    }
+
+    > :is(thead, tbody, tfoot):last-child > tr:last-child > :last-child {
+      border-end-end-radius: calc(var(--lumin-table-radius) - var(--table-border-width));
+    }
+  }
+
+  @media (hover: hover) {
+    :is(.markdown-rendered, .cm-html-embed) table > tbody > tr:hover > :is(th, td) {
+      background-color: var(--table-row-background-hover);
+    }
+
+    :is(.markdown-rendered, .cm-html-embed) table > tbody > tr:nth-child(odd):hover > :is(th, td) {
+      background-color: var(--table-row-alt-background-hover);
+    }
+  }
+
+  .markdown-source-view.mod-cm6 .cm-table-widget {
     table {
-      position: relative;
-      border: 1px solid var(--table-border-color);
-      border-radius: var(--radius-m);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-      overflow: hidden;
-
-      .table-cell-wrapper:active,
-      .table-cell-wrapper:focus,
-      .table-cell-wrapper:focus-within {
-        background-color: var(--background-modifier-hover);
-      }
-
-      th,
-      td {
-        corner-shape: var(--corner-shape);
-        border-bottom: 1px solid var(--table-border-color);
-        border-inline-end: 1px solid var(--table-border-color);
-        padding: 10px 12px;
-        transition: background-color var(--anim-duration-fast);
-        vertical-align: top;
-        line-height: 1.5;
-      }
-
-      > thead > tr > th {
-        background-color: var(--table-header-background);
-        color: var(--text-normal);
-        font-weight: var(--table-header-weight);
-      }
-
-      > tbody > tr:nth-child(even) {
-        background-color: var(--table-row-alt-background);
-      }
-
-      > tbody > tr:hover {
-        background-color: var(--table-row-hover-background);
-      }
-
-      > :is(thead, tbody) > tr > :last-child {
-        border-inline-end: none;
-      }
-
-      > tbody > tr:last-child > :is(th, td) {
-        border-bottom: none;
-      }
-
-      > thead:only-child,
-      > tbody {
-        --table-header-border-color: var(--table-border-color);
-
-        background-color: var(--background-primary);
-        position: relative;
-      }
-
-      > tbody > tr:not(:last-child) > th,
-      > tbody > tr:not(:last-child) > td {
-        border-bottom: 1px solid var(--table-border-color);
-      }
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: var(--lumin-table-radius);
+      overflow: visible;
+      box-shadow: none;
     }
 
-    div:not([dir="rtl"]) > table:not([dir="rtl"]) {
-      > thead > tr > th:not(:last-child),
-      > tbody > tr > th:not(:last-child),
-      > tbody > tr > td:not(:last-child) {
-        border-inline-end: 1px solid var(--table-border-color);
-      }
-
-      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child,
-      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
-        border-top-left-radius: var(--radius-s);
-      }
-      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child,
-      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
-        border-top-right-radius: var(--radius-s);
-      }
-      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child,
-      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
-        border-bottom-left-radius: var(--radius-s);
-      }
-      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child,
-      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
-        border-bottom-right-radius: var(--radius-s);
-      }
+    :is(th, td) {
+      padding: 0;
+      line-height: var(--table-line-height);
+      vertical-align: top;
     }
 
-    div[dir="rtl"] > table,
-    table[dir="rtl"] {
-      > thead > tr > th:not(:last-child),
-      > tbody > tr > th:not(:last-child),
-      > tbody > tr > td:not(:last-child) {
-        border-inline-end: 1px solid var(--table-border-color);
-      }
+    .table-cell-wrapper {
+      padding: 6px 13px;
+      border-radius: 0;
+      overflow-wrap: anywhere;
+      word-break: normal;
+      background-color: transparent;
+    }
 
-      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child,
-      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
-        border-top-right-radius: var(--radius-s);
-      }
-      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child,
-      > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
-        border-top-left-radius: var(--radius-s);
-      }
-      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child,
-      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
-        border-bottom-right-radius: var(--radius-s);
-      }
-      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child,
-      > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
-        border-bottom-left-radius: var(--radius-s);
-      }
+    .table-cell-wrapper:focus-within {
+      box-shadow: inset 0 0 0 1px var(--background-modifier-border-focus);
     }
   }
 
-  .cm-html-embed th,
-  .markdown-rendered th,
-  .cm-html-embed td,
-  .markdown-rendered td,
-  .markdown-source-view.mod-cm6 .cm-table-widget .table-cell-wrapper {
-    padding: 10px 12px;
+  .cm-html-embed th:not([align]),
+  .markdown-rendered th:not([align]) {
+    text-align: var(--table-text-align-header, start);
   }
-  .cm-html-embed th,
-  .markdown-rendered th {
-    text-align: var(--table-text-align-header);
-  }
-  .cm-html-embed td,
-  .markdown-rendered td {
-    text-align: var(--table-text-align-body);
+
+  .cm-html-embed td:not([align]),
+  .markdown-rendered td:not([align]) {
+    text-align: var(--table-text-align-body, start);
   }
 
   .dataview,

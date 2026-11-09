@@ -8,7 +8,10 @@ on:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -17,8 +20,19 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install development dependencies
+        run: npm ci
+
       - name: Build and validate distributable CSS
         run: |
-          npx --yes sass src/theme.scss theme.css --no-source-map
+          npm run build
+          npm run test:hotkeys
           git diff --check
           git diff --exit-code -- theme.css
+
+      - name: Validate macOS launcher
+        if: runner.os == 'macOS'
+        run: |
+          bash -n tools/typora-hotkeys/Start.command
+          test -x tools/typora-hotkeys/Start.command
+          node tools/typora-hotkeys/launch-macos.mjs --check

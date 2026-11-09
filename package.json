@@ -1,0 +1,15 @@
+{
+  "name": "obsidian-lumin-dev",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "sass src/theme.scss theme.css --no-source-map",
+    "verify:edge": "node scripts/verify-edge.mjs",
+    "hotkeys": "node tools/typora-hotkeys/import-hotkeys.mjs",
+    "test:hotkeys": "node --test tools/typora-hotkeys/import-hotkeys.test.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.56.1",
+    "sass": "^1.93.2"
+  }
+}

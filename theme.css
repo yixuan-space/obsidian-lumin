@@ -68,7 +68,8 @@ body,
 .theme-light,
 .theme-dark {
   --font-interface-theme: "SF Pro";
-  --font-text-theme: "SF Pro";
+  --font-text-theme: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --font-monospace-theme: Consolas, "Liberation Mono", Menlo, "PingFang SC", "Microsoft YaHei", monospace;
   --font-ui-modifier: 0px;
   --font-ui-smaller: calc(12px + var(--font-ui-modifier));
   --font-ui-small: calc(13px + var(--font-ui-modifier));
@@ -120,16 +121,6 @@ body,
   --color-blue-rgb: 106, 173, 250;
   --color-purple-rgb: 187, 158, 245;
   --color-pink-rgb: 243, 125, 183;
-  --code-normal: #383a42;
-  --code-comment: #b6b9c5;
-  --code-function: #b76b02;
-  --code-important: #b76b02;
-  --code-keyword: #e45749;
-  --code-property: #62afef;
-  --code-punctuation: #383a42;
-  --code-string: #0d97b3;
-  --code-tag: #e45749;
-  --code-value: #a626a4;
   /* Markdown links: fixed system blue / indigo (independent of accent) */
   --link-color: #3d79b7;
   --link-color-hover: #0055b0;
@@ -148,16 +139,6 @@ body,
   --color-blue-rgb: 86, 148, 218;
   --color-purple-rgb: 142, 125, 194;
   --color-pink-rgb: 222, 103, 147;
-  --code-normal: #abb2bf;
-  --code-comment: #5c6370;
-  --code-function: #d19a66;
-  --code-important: #d19a66;
-  --code-keyword: #e16d76;
-  --code-property: #62afef;
-  --code-punctuation: #abb2bf;
-  --code-string: #58b6c2;
-  --code-tag: #e16d76;
-  --code-value: #c678de;
   /* Markdown links: system blue on dark UI */
   --link-color: #3d79b7;
   --link-color-hover: #8ac4ff;
@@ -3162,23 +3143,33 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .style-settings
 
 @media screen, print {
   body {
-    --heading-spacing: 2em;
-    --p-spacing: 1.75rem;
+    --heading-spacing: 1.5em;
+    --p-spacing: 0.8em;
     --line-height-normal: 1.6;
-    --list-spacing: 0.175em;
     --inline-title-margin-bottom: calc(0.5em * var(--readable-spacing-modifier, 1));
     --inline-title-color: inherit;
-    --h1-size: 1.5em;
-    --h2-size: 1.25em;
-    --h3-size: 1.125em;
-    --h4-size: 1em;
+    --h1-size: 2.25em;
+    --h2-size: 1.75em;
+    --h3-size: 1.5em;
+    --h4-size: 1.25em;
     --h5-size: 1em;
-    --h6-size: 0.875em;
+    --h6-size: 1em;
+    --h1-line-height: 1.2;
+    --h2-line-height: 1.25;
+    --h3-line-height: 1.4;
+    --h4-line-height: 1.4;
+    --h5-line-height: 1.4;
+    --h6-line-height: 1.4;
+    --h1-weight: 700;
+    --h2-weight: 700;
+    --h3-weight: 700;
+    --h4-weight: 700;
+    --h5-weight: 700;
+    --h6-weight: 700;
+    --h6-color: var(--text-muted);
     --file-margins-y: 32px;
     --file-margins-x: 32px;
     --file-margins: var(--file-margins-y) var(--file-margins-x);
-    --code-border-width: 1px;
-    --code-size: var(--font-smallest);
     --embed-padding: 16px;
     --embed-max-height: none;
     --embed-background: var(--background-primary-alt);
@@ -3205,6 +3196,15 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .style-settings
   .markdown-preview-view,
   .markdown-source-view {
     color: var(--text-normal-editor, var(--text-normal));
+    letter-spacing: normal;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    --bold-weight: 700;
+  }
+  .markdown-rendered :is(h1, h2),
+  .markdown-source-view.mod-cm6 :is(.HyperMD-header-1, .HyperMD-header-2) {
+    border-bottom: 1px solid var(--background-modifier-border);
+    padding-bottom: 0.25em;
   }
   .view-header {
     padding: 0 8px;
@@ -3246,20 +3246,6 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .style-settings
     border-left: 4px solid var(--background-modifier-border-hover);
     border-radius: var(--input-radius);
     content: "";
-  }
-  .markdown-rendered pre {
-    corner-shape: var(--corner-shape);
-  }
-  .markdown-rendered code {
-    corner-shape: var(--corner-shape);
-    padding: 2px 4px;
-  }
-  .markdown-rendered pre code {
-    white-space: var(--code-white-space);
-  }
-  body .markdown-rendered pre {
-    background: linear-gradient(var(--background-primary-alt), var(--background-secondary));
-    box-shadow: var(--shadow-tactile);
   }
   kbd {
     box-shadow: var(--shadow-tactile);
@@ -3438,9 +3424,6 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .style-settings
     --tag-size: inherit;
     --tag-color-hover: var(--text-accent-hover);
   }
-  .task-list-item {
-    --indentation-guide-reading-indent: -1.05em;
-  }
   .pdf-container .pdfViewer .canvasWrapper {
     contain: content;
     border-radius: var(--radius-s);
@@ -3449,6 +3432,145 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .style-settings
   body:not(.clean-link-off) {
     --link-decoration: none;
     --link-external-decoration: none;
+  }
+}
+@media screen, print {
+  :is(.markdown-rendered, .markdown-source-view) {
+    --list-spacing: 0.05em;
+    --list-marker-color: color-mix(in srgb, var(--text-normal) 80%, var(--background-primary));
+    --list-marker-color-hover: var(--text-normal);
+    --list-bullet-size: 0.3em;
+    --list-numbered-style: decimal;
+    --lumin-list-indent: 1.875em;
+  }
+  .markdown-rendered:not(.list-cards) :is(ul, ol) {
+    padding-inline-start: 0;
+    margin-block: 0.8em;
+    line-height: var(--line-height-normal);
+  }
+  .markdown-rendered:not(.list-cards) :is(ul, ol) > li {
+    margin-inline-start: var(--lumin-list-indent);
+    padding-block: var(--list-spacing);
+    overflow-wrap: anywhere;
+  }
+  .markdown-rendered:not(.list-cards) li > :is(ul, ol) {
+    margin-block: 0;
+  }
+  .markdown-rendered:not(.list-cards) li > p {
+    margin-block: 0.5em;
+  }
+  .markdown-rendered:not(.list-cards) li > p:first-child {
+    margin-block-start: 0;
+  }
+  .markdown-rendered:not(.list-cards) li > p:last-child {
+    margin-block-end: 0;
+  }
+  .markdown-rendered:not(.list-cards) ol > li::marker {
+    font-variant-numeric: tabular-nums;
+  }
+  .markdown-rendered:not(.list-cards) .task-list-item {
+    --indentation-guide-reading-indent: -1.05em;
+  }
+}
+@media screen, print {
+  body {
+    --code-border-width: 1px;
+    --code-radius: 8px;
+    --code-size: calc(var(--font-text-size) * 0.9);
+    --code-border-color: color-mix(in srgb, var(--code-normal) 14%, var(--code-background));
+    --lumin-code-line-height: 1.6;
+  }
+  body.theme-light {
+    --code-background: color-mix(in srgb, var(--background-primary) 96.5%, black);
+    --lumin-code-inline-background: color-mix(in srgb, var(--background-primary) 94.5%, black);
+    --code-normal: #302e2b;
+    --code-comment: #98551b;
+    --code-keyword: #770088;
+    --code-string: #a11f26;
+    --code-value: #165c3b;
+    --code-function: #254e9c;
+    --code-property: #27546e;
+    --code-operator: #5c4736;
+    --code-punctuation: #49433c;
+    --code-tag: #346145;
+    --code-important: #814d17;
+  }
+  body.theme-dark {
+    --code-background: color-mix(in srgb, var(--background-primary) 96%, white);
+    --lumin-code-inline-background: color-mix(in srgb, var(--background-primary) 93%, white);
+    --code-normal: #e0d8cd;
+    --code-comment: #c5a47b;
+    --code-keyword: #d4a1dc;
+    --code-string: #e7a29b;
+    --code-value: #9dc9a4;
+    --code-function: #a9bfe8;
+    --code-property: #a5c8d9;
+    --code-operator: #d4bea0;
+    --code-punctuation: #cbc2b7;
+    --code-tag: #a8c59a;
+    --code-important: #e1bd82;
+  }
+  .markdown-rendered pre {
+    margin-block: 15px;
+    padding: 12px 14px;
+    min-height: 0;
+    background: var(--code-background);
+    border: var(--code-border-width) solid var(--code-border-color);
+    border-radius: var(--code-radius);
+    box-shadow: none;
+  }
+  .markdown-rendered code {
+    --code-radius: 4px;
+    padding: 0 2px;
+    border-radius: var(--code-radius);
+    background-color: var(--lumin-code-inline-background);
+  }
+  .markdown-rendered pre code {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    white-space: var(--code-white-space);
+    line-height: var(--lumin-code-line-height);
+    font-weight: 400;
+    font-feature-settings: normal;
+    font-variant-ligatures: none;
+  }
+  .markdown-source-view.mod-cm6 .cm-inline-code {
+    --code-radius: 4px;
+  }
+  .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock:not(.HyperMD-list-line) {
+    padding-inline-start: 14px;
+  }
+  .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock {
+    line-height: var(--lumin-code-line-height);
+    font-weight: 400;
+    font-feature-settings: normal;
+    font-variant-ligatures: none;
+  }
+  .markdown-source-view.mod-cm6 .HyperMD-codeblock :is(.cm-def, .cm-type) {
+    color: var(--code-function);
+  }
+  .markdown-source-view.mod-cm6 .HyperMD-codeblock :is(.cm-atom, .cm-number) {
+    color: var(--code-value);
+  }
+  .markdown-source-view.mod-cm6 .HyperMD-codeblock .cm-variable {
+    color: var(--code-normal);
+  }
+  .markdown-source-view.mod-cm6 .cm-inline-code:not(.cm-formatting) {
+    padding: 0 2px;
+  }
+  .markdown-source-view.mod-cm6 .cm-inline-code.cm-formatting,
+  .markdown-source-view.mod-cm6 .cm-inline-code.cm-formatting ~ .cm-inline-code:not(.cm-formatting) {
+    padding: 0;
+  }
+  .markdown-source-view.mod-cm6 span.cm-inline-code,
+  .markdown-source-view.mod-cm6 span.cm-inline-code span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(.obsidian-search-match-highlight) {
+    background-color: var(--lumin-code-inline-background);
+  }
+  .markdown-source-view.mod-cm6 .HyperMD-codeblock span.cm-inline-code {
+    padding: inherit;
+    background-color: inherit;
   }
 }
 @media screen, print {
@@ -3586,76 +3708,23 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .style-settings
   }
 }
 @media screen, print {
-  body {
-    --blockquote-background-color: var(--background-primary-alt);
-    --blockquote-border-color: var(--color-base-50);
-    --blockquote-border-thickness: 2px;
+  :is(.markdown-rendered, .markdown-source-view) {
+    --blockquote-background-color: transparent;
+    --blockquote-border-color: color-mix(in srgb, var(--text-normal) 18%, var(--background-primary));
+    --blockquote-border-thickness: 4px;
+    --blockquote-color: color-mix(in srgb, var(--text-normal) 75%, var(--background-primary));
     --blockquote-size: var(--font-text-size);
-  }
-  .markdown-rendered blockquote,
-  .HyperMD-quote {
-    corner-shape: var(--corner-shape);
-    font-size: var(--blockquote-size);
-  }
-  .cm-formatting-quote {
-    margin-left: 8px;
+    --blockquote-font-style: normal;
+    --blockquote-style: normal;
   }
   .markdown-rendered blockquote {
-    position: relative;
-    border-radius: var(--radius-s);
-    border-inline-start: none;
-    padding-inline: calc(32px + var(--blockquote-border-thickness)) 16px;
-    padding-block: 16px;
+    margin-block: 0.8em;
+    border-radius: 0;
+    padding: 0 15px;
+    font-size: var(--blockquote-size);
   }
-  .markdown-rendered blockquote > blockquote {
-    padding-inline-start: calc(16px + var(--blockquote-border-thickness));
-    padding-block: 0 !important;
-  }
-  .markdown-rendered blockquote > blockquote::before {
-    top: 0;
-    bottom: 0;
-    inset-inline-start: 0;
-  }
-  .markdown-rendered blockquote::before {
-    position: absolute;
-    top: 16px;
-    bottom: 16px;
-    inset-inline-start: 16px;
-    border-radius: var(--radius-s);
-    background-color: var(--blockquote-border-color);
-    width: var(--blockquote-border-thickness);
-    pointer-events: none;
-    content: "";
-  }
-  .HyperMD-quote {
-    border: solid var(--blockquote-background-color);
-    border-width: 0 16px 0 16px;
-    background-color: var(--blockquote-background-color);
-  }
-  .HyperMD-quote::before {
-    width: 0 !important;
-  }
-  .HyperMD-quote:first-child,
-  .cm-sizer > div > div > *:not(.HyperMD-quote) + .HyperMD-quote {
-    border-top-width: 16px;
-    border-start-start-radius: var(--radius-s);
-    border-start-end-radius: var(--radius-s);
-  }
-  .HyperMD-quote:first-child::before,
-  .cm-sizer > div > div > *:not(.HyperMD-quote) + .HyperMD-quote::before {
-    border-start-start-radius: var(--radius-s);
-    border-start-end-radius: var(--radius-s);
-  }
-  .HyperMD-quote:last-child,
-  .cm-sizer > div > div > .HyperMD-quote:has(+ *:not(.HyperMD-quote)) {
-    border-bottom-width: 16px;
-    border-end-start-radius: var(--radius-s);
-    border-end-end-radius: var(--radius-s);
-  }
-  .HyperMD-quote:last-child::before,
-  .cm-sizer > div > div > .HyperMD-quote:has(+ *:not(.HyperMD-quote))::before {
-    border-end-start-radius: var(--radius-s);
-    border-end-end-radius: var(--radius-s);
+  .markdown-rendered blockquote blockquote {
+    padding-inline-end: 0;
   }
 }
 @media screen, print {
@@ -3711,140 +3780,131 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .style-settings
 }
 @media screen, print {
   body {
-    --table-text-size: var(--font-small);
-    --table-border-color: color-mix(in srgb, var(--background-modifier-border), var(--background-primary) 45%);
-    --table-header-background: color-mix(in srgb, var(--background-primary), var(--text-normal) 4%);
-    --table-row-alt-background: color-mix(in srgb, var(--background-primary), var(--text-normal) 1.5%);
-    --table-row-hover-background: var(--background-modifier-hover);
+    --lumin-table-radius: 8px;
+    --table-text-size: var(--font-text-size);
+    --table-line-height: 1.6;
+    --table-border-color: color-mix(in srgb, var(--text-normal) 18%, var(--background-primary));
+    --table-header-border-color: var(--table-border-color);
+    --table-header-background: color-mix(in srgb, var(--background-primary) 94%, var(--text-normal));
+    --table-header-background-hover: var(--table-header-background);
+    --table-header-weight: 700;
+    --table-header-color: var(--text-normal);
+    --table-row-alt-background: color-mix(in srgb, var(--background-primary) 97.5%, var(--text-normal));
+    --table-row-background-hover: color-mix(in srgb, var(--background-primary) 95%, var(--text-normal));
+    --table-row-alt-background-hover: var(--table-row-background-hover);
     --table-add-button-border-width: 0;
-    --table-header-border-color: transparent;
     --embed-block-shadow-hover: none;
   }
-  body:not(.full-width-media-off) table,
+  body:not(.full-width-media-off) :is(.markdown-rendered, .cm-table-widget) table,
   body:not(.full-width-media-off) .markdown-source-view.mod-cm6 .cm-table-widget .table-wrapper {
     min-width: 100%;
   }
-  :root table {
+  :is(.markdown-rendered, .cm-html-embed) table {
+    --table-column-first-border-width: 0;
+    --table-column-last-border-width: 0;
+    --table-row-last-border-width: 0;
+    --table-header-border-width: 0;
+    border: var(--table-border-width) solid var(--table-border-color);
     border-collapse: separate;
     border-spacing: 0;
-    word-break: break-word;
+    border-radius: var(--lumin-table-radius);
+    box-shadow: none;
   }
-  div:is(.markdown-preview-view, .is-live-preview) table {
-    position: relative;
-    border: 1px solid var(--table-border-color);
-    border-radius: var(--radius-m);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-    overflow: hidden;
-  }
-  div:is(.markdown-preview-view, .is-live-preview) table .table-cell-wrapper:active,
-  div:is(.markdown-preview-view, .is-live-preview) table .table-cell-wrapper:focus,
-  div:is(.markdown-preview-view, .is-live-preview) table .table-cell-wrapper:focus-within {
-    background-color: var(--background-modifier-hover);
-  }
-  div:is(.markdown-preview-view, .is-live-preview) table th,
-  div:is(.markdown-preview-view, .is-live-preview) table td {
-    corner-shape: var(--corner-shape);
-    border-bottom: 1px solid var(--table-border-color);
-    border-inline-end: 1px solid var(--table-border-color);
-    padding: 10px 12px;
-    transition: background-color var(--anim-duration-fast);
+  :is(.markdown-rendered, .cm-html-embed) :is(th, td) {
+    border-color: var(--table-border-color);
+    border-radius: 0;
+    padding: 6px 13px;
     vertical-align: top;
-    line-height: 1.5;
+    line-height: var(--table-line-height);
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
-  div:is(.markdown-preview-view, .is-live-preview) table > thead > tr > th {
+  :is(.markdown-rendered, .cm-html-embed) th {
+    border-color: var(--table-header-border-color);
+  }
+  :is(.markdown-rendered, .cm-html-embed) table > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+    border-block-start-width: 0;
+    border-inline-start-width: 0;
+    border-inline-end-width: var(--table-border-width);
+    border-block-end-width: var(--table-border-width);
+  }
+  :is(.markdown-rendered, .cm-html-embed) table > :is(thead, tbody, tfoot) > tr > :last-child {
+    border-inline-end-width: 0;
+  }
+  :is(.markdown-rendered, .cm-html-embed) table > :is(thead, tbody, tfoot):last-child > tr:last-child > :is(th, td) {
+    border-block-end-width: 0;
+  }
+  :is(.markdown-rendered, .cm-html-embed) table > thead > tr,
+  :is(.markdown-rendered, .cm-html-embed) table > thead > tr:hover,
+  :is(.markdown-rendered, .cm-html-embed) table > tbody > tr,
+  :is(.markdown-rendered, .cm-html-embed) table > tbody > tr:hover,
+  :is(.markdown-rendered, .cm-html-embed) table > tfoot > tr,
+  :is(.markdown-rendered, .cm-html-embed) table > tfoot > tr:hover {
+    background-color: transparent;
+  }
+  :is(.markdown-rendered, .cm-html-embed) table > thead > tr > th {
     background-color: var(--table-header-background);
-    color: var(--text-normal);
-    font-weight: var(--table-header-weight);
   }
-  div:is(.markdown-preview-view, .is-live-preview) table > tbody > tr:nth-child(even) {
+  :is(.markdown-rendered, .cm-html-embed) table > tbody > tr > :is(th, td) {
+    background-color: var(--table-background);
+  }
+  :is(.markdown-rendered, .cm-html-embed) table > tbody > tr:nth-child(odd) > :is(th, td) {
     background-color: var(--table-row-alt-background);
   }
-  div:is(.markdown-preview-view, .is-live-preview) table > tbody > tr:hover {
-    background-color: var(--table-row-hover-background);
+  :is(.markdown-rendered, .cm-html-embed) table > :is(thead, tbody) > tr > :nth-child(even) {
+    background-image: linear-gradient(var(--table-column-alt-background), var(--table-column-alt-background));
   }
-  div:is(.markdown-preview-view, .is-live-preview) table > :is(thead, tbody) > tr > :last-child {
-    border-inline-end: none;
+  :is(.markdown-rendered, .cm-html-embed) table > :is(thead, tbody, tfoot):first-child > tr:first-child > :first-child {
+    border-start-start-radius: calc(var(--lumin-table-radius) - var(--table-border-width));
   }
-  div:is(.markdown-preview-view, .is-live-preview) table > tbody > tr:last-child > :is(th, td) {
-    border-bottom: none;
+  :is(.markdown-rendered, .cm-html-embed) table > :is(thead, tbody, tfoot):first-child > tr:first-child > :last-child {
+    border-start-end-radius: calc(var(--lumin-table-radius) - var(--table-border-width));
   }
-  div:is(.markdown-preview-view, .is-live-preview) table > thead:only-child,
-  div:is(.markdown-preview-view, .is-live-preview) table > tbody {
-    --table-header-border-color: var(--table-border-color);
-    background-color: var(--background-primary);
-    position: relative;
+  :is(.markdown-rendered, .cm-html-embed) table > :is(thead, tbody, tfoot):last-child > tr:last-child > :first-child {
+    border-end-start-radius: calc(var(--lumin-table-radius) - var(--table-border-width));
   }
-  div:is(.markdown-preview-view, .is-live-preview) table > tbody > tr:not(:last-child) > th,
-  div:is(.markdown-preview-view, .is-live-preview) table > tbody > tr:not(:last-child) > td {
-    border-bottom: 1px solid var(--table-border-color);
+  :is(.markdown-rendered, .cm-html-embed) table > :is(thead, tbody, tfoot):last-child > tr:last-child > :last-child {
+    border-end-end-radius: calc(var(--lumin-table-radius) - var(--table-border-width));
   }
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > thead > tr > th:not(:last-child),
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > tbody > tr > th:not(:last-child),
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > tbody > tr > td:not(:last-child) {
-    border-inline-end: 1px solid var(--table-border-color);
+}
+@media screen and (hover: hover), print and (hover: hover) {
+  :is(.markdown-rendered, .cm-html-embed) table > tbody > tr:hover > :is(th, td) {
+    background-color: var(--table-row-background-hover);
   }
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
-    border-top-left-radius: var(--radius-s);
+  :is(.markdown-rendered, .cm-html-embed) table > tbody > tr:nth-child(odd):hover > :is(th, td) {
+    background-color: var(--table-row-alt-background-hover);
   }
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
-    border-top-right-radius: var(--radius-s);
+}
+@media screen, print {
+  .markdown-source-view.mod-cm6 .cm-table-widget table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--lumin-table-radius);
+    overflow: visible;
+    box-shadow: none;
   }
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
-    border-bottom-left-radius: var(--radius-s);
+  .markdown-source-view.mod-cm6 .cm-table-widget :is(th, td) {
+    padding: 0;
+    line-height: var(--table-line-height);
+    vertical-align: top;
   }
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) div:not([dir=rtl]) > table:not([dir=rtl]) > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
-    border-bottom-right-radius: var(--radius-s);
-  }
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > thead > tr > th:not(:last-child),
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > tbody > tr > th:not(:last-child),
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > tbody > tr > td:not(:last-child),
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > thead > tr > th:not(:last-child),
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > tbody > tr > th:not(:last-child),
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > tbody > tr > td:not(:last-child) {
-    border-inline-end: 1px solid var(--table-border-color);
-  }
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child .table-cell-wrapper,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):first-child .table-cell-wrapper {
-    border-top-right-radius: var(--radius-s);
-  }
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child .table-cell-wrapper,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:first-child, tbody:only-child) > tr:first-child > :is(th, td):last-child .table-cell-wrapper {
-    border-top-left-radius: var(--radius-s);
-  }
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child .table-cell-wrapper,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):first-child .table-cell-wrapper {
-    border-bottom-right-radius: var(--radius-s);
-  }
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) div[dir=rtl] > table > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child .table-cell-wrapper,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child,
-  div:is(.markdown-preview-view, .is-live-preview) table[dir=rtl] > :is(thead:only-child, tbody:last-child) > tr:last-child > :is(th, td):last-child .table-cell-wrapper {
-    border-bottom-left-radius: var(--radius-s);
-  }
-  .cm-html-embed th,
-  .markdown-rendered th,
-  .cm-html-embed td,
-  .markdown-rendered td,
   .markdown-source-view.mod-cm6 .cm-table-widget .table-cell-wrapper {
-    padding: 10px 12px;
+    padding: 6px 13px;
+    border-radius: 0;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    background-color: transparent;
   }
-  .cm-html-embed th,
-  .markdown-rendered th {
-    text-align: var(--table-text-align-header);
+  .markdown-source-view.mod-cm6 .cm-table-widget .table-cell-wrapper:focus-within {
+    box-shadow: inset 0 0 0 1px var(--background-modifier-border-focus);
   }
-  .cm-html-embed td,
-  .markdown-rendered td {
-    text-align: var(--table-text-align-body);
+  .cm-html-embed th:not([align]),
+  .markdown-rendered th:not([align]) {
+    text-align: var(--table-text-align-header, start);
+  }
+  .cm-html-embed td:not([align]),
+  .markdown-rendered td:not([align]) {
+    text-align: var(--table-text-align-body, start);
   }
   .dataview.table-view-table::before,
   .block-language-datacorejsx.table-view-table::before {
@@ -3880,7 +3940,7 @@ body.is-phone .modal.mod-settings:has(.style-settings-container) .style-settings
 }
 body {
   --bases-header-border-width: 0;
-  --bases-table-header-color: var(--text-faint);
+  --bases-table-header-color: var(--text-muted);
 }
 
 .bases-view {
@@ -3902,7 +3962,7 @@ body {
 
 .bases-thead .bases-td {
   box-shadow: none;
-  border-radius: var(--radius-s);
+  border-radius: 0;
   overflow: visible;
 }
 
@@ -3911,7 +3971,7 @@ body {
 }
 
 .bases-table-header-resizer {
-  border-radius: var(--radius-s);
+  border-radius: 0;
 }
 
 .bases-table-cell > * {
@@ -3987,6 +4047,47 @@ body.is-phone .cm-content > .cm-lang-base {
   margin-inline: calc(-1 * var(--file-margins-x)) !important;
 }
 
+@media screen, print {
+  :is(.markdown-rendered, .markdown-source-view) {
+    --hr-thickness: 2px;
+    --hr-color: color-mix(in srgb, var(--text-normal) 14%, var(--background-primary));
+  }
+  .markdown-rendered hr {
+    margin-block: 1em;
+  }
+  .markdown-rendered kbd {
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    background: var(--background-primary-alt);
+    box-shadow: 0 1px 0 var(--background-modifier-border);
+    font-family: var(--font-monospace);
+    font-size: 0.85em;
+    color: var(--text-normal);
+  }
+  .markdown-rendered mark,
+  .markdown-source-view mark {
+    border-radius: 3px;
+    padding: 0 2px;
+    font-weight: inherit;
+  }
+  .cm-line .cm-highlight {
+    padding-block: 0;
+  }
+  .cm-line .cm-highlight:nth-child(1 of .cm-highlight) {
+    border-start-start-radius: 3px;
+    border-end-start-radius: 3px;
+    padding-inline-start: 2px;
+  }
+  .cm-line .cm-highlight:nth-last-child(1 of .cm-highlight) {
+    border-start-end-radius: 3px;
+    border-end-end-radius: 3px;
+    padding-inline-end: 2px;
+  }
+  .markdown-rendered .footnote-backref {
+    color: var(--text-muted);
+  }
+}
 body:not(.is-mobile) {
   --radius-window: var(--lumin-radius);
 }
@@ -6677,8 +6778,6 @@ body:not(.is-mobile) .nav-files-container > div {
     --metadata-property-radius-focus: 0;
     --embed-background: transparent;
     --embed-border-start: 2px solid var(--background-modifier-border);
-    --table-row-alt-background: transparent;
-    --table-row-hover-background: var(--background-modifier-hover);
   }
   body .inline-title {
     letter-spacing: 0;
@@ -6733,31 +6832,9 @@ body:not(.is-mobile) .nav-files-container > div {
   body .callout:not([data-callout=note-toolbar]) .callout-content > *:first-child {
     margin-block-start: 6px;
   }
-  body .markdown-rendered pre {
-    border: var(--code-border-width) solid var(--background-modifier-border);
-    border-radius: var(--radius-s);
-    box-shadow: none;
-    background: var(--background-secondary);
-  }
-  body .markdown-rendered code {
-    border-radius: var(--lumin-radius);
-    background-color: var(--background-secondary);
-  }
   body .markdown-embed:not(.image-embed, .canvas-node-content) {
     border-radius: 0;
     box-shadow: none;
-  }
-  body div:is(.markdown-preview-view, .is-live-preview) table {
-    border-color: var(--background-modifier-border);
-    border-radius: var(--radius-s);
-    box-shadow: none;
-  }
-  body div:is(.markdown-preview-view, .is-live-preview) table th,
-  body div:is(.markdown-preview-view, .is-live-preview) table td {
-    padding: 8px 10px;
-  }
-  body div:is(.markdown-preview-view, .is-live-preview) table > thead > tr > th {
-    background-color: var(--background-secondary);
   }
   body .workspace-leaf-content[data-type=markdown] img:not(.link-favicon, .emoji, [alt=banner]) {
     box-shadow: none;

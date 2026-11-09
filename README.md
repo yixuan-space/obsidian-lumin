@@ -25,6 +25,7 @@ Lumin keeps the note at the center of the workspace. Its measured spacing, clear
 - **A complete note surface.** Thoughtful styling for properties, tables, callouts, code, tasks, embeds, banners, images, and media.
 - **Desktop controls when you need them.** Hoverable ribbons and sidebars, focus view, compact panel actions, and centered tabs keep wide workspaces adaptable.
 - **Configure without CSS.** Optional [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) controls cover color, editor, desktop behavior, and accessibility preferences.
+- **Typora-inspired writing details.** Readable code with brown comments, compact lists, gently rounded tables, and a standalone Windows/macOS hotkey importer.
 
 ## Across Devices
 
@@ -84,6 +85,30 @@ Additional symbols cover quotation, location, bookmark, information, savings, ke
 
 ## Customize
 
+Note typography takes inspiration from Typora's GitHub theme: a cross-platform sans-serif stack, monospace code, and subtle rules under first- and second-level headings. Code uses neutral gray backgrounds, deep purple keywords, brick-red strings, and brown comments with a matching dark palette. Tables and code blocks have 8px corners; tables retain clear grids, alternating rows, and stable headers on hover. Font choices in Obsidian's Appearance settings still take priority; no fonts are downloaded or bundled.
+
+Ordered and unordered lists use clearer markers and compact spacing. Reading view uses a consistent 1.875em indent per level (30px at a 16px text size), including mixed nested lists, with space between paragraphs within an item. The editor retains Obsidian's native indentation, numbering, and folding behavior.
+
+Ordinary blockquotes use a transparent background, a 4px rule, and simple spacing. Horizontal rules, highlights, keyboard keys, and footnote backlinks use compact, readable styling.
+
+### Typora-style hotkeys
+
+The hotkey tool is separate from the theme; installing Lumin does not change your bindings. Open [`tools/typora-hotkeys`](tools/typora-hotkeys) and choose the entry point for your system:
+
+| System | Entry point | Interface |
+| --- | --- | --- |
+| Windows 10/11 | Double-click [`Start.cmd`](tools/typora-hotkeys/Start.cmd) | A window for vault selection, preview, import, and restore |
+| macOS (Apple Silicon / Intel) | Double-click [`Start.command`](tools/typora-hotkeys/Start.command) | Native dialogs with results in Terminal |
+| Linux / command line | `node import-hotkeys.mjs --vault "/path/to/vault"` | Preview by default; add `--apply` to write |
+
+1. Clone the repository or use GitHub **Code → Download ZIP**, then extract it. Keep the entire `tools/typora-hotkeys` folder together.
+2. Install **Node.js 22 or a newer LTS release**. No npm dependencies or community plugins are required for the importer.
+3. Fully quit Obsidian (Command+Q on Mac), open the launcher, and select a vault. Preview the changes before importing if desired.
+
+The profile covers headings, body text, bold, italics, strikethrough, code, quotes, lists, links, tables, and source mode. `Mod` becomes Ctrl on Windows/Linux and Command on Mac. Imports back up existing changes, detect custom conflicts, preserve unrelated bindings, and support restoration. Some Obsidian default shortcuts are disabled to avoid conflicts. This is a shared Typora Windows/Linux-style layout, not an exact replica of Typora's macOS shortcuts.
+
+Copy the tool folder to another computer, or sync `.obsidian/hotkeys.json` for a shared vault using Obsidian Sync's hotkey settings or another sync tool. Import separately for different vaults. Mobile devices can receive synced bindings for supported external-keyboard commands. On Mac, a downloaded launcher may need executable permission (`chmod +x Start.command`) or approval through Control-click → Open / System Settings → Privacy & Security. See the [tool guide (Chinese)](tools/typora-hotkeys/README.md) and [full mapping and sync guide (Chinese)](docs/typora-hotkeys.zh-CN.md).
+
 Lumin works without companion plugins. Install and enable [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) to adjust Lumin in **Settings > Style Settings**.
 
 - Choose the default, mist blue, moss green, or warm gray palette in light and dark appearance.
@@ -138,6 +163,8 @@ npx --yes sass src/theme.scss theme.css --no-source-map
 ```
 
 Commit the generated `theme.css` with its source changes. Run `git diff --check` before opening a pull request or publishing a release.
+
+Install development dependencies with `npm ci`. Use `npm run build`, `npm run verify:edge`, and `npm run test:hotkeys` to build and verify the theme and importer. Browser checks use locally installed Microsoft Edge with an isolated temporary session, covering all palettes, light/dark modes, desktop/mobile widths, and print styles. Set `EDGE_PATH` for a nonstandard installation. Checks do not change the system default browser or use your personal browser profile. This project does not use Tabbit for verification.
 
 ## Credits
 

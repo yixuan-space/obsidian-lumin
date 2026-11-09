@@ -1,0 +1,124 @@
+// Typora GitHub-inspired code surfaces, using Obsidian's native code tokens
+// so Reading view, Live Preview, and Source mode share the same treatment.
+@media screen, print {
+  body {
+    --code-border-width: 1px;
+    --code-radius: 8px;
+    --code-size: calc(var(--font-text-size) * 0.9);
+    --code-border-color: color-mix(in srgb, var(--code-normal) 14%, var(--code-background));
+    --lumin-code-line-height: 1.6;
+  }
+
+  body.theme-light {
+    --code-background: color-mix(in srgb, var(--background-primary) 96.5%, black);
+    --lumin-code-inline-background: color-mix(in srgb, var(--background-primary) 94.5%, black);
+    --code-normal: #302e2b;
+    --code-comment: #98551b;
+    --code-keyword: #770088;
+    --code-string: #a11f26;
+    --code-value: #165c3b;
+    --code-function: #254e9c;
+    --code-property: #27546e;
+    --code-operator: #5c4736;
+    --code-punctuation: #49433c;
+    --code-tag: #346145;
+    --code-important: #814d17;
+  }
+
+  body.theme-dark {
+    --code-background: color-mix(in srgb, var(--background-primary) 96%, white);
+    --lumin-code-inline-background: color-mix(in srgb, var(--background-primary) 93%, white);
+    --code-normal: #e0d8cd;
+    --code-comment: #c5a47b;
+    --code-keyword: #d4a1dc;
+    --code-string: #e7a29b;
+    --code-value: #9dc9a4;
+    --code-function: #a9bfe8;
+    --code-property: #a5c8d9;
+    --code-operator: #d4bea0;
+    --code-punctuation: #cbc2b7;
+    --code-tag: #a8c59a;
+    --code-important: #e1bd82;
+  }
+
+  .markdown-rendered pre {
+    margin-block: 15px;
+    padding: 12px 14px;
+    min-height: 0;
+    background: var(--code-background);
+    border: var(--code-border-width) solid var(--code-border-color);
+    border-radius: var(--code-radius);
+    box-shadow: none;
+  }
+
+  .markdown-rendered code {
+    --code-radius: 4px;
+    padding: 0 2px;
+    border-radius: var(--code-radius);
+    background-color: var(--lumin-code-inline-background);
+  }
+
+  // The enclosing pre owns the surface; code only supplies text and tokens.
+  .markdown-rendered pre code {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    white-space: var(--code-white-space);
+    line-height: var(--lumin-code-line-height);
+    font-weight: 400;
+    font-feature-settings: normal;
+    font-variant-ligatures: none;
+  }
+
+  .markdown-source-view.mod-cm6 {
+    .cm-inline-code {
+      --code-radius: 4px;
+    }
+
+    .cm-line.HyperMD-codeblock:not(.HyperMD-list-line) {
+      padding-inline-start: 14px;
+    }
+
+    .cm-line.HyperMD-codeblock {
+      line-height: var(--lumin-code-line-height);
+      font-weight: 400;
+      font-feature-settings: normal;
+      font-variant-ligatures: none;
+    }
+
+    .HyperMD-codeblock :is(.cm-def, .cm-type) {
+      color: var(--code-function);
+    }
+
+    .HyperMD-codeblock :is(.cm-atom, .cm-number) {
+      color: var(--code-value);
+    }
+
+    .HyperMD-codeblock .cm-variable {
+      color: var(--code-normal);
+    }
+
+    // Keep native fence backgrounds and inline token joins in charge of
+    // borders, selection, and wrapping while matching Reading view's spacing.
+    .cm-inline-code:not(.cm-formatting) {
+      padding: 0 2px;
+    }
+
+    .cm-inline-code.cm-formatting,
+    .cm-inline-code.cm-formatting ~ .cm-inline-code:not(.cm-formatting) {
+      padding: 0;
+    }
+
+    span.cm-inline-code,
+    span.cm-inline-code span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(.obsidian-search-match-highlight) {
+      background-color: var(--lumin-code-inline-background);
+    }
+
+    // Inline-code tokens inside a fenced block must remain part of that block.
+    .HyperMD-codeblock span.cm-inline-code {
+      padding: inherit;
+      background-color: inherit;
+    }
+  }
+}
