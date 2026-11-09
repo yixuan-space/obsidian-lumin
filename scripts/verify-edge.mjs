@@ -84,24 +84,82 @@ try {
   requireEqual(await page.locator('pre').evaluate(element => getComputedStyle(element).borderRadius), '8px', 'Print code radius');
   await page.emulateMedia({ media: 'screen' });
   await page.setViewportSize({ width: 1120, height: 800 });
-  await page.setContent(`<!doctype html><html><head><link rel="stylesheet" href="https://lumin.test/app.css"><link rel="stylesheet" href="https://lumin.test/theme.css"><style>body{margin:0;padding:0}.workspace{position:relative;display:flex;width:100vw;height:100vh}.workspace-ribbon{flex:0 0 48px}.mod-sidedock{flex:none;width:320px}.workspace-tab-header-container{display:flex;height:36px}.workspace-tab-header-container-inner{flex:1}.workspace-ribbon .side-dock-actions{display:flex;height:200px}.mod-root{flex:1}</style></head><body class="mod-windows is-focused is-hidden-frameless show-ribbon theme-light"><div class="workspace is-left-sidedock-open"><div class="workspace-ribbon mod-left"><div class="sidebar-toggle-button mod-left"><div class="clickable-icon">☰</div></div><div class="side-dock-actions">工具栏</div></div><div class="workspace-split mod-sidedock mod-left-split"><div class="workspace-tabs mod-top-left-space"><div class="workspace-tab-header-container"><div class="workspace-tab-header-container-inner">文件 搜索 书签</div></div></div></div><div class="workspace-split mod-root"></div></div></body></html>`, { waitUntil: 'networkidle' });
   const sidebarChecks = [];
-  for (const width of [240, 360, 480]) {
-    await page.locator('.mod-sidedock').evaluate((element, width) => element.style.width = width + 'px', width);
-    const geometry = await page.evaluate(() => {
-      const header = document.querySelector('.workspace-tab-header-container').getBoundingClientRect();
-      const toggle = document.querySelector('.sidebar-toggle-button').getBoundingClientRect();
-      const hit = document.elementFromPoint(toggle.x + toggle.width / 2, toggle.y + toggle.height / 2);
-      return { rightGap: header.right - toggle.right, topGap: toggle.top - header.top, clickable: !!hit?.closest('.sidebar-toggle-button') };
-    });
-    if (Math.abs(geometry.rightGap - 8) > 1 || Math.abs(geometry.topGap) > 1 || !geometry.clickable) throw new Error(`Windows sidebar toggle: ${JSON.stringify(geometry)}`);
-    sidebarChecks.push({ width, ...geometry });
+  // Obsidian updateFrameless keeps the toggle in the Ribbon on Windows.
+  // With no Ribbon, or macOS's hidden title bar, it moves the same element
+  // between the dock header (expanded) and root header (collapsed).
+  for (const platform of ['windows', 'macos']) {
+    for (const frame of ['hidden', 'visible', 'fullscreen']) {
+      for (const ribbon of ['pinned', 'hidden', 'hover']) {
+        for (const naming of ['left', 'primary']) {
+          const inHeader = ribbon === 'hidden' || (platform === 'macos' && frame !== 'visible');
+          const bodyClasses = `mod-${platform} is-focused is-frameless theme-light ${frame === 'visible' ? '' : 'is-hidden-frameless'} ${frame === 'fullscreen' ? 'is-fullscreen' : ''} ${ribbon === 'hidden' ? '' : 'show-ribbon'} ${ribbon === 'hover' ? 'hover-ribbon' : ''}`;
+          await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://lumin.test/app.css"><link rel="stylesheet" href="https://lumin.test/theme.css"><style>body{margin:0}.workspace{width:100vw;height:calc(100vh - 30px)}.mod-sidedock{flex:none;width:320px}.mod-sidedock.is-sidedock-collapsed{width:0!important;min-width:0;padding:0!important;margin:0!important;overflow:hidden}.mod-root{flex:1}.workspace-tab-header-container-inner{flex:1}</style></head><body class="${bodyClasses}"><div class="workspace is-left-sidedock-open"><div class="workspace-ribbon mod-${naming}"><div class="sidebar-toggle-button mod-left"><div class="clickable-icon"><svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="2" width="22" height="20" rx="4"/><rect x="4" y="5" width="2" height="14" rx="2" fill="currentColor" class="sidebar-toggle-icon-inner"/></svg></div></div><div class="side-dock-actions"><div class="side-dock-ribbon-action clickable-icon">⌘</div></div></div><div class="workspace-split mod-horizontal mod-sidedock mod-${naming}-split"><div class="workspace-tabs mod-top mod-top-left-space"><div class="workspace-tab-header-container"><div class="workspace-tab-header-container-inner"><div class="workspace-tab-header is-active"><div class="workspace-tab-header-inner"><div class="workspace-tab-header-inner-icon"><svg class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h6l2-3h8a2 2 0 0 1 2 2v13H3Z"/></svg></div></div></div><div class="workspace-tab-header"><div class="workspace-tab-header-inner"><div class="workspace-tab-header-inner-icon"><svg class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg></div></div></div></div></div></div></div><div class="workspace-split mod-vertical mod-root"><div class="workspace-tabs mod-top"><div class="workspace-tab-header-container"><div class="workspace-tab-header-container-inner">笔记</div></div></div></div></div></body></html>`, { waitUntil: 'load' });
+          await page.evaluate(inHeader => {
+            const workspace = document.querySelector('.workspace');
+            const dock = document.querySelector('.mod-sidedock');
+            const ribbon = document.querySelector('.workspace-ribbon');
+            const toggle = document.querySelector('.sidebar-toggle-button');
+            const dockHeader = dock.querySelector('.workspace-tab-header-container');
+            const rootTabs = document.querySelector('.mod-root .workspace-tabs');
+            window.sidebarClickCount = 0;
+            if (inHeader) dockHeader.append(toggle);
+            toggle.addEventListener('click', () => {
+              window.sidebarClickCount++;
+              const expanded = workspace.classList.toggle('is-left-sidedock-open');
+              dock.classList.toggle('is-sidedock-collapsed', !expanded);
+              ribbon.classList.toggle('is-collapsed', !expanded);
+              rootTabs.classList.toggle('mod-top-left-space', !expanded);
+              if (inHeader) {
+                if (expanded) dockHeader.append(toggle);
+                else rootTabs.querySelector('.workspace-tab-header-container').prepend(toggle);
+              }
+            });
+          }, inHeader);
+          for (const width of [240, 480]) {
+            await page.locator('.mod-sidedock').evaluate((element, width) => element.style.width = width + 'px', width);
+            await page.evaluate(width => document.body.classList.toggle('theme-dark', width === 480), width);
+            // Include the collapsed-dock hover feature, which must not cover the toggle.
+            await page.evaluate(width => document.body.classList.toggle('hover-sidedock', width === 480), width);
+            for (const expanded of [true, false]) {
+              if (ribbon === 'hover' && !inHeader) {
+                const bounds = await page.locator('.workspace-ribbon').boundingBox();
+                await page.mouse.move(1, bounds.y + 80);
+              }
+              const geometry = await page.locator('.sidebar-toggle-button').evaluate(element => {
+                const icon = element.querySelector('.clickable-icon');
+                const rect = icon.getBoundingClientRect();
+                const parent = element.parentElement.getBoundingClientRect();
+                const action = document.querySelector('.side-dock-ribbon-action').getBoundingClientRect();
+                const glyph = icon.querySelector('svg').getBoundingClientRect();
+                const fileIcon = document.querySelector('.mod-sidedock .workspace-tab-header-inner-icon svg').getBoundingClientRect();
+                const hit = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+                return { rect: rect.toJSON(), parent: parent.toJSON(), position: getComputedStyle(element).position,
+                  anchor: getComputedStyle(element).getPropertyValue('position-anchor'),
+                  noDrag: [element, ...element.querySelectorAll('*')].every(node => getComputedStyle(node).getPropertyValue('-webkit-app-region') === 'no-drag'),
+                  clickable: !!hit && element.contains(hit),
+                  fileCenterOffset: glyph.y + glyph.height / 2 - fileIcon.y - fileIcon.height / 2,
+                  actionCenterOffset: rect.x + rect.width / 2 - action.x - action.width / 2,
+                  withinParent: glyph.left >= parent.left - 1 && glyph.right <= parent.right + 1 && glyph.top >= parent.top - 1 && glyph.bottom <= parent.bottom + 1,
+                  visible: rect.width > 0 && rect.height > 0 && rect.left >= 0 && rect.top >= 0 };
+              });
+              const label = `${platform}/${frame}/${ribbon}/${naming}/${width}/${expanded}`;
+              if (platform === 'windows' && !inHeader) requireEqual(Math.abs(geometry.actionCenterOffset) < 1, true, `${label}: toggle aligns with Ribbon actions`);
+              // This native app.css snapshot supplies tab icon sizing for mod-left-split.
+              if (platform === 'windows' && ribbon === 'pinned' && naming === 'left' && expanded) requireEqual(Math.abs(geometry.fileCenterOffset) < 1, true, `${label}: file icon vertical offset ${geometry.fileCenterOffset}`);
+              requireEqual(geometry.position, 'relative', `${label}: native toggle position`);
+              requireEqual(['auto', 'normal', ''].includes(geometry.anchor), true, `${label}: no cross-panel anchor`);
+              for (const key of ['noDrag', 'clickable', 'withinParent', 'visible']) requireEqual(geometry[key], true, `${label}: ${key} ${JSON.stringify(geometry)}`);
+              await page.locator('.sidebar-toggle-button .clickable-icon').click();
+              requireEqual(await page.locator('.workspace').evaluate(element => element.classList.contains('is-left-sidedock-open')), !expanded, `${label}: click toggles sidebar`);
+            }
+          }
+          requireEqual(await page.evaluate(() => window.sidebarClickCount), 4, 'Each toggle click fires once');
+          sidebarChecks.push({ platform, frame, ribbon, naming, widths: [240, 480], clicks: 4 });
+        }
+      }
+    }
   }
-  await page.locator('.workspace').evaluate(element => element.classList.remove('is-left-sidedock-open'));
-  requireEqual(await page.locator('.sidebar-toggle-button').evaluate(element => getComputedStyle(element).position), 'relative', 'Collapsed sidebar toggle returns to ribbon');
-  await page.locator('.workspace').evaluate(element => element.classList.add('is-left-sidedock-open'));
-  await page.evaluate(() => document.body.classList.add('hover-ribbon'));
-  requireEqual(await page.locator('.sidebar-toggle-button').evaluate(element => getComputedStyle(element).position), 'relative', 'Hover ribbon retains its native toggle');
   console.log(JSON.stringify({ sidebarChecks }, null, 2));
   console.log(JSON.stringify({ browser: 'Microsoft Edge', executablePath, version: browser.version(), checks, print: 'passed' }, null, 2));
 } finally {

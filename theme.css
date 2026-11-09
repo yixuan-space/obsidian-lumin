@@ -708,6 +708,37 @@ body.bold-folders .nav-folder-title {
   height: 100%;
 }
 
+body:not(.is-mobile) .sidebar-toggle-button.mod-left {
+  -webkit-app-region: no-drag;
+  pointer-events: auto;
+}
+body:not(.is-mobile) .sidebar-toggle-button.mod-left * {
+  -webkit-app-region: no-drag;
+}
+
+body:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left {
+  padding: 0;
+  flex-shrink: 0;
+}
+body:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left .clickable-icon {
+  min-width: 0;
+  width: 100%;
+  padding: 4px 0;
+}
+
+body.mod-windows:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left {
+  width: var(--tab-action-width);
+  margin-inline: auto;
+}
+
+body.mod-windows:not(.is-mobile).show-ribbon:not(.hover-ribbon) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left {
+  height: calc(var(--header-height) - 16px);
+}
+
+body.mod-windows:not(.is-mobile):not(.is-hidden-frameless).show-ribbon:not(.hover-ribbon) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left {
+  margin-top: calc(-1 * var(--size-4-2));
+}
+
 body.mod-macos:not(.is-mobile) {
   --macos-window-controls-space: max(
     84px,
@@ -5136,28 +5167,6 @@ body.mod-windows:not(.is-mobile) .modal.mod-settings {
   zoom: 0.9;
 }
 
-@supports (anchor-name: --lumin-left-sidebar-header) {
-  body.mod-windows:not(.is-mobile).show-ribbon:not(.hover-ribbon) .workspace.is-left-sidedock-open .mod-sidedock:is(.mod-left-split, .mod-primary-split):not(.is-sidedock-collapsed) .mod-top-left-space .workspace-tab-header-container {
-    anchor-name: --lumin-left-sidebar-header;
-    padding-inline-end: calc(var(--tab-action-width) + 8px);
-  }
-  body.mod-windows:not(.is-mobile).show-ribbon:not(.hover-ribbon) .workspace.is-left-sidedock-open .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left {
-    position: fixed;
-    position-anchor: --lumin-left-sidebar-header;
-    inset: auto;
-    top: anchor(top);
-    left: calc(anchor(right) - var(--tab-action-width) - 8px);
-    width: var(--tab-action-width);
-    height: calc(var(--header-height) - 16px);
-    padding: 0;
-    margin: 0;
-    transition: none;
-    -webkit-app-region: no-drag;
-  }
-  body.mod-windows:not(.is-mobile).show-ribbon:not(.hover-ribbon) .workspace.is-left-sidedock-open .workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions {
-    padding-top: calc(var(--header-height) - 24px);
-  }
-}
 @font-face {
   font-family: "Google Sans System";
   font-style: normal;

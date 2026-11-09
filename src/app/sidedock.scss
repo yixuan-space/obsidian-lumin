@@ -64,6 +64,47 @@ body.bold-folders .nav-folder-title {
 }
 
 // Ribbon
+// Keep Obsidian's own toggle and parent selection: the Ribbon on Windows,
+// or a tab header on macOS with a hidden title bar / when the Ribbon is hidden.
+// Only the button is excluded from Electron's native window-drag hit region.
+body:not(.is-mobile) .sidebar-toggle-button.mod-left {
+  -webkit-app-region: no-drag;
+  pointer-events: auto;
+
+  * {
+    -webkit-app-region: no-drag;
+  }
+}
+
+// Fit the native Ribbon hit target inside its padded column. Shared button
+// styles otherwise force a 40px icon into a narrower, overflow-hidden area.
+body:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left {
+  padding: 0;
+  flex-shrink: 0;
+
+  .clickable-icon {
+    min-width: 0;
+    width: 100%;
+    padding: 4px 0;
+  }
+}
+
+// Match the action buttons' center even when Ribbon padding leaves less
+// space than --tab-action-width. Keep the native in-flow click target.
+body.mod-windows:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left {
+  width: var(--tab-action-width);
+  margin-inline: auto;
+}
+
+// The pinned Ribbon and the file tabs share the same 8px top inset.
+// Use the dock header's height in both expanded and collapsed states.
+body.mod-windows:not(.is-mobile).show-ribbon:not(.hover-ribbon) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left {
+  height: calc(var(--header-height) - 16px);
+}
+body.mod-windows:not(.is-mobile):not(.is-hidden-frameless).show-ribbon:not(.hover-ribbon) .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left {
+  margin-top: calc(-1 * var(--size-4-2));
+}
+
 // Reserve the native macOS window-control area before laying out the left
 // sidebar header. Other platforms do not have traffic lights in this region.
 body.mod-macos:not(.is-mobile) {

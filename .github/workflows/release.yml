@@ -34,13 +34,18 @@ jobs:
           node -e 'const fs = require("fs"); const version = JSON.parse(fs.readFileSync("manifest.json", "utf8")).version; if (version !== process.env.GITHUB_REF_NAME) throw new Error("Tag does not match manifest version");'
           git archive --format=zip --output=typora-hotkeys.zip HEAD tools/typora-hotkeys docs/typora-hotkeys.zh-CN.md
 
-      - name: Create release
+      - name: Publish release assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           tag="${GITHUB_REF#refs/tags/}"
 
-          gh release create "$tag" \
-            --title="$tag" \
-            --notes-file "docs/releases/$tag.md" \
-            manifest.json theme.css typora-hotkeys.zip
+          if gh release view "$tag" > /dev/null 2>&1; then
+            gh release edit "$tag" --notes-file "docs/releases/$tag.md"
+            gh release upload "$tag" manifest.json theme.css --clobber
+          else
+            gh release create "$tag" \
+              --title="$tag" \
+              --notes-file "docs/releases/$tag.md" \
+              manifest.json theme.css typora-hotkeys.zip
+          fi
