@@ -1,0 +1,46 @@
+name: Release Obsidian theme
+
+on:
+  push:
+    tags:
+      - "[0-9]*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install development dependencies
+        run: npm ci
+
+      - name: Build and validate theme CSS
+        run: |
+          npm run build
+          npm run test:hotkeys
+          git diff --check
+          git diff --exit-code -- theme.css
+
+      - name: Package portable hotkey tool
+        run: |
+          node -e 'const fs = require("fs"); const version = JSON.parse(fs.readFileSync("manifest.json", "utf8")).version; if (version !== process.env.GITHUB_REF_NAME) throw new Error("Tag does not match manifest version");'
+          git archive --format=zip --output=typora-hotkeys.zip HEAD tools/typora-hotkeys docs/typora-hotkeys.zh-CN.md
+
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+
+          gh release create "$tag" \
+            --title="$tag" \
+            --notes-file "docs/releases/$tag.md" \
+            manifest.json theme.css typora-hotkeys.zip

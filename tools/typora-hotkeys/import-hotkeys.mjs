@@ -109,7 +109,7 @@ export function run(args) {
   console.log(JSON.stringify(writeWithBackup(target, JSON.stringify(merged, null, 2) + '\n'), null, 2));
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   try { run(process.argv.slice(2)); }
   catch (error) { console.error(error.message); process.exitCode = 1; }
 }

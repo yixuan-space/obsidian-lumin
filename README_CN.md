@@ -95,6 +95,8 @@ Lumin 在所有 Obsidian 平台上延续同一套视觉语言，同时根据设�
 
 快捷键工具与主题独立，安装主题不会自动改动你的键位。打开仓库中的 [`tools/typora-hotkeys`](tools/typora-hotkeys) 文件夹，按系统选择入口：
 
+从 [1.1.8 发布页](https://github.com/yixuan-space/obsidian-lumin/releases/tag/1.1.8)下载 `typora-hotkeys.zip` 即可单独获取工具，也可以下载整个仓库。[查看 1.1.8 更新说明](docs/releases/1.1.8.md)。
+
 | 系统 | 双击入口 | 操作方式 |
 | --- | --- | --- |
 | Windows 10/11 | [`Start.cmd`](tools/typora-hotkeys/Start.cmd) | 窗口选择笔记库，点击预览、导入或恢复 |

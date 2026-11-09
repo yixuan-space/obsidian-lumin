@@ -108,6 +108,31 @@ test('macOS vault discovery filters missing paths and deduplicates entries', () 
   }
 });
 
+test('CLI runs when its entry path contains a symbolic link', { skip: process.platform === 'win32' }, () => {
+  const temporary = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'lumin-symlink-')));
+  const actual = path.join(temporary, 'actual');
+  const alias = path.join(temporary, 'alias');
+  const vault = path.join(actual, 'vault');
+  const config = path.join(vault, '.obsidian');
+  fs.mkdirSync(config, { recursive: true });
+  fs.copyFileSync(importer, path.join(actual, 'import-hotkeys.mjs'));
+  fs.copyFileSync(fileURLToPath(new URL('./typora-hotkeys.json', import.meta.url)), path.join(actual, 'typora-hotkeys.json'));
+  fs.symlinkSync(actual, alias, 'dir');
+  try {
+    execFileSync(process.execPath, [path.join(alias, 'import-hotkeys.mjs'), '--vault', vault, '--apply']);
+    assert.ok(fs.existsSync(path.join(config, 'hotkeys.json')));
+  } finally {
+    fs.unlinkSync(alias);
+    for (const entry of fs.readdirSync(config)) fs.unlinkSync(path.join(config, entry));
+    fs.rmdirSync(config);
+    fs.rmdirSync(vault);
+    fs.unlinkSync(path.join(actual, 'import-hotkeys.mjs'));
+    fs.unlinkSync(path.join(actual, 'typora-hotkeys.json'));
+    fs.rmdirSync(actual);
+    fs.rmdirSync(temporary);
+  }
+});
+
 test('macOS AppleScript dialogs compile without opening windows', { skip: process.platform !== 'darwin' }, () => {
   const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'lumin-applescript-'));
   try {
