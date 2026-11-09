@@ -1,6 +1,7 @@
 @media screen, print {
   body {
-    --heading-spacing: 1.5em;
+    --lumin-paragraph-gap: calc(var(--font-text-size) * 0.8);
+    --heading-spacing: var(--lumin-paragraph-gap);
     --p-spacing: 0.8em;
     --line-height-normal: 1.6;
     --inline-title-margin-bottom: calc(0.5em * var(--readable-spacing-modifier, 1));
@@ -79,6 +80,31 @@
   .markdown-source-view.mod-cm6 :is(.HyperMD-header-1, .HyperMD-header-2) {
     border-bottom: 1px solid var(--background-modifier-border);
     padding-bottom: 0.25em;
+  }
+
+  // Use body-sized spacing around headings instead of scaling the gap with
+  // each heading's font size. Live Preview already has a source blank line.
+  .markdown-rendered :is(h1, h2, h3, h4, h5, h6) {
+    margin-block: var(--lumin-paragraph-gap);
+  }
+
+  .markdown-source-view.mod-cm6.is-live-preview {
+    --p-spacing-empty: var(--lumin-paragraph-gap);
+
+    .cm-content > .cm-line.HyperMD-header {
+      padding-top: 0;
+    }
+
+    // Preserve a visible, editable line, including while the caret is on it.
+    // Do not collapse code, list, quote, table or frontmatter source lines.
+    .cm-content > .cm-line:not([class*="HyperMD-"]):not(:has(.cm-hmd-frontmatter)):is(:empty, :has(> br:only-child)) {
+      line-height: 0.8;
+    }
+
+    // A heading with no source blank line still needs a paragraph gap.
+    .cm-content > .cm-line:not(:empty):not(:has(> br:only-child)) + .cm-line.HyperMD-header {
+      padding-top: var(--lumin-paragraph-gap);
+    }
   }
 
   // Tab title bar

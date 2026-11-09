@@ -84,6 +84,46 @@ try {
   requireEqual(await page.locator('pre').evaluate(element => getComputedStyle(element).borderRadius), '8px', 'Print code radius');
   await page.emulateMedia({ media: 'screen' });
   await page.setViewportSize({ width: 1120, height: 800 });
+  // Model native Reading wrappers and CodeMirror's direct line children.
+  const typographyChecks = [];
+  for (const fontSize of [16, 20]) {
+    for (const width of [390, 1120]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://lumin.test/app.css"><link rel="stylesheet" href="https://lumin.test/theme.css"><style>body{display:block;overflow:auto;--font-text-size:${fontSize}px}.sample{width:min(680px,calc(100vw - 48px));font-size:var(--font-text-size);height:auto!important;padding:0!important;overflow:visible;scrollbar-gutter:auto}.sample .cm-scroller{scrollbar-gutter:auto}.cm-content{width:100%!important}.cm-line{white-space:pre-wrap}.markdown-preview-section{padding:0!important}</style></head><body class="theme-light"><section id="reading-spacing" class="sample markdown-preview-view markdown-rendered"><div class="markdown-preview-section"><div class="el-p"><p id="read-first">第一段正文 English</p></div><div class="el-p"><p id="read-second">第二段正文 English</p></div><div class="el-h2"><h2 id="read-heading">标题</h2></div><div class="el-p"><p id="read-after">标题后的正文</p></div><div class="el-p"><p id="read-wrap">${'自然换行的正文 English text。'.repeat(6)}</p></div></div></section><section id="edit-spacing" class="sample markdown-source-view mod-cm6 is-live-preview cm-s-obsidian"><div class="cm-scroller"><div class="cm-content" contenteditable="true"><div class="cm-line" id="edit-first">第一段正文 English</div><div class="cm-line" id="blank"><br></div><div class="cm-line" id="edit-second">第二段正文 English</div><div class="cm-line"><br></div><div class="cm-line HyperMD-header HyperMD-header-2" id="edit-heading"><span class="cm-header-2">标题</span></div><div class="cm-line"><br></div><div class="cm-line" id="edit-after">标题后的正文</div><div class="cm-line"><br></div><div class="cm-line" id="edit-wrap">${'自然换行的正文 English text。'.repeat(6)}</div><div class="cm-line" id="extra-blank"><br></div><div class="cm-line"><br></div><div class="cm-line HyperMD-codeblock" id="code-blank"><br></div><div class="cm-line HyperMD-quote" id="quote-blank"><br></div><div class="cm-line HyperMD-list-line" id="list-blank"><br></div><div class="cm-line" id="spaces">   </div></div></div></section><section class="sample markdown-source-view mod-cm6 cm-s-obsidian"><div class="cm-scroller"><div class="cm-content"><div class="cm-line" id="source-blank"><br></div></div></div></section></body></html>`, { waitUntil: 'load' });
+      const metrics = await page.evaluate(() => {
+        const rect = id => document.getElementById(id).getBoundingClientRect();
+        const gap = (a,b) => rect(b).top - rect(a).bottom;
+        return { readGap: gap('read-first','read-second'), editGap: gap('edit-first','edit-second'),
+          readBeforeHeading: gap('read-second','read-heading'), editBeforeHeading: gap('edit-second','edit-heading'),
+          readAfterHeading: gap('read-heading','read-after'), editAfterHeading: gap('edit-heading','edit-after'),
+          readLine: rect('read-first').height, editLine: rect('edit-first').height,
+          readWrap: rect('read-wrap').height, editWrap: rect('edit-wrap').height,
+          blank: rect('blank').height, extraBlank: rect('extra-blank').height,
+          sourceBlank: rect('source-blank').height, codeBlank: rect('code-blank').height,
+          codeLineHeight: parseFloat(getComputedStyle(document.getElementById('code-blank')).lineHeight),
+          quoteBlank: rect('quote-blank').height, listBlank: rect('list-blank').height,
+          spaces: document.getElementById('spaces').textContent };
+      });
+      for (const [reading, editing] of [['readGap','editGap'], ['readBeforeHeading','editBeforeHeading'], ['readAfterHeading','editAfterHeading'], ['readLine','editLine'], ['readWrap','editWrap']]) {
+        if (Math.abs(metrics[reading] - metrics[editing]) > 1) throw new Error(`Typography ${fontSize}/${width}: ${reading}=${metrics[reading]}, ${editing}=${metrics[editing]}`);
+      }
+      for (const key of ['sourceBlank','quoteBlank','listBlank']) {
+        if (metrics[key] < fontSize * 1.5) throw new Error(`${key} was compressed: ${metrics[key]}`);
+      }
+      if (Math.abs(metrics.codeBlank - metrics.codeLineHeight) > 1) throw new Error('Empty code line lost its code line height');
+      requireEqual(metrics.blank, metrics.extraBlank, 'Consecutive blank lines remain individually editable');
+      requireEqual(metrics.spaces, '   ', 'Literal source spaces are preserved');
+      await page.locator('#blank').click();
+      await page.locator('#blank').evaluate(element => element.classList.add('cm-active'));
+      requireEqual(await page.locator('#blank').evaluate(element => element.getBoundingClientRect().height), metrics.blank, 'Caret does not change empty line height');
+      await page.keyboard.type('输入');
+      requireEqual(await page.locator('#blank').textContent(), '输入', 'Typing into a compact blank line');
+      if (await page.locator('#blank').evaluate(element => element.getBoundingClientRect().height) < fontSize * 1.5) throw new Error('Typed line did not regain normal height');
+      typographyChecks.push({ fontSize, width, ...metrics });
+    }
+  }
+  console.log(JSON.stringify({ typographyChecks }, null, 2));
+  await page.setViewportSize({ width: 1120, height: 800 });
   const sidebarChecks = [];
   // Obsidian updateFrameless keeps the toggle in the Ribbon on Windows.
   // With no Ribbon, or macOS's hidden title bar, it moves the same element
