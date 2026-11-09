@@ -53,3 +53,30 @@ body.mod-windows:not(.is-mobile) {
     zoom: 0.9;
   }
 }
+
+@supports (anchor-name: --lumin-left-sidebar-header) {
+  body.mod-windows:not(.is-mobile).show-ribbon:not(.hover-ribbon) .workspace.is-left-sidedock-open {
+    .mod-sidedock:is(.mod-left-split, .mod-primary-split):not(.is-sidedock-collapsed) .mod-top-left-space .workspace-tab-header-container {
+      anchor-name: --lumin-left-sidebar-header;
+      padding-inline-end: calc(var(--tab-action-width) + 8px);
+    }
+
+    .workspace-ribbon:is(.mod-left, .mod-primary) .sidebar-toggle-button.mod-left {
+      position: fixed;
+      position-anchor: --lumin-left-sidebar-header;
+      inset: auto;
+      top: anchor(top);
+      left: calc(anchor(right) - var(--tab-action-width) - 8px);
+      width: var(--tab-action-width);
+      height: calc(var(--header-height) - 16px);
+      padding: 0;
+      margin: 0;
+      transition: none;
+      -webkit-app-region: no-drag;
+    }
+
+    .workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions {
+      padding-top: calc(var(--header-height) - 24px);
+    }
+  }
+}

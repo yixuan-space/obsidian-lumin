@@ -82,6 +82,27 @@ try {
   }
   await page.emulateMedia({ media: 'print' });
   requireEqual(await page.locator('pre').evaluate(element => getComputedStyle(element).borderRadius), '8px', 'Print code radius');
+  await page.emulateMedia({ media: 'screen' });
+  await page.setViewportSize({ width: 1120, height: 800 });
+  await page.setContent(`<!doctype html><html><head><link rel="stylesheet" href="https://lumin.test/app.css"><link rel="stylesheet" href="https://lumin.test/theme.css"><style>body{margin:0;padding:0}.workspace{position:relative;display:flex;width:100vw;height:100vh}.workspace-ribbon{flex:0 0 48px}.mod-sidedock{flex:none;width:320px}.workspace-tab-header-container{display:flex;height:36px}.workspace-tab-header-container-inner{flex:1}.workspace-ribbon .side-dock-actions{display:flex;height:200px}.mod-root{flex:1}</style></head><body class="mod-windows is-focused is-hidden-frameless show-ribbon theme-light"><div class="workspace is-left-sidedock-open"><div class="workspace-ribbon mod-left"><div class="sidebar-toggle-button mod-left"><div class="clickable-icon">☰</div></div><div class="side-dock-actions">工具栏</div></div><div class="workspace-split mod-sidedock mod-left-split"><div class="workspace-tabs mod-top-left-space"><div class="workspace-tab-header-container"><div class="workspace-tab-header-container-inner">文件 搜索 书签</div></div></div></div><div class="workspace-split mod-root"></div></div></body></html>`, { waitUntil: 'networkidle' });
+  const sidebarChecks = [];
+  for (const width of [240, 360, 480]) {
+    await page.locator('.mod-sidedock').evaluate((element, width) => element.style.width = width + 'px', width);
+    const geometry = await page.evaluate(() => {
+      const header = document.querySelector('.workspace-tab-header-container').getBoundingClientRect();
+      const toggle = document.querySelector('.sidebar-toggle-button').getBoundingClientRect();
+      const hit = document.elementFromPoint(toggle.x + toggle.width / 2, toggle.y + toggle.height / 2);
+      return { rightGap: header.right - toggle.right, topGap: toggle.top - header.top, clickable: !!hit?.closest('.sidebar-toggle-button') };
+    });
+    if (Math.abs(geometry.rightGap - 8) > 1 || Math.abs(geometry.topGap) > 1 || !geometry.clickable) throw new Error(`Windows sidebar toggle: ${JSON.stringify(geometry)}`);
+    sidebarChecks.push({ width, ...geometry });
+  }
+  await page.locator('.workspace').evaluate(element => element.classList.remove('is-left-sidedock-open'));
+  requireEqual(await page.locator('.sidebar-toggle-button').evaluate(element => getComputedStyle(element).position), 'relative', 'Collapsed sidebar toggle returns to ribbon');
+  await page.locator('.workspace').evaluate(element => element.classList.add('is-left-sidedock-open'));
+  await page.evaluate(() => document.body.classList.add('hover-ribbon'));
+  requireEqual(await page.locator('.sidebar-toggle-button').evaluate(element => getComputedStyle(element).position), 'relative', 'Hover ribbon retains its native toggle');
+  console.log(JSON.stringify({ sidebarChecks }, null, 2));
   console.log(JSON.stringify({ browser: 'Microsoft Edge', executablePath, version: browser.version(), checks, print: 'passed' }, null, 2));
 } finally {
   await browser.close();
