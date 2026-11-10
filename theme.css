@@ -893,6 +893,10 @@ body:not(.nav-action-center) .mod-sidedock .workspace-leaf-content .nav-header:f
   height: 0px;
 }
 
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split):not(.is-sidedock-collapsed) {
+  min-width: 220px;
+}
+
 body:not(.is-mobile) .workspace-split:is(.mod-left-split, .mod-primary-split) .workspace-drawer-vault-actions .clickable-icon:first-child:not(:last-child) {
   display: none;
 }
