@@ -245,59 +245,31 @@ body:not(.nav-action-center) .mod-sidedock .workspace-leaf-content .nav-header:f
   }
 }
 
-// Vault switcher
-body:not(.is-mobile) .workspace-split:is(.mod-left-split, .mod-primary-split) .workspace-drawer-vault-actions .clickable-icon:first-child {
+// Vault switcher (layout borrowed from Velocity)
+body:not(.is-mobile) .workspace-split:is(.mod-left-split, .mod-primary-split) .workspace-drawer-vault-actions .clickable-icon:first-child:not(:last-child) {
   display: none;
-}
-body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) .workspace-sidedock-vault-profile {
-  background-color: transparent;
 }
 body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split) {
   .workspace-sidedock-vault-profile {
     border-top: none;
-    position: absolute;
-    inset: auto 0 0 auto;
-    z-index: 1;
-    align-items: unset;
-    width: auto;
-    max-width: 100%;
+    background-color: transparent;
+    gap: 0;
+    padding: 0 var(--size-4-1);
+  }
 
-    &:hover ~ .workspace-tabs:last-child {
-      mask: linear-gradient(to top, transparent, black 64px);
+  .workspace-drawer-vault-switcher {
+    align-items: center;
+    height: 100%;
+    border-radius: var(--radius-xl);
+    padding-inline-start: 10px;
+
+    &:is(:hover, .has-active-menu) {
+      background-color: var(--background-modifier-hover);
     }
-
-    .workspace-drawer-vault-switcher.has-active-menu {
-      background-color: var(--interactive-normal);
-    }
-
   }
 
-  // Rest as a bare settings button; the vault entry slides out only while the
-  // pointer or focus is on the actions, so it no longer covers the file list.
-  .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher {
-    flex: 0 1 auto;
-    max-width: 0;
-    padding-inline: 0;
-    opacity: 0;
-    transition:
-      max-width var(--anim-duration-moderate) var(--anim-motion-baseline),
-      padding var(--anim-duration-fast) ease-out,
-      opacity var(--anim-duration-fast) ease-out;
-  }
-  .workspace-sidedock-vault-profile:is(:hover, :has(.has-active-menu), :has(.clickable-icon:focus-visible)) .workspace-drawer-vault-switcher {
-    max-width: 240px;
-    padding-inline: var(--size-4-2);
-    opacity: 1;
-  }
-
-  .workspace-drawer-vault-switcher,
-  .workspace-drawer-vault-actions .clickable-icon {
-    transition: var(--anim-duration-moderate) var(--anim-motion-baseline);
-    pointer-events: visible;
-  }
-
-  .workspace-leaf-content > .node-insert-event,
-  .workspace-leaf-content > .view-content {
-    padding-bottom: 64px;
+  .workspace-drawer-vault-switcher > .workspace-drawer-vault-switcher-icon {
+    --icon-stroke: 2.125px;
+    color: var(--vault-profile-color);
   }
 }

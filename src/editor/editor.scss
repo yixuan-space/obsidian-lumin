@@ -137,6 +137,21 @@
     font-size: inherit;
   }
 
+  // Edit / reading toggle: Velocity's glasses / pen glyph on the native
+  // action-button box, so its size and hover match the neighbouring actions.
+  &:not(.is-mobile) .mod-root .workspace-leaf-content[data-type="markdown"] {
+    .view-actions .clickable-icon.view-action:not(:last-child, .mod-bookmark) {
+      --icon-color: var(--text-muted);
+      --icon-color-hover: var(--text-normal);
+      --icon-color-focused: var(--text-normal);
+      margin-inline-end: 2px;
+    }
+
+    &[data-mode="source"] .view-actions .clickable-icon.view-action:not(:last-child, .mod-bookmark) {
+      --icon-color: var(--text-normal);
+    }
+  }
+
   .document-search-buttons,
   .document-replace-buttons {
     flex-grow: 0 !important;
