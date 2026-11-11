@@ -245,10 +245,12 @@ body:not(.nav-action-center) .mod-sidedock .workspace-leaf-content .nav-header:f
   }
 }
 
-// Sidebar sizing: keep the dock wide enough that the file-explorer header
-// actions cannot pile up on each other when the split is dragged narrow.
+// Sidebar sizing: keep the dock at least as wide as the expanded panel
+// toolbar (five 40px actions plus the header's 16px and the container's 2px
+// insets), so the file-explorer header actions keep their spacing instead of
+// spilling out of the dock when the split is dragged narrow.
 body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split):not(.is-sidedock-collapsed) {
-  min-width: 220px;
+  min-width: calc(var(--tab-action-width) * 5 + 16px * 2 + 2px * 2);
 }
 
 // Vault switcher (layout borrowed from Velocity)

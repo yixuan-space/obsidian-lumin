@@ -95,7 +95,7 @@ Ordinary blockquotes use a transparent background, a 4px rule, and simple spacin
 
 The hotkey tool is separate from the theme; installing Lumin does not change your bindings. Open [`tools/typora-hotkeys`](tools/typora-hotkeys) and choose the entry point for your system:
 
-Download `typora-hotkeys.zip` from the [1.2.0 release](https://github.com/yixuan-space/obsidian-lumin/releases/tag/1.2.0) for the standalone tool, or download the full repository. See the [1.2.0 release notes](docs/releases/1.2.0.md).
+Download `typora-hotkeys.zip` from the [1.2.1 release](https://github.com/yixuan-space/obsidian-lumin/releases/tag/1.2.1) for the standalone tool, or download the full repository. See the [1.2.1 release notes](docs/releases/1.2.1.md).
 
 | System | Entry point | Interface |
 | --- | --- | --- |
