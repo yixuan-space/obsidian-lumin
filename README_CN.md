@@ -144,7 +144,7 @@ cssclasses:
 
 ## 集成支持
 
-Lumin 为 Obsidian 属性、Bases、表格、Callout、Banner、嵌入内容和任务状态提供专门样式，同时适配 Dataview 表格与卡片布局，为 Datacore 块提供宽度工具，并处理 Banner 类插件常用的横幅区域。
+Lumin 为 Obsidian 属性、Bases、表格、Callout、Banner、嵌入内容和任务状态提供专门样式，并为 Mermaid 图表、关系图谱和 Canvas 提供与各套配色一致的视觉处理；同时适配 Dataview 表格与卡片布局，为 Datacore 块提供宽度工具，并处理 Banner 类插件常用的横幅区域。
 
 ## 兼容性
 

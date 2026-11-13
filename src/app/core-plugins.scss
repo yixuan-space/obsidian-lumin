@@ -37,6 +37,15 @@ body:not(.is-mobile) .backlink-pane {
 
 // Canvas
 
+// The canvas is a workspace surface, not a note, so it sits one step behind
+// cards instead of matching them exactly.
+body {
+  --canvas-background: var(--background-primary-alt);
+  --canvas-card-label-color: var(--text-muted);
+  --canvas-color: color-mix(in srgb, var(--text-muted) 45%, transparent);
+  --canvas-dot-pattern: color-mix(in srgb, var(--text-normal) 12%, transparent);
+}
+
 body:not(.is-mobile) {
   .canvas-control-group:not(:hover),
   .canvas-card-menu:not(:hover) {

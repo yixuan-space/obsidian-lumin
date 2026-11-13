@@ -144,7 +144,7 @@ cssclasses:
 
 ## Integrations
 
-Lumin includes dedicated styling for Obsidian properties, Bases, tables, callouts, banners, embeds, and task states. It also styles Dataview tables and card layouts, supports block-width utilities for Datacore blocks, and handles banner areas used by banner-style plugins.
+Lumin includes dedicated styling for Obsidian properties, Bases, tables, callouts, banners, embeds, and task states. It also themes Mermaid diagrams, the graph view, and Canvas in every palette, styles Dataview tables and card layouts, supports block-width utilities for Datacore blocks, and handles banner areas used by banner-style plugins.
 
 ## Compatibility
 

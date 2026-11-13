@@ -201,6 +201,68 @@ try {
     }
   }
   console.log(JSON.stringify({ sidebarChecks }, null, 2));
+  // Mermaid, graph view and Canvas must follow every palette in both modes.
+  // Mermaid injects ID-scoped styles, so the fixture carries the same inline
+  // rules Obsidian renders and proves the theme's overrides still win.
+  const integrationChecks = [];
+  const graphNodeByPalette = {};
+  for (const width of [1120, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const mode of ['light', 'dark']) {
+      for (const palette of ['', 'lumin-mist', 'lumin-moss', 'lumin-warmgray']) {
+        await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://lumin.test/app.css"><link rel="stylesheet" href="https://lumin.test/theme.css"><style>body{display:block;overflow:auto;margin:0;padding:24px;background:var(--background-primary)}main{max-width:800px}.canvas-wrapper{position:relative!important;width:360px;height:220px}</style></head><body><main>
+  <section class="markdown-rendered"><div class="mermaid"><svg id="mermaid-1" width="1200" height="120" aria-roledescription="flowchart-v2"><style>#mermaid-1 .node rect{fill:#ECECFF;stroke:#9370DB}#mermaid-1 text{fill:#333}#mermaid-1 .flowchart-link{stroke:#333}</style><svg><rect id="probe-shape" style="fill:var(--lumin-diagram-surface);stroke:var(--lumin-diagram-border)"></rect><path id="probe-line" style="stroke:var(--lumin-diagram-line)"></path></svg><g class="node"><rect width="60" height="30"></rect></g><path class="flowchart-link" d="M0 0L10 10"></path><text id="mermaid-text">A</text><foreignObject width="60" height="20"><div class="nodeLabel" xmlns="http://www.w3.org/1999/xhtml">A</div></foreignObject></svg></div></section>
+  <section class="graph-view-outer"><div class="graph-view-container"><div class="graph-view color-fill"></div><div class="graph-view color-line"></div><div class="graph-view color-text"></div><div class="graph-controls"><div class="graph-control-section"><div class="graph-control-section-header">Filters</div></div></div></div></section>
+  <section class="canvas-wrapper"><svg class="canvas-background"><circle cx="4" cy="4" r="1"></circle></svg><div class="canvas-node"><div class="canvas-node-container"></div><div class="canvas-node-label">Note</div></div></section>
+  </main></body></html>`, { waitUntil: 'load' });
+        await page.evaluate(({ mode, palette }) => { document.body.className = `theme-${mode} ${palette}`; }, { mode, palette });
+        const result = await page.evaluate(() => {
+          const style = (selector, property) => getComputedStyle(document.querySelector(selector)).getPropertyValue(property);
+          const probe = (property, value) => {
+            const element = document.createElement('div');
+            element.style.setProperty(property, value);
+            document.body.append(element);
+            const computed = getComputedStyle(element).getPropertyValue(property);
+            element.remove();
+            return computed;
+          };
+          return { overflow: document.documentElement.scrollWidth > innerWidth,
+            filter: style('.mermaid > svg', 'filter'),
+            nodeFill: style('#mermaid-1 .node rect', 'fill'), probeFill: style('#probe-shape', 'fill'),
+            nodeStroke: style('#mermaid-1 .node rect', 'stroke'), probeStroke: style('#probe-shape', 'stroke'),
+            line: style('.flowchart-link', 'stroke'), probeLine: style('#probe-line', 'stroke'),
+            text: style('#mermaid-text', 'fill'), labelColor: style('.nodeLabel', 'color'), textNormal: probe('color', 'var(--text-normal)'),
+            graphNode: style('.graph-view.color-fill', 'color'), graphLine: style('.graph-view.color-line', 'color'), textMuted: probe('color', 'var(--text-muted)'),
+            graphBlur: style('.graph-controls', 'backdrop-filter'),
+            canvasBackground: style('.canvas-wrapper', 'background-color'), canvasPrimary: probe('background-color', 'var(--background-primary)'),
+            canvasDot: style('.canvas-background circle', 'fill'), dotDefault: probe('background-color', 'var(--color-base-30)'),
+            nodeRadius: style('.canvas-node-container', 'border-radius'), canvasLabel: style('.canvas-node-label', 'color') };
+        });
+        const label = `${mode}/${palette || 'default'}/${width}`;
+        requireEqual(result.overflow, false, `${label}: diagram overflow`);
+        requireEqual(result.filter, 'none', `${label}: Mermaid filter`);
+        requireEqual(result.nodeFill, result.probeFill, `${label}: Mermaid node fill`);
+        requireEqual(result.nodeStroke, result.probeStroke, `${label}: Mermaid node stroke`);
+        requireEqual(result.line, result.probeLine, `${label}: Mermaid edge`);
+        requireEqual(result.text, result.textNormal, `${label}: Mermaid text`);
+        requireEqual(result.labelColor, result.textNormal, `${label}: Mermaid HTML label`);
+        requireEqual(result.graphNode === result.graphLine, false, `${label}: Graph nodes differ from links`);
+        requireEqual(result.graphNode === result.textMuted, false, `${label}: Graph nodes follow palette`);
+        requireEqual(result.graphBlur.includes('blur'), true, `${label}: Graph controls blur`);
+        requireEqual(result.canvasBackground === result.canvasPrimary, false, `${label}: Canvas surface separates from notes`);
+        requireEqual(result.canvasDot === result.dotDefault, false, `${label}: Canvas dot pattern`);
+        requireEqual(result.nodeRadius, '16px', `${label}: Canvas card radius`);
+        requireEqual(result.canvasLabel, result.textMuted, `${label}: Canvas label contrast`);
+        graphNodeByPalette[`${mode}:${palette || 'default'}`] = result.graphNode;
+        integrationChecks.push({ width, mode, palette: palette || 'default', graphNode: result.graphNode });
+      }
+    }
+  }
+  for (const mode of ['light', 'dark']) {
+    const values = new Set(['default', 'lumin-mist', 'lumin-moss', 'lumin-warmgray'].map(palette => graphNodeByPalette[`${mode}:${palette}`]));
+    if (values.size < 2) throw new Error(`Graph nodes ignore palette changes in ${mode}`);
+  }
+  console.log(JSON.stringify({ integrationChecks }, null, 2));
   console.log(JSON.stringify({ browser: 'Microsoft Edge', executablePath, version: browser.version(), checks, print: 'passed' }, null, 2));
 } finally {
   await browser.close();

@@ -1,0 +1,279 @@
+@use "sass:list";
+
+// Mermaid ships its own light palette, and Obsidian compensates in dark mode
+// with an inverting SVG filter. That filter would also invert every color
+// Lumin sets, so the theme paints diagrams from the note palette directly and
+// removes the filter. Mermaid injects ID-scoped rules into each rendered SVG,
+// which is why these overrides need !important to win over the renderer.
+
+body.theme-dark .mermaid > svg {
+  filter: none;
+}
+
+.mermaid {
+  --lumin-diagram-surface: var(--background-secondary);
+  --lumin-diagram-surface-strong: var(--background-secondary-alt);
+  --lumin-diagram-border: color-mix(in srgb, var(--text-normal) 22%, transparent);
+  --lumin-diagram-line: color-mix(in srgb, var(--text-muted) 62%, transparent);
+  --lumin-diagram-text: var(--text-normal);
+  --lumin-diagram-muted: var(--text-muted);
+  --lumin-diagram-accent: var(--interactive-accent);
+  --lumin-diagram-note: color-mix(in srgb, var(--color-yellow) 16%, var(--background-primary));
+  --lumin-diagram-note-border: color-mix(in srgb, var(--color-yellow) 55%, transparent);
+
+  // Obsidian disables Mermaid's responsive width, so wide diagrams still need
+  // to fit narrow panes and phones.
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  svg {
+    text,
+    tspan {
+      fill: var(--lumin-diagram-text) !important;
+    }
+
+    // Flowchart and mindmap labels render as HTML inside foreignObject.
+    foreignObject div,
+    .nodeLabel,
+    .edgeLabel {
+      color: var(--lumin-diagram-text) !important;
+    }
+
+    // Nodes, actors, class boxes, entity boxes and mindmap shapes.
+    .node rect,
+    .node circle,
+    .node ellipse,
+    .node polygon,
+    .node path,
+    rect.actor,
+    .labelBox,
+    .classGroup rect,
+    .entityBox,
+    .attributeBoxOdd,
+    .mindmap-node > rect,
+    .mindmap-node > circle,
+    .mindmap-node > polygon,
+    .mindmap-node > path {
+      fill: var(--lumin-diagram-surface) !important;
+      stroke: var(--lumin-diagram-border) !important;
+    }
+
+    .attributeBoxEven {
+      fill: var(--lumin-diagram-surface-strong) !important;
+      stroke: var(--lumin-diagram-border) !important;
+    }
+
+    .cluster rect {
+      fill: color-mix(in srgb, var(--text-normal) 3%, transparent) !important;
+      stroke: var(--lumin-diagram-border) !important;
+    }
+
+    .cluster-label,
+    .cluster-label text {
+      fill: var(--lumin-diagram-muted) !important;
+      color: var(--lumin-diagram-muted) !important;
+    }
+
+    .mindmap-node.section-root > rect,
+    .mindmap-node.section-root > circle {
+      fill: color-mix(in srgb, var(--interactive-accent) 14%, var(--background-primary)) !important;
+    }
+
+    // Edges
+    .edgePath .path,
+    .flowchart-link,
+    .messageLine0,
+    .messageLine1,
+    .relation,
+    .actor-line,
+    .loopLine,
+    .relationshipLine {
+      stroke: var(--lumin-diagram-line) !important;
+    }
+
+    .loopLine {
+      fill: none !important;
+    }
+
+    marker :is(path, circle, polygon, rect),
+    .marker path,
+    .arrowheadPath,
+    .marker.cross {
+      fill: var(--lumin-diagram-line) !important;
+      stroke: var(--lumin-diagram-line) !important;
+    }
+
+    // Edge labels sit over lines, so they need the page surface behind them.
+    // Mermaid 11 uses HTML labelBkg wrappers; older builds use an SVG rect.
+    .edgeLabel,
+    .edgeLabel p,
+    .labelBkg {
+      background-color: var(--background-primary) !important;
+    }
+
+    .edgeLabel rect,
+    .icon-shape .label rect,
+    .image-shape .label rect {
+      fill: var(--background-primary) !important;
+      opacity: 1 !important;
+    }
+
+    // Sequence notes and numbering.
+    .note {
+      fill: var(--lumin-diagram-note) !important;
+      stroke: var(--lumin-diagram-note-border) !important;
+    }
+
+    #sequencenumber {
+      fill: var(--lumin-diagram-accent) !important;
+    }
+
+    .sequenceNumber {
+      fill: var(--text-on-accent) !important;
+    }
+
+    .error-text,
+    .error-icon {
+      fill: var(--color-red) !important;
+    }
+
+    &[aria-roledescription="gantt"] {
+      .section {
+        opacity: 1 !important;
+      }
+
+      .section0 {
+        fill: color-mix(in srgb, var(--interactive-accent) 10%, transparent) !important;
+      }
+
+      .section2 {
+        fill: color-mix(in srgb, var(--interactive-accent) 5%, transparent) !important;
+      }
+
+      .section1,
+      .section3 {
+        fill: transparent !important;
+      }
+
+      .task {
+        fill: var(--lumin-diagram-surface-strong) !important;
+        stroke: var(--lumin-diagram-border) !important;
+      }
+
+      .taskText,
+      .taskTextOutsideLeft,
+      .taskTextOutsideRight {
+        fill: var(--lumin-diagram-text) !important;
+      }
+
+      .grid .tick {
+        stroke: var(--lumin-diagram-line) !important;
+        opacity: 0.55 !important;
+      }
+
+      .grid path {
+        stroke-width: 0 !important;
+      }
+
+      .today {
+        stroke: var(--lumin-diagram-accent) !important;
+      }
+    }
+
+    &[aria-roledescription="pie"] {
+      .pieOuterCircle {
+        fill: none !important;
+        stroke: var(--lumin-diagram-border) !important;
+      }
+
+      .pieCircle {
+        stroke: var(--background-primary) !important;
+      }
+
+      // Slice fills stay categorical so legend swatches keep matching their
+      // slices; keep the labels dark on those fixed pastel fills.
+      .slice {
+        fill: #1f1f1f !important;
+      }
+    }
+
+    &[aria-roledescription="journey"] {
+      $journey-colors:
+        var(--color-blue), var(--color-green), var(--color-orange), var(--color-purple),
+        var(--color-cyan), var(--color-pink), var(--color-yellow), var(--color-red);
+
+      @for $index from 1 through 8 {
+        .task-type-#{$index - 1},
+        .section-type-#{$index - 1} {
+          fill: color-mix(in srgb, list.nth($journey-colors, $index) 30%, var(--background-primary)) !important;
+          stroke: color-mix(in srgb, list.nth($journey-colors, $index) 30%, var(--background-primary)) !important;
+        }
+      }
+    }
+
+    &[aria-roledescription="timeline"] {
+      .node-bkg {
+        fill: var(--lumin-diagram-surface) !important;
+        stroke: var(--lumin-diagram-border) !important;
+      }
+
+      .section-0 .node-bkg {
+        fill: color-mix(in srgb, var(--interactive-accent) 6%, var(--background-primary)) !important;
+      }
+
+      .timeline-node line,
+      .lineWrapper line {
+        stroke: var(--lumin-diagram-line) !important;
+      }
+    }
+
+    &[aria-roledescription="xychart"] {
+      .background {
+        fill: var(--lumin-diagram-surface) !important;
+      }
+
+      [class^="bar-plot-"] rect {
+        fill: color-mix(in srgb, var(--interactive-accent) 32%, transparent) !important;
+        stroke: none !important;
+      }
+
+      [class^="line-plot-"] path {
+        stroke: var(--lumin-diagram-accent) !important;
+      }
+
+      .axis-line path,
+      .axisl-line path,
+      .ticks path {
+        stroke: var(--lumin-diagram-line) !important;
+      }
+    }
+
+    &[aria-roledescription="quadrantChart"] {
+      .quadrant rect {
+        fill: var(--lumin-diagram-surface) !important;
+      }
+
+      // Mermaid shades two of the quadrants; keep that hint in palette color.
+      .quadrant:nth-child(1) rect {
+        fill: color-mix(in srgb, var(--interactive-accent) 6%, var(--background-primary)) !important;
+      }
+
+      .quadrant:nth-child(3) rect {
+        fill: color-mix(in srgb, var(--interactive-accent) 3%, var(--background-primary)) !important;
+      }
+
+      .border line {
+        stroke: var(--lumin-diagram-line) !important;
+      }
+
+      // Mermaid writes an invalid hsl() fill for data points, which renders
+      // them black, so the theme paints the dots itself.
+      .data-point circle {
+        fill: var(--lumin-diagram-accent) !important;
+        stroke: var(--lumin-diagram-accent) !important;
+      }
+    }
+  }
+}

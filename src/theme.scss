@@ -13,12 +13,14 @@
 @use "app/mobile.scss";
 @use "app/workspace.scss";
 @use "app/core-plugins.scss";
+@use "app/graph-view.scss";
 @use "app/community-plugins.scss";
 @use "app/style-settings.scss";
 
 @use "editor/editor.scss";
 @use "editor/lists.scss";
 @use "editor/code.scss";
+@use "editor/mermaid.scss";
 @use "editor/frontmatter.scss";
 @use "editor/blockquote.scss";
 @use "editor/callout.scss";
