@@ -290,6 +290,33 @@ try {
     if (values.size < 2) throw new Error(`Graph nodes ignore palette changes in ${mode}`);
   }
   console.log(JSON.stringify({ integrationChecks }, null, 2));
+  // The settings page titlebar is sticky above scrolling rows, so its surface
+  // must be opaque and match the translucent content area behind it.
+  const titlebarChecks = [];
+  for (const mode of ['light', 'dark']) {
+    await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://lumin.test/app.css"><link rel="stylesheet" href="https://lumin.test/theme.css"><style>body{display:block!important;overflow:auto!important;margin:0}.modal{position:relative!important;display:block;margin:24px;width:800px;height:600px}.vertical-tab-content{overflow-y:auto;height:100%}.setting-page-content{height:1200px}</style></head><body class="theme-${mode}"><div class="modal mod-settings mod-sidebar-layout"><div class="vertical-tab-content setting-page"><div class="setting-page-titlebar"><div class="setting-page-back-button">‹</div><div class="setting-page-title">正文字体</div></div><div class="setting-page-content"><div class="setting-item">AI Tarikh</div></div></div></div></body></html>`, { waitUntil: 'load' });
+    for (const translucent of [false, true]) {
+      await page.evaluate(translucent => document.body.classList.toggle('is-translucent', translucent), translucent);
+      const result = await page.evaluate(() => {
+        const canvas = document.createElement('canvas'); canvas.width = 1; canvas.height = 1;
+        const context = canvas.getContext('2d');
+        const paint = color => { context.clearRect(0, 0, 1, 1); context.fillStyle = color; context.fillRect(0, 0, 1, 1); return Array.from(context.getImageData(0, 0, 1, 1).data); };
+        const composite = (top, bottom) => { context.clearRect(0, 0, 1, 1); context.fillStyle = bottom; context.fillRect(0, 0, 1, 1); context.fillStyle = top; context.fillRect(0, 0, 1, 1); return Array.from(context.getImageData(0, 0, 1, 1).data); };
+        const style = selector => getComputedStyle(document.querySelector(selector));
+        const titlebar = paint(style('.setting-page-titlebar').backgroundColor);
+        const content = style('.vertical-tab-content').backgroundColor;
+        const modal = style('.modal').backgroundColor;
+        return { titlebar, surface: composite(content, modal), shadowAlpha: paint(style('.setting-page-titlebar').boxShadow.match(/rgba?\([^)]+\)|color\([^)]+\)/)?.[0] ?? 'transparent')[3] };
+      });
+      const label = `${mode}${translucent ? '/translucent' : ''}`;
+      requireEqual(result.titlebar[3], 255, `${label}: settings titlebar is opaque`);
+      const channelDelta = Math.max(...result.titlebar.slice(0, 3).map((value, index) => Math.abs(value - result.surface[index])));
+      if (channelDelta > 2) throw new Error(`${label}: settings titlebar surface mismatch: ${result.titlebar} vs ${result.surface}`);
+      requireEqual(result.shadowAlpha, 255, `${label}: settings titlebar shadow is opaque`);
+      titlebarChecks.push({ mode, translucent, titlebar: result.titlebar.slice(0, 3) });
+    }
+  }
+  console.log(JSON.stringify({ titlebarChecks }, null, 2));
   console.log(JSON.stringify({ browser: 'Microsoft Edge', executablePath, version: browser.version(), checks, print: 'passed' }, null, 2));
 } finally {
   await browser.close();

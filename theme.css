@@ -1197,6 +1197,13 @@ body:not(.is-mobile) .modal.mod-settings .modal-sidebar {
 body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .vertical-tab-header {
   border-inline-end: none;
 }
+body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout {
+  --setting-page-titlebar-background: color-mix(in srgb, var(--background-secondary) var(--modal-background-opacity), var(--background-primary));
+}
+body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .setting-page-titlebar {
+  background-color: var(--setting-page-titlebar-background);
+  box-shadow: 0 var(--size-4-2) var(--size-4-2) 0 var(--setting-page-titlebar-background);
+}
 body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .vertical-tab-header-group-title,
 body:not(.is-mobile) .modal.mod-settings.mod-sidebar-layout .vertical-tab-nav-item {
   padding: calc(8px * var(--density-modifier)) 12px;
@@ -1257,6 +1264,10 @@ body:not(.is-mobile) .installed-plugins-container .setting-items .setting-item-c
 }
 body:not(.is-mobile) .installed-plugins-container .setting-items .setting-item:has(button) {
   order: -1;
+}
+
+body:not(.is-mobile).is-translucent .modal.mod-settings.mod-sidebar-layout {
+  --setting-page-titlebar-background: var(--background-primary);
 }
 
 body:not(.is-mobile) .modal.mod-community-modal .modal-sidebar {
@@ -4760,7 +4771,8 @@ input[type=range]::-webkit-slider-thumb {
 
 body {
   --background-modifier-message: var(--modal-background);
-  --modal-background: rgb(from var(--background-secondary) r g b / 75%) !important;
+  --modal-background-opacity: 75%;
+  --modal-background: rgb(from var(--background-secondary) r g b / var(--modal-background-opacity)) !important;
 }
 body.is-translucent {
   --modal-background: var(--background-primary) !important;

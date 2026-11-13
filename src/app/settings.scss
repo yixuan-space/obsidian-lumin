@@ -14,6 +14,15 @@ body:not(.is-mobile) {
     .vertical-tab-header {
       border-inline-end: none;
     }
+
+    // The sticky page titlebar paints over scrolling rows, so it needs an
+    // opaque surface; the translucent modal tint would let rows show through.
+    --setting-page-titlebar-background: color-mix(in srgb, var(--background-secondary) var(--modal-background-opacity), var(--background-primary));
+
+    .setting-page-titlebar {
+      background-color: var(--setting-page-titlebar-background);
+      box-shadow: 0 var(--size-4-2) var(--size-4-2) 0 var(--setting-page-titlebar-background);
+    }
     .vertical-tab-header-group-title,
     .vertical-tab-nav-item {
       padding: calc(8px * var(--density-modifier)) 12px;
@@ -84,6 +93,11 @@ body:not(.is-mobile) {
     }
   }
 
+}
+
+// Translucent windows render settings on the opaque primary surface.
+body:not(.is-mobile).is-translucent .modal.mod-settings.mod-sidebar-layout {
+  --setting-page-titlebar-background: var(--background-primary);
 }
 
 // Keep the desktop market density, while tablets use Obsidian's native mobile
