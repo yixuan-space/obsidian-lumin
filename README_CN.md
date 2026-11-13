@@ -166,7 +166,7 @@ npx --yes sass src/theme.scss theme.css --no-source-map
 
 请将生成的 `theme.css` 与源文件改动一并提交；发布或提交 PR 前建议运行 `git diff --check`。
 
-开发依赖通过 `npm ci` 安装。运行 `npm run build` 构建，`npm run verify:edge` 使用本机 Microsoft Edge 和隔离临时会话验证主题，`npm run test:hotkeys` 验证快捷键导入工具。Edge 验证覆盖浅深色、四套配色、桌面/手机宽度与打印样式；它不会更改系统默认浏览器或使用个人浏览器配置。非标准安装位置可通过 `EDGE_PATH` 指定 Edge 可执行文件。本项目不使用 Tabbit 验证。
+开发依赖通过 `npm ci` 安装。运行 `npm run build` 构建，`npm run verify:edge` 使用本机 Microsoft Edge 和隔离临时会话验证主题，`npm run audit:contrast` 校验四套配色在浅深色下的对比度，`npm run check:size` 检查 `theme.css` 的原始与 gzip 体积预算，`npm run test:hotkeys` 验证快捷键导入工具。Edge 验证覆盖浅深色、四套配色、桌面/手机宽度与打印样式；它不会更改系统默认浏览器或使用个人浏览器配置。非标准安装位置可通过 `EDGE_PATH` 指定 Edge 可执行文件。本项目不使用 Tabbit 验证。
 
 ## 致谢
 

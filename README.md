@@ -166,7 +166,7 @@ npx --yes sass src/theme.scss theme.css --no-source-map
 
 Commit the generated `theme.css` with its source changes. Run `git diff --check` before opening a pull request or publishing a release.
 
-Install development dependencies with `npm ci`. Use `npm run build`, `npm run verify:edge`, and `npm run test:hotkeys` to build and verify the theme and importer. Browser checks use locally installed Microsoft Edge with an isolated temporary session, covering all palettes, light/dark modes, desktop/mobile widths, and print styles. Set `EDGE_PATH` for a nonstandard installation. Checks do not change the system default browser or use your personal browser profile. This project does not use Tabbit for verification.
+Install development dependencies with `npm ci`. Use `npm run build`, `npm run verify:edge`, `npm run audit:contrast`, `npm run check:size`, and `npm run test:hotkeys` to build and verify the theme and importer. The contrast audit checks all four palettes in light and dark mode, and the size check enforces the raw and gzip budgets for `theme.css`. Browser checks use locally installed Microsoft Edge with an isolated temporary session, covering all palettes, light/dark modes, desktop/mobile widths, and print styles. Set `EDGE_PATH` for a nonstandard installation. Checks do not change the system default browser or use your personal browser profile. This project does not use Tabbit for verification.
 
 ## Credits
 

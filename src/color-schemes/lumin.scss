@@ -23,7 +23,7 @@ body.theme-light:not(.is-mobile) {
   --interactive-hover: hsl(0 0% 0% / 5%);
 
   --text-normal: #262626; // rgba(var(--mono-rgb-100), 85%)
-  --text-muted: #737373; // rgba(var(--mono-rgb-100), 55%)
+  --text-muted: #6f6f6f; // rgba(var(--mono-rgb-100), 55%)
   --text-faint: #bfbfbf; // rgba(var(--mono-rgb-100), 25%)
 }
 body.theme-light.is-mobile {
@@ -155,7 +155,7 @@ body.lumin-warmgray.theme-light {
   --interactive-normal: rgb(70 67 62 / 6%);
   --interactive-hover: rgb(70 67 62 / 10%);
   --text-normal: #302f2c;
-  --text-muted: #73716c;
+  --text-muted: #6b6964;
   --text-faint: #bdbab3;
   --link-color: #586b85;
   --link-color-hover: #3f5068;

@@ -5,6 +5,8 @@
   "scripts": {
     "build": "sass src/theme.scss theme.css --no-source-map",
     "verify:edge": "node scripts/verify-edge.mjs",
+    "audit:contrast": "node scripts/audit-contrast.mjs",
+    "check:size": "node scripts/check-size.mjs",
     "hotkeys": "node tools/typora-hotkeys/import-hotkeys.mjs",
     "test:hotkeys": "node --test tools/typora-hotkeys/import-hotkeys.test.mjs"
   },

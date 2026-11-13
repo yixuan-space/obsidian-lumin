@@ -140,9 +140,9 @@ body,
   --color-purple-rgb: 142, 125, 194;
   --color-pink-rgb: 222, 103, 147;
   /* Markdown links: system blue on dark UI */
-  --link-color: #3d79b7;
+  --link-color: #6ea8e8;
   --link-color-hover: #8ac4ff;
-  --link-external-color: #3d79b7;
+  --link-external-color: #6ea8e8;
   --link-external-color-hover: #8ac4ff;
   --link-unresolved-color: #7a9ab8;
 }
@@ -7180,7 +7180,7 @@ body.theme-light:not(.is-mobile) {
   --interactive-normal: hsl(0 0% 0% / 5%);
   --interactive-hover: hsl(0 0% 0% / 5%);
   --text-normal: #262626;
-  --text-muted: #737373;
+  --text-muted: #6f6f6f;
   --text-faint: #bfbfbf;
 }
 
@@ -7307,7 +7307,7 @@ body.lumin-warmgray.theme-light {
   --interactive-normal: rgb(70 67 62 / 6%);
   --interactive-hover: rgb(70 67 62 / 10%);
   --text-normal: #302f2c;
-  --text-muted: #73716c;
+  --text-muted: #6b6964;
   --text-faint: #bdbab3;
   --link-color: #586b85;
   --link-color-hover: #3f5068;

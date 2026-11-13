@@ -26,6 +26,7 @@ jobs:
         run: |
           npm run build
           npm run test:hotkeys
+          npm run check:size
           git diff --check
           git diff --exit-code -- theme.css
 
