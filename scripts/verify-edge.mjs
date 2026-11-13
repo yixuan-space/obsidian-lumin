@@ -134,7 +134,7 @@ try {
         for (const naming of ['left', 'primary']) {
           const inHeader = ribbon === 'hidden' || (platform === 'macos' && frame !== 'visible');
           const bodyClasses = `mod-${platform} is-focused is-frameless theme-light ${frame === 'visible' ? '' : 'is-hidden-frameless'} ${frame === 'fullscreen' ? 'is-fullscreen' : ''} ${ribbon === 'hidden' ? '' : 'show-ribbon'} ${ribbon === 'hover' ? 'hover-ribbon' : ''}`;
-          await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://lumin.test/app.css"><link rel="stylesheet" href="https://lumin.test/theme.css"><style>body{margin:0}.workspace{width:100vw;height:calc(100vh - 30px)}.mod-sidedock{flex:none;width:320px}.mod-sidedock.is-sidedock-collapsed{width:0!important;min-width:0;padding:0!important;margin:0!important;overflow:hidden}.mod-root{flex:1}.workspace-tab-header-container-inner{flex:1}</style></head><body class="${bodyClasses}"><div class="workspace is-left-sidedock-open"><div class="workspace-ribbon mod-${naming}"><div class="sidebar-toggle-button mod-left"><div class="clickable-icon"><svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="2" width="22" height="20" rx="4"/><rect x="4" y="5" width="2" height="14" rx="2" fill="currentColor" class="sidebar-toggle-icon-inner"/></svg></div></div><div class="side-dock-actions"><div class="side-dock-ribbon-action clickable-icon">⌘</div></div></div><div class="workspace-split mod-horizontal mod-sidedock mod-${naming}-split"><div class="workspace-tabs mod-top mod-top-left-space"><div class="workspace-tab-header-container"><div class="workspace-tab-header-container-inner"><div class="workspace-tab-header is-active"><div class="workspace-tab-header-inner"><div class="workspace-tab-header-inner-icon"><svg class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h6l2-3h8a2 2 0 0 1 2 2v13H3Z"/></svg></div></div></div><div class="workspace-tab-header"><div class="workspace-tab-header-inner"><div class="workspace-tab-header-inner-icon"><svg class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg></div></div></div></div></div></div></div><div class="workspace-split mod-vertical mod-root"><div class="workspace-tabs mod-top"><div class="workspace-tab-header-container"><div class="workspace-tab-header-container-inner">笔记</div></div></div></div></div></body></html>`, { waitUntil: 'load' });
+          await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://lumin.test/app.css"><link rel="stylesheet" href="https://lumin.test/theme.css"><style>body{margin:0}.workspace{width:100vw;height:calc(100vh - 30px)}.mod-sidedock{flex:none;width:320px}.mod-sidedock.is-sidedock-collapsed{width:0!important;min-width:0;padding:0!important;margin:0!important;overflow:hidden}.mod-root{flex:1}.workspace-tab-header-container-inner{flex:1}</style></head><body class="${bodyClasses}"><div class="workspace is-left-sidedock-open"><div class="workspace-ribbon mod-${naming}"><div class="sidebar-toggle-button mod-left"><div class="clickable-icon"><svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="2" width="22" height="20" rx="4"/><rect x="4" y="5" width="2" height="14" rx="2" fill="currentColor" class="sidebar-toggle-icon-inner"/></svg></div></div><div class="side-dock-actions"><div class="side-dock-ribbon-action clickable-icon">⌘</div></div></div><div class="workspace-split mod-horizontal mod-sidedock mod-${naming}-split"><div class="workspace-leaf-resize-handle"></div><div class="workspace-tabs mod-top mod-top-left-space"><div class="workspace-tab-header-container"><div class="workspace-tab-header-container-inner"><div class="workspace-tab-header is-active"><div class="workspace-tab-header-inner"><div class="workspace-tab-header-inner-icon"><svg class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h6l2-3h8a2 2 0 0 1 2 2v13H3Z"/></svg></div></div></div><div class="workspace-tab-header"><div class="workspace-tab-header-inner"><div class="workspace-tab-header-inner-icon"><svg class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg></div></div></div></div></div></div></div><div class="workspace-split mod-vertical mod-root"><div class="workspace-tabs mod-top"><div class="workspace-tab-header-container"><div class="workspace-tab-header-container-inner">笔记</div></div></div></div></div></body></html>`, { waitUntil: 'load' });
           await page.evaluate(inHeader => {
             const workspace = document.querySelector('.workspace');
             const dock = document.querySelector('.mod-sidedock');
@@ -200,7 +200,34 @@ try {
       }
     }
   }
+  const sidebarMinimum = await page.locator('.mod-sidedock').evaluate(element => {
+    document.querySelector('.workspace').classList.add('is-left-sidedock-open');
+    element.classList.remove('is-sidedock-collapsed');
+    element.style.width = '180px';
+    return element.getBoundingClientRect().width;
+  });
+  requireEqual(sidebarMinimum, 244, 'Sidebar clamps to its minimum width');
+  const sidebarResizeHandle = await page.locator('.mod-sidedock > .workspace-leaf-resize-handle').evaluate(element => {
+    const style = getComputedStyle(element);
+    return { width: parseFloat(style.width), cursor: style.cursor };
+  });
+  requireEqual(sidebarResizeHandle.width, 8, 'Sidebar resize handle is 8px wide');
+  requireEqual(sidebarResizeHandle.cursor, 'col-resize', 'Sidebar resize handle uses a column cursor');
   console.log(JSON.stringify({ sidebarChecks }, null, 2));
+  // One toggle keeps both sidebar tabs and panel actions out of their compact state.
+  await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://lumin.test/app.css"><link rel="stylesheet" href="https://lumin.test/theme.css"><style>body{margin:0}.workspace{display:flex;width:1120px;height:800px}.workspace-split.mod-sidedock{display:flex;flex:none;width:300px}*{transition:none!important;animation:none!important}</style></head><body class="theme-light is-focused"><div class="workspace"><div class="workspace-split mod-horizontal mod-sidedock mod-left-split"><div class="workspace-leaf-content" data-type="folder"><div class="nav-header"><div class="nav-buttons-container"><div class="nav-action-button clickable-icon"><svg class="svg-icon" width="16" height="16" viewBox="0 0 24 24"></svg></div><div class="nav-action-button clickable-icon"><svg class="svg-icon" width="16" height="16" viewBox="0 0 24 24"></svg></div></div></div></div></div></div></body></html>`, { waitUntil: 'load' });
+  await page.mouse.move(600, 400);
+  const sidebarControls = await page.evaluate(() => {
+    const body = document.body;
+    const button = document.querySelector('.nav-action-button');
+    const compact = getComputedStyle(button).width;
+    body.classList.add('tab-icon');
+    const shown = getComputedStyle(button).width;
+    return { compact, shown };
+  });
+  if (parseFloat(sidebarControls.compact) >= 8) throw new Error(`Sidebar panel actions start collapsed: got ${sidebarControls.compact}`);
+  if (parseFloat(sidebarControls.shown) <= 16) throw new Error(`Sidebar controls toggle reveals panel actions: got ${sidebarControls.shown}`);
+  console.log(JSON.stringify({ sidebarControls }, null, 2));
   // Mermaid, graph view and Canvas must follow every palette in both modes.
   // Mermaid injects ID-scoped styles, so the fixture carries the same inline
   // rules Obsidian renders and proves the theme's overrides still win.

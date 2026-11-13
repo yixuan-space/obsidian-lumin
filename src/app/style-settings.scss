@@ -10,17 +10,17 @@ collapsed: true
 settings:
     -
         id: colorful-frame
-        title: 侧边栏着色
-        title.en: Tinted sidebar
-        description: 根据强调色为侧边栏施加淡淡着色。
-        description.en: Apply a subtle tint to the sidebar based on accent color.
+        title: 左侧边栏着色
+        title.en: Tinted left sidebar
+        description: 在桌面端非透明窗口中，为左侧边栏叠加一层跟随强调色的淡色。
+        description.en: Apply a faint accent tint to the left sidebar in non-translucent desktop windows.
         type: class-toggle
     -
         id: tab-floating
         title: 取消标签居中
         title.en: Disable centered tabs
-        description: 将标签栏改为传统左侧对齐，而非居中排列。
-        description.en: Use left-aligned tabs instead of centered tabs in the tab bar.
+        description: 将笔记标签改为从左排列，而不是在宽窗口中居中。
+        description.en: Left-align note tabs instead of centering them in wide windows.
         type: class-toggle
     -
         id: lumin-palette
@@ -55,54 +55,59 @@ settings:
         id: hover-ribbon
         title: 悬停显示功能区
         title.en: Hover ribbon
-        description: 鼠标靠近左侧窗口边缘时显示功能区（Ribbon）。
-        description.en: Reveal ribbon by hovering over left window edge.
+        description: 当功能区处于隐藏状态时，鼠标靠近窗口左侧边缘即可显示。
+        description.en: Show the hidden ribbon when the pointer reaches the left window edge.
         type: class-toggle
         addCommand: true
     -
         id: hover-sidedock
         title: 悬停显示侧边栏
         title.en: Hover sidebar
-        description: 鼠标靠近窗口边缘时展开已收起的侧边栏。
-        description.en: Reveal collapsed sidebars by hovering over window edges.
+        description: 鼠标靠近窗口边缘时，展开处于收起状态的侧边栏。
+        description.en: Reveal collapsed sidebars when the pointer reaches the window edge.
         type: class-toggle
         addCommand: true
     -
         id: focus-view
         title: 专注视图
         title.en: Focus view
-        description: 当两侧栏均收起时隐藏标签与表格标题栏。
-        description.en: Hide tabs and table title bar when both sidebars are collapsed.
+        description: 两侧边栏都收起时隐藏顶部标签栏，并淡化视图标题栏；悬停标题栏可恢复。
+        description.en: Hide the tab bar and fade the view header when both sidebars are collapsed; the header returns on hover.
         type: class-toggle
         addCommand: true
     -
-        id: nav-action-center
-        title: 取消紧凑面板操作区
-        title.en: Disable compact panel actions
-        description: 窄侧边栏顶栏操作按钮恢复默认对齐，不再居中紧凑排列。
-        description.en: Use default alignment for narrow sidebar header actions.
-        type: class-toggle
-    -
         id: tab-icon
-        title: 取消紧凑侧边栏标签
-        title.en: Disable compact sidebar tabs
-        description: 保留侧边栏标签的完整文字，而非仅图标的紧凑标签。
-        description.en: Keep full sidebar tab labels instead of icon-only compact tabs.
+        title: 侧边栏控件常显
+        title.en: Always show sidebar controls
+        description: 侧边栏标签与面板操作按钮保持完整显示，而不是收起成 4px 细条或零宽、悬停后才出现。
+        description.en: Keep sidebar tabs and panel actions fully visible instead of collapsing them into slivers until hover.
         type: class-toggle
     -
         id: status-bar-baseline
-        title: 取消紧凑状态栏
-        title.en: Disable compact status bar
-        description: 使用更高的默认风格状态栏，而非单行紧凑状态栏。
-        description.en: Use a taller default-style status bar instead of the compact row.
+        title: 常驻状态栏
+        title.en: Always-visible status bar
+        description: 改用透明、始终占位的状态栏，而不是默认收起成 4px 细条、悬停才展开的浮动状态栏。
+        description.en: Use a transparent, always-present status bar instead of the 4 px floating bar that expands on hover.
         type: class-toggle
     -
         id: zoom-off
-        title: 关闭媒体缩放
-        title.en: Disable media zoom
-        description: 关闭图片与媒体的点击放大效果。
-        description.en: Disable click-to-zoom behavior on images and media.
+        title: 关闭图片放大
+        title.en: Disable image zoom
+        description: 关闭桌面端阅读视图中按住图片查看大图的效果。
+        description.en: Disable press-and-hold image zoom in desktop reading view.
         type: class-toggle
+    -
+        id: icon-size-modifier
+        title: 桌面端图标尺寸
+        title.en: Desktop icon size
+        description: 细调桌面端界面图标大小，正值放大、负值缩小。
+        description.en: Fine-tune icon size on desktop; positive values enlarge, negative values shrink.
+        type: variable-number-slider
+        default: 0
+        min: -4
+        max: 4
+        step: 1
+        format: px
 */
 /* @settings
 
@@ -112,38 +117,38 @@ collapsed: true
 settings:
     -
         id: active-line-off
-        title: 关闭当前行高亮
-        title.en: Disable active line highlight
-        description: 关闭编辑器中当前行的背景高亮。
-        description.en: Turn off background highlight for the active line in the editor.
+        title: 关闭当前行指示条
+        title.en: Disable active line indicator
+        description: 关闭编辑器中当前行左侧的 4px 竖线指示。
+        description.en: Turn off the 4 px vertical marker beside the active line.
         type: class-toggle
     -
         id: banner-off
-        title: 关闭 Banner
-        title.en: Disable banner
-        description: 关闭 Banner 类插件常用的顶部横幅区域样式。
-        description.en: Disable styling for banner areas used by banner-style plugins.
+        title: 关闭 Banner 样式
+        title.en: Disable banner styling
+        description: 关闭笔记顶部横幅（Banner）的图片、图标与标题样式。
+        description.en: Turn off Lumin's banner image, icon and title styling.
         type: class-toggle
     -
         id: block-width-off
-        title: 关闭块级宽度
-        title.en: Disable block width
-        description: 不将块元素加宽到默认阅读栏之外。
-        description.en: Do not widen blocks beyond the default reading column.
+        title: 关闭自定义宽版块
+        title.en: Disable custom wide blocks
+        description: 关闭通过 cssclasses 启用的 lumin-wide、table-wide、bases-wide、img-wide 等加宽效果，让这些块保持正文宽度。
+        description.en: Disable the opt-in wide layouts set via cssclasses (lumin-wide, table-wide, bases-wide, img-wide).
         type: class-toggle
     -
         id: font-variant-off
-        title: 关闭字体变体
-        title.en: Disable font variants
-        description: 关闭界面字体的 OpenType 变体与替代字形特性。
-        description.en: Disable OpenType stylistic alternates for interface fonts.
+        title: 关闭正文字体变体
+        title.en: Disable text font variants
+        description: 关闭笔记正文的 OpenType 替代字形（ss01、ss07、cv07）。
+        description.en: Turn off the OpenType alternates (ss01, ss07, cv07) used in note text.
         type: class-toggle
     -
         id: full-width-media-off
-        title: 关闭全宽元素
-        title.en: Disable full-width elements
-        description: 将嵌入与全宽元素限制在正文主栏宽度内。
-        description.en: Keep embeds and wide elements within the main text column.
+        title: 关闭默认全宽媒体
+        title.en: Disable default full-width media
+        description: 关闭图片圆角、iframe 与视频的正文全宽，以及表格的默认满宽。
+        description.en: Disable image rounding, full-width iframes and videos, and default full-width tables.
         type: class-toggle
     -
         id: image-align
@@ -168,15 +173,29 @@ settings:
         id: clean-link-off
         title: 链接始终下划线
         title.en: Underlined links
-        description: 始终为链接添加下划线以提高辨识度。
-        description.en: Always underline links for improved visibility.
+        description: 为所有链接加上下划线；默认样式不带下划线。
+        description.en: Underline every link; the default style has no underline.
         type: class-toggle
+*/
+/* @settings
+
+name: 移动端 · Mobile
+id: mobile
+collapsed: true
+settings:
     -
         id: mode-switcher-off
-        title: 关闭快速配色切换
-        title.en: Disable quick mode switcher
-        description: 隐藏状态栏区域的快速明暗配色切换入口。
-        description.en: Hide the quick light/dark switch in the status bar area.
+        title: 关闭模式切换浮钮
+        title.en: Disable mode switcher
+        description: 关闭手机笔记右下角的阅读/编辑浮动按钮，恢复顶部栏中的默认按钮。
+        description.en: Turn off the floating reading/editing button on phones and keep the standard header button.
+        type: class-toggle
+    -
+        id: dynamic-type-off
+        title: 动态界面字号
+        title.en: Dynamic interface font size
+        description: 开启后移动端界面字号随正文字号缩放；关闭时使用固定的界面字号层级。
+        description.en: On mobile, scale interface text with the note font size; turn off to use fixed interface sizes.
         type: class-toggle
 */
 /* @settings
@@ -189,8 +208,8 @@ settings:
         id: reduce-contrast-change
         title: 减弱失焦对比变化
         title.en: Reduce contrast change
-        description: 减轻窗口失焦时的对比度变化。
-        description.en: Minimize contrast shifts when window loses focus.
+        description: 减轻桌面端窗口失焦时的对比度变化。
+        description.en: Reduce contrast shifts when the desktop window loses focus.
         type: class-toggle
     -
         id: reduce-motion
@@ -200,34 +219,15 @@ settings:
         description.en: Minimize animation effects.
         type: class-toggle
     -
-        id: dynamic-type-off
-        title: 固定界面字号层级
-        title.en: Standard font size
-        description: 关闭随系统「动态字体」调整的界面字号层级。
-        description.en: Disable operating system-based dynamic font sizes.
-        type: class-toggle
-    -
         id: font-ui-modifier
         title: 界面字号微调
         title.en: Interface font size
-        description: 细调界面文字大小。
-        description.en: Fine-tune interface text size.
+        description: 细调界面文字大小，正值放大、负值缩小。
+        description.en: Fine-tune interface text size; positive values enlarge, negative values shrink.
         type: variable-number-slider
         default: 0
         min: -8
         max: 8
-        step: 1
-        format: px
-    -
-        id: icon-size-modifier
-        title: 图标尺寸微调
-        title.en: Icon size
-        description: 细调界面图标大小。
-        description.en: Fine-tune icon size.
-        type: variable-number-slider
-        default: 0
-        min: -4
-        max: 4
         step: 1
         format: px
 */

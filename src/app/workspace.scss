@@ -83,7 +83,7 @@ body {
   }
 
   // Panel actions
-  &:not(.nav-action-center) .mod-sidedock .workspace-leaf-content .nav-header:first-child .nav-buttons-container {
+  &:not(.nav-action-center, .tab-icon) .mod-sidedock .workspace-leaf-content .nav-header:first-child .nav-buttons-container {
     border-radius: var(--clickable-icon-radius);
     background-color: var(--background-modifier-hover);
     padding: 2px;
@@ -119,9 +119,5 @@ body {
   .workspace-leaf-content[data-mode="preview"] > .view-content > .markdown-source-view {
     transform: scale(0.995);
     opacity: 0;
-  }
-
-  &:not(.tab-icon) .mod-sidedock .workspace-tabs:not(.mod-top) .workspace-tab-header-container:not(:hover) .workspace-tab-header-container-inner {
-    gap: calc(8px * var(--density-modifier));
   }
 }

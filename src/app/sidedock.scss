@@ -213,7 +213,7 @@ body:not(.is-mobile) {
     background-color var(--anim-duration-fast);
 }
 
-body:not(.nav-action-center) .mod-sidedock .workspace-leaf-content .nav-header:first-child:not(:hover) .nav-buttons-container {
+body:not(.nav-action-center, .tab-icon) .mod-sidedock .workspace-leaf-content .nav-header:first-child:not(:hover) .nav-buttons-container {
   gap: 4px !important;
   padding: 0 !important;
   background-color: transparent !important;
@@ -245,12 +245,33 @@ body:not(.nav-action-center) .mod-sidedock .workspace-leaf-content .nav-header:f
   }
 }
 
-// Sidebar sizing: keep the dock at least as wide as the expanded panel
+// Sidebar sizing: keep the dock slightly wider than the expanded panel
 // toolbar (five 40px actions plus the header's 16px and the container's 2px
 // insets), so the file-explorer header actions keep their spacing instead of
 // spilling out of the dock when the split is dragged narrow.
 body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split):not(.is-sidedock-collapsed) {
-  min-width: calc(var(--tab-action-width) * 5 + 16px * 2 + 2px * 2);
+  min-width: calc(var(--tab-action-width) * 5 + 16px * 2 + 2px * 2 + 8px);
+}
+
+// Widen the native 3px drag target so the dock stays easy to resize by
+// dragging its inner edge.
+body:not(.is-mobile) .mod-sidedock:not(.is-sidedock-collapsed) > .workspace-leaf-resize-handle {
+  width: 8px;
+  cursor: col-resize;
+  background-color: transparent;
+}
+body:not(.is-mobile) .mod-sidedock:is(.mod-left-split, .mod-primary-split):not(.is-sidedock-collapsed) > .workspace-leaf-resize-handle {
+  inset-inline-end: 0;
+  border-inline-end-width: 2px;
+}
+body:not(.is-mobile) .mod-sidedock:is(.mod-right-split, .mod-secondary-split):not(.is-sidedock-collapsed) > .workspace-leaf-resize-handle {
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+  border-inline-start-width: 2px;
+}
+body:not(.is-mobile) .mod-sidedock:not(.is-sidedock-collapsed) > .workspace-leaf-resize-handle:is(:hover, .is-active) {
+  background-color: transparent;
+  border-color: var(--divider-color-hover);
 }
 
 // Vault switcher (layout borrowed from Velocity)

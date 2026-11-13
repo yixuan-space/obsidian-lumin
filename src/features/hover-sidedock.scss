@@ -102,23 +102,43 @@ body.mod-macos:not(.is-mobile).hover-sidedock.is-hidden-frameless:not(.is-fullsc
 }
 
 body:not(.is-mobile).hover-ribbon.show-ribbon {
+  --hover-ribbon-width: calc(var(--tab-action-width) + 12px);
+
   .workspace-ribbon:is(.mod-left, .mod-primary) {
     position: absolute;
     z-index: 12;
-    top: var(--header-height);
-    bottom: 0;
-    left: 0;
+    top: calc(var(--header-height) + 8px);
+    bottom: auto;
+    left: calc(-1 * (var(--hover-ribbon-width) - var(--hover-sidedock-trigger-area)));
     height: auto;
+    max-height: calc(100% - var(--header-height) - 16px);
+    width: var(--hover-ribbon-width);
     margin: 0;
-    padding-left: 0;
+    padding: 6px;
     opacity: 0;
-    transform: translateX(calc(-100% + var(--hover-sidedock-trigger-area)));
     background-color: var(--background-primary);
-    transition: none !important;
+    border: none;
+    border-radius: 0 var(--radius-m) var(--radius-m) 0;
+    box-shadow: var(--shadow-s);
+    overflow: hidden auto;
+    transition: opacity var(--anim-duration-fast) ease-out !important;
+
+    // The card is only as tall as its actions, but the whole left edge should
+    // still reveal it. This hit area is fixed to the window rather than the
+    // sliding card, so hovering anywhere below the header opens the ribbon.
+    &::after {
+      content: "";
+      position: fixed;
+      top: var(--header-height);
+      bottom: 0;
+      left: 0;
+      width: var(--hover-sidedock-trigger-area);
+      pointer-events: auto;
+    }
   }
   .workspace-ribbon:is(.mod-left, .mod-primary):hover {
     opacity: 1;
-    transform: none;
+    left: 0;
   }
   &.mod-macos .workspace-ribbon:is(.mod-left, .mod-primary) .side-dock-actions {
     padding-top: 0;

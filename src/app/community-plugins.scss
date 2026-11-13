@@ -187,7 +187,7 @@ body.is-phone.hider-sidebar-buttons {
 }
 
 // Novel Word Count https://github.com/isaaclyman/novel-word-count-obsidian
-body:not(.is-mobile):not(.nav-action-center) .mod-sidedock .workspace-leaf-content.novel-word-count--active > .nav-header {
+body:not(.is-mobile):not(.nav-action-center, .tab-icon) .mod-sidedock .workspace-leaf-content.novel-word-count--active > .nav-header {
   &:not(:hover) .nav-buttons-container {
     .nav-action-button {
       opacity: 0;
